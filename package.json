@@ -25,7 +25,7 @@
     "bootstrap": "4.1.2",
     "core-js": "3.6.4",
     "font-awesome": "^4.7.0",
-    "jquery": "3.2.1",
+    "jquery": "3.5.1",
     "jw-bootstrap-switch-ng2": "2.0.1",
     "ng2-nouislider": "1.7.12",
     "nouislider": "9.2.0",

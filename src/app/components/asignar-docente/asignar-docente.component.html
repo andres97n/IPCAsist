@@ -113,8 +113,30 @@
     <div class="container">
       <h2 class="title">Asigne a un Docente!!</h2>
       <div class="row">
-        <div class="col-md-4">
-          <div class="card card-profile card-plain">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Cédula o Pasaporte</label>
+            <!-- <div
+              class="input-group"
+              [ngClass]="{ 'input-group-focus': focus === true }"
+            > -->
+            <!-- <div class="input-group-prepend text-center"> -->
+            <!-- <span class="input-group-text"
+                ><i class="nc-icon nc-single-02"></i
+                ></span> -->
+
+            <p-autoComplete
+              name="cedula"
+              [(ngModel)]="palabra"
+              [suggestions]="libros"
+              (completeMethod)="search($event)"
+              placeholder="Cédula"
+            ></p-autoComplete>
+            <!-- </div> -->
+            <!-- </div> -->
+          </div>
+
+          <!-- <div class="card card-profile card-plain">
             <div class="card-avatar">
               <a href="#avatar"
                 ><img src="./assets/img/faces/clem-onojeghuo-3.jpg" alt="..."
@@ -144,11 +166,11 @@
                 ><i class="fa fa-linkedin"></i
               ></a>
             </div>
-          </div>
+          </div> -->
         </div>
 
-        <div class="col-md-4">
-          <div class="card card-profile card-plain">
+        <div class="col-md-6">
+          <!-- <div class="card card-profile card-plain">
             <div class="card-avatar">
               <a href="#avatar"
                 ><img src="./assets/img/faces/joe-gardner-2.jpg" alt="..."
@@ -178,10 +200,10 @@
                 ><i class="fa fa-linkedin"></i
               ></a>
             </div>
-          </div>
+          </div> -->
         </div>
 
-        <div class="col-md-4">
+        <!-- <div class="col-md-4">
           <div class="card card-profile card-plain">
             <div class="card-avatar">
               <a href="#avatar"
@@ -213,7 +235,7 @@
               ></a>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

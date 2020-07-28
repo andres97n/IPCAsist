@@ -8,6 +8,7 @@ import { RouterModule } from "@angular/router";
 
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { DropdownModule } from "primeng/dropdown";
+import { AutoCompleteModule } from "primeng/autocomplete";
 
 import { BasicelementsComponent } from "./basicelements/basicelements.component";
 import { NavigationComponent } from "./navigation/navigation.component";
@@ -17,6 +18,11 @@ import { ComponentsComponent } from "./components.component";
 import { NotificationComponent } from "./notification/notification.component";
 import { NgbdModalComponent } from "./modal/modal.component";
 import { NgbdModalContent } from "./modal/modal.component";
+import { DesarrolladoresComponent } from "./desarrolladores/desarrolladores.component";
+import { PlanVidaComponent } from "./plan-vida/plan-vida.component";
+import { PasanteComponent } from "./pasante/pasante.component";
+import { VisitaEmpresaComponent } from "./visita-empresa/visita-empresa.component";
+import { AsignarDocenteComponent } from "./asignar-docente/asignar-docente.component";
 
 @NgModule({
   imports: [
@@ -28,6 +34,7 @@ import { NgbdModalContent } from "./modal/modal.component";
     JwBootstrapSwitchNg2Module,
     BrowserAnimationsModule,
     DropdownModule,
+    AutoCompleteModule,
   ],
   declarations: [
     ComponentsComponent,
@@ -38,6 +45,11 @@ import { NgbdModalContent } from "./modal/modal.component";
     NotificationComponent,
     NgbdModalComponent,
     NgbdModalContent,
+    DesarrolladoresComponent,
+    PlanVidaComponent,
+    PasanteComponent,
+    VisitaEmpresaComponent,
+    AsignarDocenteComponent,
   ],
   entryComponents: [NgbdModalContent],
   exports: [ComponentsComponent],

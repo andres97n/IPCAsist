@@ -3,16 +3,29 @@
   color-on-scroll="500"
 >
   <div class="container">
-    <div class="navbar-translate">
-      <img
-        src="./assets/img/IPCA/logo.png"
-        width="70"
-        height="50"
-        class="d-inline-block align-top"
-        alt=""
-        loading="lazy"
-      />
-      <a class="navbar-brand" href="https://www.creative-tim.com">IPCAsist</a>
+    <div class="navbar-translate" routerLinkActive="true">
+      <a class="navbar-brand" [routerLink]="['/']"
+        ><img
+          src="./assets/img/IPCA/logo.png"
+          width="60"
+          height="40"
+          class="d-inline-block"
+          alt="Logo"
+          loading="lazy"
+      /></a>
+      <a class="navbar-brand" [routerLink]="['/plan-vida']"
+        ><i class="fa fa-address-book" aria-hidden="true"></i>Plan de Vida</a
+      >
+      <a class="navbar-brand" [routerLink]="['/visitas']"
+        ><i class="fa fa-map-marker" aria-hidden="true"></i>Visitas</a
+      >
+      <a class="navbar-brand" [routerLink]="['/pasante']"
+        ><i class="fa fa-users" aria-hidden="true"></i>Pasantes</a
+      >
+      <a class="navbar-brand" [routerLink]="['/asignar-docente']"
+        ><i class="fa fa-hand-o-up" aria-hidden="true"></i>Asignar Docente</a
+      >
+
       <button
         class="navbar-toggler navbar-burger"
         type="button"
@@ -30,7 +43,7 @@
     </div>
     <div class="navbar-collapse" id="navbarToggler">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item" *ngIf="!isDocumentation()">
+        <!-- <li class="nav-item" *ngIf="!isDocumentation()">
           <a
             class="nav-link"
             rel="tooltip"
@@ -42,21 +55,35 @@
             <i class="fa fa-twitter"></i>
             <p class="d-lg-none">Twitter</p>
           </a>
-        </li>
+        </li> -->
         <li class="nav-item" *ngIf="!isDocumentation()">
           <a
             class="nav-link"
             rel="tooltip"
-            title="Like us on Facebook"
+            title="Página Facebook"
             data-placement="bottom"
-            href="https://www.facebook.com/CreativeTim"
+            href="https://www.facebook.com/IPCA-Cuenca-1031699846922675"
             target="_blank"
           >
             <i class="fa fa-facebook-square"></i>
             <p class="d-lg-none">Facebook</p>
           </a>
         </li>
+
         <li class="nav-item" *ngIf="!isDocumentation()">
+          <a
+            class="nav-link"
+            rel="tooltip"
+            title="Más Información"
+            data-placement="bottom"
+            href="https://ipca.catedraunescoinclusion.org"
+            target="_blank"
+          >
+            <i class="fa fa-info-circle" aria-hidden="true"></i>
+            <p class="d-lg-none">Sitio Web</p>
+          </a>
+        </li>
+        <!-- <li class="nav-item" *ngIf="!isDocumentation()">
           <a
             class="nav-link"
             rel="tooltip"
@@ -68,8 +95,8 @@
             <i class="fa fa-instagram"></i>
             <p class="d-lg-none">Instagram</p>
           </a>
-        </li>
-        <li class="nav-item" *ngIf="!isDocumentation()">
+        </li> -->
+        <!-- <li class="nav-item" *ngIf="!isDocumentation()">
           <a
             class="nav-link"
             rel="tooltip"
@@ -81,21 +108,21 @@
             <i class="fa fa-github"></i>
             <p class="d-lg-none">GitHub</p>
           </a>
-        </li>
-        <li class="nav-item" *ngIf="!isDocumentation()">
+        </li> -->
+        <!-- <li class="nav-item" *ngIf="!isDocumentation()">
           <a
             href="http://pk2-angular.creative-tim.com/documentation/tutorial"
             class="nav-link"
             target="_blank"
             ><i class="nc-icon nc-book-bookmark"></i> Documentation</a
           >
-        </li>
+        </li> -->
         <li class="nav-item" *ngIf="isHome()">
           <a
             href="https://www.creative-tim.com/product/paper-kit-2-pro-angular?ref=pk2-angular-free-local"
             target="_blank"
-            class="btn btn-danger btn-round"
-            >Upgrade to Pro</a
+            class="btn btn-outline-info btn-round"
+            >Ingresar</a
           >
         </li>
         <li class="nav-item" *ngIf="!isHome()">

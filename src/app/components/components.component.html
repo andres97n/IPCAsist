@@ -46,7 +46,58 @@
   </div>
 
   <div class="main">
-    <p-dropdown
+
+    <div class="section" id="carousel">
+      <div class="container">
+        <div class="tim-title">
+        </div>
+        <div class="row">
+          <div class="col-md-8 mr-auto ml-auto">
+            <div class="card page-carousel">
+              <ngb-carousel>
+                <ng-template ngbSlide>
+                  <img
+                    src="./assets/img/ipcaCabecera.png"
+                    alt="Random first slide"
+                  />
+                  <div class="carousel-caption">
+                    <p>Ipca</p>
+                  </div>
+                </ng-template>
+                <ng-template ngbSlide>
+                  <img
+                    src="./assets/img/ipca-dia-del-niño.jpg"
+                    alt="Random second slide"
+                  />
+                  <div class="carousel-caption">
+                    <p>Día del niño</p>
+                  </div>
+                </ng-template>
+                <ng-template ngbSlide>
+                  <img
+                    src="./assets/img/ipca-voluntariado.jpg"
+                    alt="Random third slide"
+                  />
+                  <div class="carousel-caption">
+                    <p>Voluntariado</p>
+                  </div>
+                </ng-template>
+                <ng-template ngbSlide>
+                  <img
+                    src="./assets/img/ipca-niños.jpg"
+                    alt="Random fourth slide"
+                  />
+                  <div class="carousel-caption">
+                    <p>Nuestros niños</p>
+                  </div>
+                </ng-template>
+              </ngb-carousel>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <p-dropdown
       [options]="books"
       [(ngModel)]="selectedBook"
       optionLabel="name"

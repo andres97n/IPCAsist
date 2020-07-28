@@ -4,20 +4,26 @@
 >
   <div class="container">
     <div class="navbar-translate" routerLinkActive="true">
-      <img
-        src="./assets/img/IPCA/logo.png"
-        width="70"
-        height="50"
-        class="d-inline-block align-top"
-        alt=""
-        loading="lazy"
-      />
-      <a class="navbar-brand" href="https://www.creative-tim.com">IPCAsist</a>
-      <a class="navbar-brand" [routerLink]="['/plan-vida']">Plan de Vida</a>
-      <a class="navbar-brand" [routerLink]="['/visitas']">Visitas</a>
-      <a class="navbar-brand" [routerLink]="['/pasante']">Pasantes</a>
+      <a class="navbar-brand" [routerLink]="['/']"
+        ><img
+          src="./assets/img/IPCA/logo.png"
+          width="60"
+          height="40"
+          class="d-inline-block"
+          alt="Logo"
+          loading="lazy"
+      /></a>
+      <a class="navbar-brand" [routerLink]="['/plan-vida']"
+        ><i class="fa fa-address-book" aria-hidden="true"></i>Plan de Vida</a
+      >
+      <a class="navbar-brand" [routerLink]="['/visitas']"
+        ><i class="fa fa-map-marker" aria-hidden="true"></i>Visitas</a
+      >
+      <a class="navbar-brand" [routerLink]="['/pasante']"
+        ><i class="fa fa-users" aria-hidden="true"></i>Pasantes</a
+      >
       <a class="navbar-brand" [routerLink]="['/asignar-docente']"
-        >Asignar Docente</a
+        ><i class="fa fa-hand-o-up" aria-hidden="true"></i>Asignar Docente</a
       >
 
       <button
@@ -54,7 +60,7 @@
           <a
             class="nav-link"
             rel="tooltip"
-            title="Like us on Facebook"
+            title="Página Facebook"
             data-placement="bottom"
             href="https://www.facebook.com/IPCA-Cuenca-1031699846922675"
             target="_blank"

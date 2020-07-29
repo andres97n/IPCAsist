@@ -9,6 +9,7 @@ import { RouterModule } from "@angular/router";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { DropdownModule } from "primeng/dropdown";
 import { AutoCompleteModule } from "primeng/autocomplete";
+import { CalendarModule } from "primeng/calendar";
 
 import { BasicelementsComponent } from "./basicelements/basicelements.component";
 import { NavigationComponent } from "./navigation/navigation.component";
@@ -35,6 +36,7 @@ import { AsignarDocenteComponent } from "./asignar-docente/asignar-docente.compo
     BrowserAnimationsModule,
     DropdownModule,
     AutoCompleteModule,
+    CalendarModule,
   ],
   declarations: [
     ComponentsComponent,

@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { DocenteService } from "app/services/docente.service";
 
 @Component({
   selector: "app-asignar-docente",
@@ -6,24 +7,18 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./asignar-docente.component.css"],
 })
 export class AsignarDocenteComponent implements OnInit {
-  books: Array<any>;
-  palabra: string;
-  libros: string[];
+  paises: any[] = [];
+  palabra: string[];
+  libros: any[];
+  libro: any[];
 
-  constructor() {
-    this.books = [
-      { name: "Book1", author: "Author1" },
-      { name: "Book2", author: "Author2" },
-      { name: "Book3", author: "Author3" },
-      { name: "Book4", author: "Author4" },
-      { name: "Book5", author: "Author5" },
-      { name: "Libro1", author: "Author1" },
-      { name: "Libro2", author: "Author2" },
-      { name: "Libro3", author: "Author3" },
-      { name: "Libro4", author: "Author4" },
-      { name: "Libro5", author: "Author5" },
-    ];
+  country: any;
 
+  countries: any[];
+
+  filteredCountriesSingle: any[];
+
+  constructor(private _docenteSrv: DocenteService) {
     this.libros = [
       "Book1",
       "Book2",
@@ -39,4 +34,37 @@ export class AsignarDocenteComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  buscarPersona(event) {
+    let persona = event.query;
+    console.log(persona);
+
+    this.libro = this.libros.filter((book: string) => {
+      if (book.includes(persona)) {
+        return book;
+      }
+    });
+  }
+
+  filterCountry(query, countries: any[]): any[] {
+    let filtered: any[] = [];
+    for (let i = 0; i < countries.length; i++) {
+      let country = countries[i];
+
+      if (country.name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+        filtered.push(country);
+      }
+    }
+    return filtered;
+  }
+
+  filterCountrySingle(event) {
+    let query = event.query;
+
+    this._docenteSrv.getCountries().subscribe((data: any[]) => {
+      // console.log(data);
+
+      this.filteredCountriesSingle = this.filterCountry(query, data);
+    });
+  }
 }

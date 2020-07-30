@@ -112,90 +112,52 @@
   <div class="section section-dark text-center">
     <div class="container">
       <h2 class="title">Asigne a un Docente!!</h2>
-      <div class="row">
+      <div class="row justify-content-center">
         <div class="col-md-6">
-          <div class="form-group">
-            <label>Cédula o Pasaporte</label>
-            <div
-              class="input-group"
-              [ngClass]="{ 'input-group-focus': focus1 === true }"
-            >
-              <div class="input-group-prepend">
-                <span class="input-group-text">
-                  <i class="fa fa-id-card-o" aria-hidden="true"></i
-                ></span>
+          <p-card
+            header="Cédula o Nombre"
+            subheader="Ingrese la identificación o el nombre del Docente a asignar."
+            [style]="{ width: '360px' }"
+            styleClass="ui-card-shadow"
+          >
+            <p-header class="text-center">
+              <div class="bg-secondary formulario">
+                <i class="fa fa-id-card-o fa-4x fa-fw" aria-hidden="true"></i>
               </div>
+            </p-header>
+            <div class="form-group">
+              <br />
               <p-autoComplete
                 styleClass="cedula"
                 [(ngModel)]="country"
                 [suggestions]="filteredCountriesSingle"
                 (completeMethod)="filterCountrySingle($event)"
                 field="name"
-                [size]="53"
-                placeholder="Countries"
+                [size]="35"
+                placeholder="Docente"
                 [minLength]="1"
               ></p-autoComplete>
             </div>
-
-            <!-- <span style="margin-left: 10px;"
-              >Country: {{ country ? country.name || country : "none" }}</span> -->
-            <!-- </div> -->
-            <!-- </div> -->
-          </div>
-
-          <!-- <div class="card card-profile card-plain">
-            <div class="card-avatar">
-              <a href="#avatar"
-                ><img src="./assets/img/faces/clem-onojeghuo-3.jpg" alt="..."
-              /></a>
-            </div>
-            <div class="card-block">
-              <a href="#paper-kit">
-                <div class="author">
-                  <h4 class="card-title">Henry Ford</h4>
-                  <h6 class="card-category">Product Manager</h6>
-                </div>
-              </a>
-              <p class="card-description text-center">
-                Teamwork is so important that it is virtually impossible for you
-                to reach the heights of your capabilities or make the money that
-                you want without becoming very good at it.
-              </p>
-            </div>
-            <div class="card-footer text-center">
-              <a href="#pablo" class="btn btn-link btn-just-icon btn-neutral"
-                ><i class="fa fa-twitter"></i
-              ></a>
-              <a href="#pablo" class="btn btn-link btn-just-icon btn-neutral"
-                ><i class="fa fa-google-plus"></i
-              ></a>
-              <a href="#pablo" class="btn btn-link btn-just-icon btn-neutral"
-                ><i class="fa fa-linkedin"></i
-              ></a>
-            </div>
-          </div> -->
+            <p-footer>
+              <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
+            </p-footer>
+          </p-card>
         </div>
+      </div>
 
-        <!-- <div class="col-md-6"> -->
+      <div class="row">
+        <!-- Horario de Entrada-->
         <div class="col-md-3">
           <div class="form-group">
             <label>Horario de Entrada</label>
-            <div
+            <!-- <div
               class="input-group"
-              [ngClass]="{ 'input-group-focus': focus1 === true }"
-            >
-              <div class="input-group-prepend">
-                <span class="input-group-text">
-                  <i class="fa fa-id-card-o" aria-hidden="true"></i
-                ></span>
-              </div>
-              <p-calendar
-                [(ngModel)]="value"
-                showTime="true"
-                hourFormat="24"
-                timeOnly="true"
-              ></p-calendar>
-            </div>
+              [ngClass]="{ 'input-group-focus': focus1 === false }"
+            > -->
+            <ngb-timepicker
+              [(ngModel)]="time"
+              [meridian]="meridian"
+            ></ngb-timepicker>
           </div>
           <!-- <div class="card card-profile card-plain">
             <div class="card-avatar">
@@ -263,95 +225,83 @@
           </div>
         </div> -->
         </div>
-
+        <!-- Horario de Salida -->
         <div class="col-md-3">
           <div class="form-group">
             <label>Horario de Salida</label>
-            <div
-              class="input-group"
-              [ngClass]="{ 'input-group-focus': focus1 === true }"
-            >
-              <div class="input-group-prepend">
-                <span class="input-group-text">
-                  <i class="fa fa-id-card-o" aria-hidden="true"></i
-                ></span>
-              </div>
-              <p-calendar
-                [(ngModel)]="value"
-                showTime="true"
-                hourFormat="24"
-                timeOnly="true"
-                icon="pi pi-calendar"
-              ></p-calendar>
-            </div>
+
+            <ngb-timepicker
+              [(ngModel)]="time"
+              [meridian]="meridian"
+            ></ngb-timepicker>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="section landing-section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-8 mr-auto ml-auto">
-            <h2 class="text-center">Keep in touch?</h2>
-            <form class="contact-form">
-              <div class="row">
-                <div class="col-md-6">
-                  <label>Name</label>
-                  <div
-                    class="input-group"
-                    [ngClass]="{ 'input-group-focus': focus === true }"
-                  >
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"
-                        ><i class="nc-icon nc-single-02"></i
-                      ></span>
-                    </div>
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Name"
-                      (focus)="focus = true"
-                      (blur)="focus = false"
-                    />
+  <div class="section landing-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 mr-auto ml-auto">
+          <h2 class="text-center">Keep in touch?</h2>
+          <form class="contact-form">
+            <div class="row">
+              <div class="col-md-6">
+                <label>Name</label>
+                <div
+                  class="input-group"
+                  [ngClass]="{ 'input-group-focus': focus === true }"
+                >
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="nc-icon nc-single-02"></i
+                    ></span>
                   </div>
-                </div>
-                <div class="col-md-6">
-                  <label>Email</label>
-                  <div
-                    class="input-group"
-                    [ngClass]="{ 'input-group-focus': focus1 === true }"
-                  >
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="nc-icon nc-email-85"></i
-                      ></span>
-                    </div>
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Email"
-                      (focus)="focus1 = true"
-                      (blur)="focus1 = false"
-                    />
-                  </div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Name"
+                    (focus)="focus = true"
+                    (blur)="focus = false"
+                  />
                 </div>
               </div>
-              <label>Message</label>
-              <textarea
-                class="form-control"
-                rows="4"
-                placeholder="Tell us your thoughts and feelings..."
-              ></textarea>
-              <div class="row">
-                <div class="col-md-4 mr-auto ml-auto">
-                  <button class="btn btn-danger btn-lg btn-fill">
-                    Send Message
-                  </button>
+              <div class="col-md-6">
+                <label>Email</label>
+                <div
+                  class="input-group"
+                  [ngClass]="{ 'input-group-focus': focus1 === true }"
+                >
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="nc-icon nc-email-85"></i
+                    ></span>
+                  </div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Email"
+                    (focus)="focus1 = true"
+                    (blur)="focus1 = false"
+                  />
                 </div>
               </div>
-            </form>
-          </div>
+            </div>
+            <label>Message</label>
+            <textarea
+              class="form-control"
+              rows="4"
+              placeholder="Tell us your thoughts and feelings..."
+            ></textarea>
+            <div class="row">
+              <div class="col-md-4 mr-auto ml-auto">
+                <button class="btn btn-danger btn-lg btn-fill">
+                  Send Message
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>

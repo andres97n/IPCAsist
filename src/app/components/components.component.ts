@@ -9,6 +9,10 @@ import { NgbDateStruct } from "@ng-bootstrap/ng-bootstrap";
       ngb-progressbar {
         margin-top: 5rem;
       }
+
+      .tab {
+        font-size: 40px;
+      }
     `,
   ],
 })

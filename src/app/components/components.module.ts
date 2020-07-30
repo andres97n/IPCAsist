@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { DropdownModule } from "primeng/dropdown";
 import { AutoCompleteModule } from "primeng/autocomplete";
 import { CalendarModule } from "primeng/calendar";
+import { CardModule } from "primeng/card";
 
 import { BasicelementsComponent } from "./basicelements/basicelements.component";
 import { NavigationComponent } from "./navigation/navigation.component";
@@ -37,6 +38,7 @@ import { AsignarDocenteComponent } from "./asignar-docente/asignar-docente.compo
     DropdownModule,
     AutoCompleteModule,
     CalendarModule,
+    CardModule,
   ],
   declarations: [
     ComponentsComponent,

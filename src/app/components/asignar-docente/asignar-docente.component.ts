@@ -7,10 +7,8 @@ import { DocenteService } from "app/services/docente.service";
   styleUrls: ["./asignar-docente.component.css"],
 })
 export class AsignarDocenteComponent implements OnInit {
-  paises: any[] = [];
-  palabra: string[];
-  libros: any[];
-  libro: any[];
+  time = { hour: 13, minute: 30 };
+  meridian = false;
 
   country: any;
 
@@ -18,33 +16,20 @@ export class AsignarDocenteComponent implements OnInit {
 
   filteredCountriesSingle: any[];
 
-  constructor(private _docenteSrv: DocenteService) {
-    this.libros = [
-      "Book1",
-      "Book2",
-      "Book3",
-      "Book4",
-      "Book5",
-      "Libro1",
-      "Libro2",
-      "Libro3",
-      "Libro4",
-      "Libro5",
-    ];
-  }
+  constructor(private _docenteSrv: DocenteService) {}
 
   ngOnInit(): void {}
 
-  buscarPersona(event) {
-    let persona = event.query;
-    console.log(persona);
+  // buscarPersona(event) {
+  //   let persona = event.query;
+  //   console.log(persona);
 
-    this.libro = this.libros.filter((book: string) => {
-      if (book.includes(persona)) {
-        return book;
-      }
-    });
-  }
+  //   this.libro = this.libros.filter((book: string) => {
+  //     if (book.includes(persona)) {
+  //       return book;
+  //     }
+  //   });
+  // }
 
   filterCountry(query, countries: any[]): any[] {
     let filtered: any[] = [];

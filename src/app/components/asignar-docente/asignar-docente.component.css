@@ -2,12 +2,6 @@
   text-shadow: 1px 1px 1px black;
 }
 
-.formulario {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-i {
-  text-align: center;
+:host .ui-card {
+  box-shadow: 2px 2px 5px white;
 }

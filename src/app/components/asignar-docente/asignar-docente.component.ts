@@ -8,6 +8,7 @@ import { DocenteService } from "app/services/docente.service";
 })
 export class AsignarDocenteComponent implements OnInit {
   time = { hour: 13, minute: 30 };
+  time2 = { hour: 13, minute: 30 };
   meridian = false;
 
   country: any;

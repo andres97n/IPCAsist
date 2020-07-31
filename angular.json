@@ -25,11 +25,14 @@
               "node_modules/font-awesome/css/font-awesome.min.css",
               "src/assets/sass/paper-kit.scss",
               "src/assets/css/demo.css",
-              "src/assets/css/nucleo-icons.css"
+              "src/assets/css/nucleo-icons.css",
+              "src/assets/fontawesome-free-5.14.0/css/all.min.css",
+              "src/assets/fontawesome-free-5.14.0/css/all.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.slim.min.js",
-              "src/assets/bootstrap-4.5.0-dist/js/bootstrap.min.js"
+              "src/assets/bootstrap-4.5.0-dist/js/bootstrap.min.css",
+              "src/assets/fontawesome-free-5.14.0/js/all.min.js"
             ]
           },
           "configurations": {

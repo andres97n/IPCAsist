@@ -12,6 +12,7 @@ import { FooterComponent } from "./shared/footer/footer.component";
 
 import { ComponentsModule } from "./components/components.module";
 import { ExamplesModule } from "./examples/examples.module";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent, FooterComponent],
@@ -24,6 +25,7 @@ import { ExamplesModule } from "./examples/examples.module";
     HttpClientModule,
     ComponentsModule,
     ExamplesModule,
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

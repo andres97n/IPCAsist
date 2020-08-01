@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { DocenteService } from "app/services/docente.service";
+import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: "app-asignar-docente",
@@ -10,6 +11,7 @@ export class AsignarDocenteComponent implements OnInit {
   time = { hour: 13, minute: 30 };
   time2 = { hour: 13, minute: 30 };
   meridian = false;
+  faCoffee = faCoffee;
 
   country: any;
 

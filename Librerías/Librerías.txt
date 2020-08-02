@@ -12,7 +12,7 @@ npm install primeicons --save
 https://www.primefaces.org/primeng/showcase/#/setup
 
 --------------------------------
-
+(Esta versión es 4.13)
 Font Awesome
 npm install font-awesome --save
 "node_modules/font-awesome/css/font-awesome.min.css",
@@ -33,8 +33,10 @@ npm i @ng-bootstrap/ng-bootstrap@5.3.1
     "ng2-nouislider": "1.7.12",
 
 ---------------------------------
-
+(Librerías no funcionaron)
 ng add @fortawesome/angular-fontawesome@0.6.0
 npm install @fortawesome/fontawesome-svg-core
 npm install @fortawesome/free-solid-svg-icons
+npm install @fortawesome/free-regular-svg-icons
+npm install @fortawesome/free-brands-svg-icons
 npm install @fortawesome/angular-fontawesome@0.6.0

@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { DocenteService } from "app/services/docente.service";
-import { faCoffee } from "@fortawesome/free-solid-svg-icons";
-
+import { Persons } from "app/clases/persons";
 @Component({
   selector: "app-asignar-docente",
   templateUrl: "./asignar-docente.component.html",
@@ -11,7 +10,6 @@ export class AsignarDocenteComponent implements OnInit {
   time = { hour: 13, minute: 30 };
   time2 = { hour: 13, minute: 30 };
   meridian = false;
-  faCoffee = faCoffee;
 
   country: any;
 
@@ -19,9 +17,27 @@ export class AsignarDocenteComponent implements OnInit {
 
   filteredCountriesSingle: any[];
 
+  persons: Persons[] = [];
+
+  cols: any[];
+
   constructor(private _docenteSrv: DocenteService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._docenteSrv.getPersons().subscribe((persons: Persons[]) => {
+      console.log(persons);
+
+      this.persons = persons;
+    });
+
+    this.cols = [
+      { field: "_id", header: "ID" },
+      { field: "name", header: "Name" },
+      { field: "age", header: "Age" },
+      { field: "email", header: "Email" },
+      { field: "phone", header: "Phone" },
+    ];
+  }
 
   // buscarPersona(event) {
   //   let persona = event.query;

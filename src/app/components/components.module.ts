@@ -11,6 +11,7 @@ import { DropdownModule } from "primeng/dropdown";
 import { AutoCompleteModule } from "primeng/autocomplete";
 import { CalendarModule } from "primeng/calendar";
 import { CardModule } from "primeng/card";
+import { TableModule } from "primeng/table";
 
 import { BasicelementsComponent } from "./basicelements/basicelements.component";
 import { NavigationComponent } from "./navigation/navigation.component";
@@ -39,6 +40,7 @@ import { AsignarDocenteComponent } from "./asignar-docente/asignar-docente.compo
     AutoCompleteModule,
     CalendarModule,
     CardModule,
+    TableModule,
   ],
   declarations: [
     ComponentsComponent,

@@ -118,7 +118,7 @@
 
       <!-- Card Identificación -->
       <div class="row justify-content-center">
-        <div class="col-md-5">
+        <div class="col-md-6">
           <p-card
             header="Identificación del Docente"
             subheader="Ingrese la identificación o el nombre del Docente a asignar."
@@ -126,7 +126,7 @@
           >
             <p-header>
               <div style="background-color: #cfcfcf;">
-                <i class="fas fa-chalkboard-teacher fa-3x fa-fw icono"></i>
+                <i class="fas fa-chalkboard-teacher fa-4x fa-fw icono"></i>
               </div>
             </p-header>
             <div class="form-group">
@@ -143,7 +143,7 @@
               ></p-autoComplete>
             </div>
             <p-footer>
-              <i class="fa fa-arrow-down fa-2x" aria-hidden="true"></i>
+              <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
             </p-footer>
           </p-card>
         </div>
@@ -262,7 +262,7 @@
 
       <!-- Card Docente -->
       <div class="row justify-content-center">
-        <div class="col-md-5">
+        <div class="col-md-6">
           <p-card
             header="Identificación del Aula"
             subheader="Ingrese la identificación del Aula en la cual se desea ingresar al Docente."
@@ -293,8 +293,9 @@
         </div>
       </div>
       <br />
+      <br />
 
-      <button type="button" class="btn btn-outline-neutral btn-round">
+      <button type="button" class="btn btn-outline-neutral btn-round btn-lg">
         <i class="fas fa-save fa-lg fa-fw"></i> Asignar Docente
       </button>
     </div>
@@ -304,8 +305,38 @@
     <div class="container">
       <div class="row">
         <div class="col-md-8 mr-auto ml-auto">
-          <h2 class="text-center">Keep in touch?</h2>
-          <form class="contact-form">
+          <h2 class="text-center">Asignaciones a un Aula</h2>
+          <br />
+
+          <p-table
+            [value]="persons"
+            [columns]="cols"
+            [scrollable]="true"
+            scrollHeight="200px"
+            [resizableColumns]="true"
+          >
+            <ng-template pTemplate="colgroup" let-columns>
+              <colgroup>
+                <col *ngFor="let col of columns" />
+              </colgroup>
+            </ng-template>
+            <ng-template pTemplate="header">
+              <tr>
+                <th *ngFor="let col of cols" pResizableColumn>
+                  {{ col.header }}
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-person>
+              <tr>
+                <td *ngFor="let col of cols">
+                  {{ person[col.field] }}
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+
+          <!-- <form class="contact-form">
             <div class="row">
               <div class="col-md-6">
                 <label>Name</label>
@@ -361,7 +392,7 @@
                 </button>
               </div>
             </div>
-          </form>
+          </form> -->
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { Persons } from "app/clases/persons";
 
 @Injectable({
   providedIn: "root",
@@ -14,5 +15,9 @@ export class DocenteService {
     // .then((data) => {
     //   return data;
     // });
+  }
+
+  getPersons() {
+    return this.http.get("/assets/json/ejemplo.json");
   }
 }

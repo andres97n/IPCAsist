@@ -6,12 +6,14 @@ import { NouisliderModule } from "ng2-nouislider";
 import { JwBootstrapSwitchNg2Module } from "jw-bootstrap-switch-ng2";
 import { RouterModule } from "@angular/router";
 
+// Primer Components
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { DropdownModule } from "primeng/dropdown";
 import { AutoCompleteModule } from "primeng/autocomplete";
 import { CalendarModule } from "primeng/calendar";
 import { CardModule } from "primeng/card";
 import { TableModule } from "primeng/table";
+import { InputNumberModule } from "primeng/inputnumber";
 
 import { BasicelementsComponent } from "./basicelements/basicelements.component";
 import { NavigationComponent } from "./navigation/navigation.component";
@@ -41,6 +43,7 @@ import { AsignarDocenteComponent } from "./asignar-docente/asignar-docente.compo
     CalendarModule,
     CardModule,
     TableModule,
+    InputNumberModule,
   ],
   declarations: [
     ComponentsComponent,

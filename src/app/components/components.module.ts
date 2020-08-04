@@ -14,6 +14,8 @@ import { CalendarModule } from "primeng/calendar";
 import { CardModule } from "primeng/card";
 import { TableModule } from "primeng/table";
 import { InputNumberModule } from "primeng/inputnumber";
+import { InputTextModule } from "primeng/inputtext";
+import { InputMaskModule } from "primeng/inputmask";
 
 import { BasicelementsComponent } from "./basicelements/basicelements.component";
 import { NavigationComponent } from "./navigation/navigation.component";
@@ -44,6 +46,8 @@ import { AsignarDocenteComponent } from "./asignar-docente/asignar-docente.compo
     CardModule,
     TableModule,
     InputNumberModule,
+    InputTextModule,
+    InputMaskModule,
   ],
   declarations: [
     ComponentsComponent,

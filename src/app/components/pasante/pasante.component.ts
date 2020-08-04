@@ -16,6 +16,10 @@ export class PasanteComponent implements OnInit {
   selectedSex: string;
 
   edad: number;
+  celular: number;
+
+  tipo_sangre: Array<any>;
+  tipo: string;
 
   constructor(private _docenteSrv: DocenteService) {}
 
@@ -39,9 +43,45 @@ export class PasanteComponent implements OnInit {
       { name: "Femenino", value: 2 },
       { name: "Otro", value: 3 },
     ];
+
+    this.tipo_sangre = [
+      {
+        name: "O negativo",
+        value: "O-",
+      },
+      { name: "O positivo", value: "O+" },
+      {
+        name: "A negativo",
+        value: "A-",
+      },
+      {
+        name: "A positivo",
+        value: "O+",
+      },
+      {
+        name: "B negativo",
+        value: "B-",
+      },
+      {
+        name: "B positivo",
+        value: "B+",
+      },
+      {
+        name: "AB negativo",
+        value: "AB-",
+      },
+      {
+        name: "AB positivo",
+        value: "AB+",
+      },
+    ];
   }
 
   sexoSeleccionado(event) {
+    console.log(event.value);
+  }
+
+  sangreSeleccionada(event) {
     console.log(event.value);
   }
 }

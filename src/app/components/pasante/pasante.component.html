@@ -59,9 +59,15 @@
     <div class="container">
       <h2 class="title">Registre un Pasante!!</h2>
 
+      <div class="row" style="margin-top: 3em;">
+        <div class="col-md-4 text-center seccion bg-primary">
+          <h3 class="title">Información Personal</h3>
+        </div>
+      </div>
+
       <!-- Card Identificación -->
-      <div class="row justify-content-center">
-        <div class="col-md-4">
+      <div class="row justify-content-center" style="margin-top: 2em;">
+        <div class="col-md-4" id="card-cedula">
           <p-card
             header="Identificación"
             subheader="Ingrese la identificación o pasaporte del Pasante."
@@ -105,27 +111,8 @@
             </p-header>
             <div class="form-group">
               <br />
-              <p-autoComplete
-                styleClass="cedula"
-                [(ngModel)]="country"
-                [suggestions]="filteredCountriesSingle"
-                (completeMethod)="filterCountrySingle($event)"
-                field="name"
-                [size]="35"
-                placeholder="Nombres"
-                [minLength]="1"
-              ></p-autoComplete>
-              <br />
-              <p-autoComplete
-                styleClass="cedula"
-                [(ngModel)]="country"
-                [suggestions]="filteredCountriesSingle"
-                (completeMethod)="filterCountrySingle($event)"
-                field="name"
-                [size]="35"
-                placeholder="Apellidos"
-                [minLength]="1"
-              ></p-autoComplete>
+              <input type="text" placeholder="Nombres" pInputText size="35" />
+              <input type="text" placeholder="Apellidos" size="35" pInputText />
             </div>
             <!-- <p-footer>
               <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
@@ -184,6 +171,7 @@
                 [min]="17"
                 [max]="100"
                 placeholder="Edad"
+                size="15"
               >
               </p-inputNumber>
             </div>
@@ -195,35 +183,91 @@
       </div>
       <br />
 
-      <!-- Card Docente -->
+      <!-- Card Email -->
       <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-4">
           <p-card
-            header="Identificación del Aula"
-            subheader="Ingrese la identificación del Aula en la cual se desea ingresar al Docente."
+            header="Correo"
+            subheader="Ingrese el correo del Pasante, para mantenerse en contacto."
             styleClass="ui-card-shadow"
           >
             <p-header>
               <div style="background-color: #cfcfcf;">
-                <i class="fas fa-school fa-3x fa-fw icono"></i>
+                <i class="far fa-envelope fa-3x fa-fw icono"></i>
               </div>
             </p-header>
             <div class="form-group">
               <br />
-              <p-autoComplete
-                styleClass="cedula"
-                [(ngModel)]="country"
-                [suggestions]="filteredCountriesSingle"
-                (completeMethod)="filterCountrySingle($event)"
-                field="name"
-                [size]="35"
-                placeholder="Aula"
-                [minLength]="1"
-              ></p-autoComplete>
+              <input
+                type="email"
+                placeholder="Correo"
+                pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
+                pInputText
+                size="35"
+              />
             </div>
-            <p-footer>
+            <!-- <p-footer>
               <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-            </p-footer>
+            </p-footer> -->
+          </p-card>
+        </div>
+
+        <!-- Card Celular -->
+        <div class="col-md-4">
+          <p-card
+            header="Celular"
+            subheader="Ingrese el número celular del Pasante, para cualquier aviso."
+            styleClass="ui-card-shadow"
+          >
+            <p-header>
+              <div style="background-color: #cfcfcf;">
+                <i class="fas fa-phone fa-3x fa-fw icono"></i>
+              </div>
+            </p-header>
+            <div class="form-group">
+              <br />
+              <p-inputMask
+                [(ngModel)]="celular"
+                mask="0999999999"
+                placeholder="Celular"
+              ></p-inputMask>
+            </div>
+            <!-- <p-footer>
+              <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
+            </p-footer> -->
+          </p-card>
+        </div>
+      </div>
+      <br />
+
+      <!-- Card Aula -->
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <p-card
+            header="Tipo de Sangre"
+            subheader="Ingrese el tipo de sangre del Pasante."
+            styleClass="ui-card-shadow"
+          >
+            <p-header>
+              <div style="background-color: #cfcfcf;">
+                <i class="fas fa-syringe fa-3x fa-fw icono"></i>
+              </div>
+            </p-header>
+            <div class="form-group">
+              <br />
+              <p-dropdown
+                [options]="tipo_sangre"
+                [(ngModel)]="tipo"
+                optionLabel="name"
+                (ngModelChange)="sangreSeleccionada($event)"
+                placeholder="Seleccione un Tipo de Sangre "
+                size="30"
+                filter="true"
+              ></p-dropdown>
+            </div>
+            <!-- <p-footer>
+              <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
+            </p-footer> -->
           </p-card>
         </div>
       </div>
@@ -231,7 +275,7 @@
       <br />
 
       <button type="button" class="btn btn-outline-neutral btn-round btn-lg">
-        <i class="fas fa-save fa-lg fa-fw"></i> Asignar Docente
+        <i class="fas fa-save fa-lg fa-fw"></i> Registrar Pasante
       </button>
     </div>
   </div>

@@ -33,6 +33,7 @@ npm i @ng-bootstrap/ng-bootstrap@5.3.1
     "ng2-nouislider": "1.7.12",
 
 ---------------------------------
+
 (Librerías no funcionaron)
 ng add @fortawesome/angular-fontawesome@0.6.0
 npm install @fortawesome/fontawesome-svg-core
@@ -40,3 +41,10 @@ npm install @fortawesome/free-solid-svg-icons
 npm install @fortawesome/free-regular-svg-icons
 npm install @fortawesome/free-brands-svg-icons
 npm install @fortawesome/angular-fontawesome@0.6.0
+
+-------------------------------------------------
+
+(Opcional)
+npm install primeflex --save
+
+-------------------------------------------------

@@ -21,6 +21,14 @@ export class PasanteComponent implements OnInit {
   tipo_sangre: Array<any>;
   tipo: string;
 
+  universidades: Array<any>;
+  universidad: string;
+
+  num_horas: number;
+
+  horario = Date;
+  es: any;
+
   constructor(private _docenteSrv: DocenteService) {}
 
   ngOnInit(): void {
@@ -75,6 +83,100 @@ export class PasanteComponent implements OnInit {
         value: "AB+",
       },
     ];
+
+    this.universidades = [
+      {
+        name: "Universidad de Cuenca",
+        value: "UCUENCA",
+      },
+      {
+        name: "Universidad Católica de Cuenca",
+        value: "CATOCUENCA",
+      },
+      {
+        name: "Universidad del Azuay",
+        value: "UDA",
+      },
+      {
+        name: "Universidad Politécnica Salesiana",
+        value: "UPS",
+      },
+      {
+        name: "Universidad Nacional de Educación",
+        value: "UNAE",
+      },
+      {
+        name: "Instituo Superior Tecnológico del Azuay",
+        value: "ISTA",
+      },
+      {
+        name: "Instituto Tecnológico Sudamericano",
+        value: "SUDA",
+      },
+      {
+        name: "Instituto Tecnológico Superior San Gabriel",
+        value: "SAN GABRIEL",
+      },
+      {
+        name: "Instituto Tecnológico Superior American Collage",
+        value: "AMERICAN COLLAGE",
+      },
+      {
+        name: "Instituto Superior San Isidro",
+        value: "SAN ISIDRO",
+      },
+      {
+        name: "Otro",
+        value: "OTRO",
+      },
+    ];
+
+    this.es = {
+      firstDayOfWeek: 0,
+      dayNames: [
+        "Domingo",
+        "Lunes",
+        "Martes",
+        "Miércoles",
+        "Jueves",
+        "Viernes",
+        "Sábado",
+      ],
+      dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+      dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+      monthNames: [
+        "Enero",
+        "Febrero",
+        "Marzo",
+        "Abril",
+        "Mayo",
+        "Junio",
+        "Julio",
+        "Agosto",
+        "Septiembre",
+        "Octubre",
+        "Noviembre",
+        "Diciembre",
+      ],
+      monthNamesShort: [
+        "Ene",
+        "Feb",
+        "Mar",
+        "Abr",
+        "May",
+        "Jun",
+        "Jul",
+        "Ago",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dic",
+      ],
+      today: "Hoy",
+      clear: "Borrar",
+      dateFormat: "mm/dd/aa",
+      weekHeader: "Sm",
+    };
   }
 
   sexoSeleccionado(event) {
@@ -83,5 +185,13 @@ export class PasanteComponent implements OnInit {
 
   sangreSeleccionada(event) {
     console.log(event.value);
+  }
+
+  universidadSeleccionada(event) {
+    console.log(event.value);
+  }
+
+  mostrarFecha(event) {
+    console.log(event);
   }
 }

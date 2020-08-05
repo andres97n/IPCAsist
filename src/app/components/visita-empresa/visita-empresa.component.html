@@ -10,7 +10,7 @@
       <h3 class="titulo">Visitas</h3>
       <br />
         <a
-            href="https://www.youtube.com/watch?v=7hUHMhUpVnw"
+            href="https://www.youtube.com/watch?v=hZle2vwEYOQ"
             class="btn btn-outline-neutral btn-round"
             target="_blank"
             ><i class="fa fa-play fa-lg fa-fw"></i> Vídeo Informativo
@@ -49,28 +49,28 @@
             <br /><br />
         </div>
     </div>
-
     <div class="section section-dark text-center">
       <div class="container">
         <h2 class="title">Registre una Visita</h2>
   
+        <!-- Información Empresa -->
         <div class="row" style="margin-top: 3em;">
-          <div class="col-md-4 text-center seccion bg-primary">
-            <h3 class="title">Información de la Empresa</h3>
+          <div class="col-md-4 text-center seccion bg-dark">
+            <h3 class="title">Información Personal</h3>
           </div>
         </div>
   
-        <!-- Card Identificación -->
+        <!-- Nombre Empresa -->
         <div class="row justify-content-center" style="margin-top: 2em;">
-          <!--<div class="col-md-4" id="card-cedula">
+          <div class="col-md-4" id="card-cedula">
             <p-card
-              header="Identificación"
-              subheader="Ingrese la identificación o pasaporte del Pasante."
+              header="Empresa"
+              subheader="Ingrese el nombre de la Empresa o Institución visitante"
               styleClass="ui-card-shadow"
             >
               <p-header>
                 <div class="head">
-                  <i class="far fa-id-card fa-4x fa-fw icono"></i>
+                  <i class="far fa-building fa-3x fa-fw icono"></i>
                 </div>
               </p-header>
               <div class="form-group">
@@ -82,32 +82,32 @@
                   (completeMethod)="filterCountrySingle($event)"
                   field="name"
                   [size]="35"
-                  placeholder="Identificación"
+                  placeholder="Nombre"
                   [minLength]="1"
                 ></p-autoComplete>
               </div>
-               ***<p-footer>
+              <!-- <p-footer>
                 <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-              </p-footer> ***
+              </p-footer> -->
             </p-card>
-          </div> -->
+          </div>
   
-          <!-- Nombre y Apellidos -->
+          <!-- Dirección -->
           <div class="col-md-4">
             <p-card
-              header="Nombre"
-              subheader="Ingrese el nombre de la Empresa o Institución"
+              header="Dirección"
+              subheader="Ingrese la dirección de la Empresa o Institución visitante"
               styleClass="ui-card-shadow"
             >
               <p-header>
                 <div class="head">
-                  <i class="far fa-building fa-4x fa-fw icono"></i>
-                  
+                  <i class="fas fa-map-marker-alt fa-3x fa-fw icono"></i>
                 </div>
               </p-header>
               <div class="form-group">
                 <br />
-                <input type="text" placeholder="Nombres" pInputText size="35" />
+                <input type="text" placeholder="Calle Principal" pInputText size="35" />
+                <input type="text" placeholder="Calle Secundaria" size="35" pInputText />
               </div>
               <!-- <p-footer>
                 <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
@@ -117,65 +117,56 @@
         </div>
         <br />
   
-        <!-- Card Sexo -->
+       <!-- Representante -->
         <div class="row justify-content-center">
           <div class="col-md-4">
             <p-card
-              header="Sexo"
-              subheader="Ingrese el sexo del Pasante"
-              styleClass="ui-card-shadow"
-            >
-              <p-header>
-                <div style="background-color: #cfcfcf;">
-                  <i class="fas fa-genderless fa-3x fa-fw icono"></i>
-                </div>
-              </p-header>
-              <div class="form-group">
-                <br />
-                <p-dropdown
-                  [options]="sexo"
-                  [(ngModel)]="selectedSex"
-                  optionLabel="name"
-                  (ngModelChange)="sexoSeleccionado($event)"
-                  placeholder="Seleccione un sexo"
-                ></p-dropdown>
+            header="Representante"
+            subheader="Ingrese los nombres y los apellidos del Representante de la Empresa o Institución"
+            styleClass="ui-card-shadow"
+          >
+            <p-header>
+              <div class="head">
+                <i class="fas fa-user fa-3x fa-fw icono"></i>
               </div>
-              <!-- <p-footer>
-                <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-              </p-footer> -->
-            </p-card>
+            </p-header>
+            <div class="form-group">
+              <br />
+              <input type="text" placeholder="Nombres" pInputText size="35" />
+              <input type="text" placeholder="Apellidos" size="35" pInputText />
+            </div>
+            <!-- <p-footer>
+              <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
+            </p-footer> -->
+          </p-card>
           </div>
-  
-          <!-- Card Edad -->
+
+          <!-- Card Celular -->
           <div class="col-md-4">
             <p-card
-              header="Edad"
-              subheader="Ingrese la edad del Pasante"
+              header="Celular"
+              subheader="Ingrese el número celular del Representante, para cualquier aviso."
               styleClass="ui-card-shadow"
             >
               <p-header>
                 <div style="background-color: #cfcfcf;">
-                  <i class="fas fa-hourglass-half fa-3x fa-fw icono"></i>
+                  <i class="fas fa-phone fa-3x fa-fw icono"></i>
                 </div>
               </p-header>
               <div class="form-group">
                 <br />
-                <p-inputNumber
-                  [(ngModel)]="value4"
-                  mode="decimal"
-                  [min]="17"
-                  [max]="100"
-                  placeholder="Edad"
-                  size="15"
-                >
-                </p-inputNumber>
+                <p-inputMask
+                  [(ngModel)]="celular"
+                  mask="0999999999"
+                  placeholder="Celular"
+                ></p-inputMask>
               </div>
               <!-- <p-footer>
                 <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
               </p-footer> -->
             </p-card>
           </div>
-        </div>
+         </div>
         <br />
   
         <!-- Card Email -->
@@ -183,7 +174,7 @@
           <div class="col-md-4">
             <p-card
               header="Correo"
-              subheader="Ingrese el correo del Pasante, para mantenerse en contacto."
+              subheader="Ingrese el correo de la Empresa o Institución, para mantenerse en contacto."
               styleClass="ui-card-shadow"
             >
               <p-header>
@@ -207,25 +198,30 @@
             </p-card>
           </div>
   
-          <!-- Card Celular -->
+           <!-- Card Guia -->
           <div class="col-md-4">
             <p-card
-              header="Celular"
-              subheader="Ingrese el número celular del Pasante, para cualquier aviso."
+              header="Guía"
+              subheader="Ingrese el nombre del Docente a cargo de la visita."
               styleClass="ui-card-shadow"
             >
               <p-header>
-                <div style="background-color: #cfcfcf;">
-                  <i class="fas fa-phone fa-3x fa-fw icono"></i>
+                <div class="head">
+                  <i class="fas fa-users fa-3x fa-fw icono"></i>
                 </div>
               </p-header>
               <div class="form-group">
                 <br />
-                <p-inputMask
-                  [(ngModel)]="celular"
-                  mask="0999999999"
-                  placeholder="Celular"
-                ></p-inputMask>
+                <p-autoComplete
+                  styleClass="cedula"
+                  [(ngModel)]="country"
+                  [suggestions]="filteredCountriesSingle"
+                  (completeMethod)="filterCountrySingle($event)"
+                  field="name"
+                  [size]="35"
+                  placeholder="Nombre o Identificación"
+                  [minLength]="1"
+                ></p-autoComplete>
               </div>
               <!-- <p-footer>
                 <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
@@ -235,42 +231,110 @@
         </div>
         <br />
   
-        <!-- Card Aula -->
+         <!-- Card Fecha de Visita -->
         <div class="row justify-content-center">
-          <div class="col-md-6">
+          <div class="col-md-5">
             <p-card
-              header="Tipo de Sangre"
-              subheader="Ingrese el tipo de sangre del Pasante."
+              header="Fecha de la Visita"
+              subheader="Ingrese la Fecha en que se realizará la visita"
               styleClass="ui-card-shadow"
             >
               <p-header>
-                <div style="background-color: #cfcfcf;">
-                  <i class="fas fa-syringe fa-3x fa-fw icono"></i>
+                <div class="head">
+                  <i class="far fa-calendar-check fa-3x fa-fw icono"></i>
                 </div>
               </p-header>
-              <div class="form-group">
-                <br />
-                <p-dropdown
-                  [options]="tipo_sangre"
-                  [(ngModel)]="tipo"
-                  optionLabel="name"
-                  (ngModelChange)="sangreSeleccionada($event)"
-                  placeholder="Seleccione un Tipo de Sangre "
-                  size="30"
-                  filter="true"
-                ></p-dropdown>
+              <div class="row">
+               
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <br />
+                    <p-calendar
+                      [(ngModel)]="date14"
+                      [inline]="true"
+                      [showWeek]="true"
+                      class="fecha"
+                      (onSelect)="mostrarFecha($event)"
+                      [locale]="es"
+                    ></p-calendar>
+                  </div>
+                </div>
               </div>
+  
               <!-- <p-footer>
                 <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
               </p-footer> -->
             </p-card>
           </div>
+
+           <!-- Horario de Visita-->
+          <div class="col-md-5">
+            <p-card
+              header="Horario de la Visita"
+              subheader="Ingrese el horario en que se realizará la visita"
+              styleClass="ui-card-shadow"
+            >
+              <p-header>
+                <div style="background-color: #cfcfcf;">
+                  <i class="far fa-clock fa-4x fa-fw icono"></i>
+                </div>
+              </p-header>
+              <div class="row justify-content-center">
+                <!-- Horario de Entrada-->
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label>Horario de Entrada</label>
+                    <ngb-timepicker
+                      [(ngModel)]="time"
+                      [meridian]="meridian"
+                    ></ngb-timepicker>
+                  </div>
+                </div>
+                <!-- Horario de Salida -->
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label>Horario de Salida</label>
+                    <ngb-timepicker
+                      [(ngModel)]="time2"
+                      [meridian]="meridian"
+                    ></ngb-timepicker>
+                  </div>
+                </div>
+              </div>
+              <p-footer>
+                <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
+              </p-footer>
+            </p-card>
+          </div>
         </div>
         <br />
+  
+        <!-- Card Observación-->
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+              <p-card
+              header="Observaciones"
+              subheader="Ingrese alguna observación acerca de la visita"
+              styleClass="ui-card-shadow"
+            >
+              <p-header>
+                <div class="head">
+                  <i class="fas fa-clipboard fa-3x fa-fw icono"></i>
+                </div>
+              </p-header>
+              <div class="form-group">
+                <br />
+                <textarea rows="5" cols="50" placeholder="Observación" pInputTextarea></textarea>
+               <!-- <textarea rows="5" cols="30" pInputTextarea autoResize="autoResize"></textarea> -->
+              </div>
+            </p-card>
+           </div>
+        </div>
+        
         <br />
   
         <button type="button" class="btn btn-outline-neutral btn-round btn-lg">
-          <i class="fas fa-save fa-lg fa-fw"></i> Registrar Pasante
+          <i class="fas fa-save fa-lg fa-fw"></i> Registrar Visita
         </button>
       </div>
     </div>
@@ -279,7 +343,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-8 mr-auto ml-auto">
-            <h2 class="text-center">Asignaciones a un Aula</h2>
+            <h2 class="text-center">Información de Visitas</h2>
             <br />
   
             <p-table

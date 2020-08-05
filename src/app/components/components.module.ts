@@ -17,6 +17,9 @@ import { InputNumberModule } from "primeng/inputnumber";
 import { InputTextModule } from "primeng/inputtext";
 import { InputMaskModule } from "primeng/inputmask";
 import { SliderModule } from "primeng/slider";
+import { GMapModule } from 'primeng/gmap';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { CarouselModule } from 'primeng/carousel';
 
 import { BasicelementsComponent } from "./basicelements/basicelements.component";
 import { NavigationComponent } from "./navigation/navigation.component";
@@ -50,6 +53,9 @@ import { AsignarDocenteComponent } from "./asignar-docente/asignar-docente.compo
     InputTextModule,
     InputMaskModule,
     SliderModule,
+    GMapModule,
+    InputTextareaModule,
+    CarouselModule,
   ],
   declarations: [
     ComponentsComponent,

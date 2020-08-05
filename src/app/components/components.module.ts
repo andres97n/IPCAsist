@@ -16,6 +16,7 @@ import { TableModule } from "primeng/table";
 import { InputNumberModule } from "primeng/inputnumber";
 import { InputTextModule } from "primeng/inputtext";
 import { InputMaskModule } from "primeng/inputmask";
+import { SliderModule } from "primeng/slider";
 
 import { BasicelementsComponent } from "./basicelements/basicelements.component";
 import { NavigationComponent } from "./navigation/navigation.component";
@@ -48,6 +49,7 @@ import { AsignarDocenteComponent } from "./asignar-docente/asignar-docente.compo
     InputNumberModule,
     InputTextModule,
     InputMaskModule,
+    SliderModule,
   ],
   declarations: [
     ComponentsComponent,

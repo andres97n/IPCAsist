@@ -59,8 +59,9 @@
     <div class="container">
       <h2 class="title">Registre un Pasante!!</h2>
 
+      <!-- Información Personal -->
       <div class="row" style="margin-top: 3em;">
-        <div class="col-md-4 text-center seccion bg-primary">
+        <div class="col-md-4 text-center seccion bg-dark">
           <h3 class="title">Información Personal</h3>
         </div>
       </div>
@@ -75,7 +76,7 @@
           >
             <p-header>
               <div class="head">
-                <i class="far fa-id-card fa-4x fa-fw icono"></i>
+                <i class="far fa-id-card fa-3x fa-fw icono"></i>
               </div>
             </p-header>
             <div class="form-group">
@@ -100,13 +101,13 @@
         <!-- Nombre y Apellidos -->
         <div class="col-md-4">
           <p-card
-            header="Nombre y Apellidos"
+            header="Nombres y Apellidos"
             subheader="Ingrese los nombres y los apellidos del Pasante"
             styleClass="ui-card-shadow"
           >
             <p-header>
               <div class="head">
-                <i class="fas fa-user fa-4x fa-fw icono"></i>
+                <i class="fas fa-user fa-3x fa-fw icono"></i>
               </div>
             </p-header>
             <div class="form-group">
@@ -240,9 +241,9 @@
       </div>
       <br />
 
-      <!-- Card Aula -->
+      <!-- Card Sangre -->
       <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-5">
           <p-card
             header="Tipo de Sangre"
             subheader="Ingrese el tipo de sangre del Pasante."
@@ -274,6 +275,213 @@
       <br />
       <br />
 
+      <!-- Información Adicional -->
+      <div class="row" style="margin-top: 3em;">
+        <div class="col-md-4 text-center seccion bg-dark">
+          <h3 class="title">Información Adicional</h3>
+        </div>
+      </div>
+
+      <div class="row justify-content-center" style="margin-top: 2em;">
+        <!-- Card Institución -->
+        <div class="col-md-4">
+          <p-card
+            header="Institución"
+            subheader="Ingrese el nombre de la Institución en la que se encuentra el pasante."
+            styleClass="ui-card-shadow"
+          >
+            <p-header>
+              <div class="head">
+                <i class="fas fa-university fa-3x fa-fw icono"></i>
+              </div>
+            </p-header>
+            <div class="form-group">
+              <br />
+              <p-dropdown
+                [options]="universidades"
+                [(ngModel)]="universidad"
+                optionLabel="name"
+                (ngModelChange)="universidadSeleccionada($event)"
+                filter="true"
+                placeholder="Seleccione un Instituto"
+              >
+                <ng-template
+                  *ngFor="let item of universidades"
+                  pTemplate="selectedItem"
+                >
+                  <img
+                    src="assets/img/Logos Universidades/{{ item.value }}.png"
+                    style="width: 16px; vertical-align: middle;"
+                  />
+                  <span style="vertical-align: middle; margin-left: 0.5em;">{{
+                    item.name
+                  }}</span>
+                </ng-template>
+                <ng-template
+                  *ngFor="let insti of universidades"
+                  pTemplate="item"
+                >
+                  <div
+                    class="ui-helper-clearfix"
+                    style="position: relative; height: 25px;"
+                  >
+                    <img
+                      src="assets/img/Logos Universidades/{{ insti.value }}.png"
+                      style="
+                        width: 24px;
+                        position: absolute;
+                        top: 1px;
+                        left: 5px;
+                      "
+                    />
+                    <div
+                      style="font-size: 14px; float: right; margin-top: 4px;"
+                    >
+                      {{ insti.name }}
+                    </div>
+                  </div>
+                </ng-template>
+              </p-dropdown>
+            </div>
+            <!-- <p-footer>
+              <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
+            </p-footer> -->
+          </p-card>
+        </div>
+
+        <!-- Card Tutor -->
+        <div class="col-md-4">
+          <p-card
+            header="Tutor"
+            subheader="Ingrese el nombre del tutor a cargo del Pasante."
+            styleClass="ui-card-shadow"
+          >
+            <p-header>
+              <div class="head">
+                <i class="fab fa-leanpub fa-3x fa-fw icono"></i>
+              </div>
+            </p-header>
+            <div class="form-group">
+              <br />
+              <p-autoComplete
+                styleClass="cedula"
+                [(ngModel)]="country"
+                [suggestions]="filteredCountriesSingle"
+                (completeMethod)="filterCountrySingle($event)"
+                field="name"
+                [size]="35"
+                placeholder="Nombre o Identificación"
+                [minLength]="1"
+              ></p-autoComplete>
+            </div>
+            <!-- <p-footer>
+              <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
+            </p-footer> -->
+          </p-card>
+        </div>
+      </div>
+
+      <div class="row justify-content-center" style="margin-top: 2em;">
+        <!-- Card Aula -->
+        <div class="col-md-4">
+          <p-card
+            header="Asignación a un Aula"
+            subheader="Ingrese el nombre del Aula al que pertenece el Pasante."
+            styleClass="ui-card-shadow"
+          >
+            <p-header>
+              <div class="head">
+                <i class="fas fa-child fa-3x fa-fw icono"></i>
+              </div>
+            </p-header>
+            <div class="form-group">
+              <br />
+              <p-autoComplete
+                styleClass="cedula"
+                [(ngModel)]="country"
+                [suggestions]="filteredCountriesSingle"
+                (completeMethod)="filterCountrySingle($event)"
+                field="name"
+                [size]="35"
+                placeholder="Aula"
+                [minLength]="1"
+              ></p-autoComplete>
+            </div>
+            <!-- <p-footer>
+              <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
+            </p-footer> -->
+          </p-card>
+        </div>
+
+        <!-- Card Horas -->
+        <div class="col-md-4">
+          <p-card
+            header="Horas al Día"
+            subheader="Ingrese el número de horas promedio diarias que realiza el Pasante"
+            styleClass="ui-card-shadow"
+          >
+            <p-header>
+              <div class="head">
+                <i class="far fa-clock fa-3x fa-fw icono"></i>
+              </div>
+            </p-header>
+            <div class="form-group">
+              <h4>#Horas: {{ num_horas }}</h4>
+              <p-slider
+                [(ngModel)]="num_horas"
+                [style]="{ width: '14em' }"
+                [step]="1"
+                max="9"
+                id="horas"
+              ></p-slider>
+            </div>
+            <!-- <p-footer>
+              <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
+            </p-footer> -->
+          </p-card>
+        </div>
+      </div>
+
+      <div class="row justify-content-center" style="margin-top: 2em;">
+        <!-- Card Fecha de Inicio -->
+        <div class="col-md-5">
+          <p-card
+            header="Fecha de Inicio"
+            subheader="Ingrese la Fecha de Inicio de las actividades del Pasante."
+            styleClass="ui-card-shadow"
+          >
+            <p-header>
+              <div class="head">
+                <i class="far fa-calendar-check fa-3x fa-fw icono"></i>
+              </div>
+            </p-header>
+            <div class="row">
+              <!-- Horario de Entrada-->
+              <div class="col-md-3">
+                <div class="form-group">
+                  <br />
+                  <p-calendar
+                    [(ngModel)]="date14"
+                    [inline]="true"
+                    [showWeek]="true"
+                    class="fecha"
+                    (onSelect)="mostrarFecha($event)"
+                    [locale]="es"
+                  ></p-calendar>
+                </div>
+              </div>
+            </div>
+
+            <!-- <p-footer>
+              <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
+            </p-footer> -->
+          </p-card>
+        </div>
+      </div>
+      <br />
+
+      <br />
+
       <button type="button" class="btn btn-outline-neutral btn-round btn-lg">
         <i class="fas fa-save fa-lg fa-fw"></i> Registrar Pasante
       </button>
@@ -284,7 +492,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-8 mr-auto ml-auto">
-          <h2 class="text-center">Asignaciones a un Aula</h2>
+          <h2 class="text-center">Información de Pasantes</h2>
           <br />
 
           <p-table

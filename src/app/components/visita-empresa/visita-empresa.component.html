@@ -25,13 +25,16 @@
               <div class="col-md-8 mr-auto ml-auto">
                 <h2 class="title">Breve Descripción</h2>
                 <h5 class="description">
-                  En está página se permitará asignar los docentes a las distintias
-                  aulas que existen en la institución IPCA.
+                  En está página se permitará registrar las visitas que realicen
+                  las distintas empresas o instituciones al IPCA.
                   <br />
                   <span
                     >A continuación se presenta un breve formulario, en el cual se le
-                    dará la postestad de hacerlo. Recuerde guardar los cambios cuando
-                    esté seguro que ingresó correcta información.
+                    dará la facilidad de registrar todos los datos de una visita. 
+                    Recuerde guardar los cambios cuando esté seguro que ingresó 
+                    correctamente la información.
+                    <br />
+                    Aquí una breve explicación.
                   </span>
                 </h5>
                 <br />
@@ -44,6 +47,272 @@
               </div>
             </div>
             <br /><br />
-           
+        </div>
     </div>
+
+    <div class="section section-dark text-center">
+      <div class="container">
+        <h2 class="title">Registre una Visita</h2>
+  
+        <div class="row" style="margin-top: 3em;">
+          <div class="col-md-4 text-center seccion bg-primary">
+            <h3 class="title">Información de la Empresa</h3>
+          </div>
+        </div>
+  
+        <!-- Card Identificación -->
+        <div class="row justify-content-center" style="margin-top: 2em;">
+          <!--<div class="col-md-4" id="card-cedula">
+            <p-card
+              header="Identificación"
+              subheader="Ingrese la identificación o pasaporte del Pasante."
+              styleClass="ui-card-shadow"
+            >
+              <p-header>
+                <div class="head">
+                  <i class="far fa-id-card fa-4x fa-fw icono"></i>
+                </div>
+              </p-header>
+              <div class="form-group">
+                <br />
+                <p-autoComplete
+                  styleClass="cedula"
+                  [(ngModel)]="country"
+                  [suggestions]="filteredCountriesSingle"
+                  (completeMethod)="filterCountrySingle($event)"
+                  field="name"
+                  [size]="35"
+                  placeholder="Identificación"
+                  [minLength]="1"
+                ></p-autoComplete>
+              </div>
+               ***<p-footer>
+                <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
+              </p-footer> ***
+            </p-card>
+          </div> -->
+  
+          <!-- Nombre y Apellidos -->
+          <div class="col-md-4">
+            <p-card
+              header="Nombre"
+              subheader="Ingrese el nombre de la Empresa o Institución"
+              styleClass="ui-card-shadow"
+            >
+              <p-header>
+                <div class="head">
+                  <i class="far fa-building fa-4x fa-fw icono"></i>
+                  
+                </div>
+              </p-header>
+              <div class="form-group">
+                <br />
+                <input type="text" placeholder="Nombres" pInputText size="35" />
+              </div>
+              <!-- <p-footer>
+                <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
+              </p-footer> -->
+            </p-card>
+          </div>
+        </div>
+        <br />
+  
+        <!-- Card Sexo -->
+        <div class="row justify-content-center">
+          <div class="col-md-4">
+            <p-card
+              header="Sexo"
+              subheader="Ingrese el sexo del Pasante"
+              styleClass="ui-card-shadow"
+            >
+              <p-header>
+                <div style="background-color: #cfcfcf;">
+                  <i class="fas fa-genderless fa-3x fa-fw icono"></i>
+                </div>
+              </p-header>
+              <div class="form-group">
+                <br />
+                <p-dropdown
+                  [options]="sexo"
+                  [(ngModel)]="selectedSex"
+                  optionLabel="name"
+                  (ngModelChange)="sexoSeleccionado($event)"
+                  placeholder="Seleccione un sexo"
+                ></p-dropdown>
+              </div>
+              <!-- <p-footer>
+                <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
+              </p-footer> -->
+            </p-card>
+          </div>
+  
+          <!-- Card Edad -->
+          <div class="col-md-4">
+            <p-card
+              header="Edad"
+              subheader="Ingrese la edad del Pasante"
+              styleClass="ui-card-shadow"
+            >
+              <p-header>
+                <div style="background-color: #cfcfcf;">
+                  <i class="fas fa-hourglass-half fa-3x fa-fw icono"></i>
+                </div>
+              </p-header>
+              <div class="form-group">
+                <br />
+                <p-inputNumber
+                  [(ngModel)]="value4"
+                  mode="decimal"
+                  [min]="17"
+                  [max]="100"
+                  placeholder="Edad"
+                  size="15"
+                >
+                </p-inputNumber>
+              </div>
+              <!-- <p-footer>
+                <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
+              </p-footer> -->
+            </p-card>
+          </div>
+        </div>
+        <br />
+  
+        <!-- Card Email -->
+        <div class="row justify-content-center">
+          <div class="col-md-4">
+            <p-card
+              header="Correo"
+              subheader="Ingrese el correo del Pasante, para mantenerse en contacto."
+              styleClass="ui-card-shadow"
+            >
+              <p-header>
+                <div style="background-color: #cfcfcf;">
+                  <i class="far fa-envelope fa-3x fa-fw icono"></i>
+                </div>
+              </p-header>
+              <div class="form-group">
+                <br />
+                <input
+                  type="email"
+                  placeholder="Correo"
+                  pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
+                  pInputText
+                  size="35"
+                />
+              </div>
+              <!-- <p-footer>
+                <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
+              </p-footer> -->
+            </p-card>
+          </div>
+  
+          <!-- Card Celular -->
+          <div class="col-md-4">
+            <p-card
+              header="Celular"
+              subheader="Ingrese el número celular del Pasante, para cualquier aviso."
+              styleClass="ui-card-shadow"
+            >
+              <p-header>
+                <div style="background-color: #cfcfcf;">
+                  <i class="fas fa-phone fa-3x fa-fw icono"></i>
+                </div>
+              </p-header>
+              <div class="form-group">
+                <br />
+                <p-inputMask
+                  [(ngModel)]="celular"
+                  mask="0999999999"
+                  placeholder="Celular"
+                ></p-inputMask>
+              </div>
+              <!-- <p-footer>
+                <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
+              </p-footer> -->
+            </p-card>
+          </div>
+        </div>
+        <br />
+  
+        <!-- Card Aula -->
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <p-card
+              header="Tipo de Sangre"
+              subheader="Ingrese el tipo de sangre del Pasante."
+              styleClass="ui-card-shadow"
+            >
+              <p-header>
+                <div style="background-color: #cfcfcf;">
+                  <i class="fas fa-syringe fa-3x fa-fw icono"></i>
+                </div>
+              </p-header>
+              <div class="form-group">
+                <br />
+                <p-dropdown
+                  [options]="tipo_sangre"
+                  [(ngModel)]="tipo"
+                  optionLabel="name"
+                  (ngModelChange)="sangreSeleccionada($event)"
+                  placeholder="Seleccione un Tipo de Sangre "
+                  size="30"
+                  filter="true"
+                ></p-dropdown>
+              </div>
+              <!-- <p-footer>
+                <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
+              </p-footer> -->
+            </p-card>
+          </div>
+        </div>
+        <br />
+        <br />
+  
+        <button type="button" class="btn btn-outline-neutral btn-round btn-lg">
+          <i class="fas fa-save fa-lg fa-fw"></i> Registrar Pasante
+        </button>
+      </div>
+    </div>
+  
+    <div class="section landing-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 mr-auto ml-auto">
+            <h2 class="text-center">Asignaciones a un Aula</h2>
+            <br />
+  
+            <p-table
+              [value]="persons"
+              [columns]="cols"
+              [scrollable]="true"
+              scrollHeight="200px"
+              [resizableColumns]="true"
+            >
+              <ng-template pTemplate="colgroup" let-columns>
+                <colgroup>
+                  <col *ngFor="let col of columns" />
+                </colgroup>
+              </ng-template>
+              <ng-template pTemplate="header">
+                <tr>
+                  <th *ngFor="let col of cols" pResizableColumn>
+                    {{ col.header }}
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-person>
+                <tr>
+                  <td *ngFor="let col of cols">
+                    {{ person[col.field] }}
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
 </div>

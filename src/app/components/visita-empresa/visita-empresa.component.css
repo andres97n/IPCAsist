@@ -1,0 +1,24 @@
+.titulo {
+    text-shadow: 1px 1px 1px black;
+  }
+  
+  .icono {
+    margin: 5px;
+  }
+  .head {
+    background-color: #cfcfcf;
+  }
+  
+  #card-cedula {
+    margin-top: 1em;
+  }
+  
+  .seccion {
+    border-radius: 42px 42px 42px 42px;
+    margin-left: 5em;
+    border: 4px solid #ffffff;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  

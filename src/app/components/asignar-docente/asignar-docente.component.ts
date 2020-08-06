@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { DocenteService } from "app/services/docente.service";
 import { Persons } from "app/clases/persons";
+import { FormGroup, FormBuilder } from "@angular/forms";
 @Component({
   selector: "app-asignar-docente",
   templateUrl: "./asignar-docente.component.html",
@@ -21,7 +22,9 @@ export class AsignarDocenteComponent implements OnInit {
 
   cols: any[];
 
-  constructor(private _docenteSrv: DocenteService) {}
+  forma: FormGroup;
+
+  constructor(private _docenteSrv: DocenteService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this._docenteSrv.getPersons().subscribe((persons: Persons[]) => {
@@ -37,6 +40,19 @@ export class AsignarDocenteComponent implements OnInit {
       { field: "email", header: "Email" },
       { field: "phone", header: "Phone" },
     ];
+  }
+
+  crearFormulario() {
+    this.forma = this.fb.group({
+      identificacion: [""],
+      horario_entrada: [""],
+      horario_salida: [""],
+      identificacion_docente: [""],
+    });
+  }
+
+  asignarDocente() {
+    console.log(this.forma);
   }
 
   // buscarPersona(event) {

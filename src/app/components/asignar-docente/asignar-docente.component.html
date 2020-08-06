@@ -117,67 +117,71 @@
   <div class="section section-dark text-center">
     <div class="container">
       <h2 class="title">Asigne a un Docente!!</h2>
-
-      <!-- Card Identificación -->
-      <div class="row justify-content-center">
-        <div class="col-md-6">
-          <p-card
-            header="Identificación del Docente"
-            subheader="Ingrese la identificación o el nombre del Docente a asignar."
-            styleClass="ui-card-shadow"
-          >
-            <p-header>
-              <div style="background-color: #cfcfcf;">
-                <i class="fas fa-chalkboard-teacher fa-4x fa-fw icono"></i>
-              </div>
-            </p-header>
-            <div class="form-group">
-              <br />
-              <p-autoComplete
-                styleClass="cedula"
-                [(ngModel)]="country"
-                [suggestions]="filteredCountriesSingle"
-                (completeMethod)="filterCountrySingle($event)"
-                field="name"
-                [size]="35"
-                placeholder="Docente"
-                [minLength]="1"
-              ></p-autoComplete>
-            </div>
-            <p-footer>
-              <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-            </p-footer>
-          </p-card>
-        </div>
-      </div>
-      <br />
-
-      <!-- Card Horarios -->
-      <div class="row justify-content-center">
-        <div class="col-md-6">
-          <p-card
-            header="Horario de Docente"
-            subheader="Ingrese el horario de trabajo del Docente."
-            styleClass="ui-card-shadow"
-          >
-            <p-header>
-              <div style="background-color: #cfcfcf;">
-                <!-- <i class="fa fa-clock-o "fa-4x fa-fw aria-hidden="true"></i> -->
-                <i class="far fa-clock fa-4x fa-fw icono"></i>
-                <!-- <i class="fab fa-adobe"></i> -->
-              </div>
-            </p-header>
-            <div class="row justify-content-center">
-              <!-- Horario de Entrada-->
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label>Horario de Entrada</label>
-                  <ngb-timepicker
-                    [(ngModel)]="time"
-                    [meridian]="meridian"
-                  ></ngb-timepicker>
+      <form [formGroup]="forma" (ngSubmit)="asignarDocente()">
+        <!-- Card Identificación -->
+        <div class="row justify-content-center">
+          <div class="col-md-6 form-group">
+            <p-card
+              header="Identificación del Docente"
+              subheader="Ingrese la identificación o el nombre del Docente a asignar."
+              styleClass="ui-card-shadow"
+            >
+              <p-header>
+                <div style="background-color: #cfcfcf;">
+                  <i class="fas fa-chalkboard-teacher fa-4x fa-fw icono"></i>
                 </div>
-                <!-- <div class="card card-profile card-plain">
+              </p-header>
+              <div class="form-group">
+                <br />
+                <p-autoComplete
+                  styleClass="cedula"
+                  [(ngModel)]="country"
+                  [suggestions]="filteredCountriesSingle"
+                  (completeMethod)="filterCountrySingle($event)"
+                  field="name"
+                  [size]="35"
+                  placeholder="Docente"
+                  [minLength]="1"
+                  class="form-control"
+                  formControlName="identificacion"
+                ></p-autoComplete>
+              </div>
+              <p-footer>
+                <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
+              </p-footer>
+            </p-card>
+          </div>
+        </div>
+        <br />
+
+        <!-- Card Horarios -->
+        <div class="row justify-content-center">
+          <div class="col-md-6 form-group">
+            <p-card
+              header="Horario de Docente"
+              subheader="Ingrese el horario de trabajo del Docente."
+              styleClass="ui-card-shadow"
+            >
+              <p-header>
+                <div style="background-color: #cfcfcf;">
+                  <!-- <i class="fa fa-clock-o "fa-4x fa-fw aria-hidden="true"></i> -->
+                  <i class="far fa-clock fa-4x fa-fw icono"></i>
+                  <!-- <i class="fab fa-adobe"></i> -->
+                </div>
+              </p-header>
+              <div class="row justify-content-center">
+                <!-- Horario de Entrada-->
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label>Horario de Entrada</label>
+                    <ngb-timepicker
+                      [(ngModel)]="time"
+                      [meridian]="meridian"
+                      class="form-control"
+                      formControlName="horario_entrada"
+                    ></ngb-timepicker>
+                  </div>
+                  <!-- <div class="card card-profile card-plain">
             <div class="card-avatar">
               <a href="#avatar"
                 ><img src="./assets/img/faces/joe-gardner-2.jpg" alt="..."
@@ -209,7 +213,7 @@
             </div>
           </div> -->
 
-                <!-- <div class="col-md-4">
+                  <!-- <div class="col-md-4">
           <div class="card card-profile card-plain">
             <div class="card-avatar">
               <a href="#avatar"
@@ -242,64 +246,69 @@
             </div>
           </div>
         </div> -->
-              </div>
-              <!-- Horario de Salida -->
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label>Horario de Salida</label>
-                  <ngb-timepicker
-                    [(ngModel)]="time2"
-                    [meridian]="meridian"
-                  ></ngb-timepicker>
+                </div>
+                <!-- Horario de Salida -->
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label>Horario de Salida</label>
+                    <ngb-timepicker
+                      [(ngModel)]="time2"
+                      [meridian]="meridian"
+                      class="form-control"
+                      formControlName="horario_salida"
+                    ></ngb-timepicker>
+                  </div>
                 </div>
               </div>
-            </div>
-            <p-footer>
-              <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-            </p-footer>
-          </p-card>
+              <p-footer>
+                <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
+              </p-footer>
+            </p-card>
+          </div>
         </div>
-      </div>
-      <br />
+        <br />
 
-      <!-- Card Docente -->
-      <div class="row justify-content-center">
-        <div class="col-md-6">
-          <p-card
-            header="Identificación del Aula"
-            subheader="Ingrese la identificación del Aula en la cual se desea ingresar al Docente."
-            styleClass="ui-card-shadow"
-          >
-            <p-header>
-              <div style="background-color: #cfcfcf;">
-                <i class="fas fa-school fa-4x fa-fw icono"></i>
+        <!-- Card Docente -->
+        <div class="row justify-content-center">
+          <div class="col-md-6 form-group">
+            <p-card
+              header="Identificación del Aula"
+              subheader="Ingrese la identificación del Aula en la cual se desea ingresar al Docente."
+              styleClass="ui-card-shadow"
+            >
+              <p-header>
+                <div style="background-color: #cfcfcf;">
+                  <i class="fas fa-school fa-4x fa-fw icono"></i>
+                </div>
+              </p-header>
+              <div class="form-group">
+                <br />
+                <p-autoComplete
+                  styleClass="cedula"
+                  [(ngModel)]="country"
+                  [suggestions]="filteredCountriesSingle"
+                  (completeMethod)="filterCountrySingle($event)"
+                  field="name"
+                  [size]="35"
+                  placeholder="Aula"
+                  [minLength]="1"
+                  class="form-control"
+                  formControlName="identificacion_docente"
+                ></p-autoComplete>
               </div>
-            </p-header>
-            <div class="form-group">
-              <br />
-              <p-autoComplete
-                styleClass="cedula"
-                [(ngModel)]="country"
-                [suggestions]="filteredCountriesSingle"
-                (completeMethod)="filterCountrySingle($event)"
-                field="name"
-                [size]="35"
-                placeholder="Aula"
-                [minLength]="1"
-              ></p-autoComplete>
-            </div>
-            <p-footer>
-              <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-            </p-footer>
-          </p-card>
+              <p-footer>
+                <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
+              </p-footer>
+            </p-card>
+          </div>
         </div>
-      </div>
-      <br />
-      <br />
+        <br />
+        <br />
 
-      <button type="button" class="btn btn-outline-neutral btn-round btn-lg">
-        <i class="fas fa-save fa-lg fa-fw"></i> Asignar Docente
-      </button>
+        <button type="submit" class="btn btn-outline-neutral btn-round btn-lg">
+          <i class="fas fa-save fa-lg fa-fw"></i> Asignar Docente
+        </button>
+      </form>
     </div>
   </div>
 

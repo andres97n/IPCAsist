@@ -120,7 +120,7 @@
       <form [formGroup]="forma" (ngSubmit)="asignarDocente()">
         <!-- Card Identificación -->
         <div class="row justify-content-center">
-          <div class="col-md-6 form-group">
+          <div class="col-md-6">
             <p-card
               header="Identificación del Docente"
               subheader="Ingrese la identificación o el nombre del Docente a asignar."
@@ -131,7 +131,7 @@
                   <i class="fas fa-chalkboard-teacher fa-4x fa-fw icono"></i>
                 </div>
               </p-header>
-              <div class="form-group">
+              <div>
                 <br />
                 <p-autoComplete
                   styleClass="cedula"
@@ -142,7 +142,6 @@
                   [size]="35"
                   placeholder="Docente"
                   [minLength]="1"
-                  class="form-control"
                   formControlName="identificacion"
                 ></p-autoComplete>
               </div>
@@ -156,7 +155,7 @@
 
         <!-- Card Horarios -->
         <div class="row justify-content-center">
-          <div class="col-md-6 form-group">
+          <div class="col-md-6">
             <p-card
               header="Horario de Docente"
               subheader="Ingrese el horario de trabajo del Docente."
@@ -172,12 +171,11 @@
               <div class="row justify-content-center">
                 <!-- Horario de Entrada-->
                 <div class="col-md-3">
-                  <div class="form-group">
+                  <div>
                     <label>Horario de Entrada</label>
                     <ngb-timepicker
                       [(ngModel)]="time"
                       [meridian]="meridian"
-                      class="form-control"
                       formControlName="horario_entrada"
                     ></ngb-timepicker>
                   </div>
@@ -249,15 +247,12 @@
                 </div>
                 <!-- Horario de Salida -->
                 <div class="col-md-3">
-                  <div class="form-group">
-                    <label>Horario de Salida</label>
-                    <ngb-timepicker
-                      [(ngModel)]="time2"
-                      [meridian]="meridian"
-                      class="form-control"
-                      formControlName="horario_salida"
-                    ></ngb-timepicker>
-                  </div>
+                  <label>Horario de Salida</label>
+                  <ngb-timepicker
+                    [(ngModel)]="time2"
+                    [meridian]="meridian"
+                    formControlName="horario_salida"
+                  ></ngb-timepicker>
                 </div>
               </div>
               <p-footer>
@@ -270,7 +265,7 @@
 
         <!-- Card Docente -->
         <div class="row justify-content-center">
-          <div class="col-md-6 form-group">
+          <div class="col-md-6">
             <p-card
               header="Identificación del Aula"
               subheader="Ingrese la identificación del Aula en la cual se desea ingresar al Docente."
@@ -281,7 +276,7 @@
                   <i class="fas fa-school fa-4x fa-fw icono"></i>
                 </div>
               </p-header>
-              <div class="form-group">
+              <div>
                 <br />
                 <p-autoComplete
                   styleClass="cedula"
@@ -292,7 +287,6 @@
                   [size]="35"
                   placeholder="Aula"
                   [minLength]="1"
-                  class="form-control"
                   formControlName="identificacion_docente"
                 ></p-autoComplete>
               </div>

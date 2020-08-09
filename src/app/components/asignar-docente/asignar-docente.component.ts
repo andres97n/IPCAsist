@@ -24,7 +24,9 @@ export class AsignarDocenteComponent implements OnInit {
 
   forma: FormGroup;
 
-  constructor(private _docenteSrv: DocenteService, private fb: FormBuilder) {}
+  constructor(private _docenteSrv: DocenteService, private fb: FormBuilder) {
+    this.crearFormulario();
+  }
 
   ngOnInit(): void {
     this._docenteSrv.getPersons().subscribe((persons: Persons[]) => {

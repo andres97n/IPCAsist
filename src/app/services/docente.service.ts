@@ -20,4 +20,8 @@ export class DocenteService {
   getPersons() {
     return this.http.get("/assets/json/ejemplo.json");
   }
+
+  getCarsSmall() {
+    return this.http.get("/assets/json/cars.json");
+  }
 }

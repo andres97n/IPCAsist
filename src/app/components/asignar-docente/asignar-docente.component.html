@@ -135,7 +135,6 @@
                 <br />
                 <p-autoComplete
                   styleClass="cedula"
-                  [(ngModel)]="country"
                   [suggestions]="filteredCountriesSingle"
                   (completeMethod)="filterCountrySingle($event)"
                   field="name"
@@ -144,6 +143,15 @@
                   [minLength]="1"
                   formControlName="identificacion"
                 ></p-autoComplete>
+                <br />
+                <small class="text-danger" *ngIf="noIdentificacion">
+                  Se requiere la Identificación
+                </small>
+                <p-message
+                  severity="error"
+                  text="Se requiere la Identificación"
+                  *ngIf="noIdentificacion"
+                ></p-message>
               </div>
               <p-footer>
                 <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
@@ -174,10 +182,18 @@
                   <div>
                     <label>Horario de Entrada</label>
                     <ngb-timepicker
-                      [(ngModel)]="time"
                       [meridian]="meridian"
                       formControlName="horario_entrada"
                     ></ngb-timepicker>
+
+                    <small class="text-danger" *ngIf="noEntrada">
+                      Se requiere el Horario de Entrada del Docente
+                    </small>
+                    <p-message
+                      severity="error"
+                      text="Se requiere el Horario de Entrada del Docente"
+                      *ngIf="noEntrada"
+                    ></p-message>
                   </div>
                   <!-- <div class="card card-profile card-plain">
             <div class="card-avatar">
@@ -249,10 +265,17 @@
                 <div class="col-md-3">
                   <label>Horario de Salida</label>
                   <ngb-timepicker
-                    [(ngModel)]="time2"
                     [meridian]="meridian"
                     formControlName="horario_salida"
                   ></ngb-timepicker>
+                  <small class="text-danger" *ngIf="noSalida">
+                    Se requiere el Horario de Salida del Docente
+                  </small>
+                  <p-message
+                    severity="error"
+                    text="Se requiere el Horario de Entrada del Docente"
+                    *ngIf="noSalida"
+                  ></p-message>
                 </div>
               </div>
               <p-footer>
@@ -280,15 +303,23 @@
                 <br />
                 <p-autoComplete
                   styleClass="cedula"
-                  [(ngModel)]="country"
                   [suggestions]="filteredCountriesSingle"
                   (completeMethod)="filterCountrySingle($event)"
                   field="name"
                   [size]="35"
                   placeholder="Aula"
                   [minLength]="1"
-                  formControlName="identificacion_docente"
+                  formControlName="aula"
                 ></p-autoComplete>
+                <br />
+                <small class="text-danger" *ngIf="noAula">
+                  Se requiere el nombre del Aula
+                </small>
+                <p-message
+                  severity="error"
+                  text="Se requiere el nombre del Aula"
+                  *ngIf="noAula"
+                ></p-message>
               </div>
               <p-footer>
                 <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
@@ -299,7 +330,11 @@
         <br />
         <br />
 
-        <button type="submit" class="btn btn-outline-neutral btn-round btn-lg">
+        <button
+          type="submit"
+          class="btn btn-neutral btn-round btn-lg"
+          [disabled]="!forma.valid"
+        >
           <i class="fas fa-save fa-lg fa-fw"></i> Asignar Docente
         </button>
       </form>
@@ -311,35 +346,145 @@
       <div class="row">
         <div class="col-md-8 mr-auto ml-auto">
           <h2 class="text-center">Asignaciones a un Aula</h2>
+
           <br />
 
           <p-table
-            [value]="persons"
             [columns]="cols"
-            [scrollable]="true"
-            scrollHeight="200px"
+            [value]="persons"
+            dataKey="_id"
             [resizableColumns]="true"
+            [scrollable]="true"
+            scrollHeight="300px"
+            styleClass="ui-table-summary"
+            selectionMode="single"
+            [(selection)]="selectedCar"
+            (onRowSelect)="onRowSelect($event)"
           >
             <ng-template pTemplate="colgroup" let-columns>
               <colgroup>
+                <col />
                 <col *ngFor="let col of columns" />
               </colgroup>
             </ng-template>
-            <ng-template pTemplate="header">
+            <ng-template pTemplate="header" let-columns>
               <tr>
-                <th *ngFor="let col of cols" pResizableColumn>
+                <th style="width: 3em;"></th>
+                <th *ngFor="let col of columns" pResizableColumn>
                   {{ col.header }}
                 </th>
               </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-person>
+            <ng-template
+              pTemplate="body"
+              let-rowData
+              let-expanded="expanded"
+              let-columns="columns"
+            >
+              <tr [pSelectableRow]="rowData">
+                <td style="width: 3em;">
+                  <a href="#" [pRowToggler]="rowData">
+                    <i
+                      [ngClass]="
+                        expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'
+                      "
+                    ></i>
+                  </a>
+                </td>
+                <td *ngFor="let col of columns" class="ui-resizable-column">
+                  {{ rowData[col.field] }}
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template
+              pTemplate="rowexpansion"
+              let-rowData
+              let-columns="columns"
+            >
               <tr>
-                <td *ngFor="let col of cols">
-                  {{ person[col.field] }}
+                <td [attr.colspan]="columns.length + 1">
+                  <div
+                    class="p-grid ui-fluid"
+                    style="font-size: 16px; padding: 20px;"
+                    [@rowExpansionTrigger]="'active'"
+                  >
+                    <div class="p-col-12 p-md-9">
+                      <div class="p-grid">
+                        <div class="p-col-12">
+                          <b>Vin:</b> {{ rowData._id }}
+                        </div>
+                        <div class="p-col-12">
+                          <b>Year:</b> {{ rowData.name }}
+                        </div>
+                        <div class="p-col-12">
+                          <b>Brand:</b> {{ rowData.email }}
+                        </div>
+                        <div class="p-col-12">
+                          <b>Color:</b> {{ rowData.phone }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </td>
               </tr>
             </ng-template>
           </p-table>
+
+          <p-dialog
+            header="Detalles de Persona"
+            [(visible)]="displayDialog"
+            [focusOnShow]="false"
+            showEffect="fade"
+            [modal]="true"
+            [style]="{ width: '300px' }"
+          >
+            <div class="p-grid ui-fluid" *ngIf="person">
+              <div class="p-col-4">
+                <label for="_id">ID</label>
+              </div>
+              <div class="p-col-8">
+                <input pInputText id="_id" [(ngModel)]="person._id" autofocus />
+              </div>
+              <div class="p-col-4">
+                <label for="name">Name</label>
+              </div>
+              <div class="p-col-8">
+                <input pInputText id="name" [(ngModel)]="person.name" />
+              </div>
+              <div class="p-col-4">
+                <label for="age">Age</label>
+              </div>
+              <div class="p-col-8">
+                <input pInputText id="age" [(ngModel)]="person.age" />
+              </div>
+              <div class="p-col-4">
+                <label for="email">Email</label>
+              </div>
+              <div class="p-col-8">
+                <input pInputText id="email" [(ngModel)]="person.email" />
+              </div>
+            </div>
+            <p-footer>
+              <div
+                class="ui-dialog-buttonpane ui-helper-clearfix row justify-content-center"
+              >
+                <button
+                  type="button"
+                  class="btn btn-outline-danger btn-round btn-sm"
+                  (click)="delete()"
+                >
+                  <i class="fas fa-trash-alt fa-lg fa-fw"></i> Borrar
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-outline-success btn-round btn-sm"
+                  (click)="save()"
+                >
+                  <i class="fas fa-save fa-lg fa-fw"></i> Guardar
+                </button>
+              </div>
+            </p-footer>
+          </p-dialog>
 
           <!-- <form class="contact-form">
             <div class="row">

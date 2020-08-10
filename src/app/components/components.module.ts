@@ -20,6 +20,7 @@ import { SliderModule } from "primeng/slider";
 import { GMapModule } from "primeng/gmap";
 import { InputTextareaModule } from "primeng/inputtextarea";
 import { CarouselModule } from "primeng/carousel";
+import { DialogModule } from "primeng/dialog";
 
 import { BasicelementsComponent } from "./basicelements/basicelements.component";
 import { NavigationComponent } from "./navigation/navigation.component";
@@ -57,6 +58,7 @@ import { AsignarDocenteComponent } from "./asignar-docente/asignar-docente.compo
     InputTextareaModule,
     CarouselModule,
     ReactiveFormsModule,
+    DialogModule,
   ],
   declarations: [
     ComponentsComponent,

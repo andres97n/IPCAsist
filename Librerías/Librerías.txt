@@ -48,3 +48,8 @@ npm install @fortawesome/angular-fontawesome@0.6.0
 npm install primeflex --save
 
 -------------------------------------------------
+
+Google Maps with Angular (Todavía no)
+npm install @angular/google-maps --save
+
+-------------------------------------------------

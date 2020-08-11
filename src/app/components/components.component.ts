@@ -28,6 +28,9 @@ export class ComponentsComponent implements OnInit {
   books: Array<any>;
   selectedBook: string;
 
+  options: any;
+  infoWindow: any;
+
   constructor(private renderer: Renderer2) {
     this.books = [
       { name: "Book1", author: "Author1" },
@@ -42,18 +45,6 @@ export class ComponentsComponent implements OnInit {
       { name: "Libro5", author: "Author5" },
     ];
   }
-  isWeekend(date: NgbDateStruct) {
-    const d = new Date(date.year, date.month - 1, date.day);
-    return d.getDay() === 0 || d.getDay() === 6;
-  }
-
-  bookSelected(event) {
-    console.log(event.name);
-  }
-
-  isDisabled(date: NgbDateStruct, current: { month: number }) {
-    return date.month !== current.month;
-  }
 
   ngOnInit() {
     let input_group_focus = document.getElementsByClassName("form-control");
@@ -66,5 +57,33 @@ export class ComponentsComponent implements OnInit {
         input_group[i].classList.remove("input-group-focus");
       });
     }
+
+    this.options = {
+      center: { lat: 36.890257, lng: 30.707417 },
+      zoom: 12,
+    };
+
+    // this.infoWindow = new google.maps.InfoWindow();
+  }
+
+  zoomIn(map) {
+    map.setZoom(map.getZoom() + 1);
+  }
+
+  zoomOut(map) {
+    map.setZoom(map.getZoom() - 1);
+  }
+
+  isWeekend(date: NgbDateStruct) {
+    const d = new Date(date.year, date.month - 1, date.day);
+    return d.getDay() === 0 || d.getDay() === 6;
+  }
+
+  bookSelected(event) {
+    console.log(event.name);
+  }
+
+  isDisabled(date: NgbDateStruct, current: { month: number }) {
+    return date.month !== current.month;
   }
 }

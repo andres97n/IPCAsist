@@ -90,6 +90,17 @@ export class AsignarDocenteComponent implements OnInit {
     // ];
   }
 
+  crearFormulario() {
+    this.forma = this.fb.group({
+      identificacion: ["", [Validators.required, Validators.minLength(2)]],
+      horario: this.fb.group({
+        horario_entrada: ["", Validators.required],
+        horario_salida: ["", Validators.required],
+      }),
+      aula: ["", [Validators.required, Validators.minLength(2)]],
+    });
+  }
+
   showDialogToAdd() {
     this.newPerson = true;
     this.person = {};
@@ -127,42 +138,28 @@ export class AsignarDocenteComponent implements OnInit {
     return person;
   }
 
-  crearFormulario() {
-    this.forma = this.fb.group({
-      identificacion: ["", [Validators.required, Validators.minLength(2)]],
-      horario_entrada: ["", Validators.required],
-      horario_salida: ["", Validators.required],
-      aula: ["", [Validators.required, Validators.minLength(2)]],
-    });
-  }
-
   asignarDocente() {
     console.log(this.forma);
+
+    // this.forma.reset();
   }
 
-  get noIdentificacion() {
-    return (
-      this.forma.get("identificacion").invalid &&
-      this.forma.get("identificacion").touched
-    );
+  invalidos(form: string) {
+    return this.forma.get(form).invalid && this.forma.get(form).touched;
   }
 
   get noEntrada() {
     return (
-      this.forma.get("horario_entrada").invalid &&
-      this.forma.get("horario_entrada").touched
+      this.forma.get("horario.horario_entrada").invalid &&
+      this.forma.get("horario.horario_entrada").touched
     );
   }
 
   get noSalida() {
     return (
-      this.forma.get("horario_salida").invalid &&
-      this.forma.get("horario_salida").touched
+      this.forma.get("horario.horario_salida").invalid &&
+      this.forma.get("horario.horario_salida").touched
     );
-  }
-
-  get noAula() {
-    return this.forma.get("aula").invalid && this.forma.get("aula").touched;
   }
 
   // buscarPersona(event) {

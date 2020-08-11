@@ -21,6 +21,8 @@ import { GMapModule } from "primeng/gmap";
 import { InputTextareaModule } from "primeng/inputtextarea";
 import { CarouselModule } from "primeng/carousel";
 import { DialogModule } from "primeng/dialog";
+import { MessagesModule } from "primeng/messages";
+import { MessageModule } from "primeng/message";
 
 import { BasicelementsComponent } from "./basicelements/basicelements.component";
 import { NavigationComponent } from "./navigation/navigation.component";
@@ -35,6 +37,8 @@ import { PlanVidaComponent } from "./plan-vida/plan-vida.component";
 import { PasanteComponent } from "./pasante/pasante.component";
 import { VisitaEmpresaComponent } from "./visita-empresa/visita-empresa.component";
 import { AsignarDocenteComponent } from "./asignar-docente/asignar-docente.component";
+
+// import { GoogleMapsModule } from "@angular/google-maps";
 
 @NgModule({
   imports: [
@@ -59,6 +63,10 @@ import { AsignarDocenteComponent } from "./asignar-docente/asignar-docente.compo
     CarouselModule,
     ReactiveFormsModule,
     DialogModule,
+    MessagesModule,
+    MessageModule,
+
+    // GoogleMapsModule,
   ],
   declarations: [
     ComponentsComponent,

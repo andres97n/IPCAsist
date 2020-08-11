@@ -10,6 +10,8 @@ import { AppComponent } from "./app.component";
 import { NavbarComponent } from "./shared/navbar/navbar.component";
 import { FooterComponent } from "./shared/footer/footer.component";
 
+// import { GoogleMapsModule } from "@angular/google-maps";
+
 import { ComponentsModule } from "./components/components.module";
 import { ExamplesModule } from "./examples/examples.module";
 
@@ -25,6 +27,7 @@ import { ExamplesModule } from "./examples/examples.module";
     ComponentsModule,
     ExamplesModule,
     ReactiveFormsModule,
+    // GoogleMapsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

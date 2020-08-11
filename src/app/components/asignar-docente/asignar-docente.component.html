@@ -131,8 +131,11 @@
                   <i class="fas fa-chalkboard-teacher fa-4x fa-fw icono"></i>
                 </div>
               </p-header>
-              <div>
-                <br />
+              <br />
+              <div class="ui-inputgroup row justify-content-center">
+                <span class="ui-inputgroup-addon">
+                  <i class="fas fa-user-tie fa-lg" style="line-height: 1;"></i
+                ></span>
                 <p-autoComplete
                   styleClass="cedula"
                   [suggestions]="filteredCountriesSingle"
@@ -143,14 +146,17 @@
                   [minLength]="1"
                   formControlName="identificacion"
                 ></p-autoComplete>
-                <br />
-                <small class="text-danger" *ngIf="noIdentificacion">
+              </div>
+              <br />
+              <!-- <small class="text-danger" *ngIf="noIdentificacion">
                   Se requiere la Identificación
-                </small>
+                </small> -->
+              <div class="row justify-content-center">
                 <p-message
                   severity="error"
-                  text="Se requiere la Identificación"
-                  *ngIf="noIdentificacion"
+                  text=" Se requiere la Identificación"
+                  *ngIf="invalidos('identificacion')"
+                  style="margin-top: 1em;"
                 ></p-message>
               </div>
               <p-footer>
@@ -176,9 +182,14 @@
                   <!-- <i class="fab fa-adobe"></i> -->
                 </div>
               </p-header>
-              <div class="row justify-content-center">
+
+              <div
+                class="row justify-content-center"
+                style="margin-top: 1em;"
+                formGroupName="horario"
+              >
                 <!-- Horario de Entrada-->
-                <div class="col-md-3">
+                <div class="col-md-4">
                   <div>
                     <label>Horario de Entrada</label>
                     <ngb-timepicker
@@ -186,12 +197,12 @@
                       formControlName="horario_entrada"
                     ></ngb-timepicker>
 
-                    <small class="text-danger" *ngIf="noEntrada">
+                    <!-- <small class="text-danger" *ngIf="noEntrada">
                       Se requiere el Horario de Entrada del Docente
-                    </small>
+                    </small> -->
                     <p-message
                       severity="error"
-                      text="Se requiere el Horario de Entrada del Docente"
+                      text=" Se requiere el Horario de Entrada del Docente"
                       *ngIf="noEntrada"
                     ></p-message>
                   </div>
@@ -262,18 +273,18 @@
         </div> -->
                 </div>
                 <!-- Horario de Salida -->
-                <div class="col-md-3">
+                <div class="col-md-4">
                   <label>Horario de Salida</label>
                   <ngb-timepicker
                     [meridian]="meridian"
                     formControlName="horario_salida"
                   ></ngb-timepicker>
-                  <small class="text-danger" *ngIf="noSalida">
+                  <!-- <small class="text-danger" *ngIf="noSalida">
                     Se requiere el Horario de Salida del Docente
-                  </small>
+                  </small> -->
                   <p-message
                     severity="error"
-                    text="Se requiere el Horario de Entrada del Docente"
+                    text=" Se requiere el Horario de Entrada del Docente"
                     *ngIf="noSalida"
                   ></p-message>
                 </div>
@@ -301,25 +312,36 @@
               </p-header>
               <div>
                 <br />
-                <p-autoComplete
-                  styleClass="cedula"
-                  [suggestions]="filteredCountriesSingle"
-                  (completeMethod)="filterCountrySingle($event)"
-                  field="name"
-                  [size]="35"
-                  placeholder="Aula"
-                  [minLength]="1"
-                  formControlName="aula"
-                ></p-autoComplete>
+                <div class="ui-inputgroup row justify-content-center">
+                  <span class="ui-inputgroup-addon">
+                    <i
+                      class="fas fa-door-open fa-lg"
+                      style="line-height: 1;"
+                    ></i
+                  ></span>
+                  <p-autoComplete
+                    styleClass="cedula"
+                    [suggestions]="filteredCountriesSingle"
+                    (completeMethod)="filterCountrySingle($event)"
+                    field="name"
+                    [size]="35"
+                    placeholder="Aula"
+                    [minLength]="1"
+                    formControlName="aula"
+                  ></p-autoComplete>
+                </div>
                 <br />
-                <small class="text-danger" *ngIf="noAula">
+                <!-- <small class="text-danger" *ngIf="noAula">
                   Se requiere el nombre del Aula
-                </small>
-                <p-message
-                  severity="error"
-                  text="Se requiere el nombre del Aula"
-                  *ngIf="noAula"
-                ></p-message>
+                </small> -->
+                <div class="row justify-content-center">
+                  <p-message
+                    severity="error"
+                    text="  Se requiere el nombre del Aula"
+                    *ngIf="invalidos('aula')"
+                    style="margin-top: 1em !important;"
+                  ></p-message>
+                </div>
               </div>
               <p-footer>
                 <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
@@ -355,7 +377,7 @@
             dataKey="_id"
             [resizableColumns]="true"
             [scrollable]="true"
-            scrollHeight="300px"
+            scrollHeight="400px"
             styleClass="ui-table-summary"
             selectionMode="single"
             [(selection)]="selectedCar"

@@ -1,0 +1,22 @@
+.encabezado {
+  /* margin-top: 1em; */
+  background-color: #cfcfcf;
+}
+
+.icono {
+  margin: 0.1em;
+}
+
+.titulo {
+  /* margin-top: 2em; */
+
+  text-shadow: 1px 1px 1px black;
+}
+
+.seccion {
+  border: 4px solid #ffffff;
+}
+
+.componente {
+  margin-top: 1em;
+}

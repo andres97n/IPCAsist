@@ -1,7 +1,7 @@
 <div
   class="page-header"
   data-parallax="true"
-  style="background-image: url('./assets/img/IPCA/portada docentes.jpg');"
+  style="background-image: url('./assets/img/IPCA/plan de vida fondo.jpg');"
 >
   <div class="filter"></div>
   <div class="container">
@@ -9,12 +9,12 @@
       <h1 class="titulo">IPCAsist</h1>
       <h3 class="titulo">Plan de Vida</h3>
       <br />
-        <a
-            href="https://www.youtube.com/watch?v=EvJjh_zYQzE"
-            class="btn btn-outline-neutral btn-round"
-            target="_blank"
-            ><i class="fa fa-play fa-lg fa-fw"></i> Vídeo Informativo
-        </a>
+      <!-- <a
+        href="https://www.youtube.com/watch?v=EvJjh_zYQzE"
+        class="btn btn-outline-neutral btn-round"
+        target="_blank"
+        ><i class="fa fa-play fa-lg fa-fw"></i> Vídeo Informativo
+      </a> -->
     </div>
   </div>
 </div>
@@ -25,13 +25,13 @@
         <div class="col-md-8 mr-auto ml-auto">
           <h2 class="title">Breve Descripción</h2>
           <h5 class="description">
-            En está página se permitará registrar las visitas que realicen las
-            distintas empresas o instituciones al IPCA.
+            En está página se podrá crear los respectivos planes de vida para
+            cada estudiante basado en las entrevistas con el representante.
             <br />
             <span
               >A continuación se presenta un breve formulario, en el cual se le
               dará la facilidad de registrar todos los datos de una visita.
-              <br /><br />
+              <br />
               Recuerde guardar los cambios cuando esté seguro que ingresó
               correctamente la información, aquí una breve explicación.
             </span>
@@ -49,17 +49,194 @@
     </div>
   </div>
 
-      <div class="section section-dark text-center">
-        <div class="container">
-
+  <div class="section section-dark text-center">
+    <div class="container">
+      <h2 class="title">A llenar Plan de Vida!!</h2>
+      <div class="row justify-content-center">
+        <div class="col-md-10 seccion bg-dark">
+          <h3 class="title">Información Personal</h3>
         </div>
       </div>
-  
 
+      <div class="row justify-content-center" style="margin-top: 2em;">
+        <div class="col-md-5">
+          <!-- Card Docente -->
+          <div class="row">
+            <div class="col-md-12">
+              <p-card
+                header="Docente"
+                subheader="Ingrese la cédula o el nombre del Docente asignado."
+                styleClass="ui-card-shadow"
+              >
+                <p-header>
+                  <div class="head encabezado">
+                    <i class="fas fa-chalkboard-teacher fa-3x fa-fw icono"></i>
+                  </div>
+                </p-header>
+                <div
+                  class="componente ui-inputgroup row justify-content-center"
+                >
+                  <span class="ui-inputgroup-addon">
+                    <i class="fas fa-user-tie fa-lg" style="line-height: 1;"></i
+                  ></span>
+                  <p-autoComplete
+                    [(ngModel)]="country"
+                    [suggestions]="filteredCountriesSingle"
+                    (completeMethod)="filterCountrySingle($event)"
+                    field="name"
+                    [size]="35"
+                    placeholder="Identificación"
+                    [minLength]="1"
+                  ></p-autoComplete>
+                </div>
+                <br />
 
+                <!-- <p-footer>
+                  <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
+                </p-footer> -->
+              </p-card>
+            </div>
+          </div>
+          <br />
 
+          <!-- Card Estudiante -->
+          <div class="row">
+            <div class="col-md-12">
+              <p-card
+                header="Estudiante"
+                subheader="Ingrese el nombre del estudiante correspondiente."
+                styleClass="ui-card-shadow"
+              >
+                <p-header>
+                  <div class="head encabezado">
+                    <i class="fas fa-child fa-3x fa-fw icono"></i>
+                  </div>
+                </p-header>
+                <div
+                  class="componente ui-inputgroup row justify-content-center"
+                >
+                  <span class="ui-inputgroup-addon">
+                    <i
+                      class="fas fa-user-circle fa-lg"
+                      style="line-height: 1;"
+                    ></i
+                  ></span>
+                  <p-autoComplete
+                    styleClass="cedula"
+                    [(ngModel)]="country"
+                    [suggestions]="filteredCountriesSingle"
+                    (completeMethod)="filterCountrySingle($event)"
+                    field="name"
+                    [size]="35"
+                    placeholder="Nombre"
+                    [minLength]="1"
+                  ></p-autoComplete>
+                </div>
+                <br />
+                <!-- <p-footer>
+                  <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
+                </p-footer> -->
+              </p-card>
+            </div>
+          </div>
+        </div>
 
+        <!-- Card Asignatura -->
+        <div class="col-md-5" style="margin-top: 1.5em;">
+          <p-card
+            header="Asignatura"
+            subheader="Ingrese el nombre/s de la Asignatura."
+            styleClass="ui-card-shadow"
+          >
+            <p-header>
+              <div class="head encabezado">
+                <i class="fas fa-book-reader fa-3x fa-fw icono"></i>
+              </div>
+            </p-header>
 
+            <div class="row justify-content-center componente">
+              <p-listbox
+                [options]="cities"
+                [(ngModel)]="selectedCities"
+                [multiple]="true"
+                [checkbox]="true"
+                [filter]="true"
+                optionLabel="name"
+                [listStyle]="{ 'max-height': '150px' }"
+              >
+                <p-header>
+                  Cities
+                </p-header>
+              </p-listbox>
+            </div>
+            <!-- <p-footer>
+              <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
+            </p-footer> -->
+          </p-card>
+        </div>
+      </div>
+      <br />
 
+      <div class="row justify-content-center">
+        <!-- Card Aula -->
+        <div class="col-md-5" style="margin-top: 3em;">
+          <p-card
+            header="Aula"
+            subheader="Ingrese el nombre del Aula"
+            styleClass="ui-card-shadow"
+          >
+            <p-header>
+              <div class="head encabezado">
+                <i class="fas fa-school fa-3x fa-fw icono"></i>
+              </div>
+            </p-header>
 
+            <div class="componente ui-inputgroup row justify-content-center">
+              <span class="ui-inputgroup-addon">
+                <i class="fas fa-door-open fa-lg" style="line-height: 1;"></i
+              ></span>
+              <p-autoComplete
+                styleClass="cedula"
+                [(ngModel)]="country"
+                [suggestions]="filteredCountriesSingle"
+                (completeMethod)="filterCountrySingle($event)"
+                field="name"
+                [size]="35"
+                placeholder="Aula"
+                [minLength]="1"
+              ></p-autoComplete>
+            </div>
+            <br />
+            <!-- <p-footer>
+              <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
+            </p-footer> -->
+          </p-card>
+        </div>
+
+        <!-- Card Descripción -->
+        <div class="col-md-5">
+          <p-card
+            header="Descripción General de la Experiencia"
+            subheader="Ingrese una breve descripción general sobre la experiencia que espera del estudiante."
+            styleClass="ui-card-shadow"
+          >
+            <p-header>
+              <div class="head encabezado">
+                <i class="fas fa-school fa-3x fa-fw icono"></i>
+              </div>
+            </p-header>
+
+            <div class="componente ui-inputgroup row justify-content-center">
+              <textarea rows="5" cols="50" pInputTextarea></textarea>
+            </div>
+            <br />
+            <!-- <p-footer>
+              <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
+            </p-footer> -->
+          </p-card>
+        </div>
+      </div>
+      <br />
+    </div>
+  </div>
 </div>

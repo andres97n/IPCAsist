@@ -17,12 +17,13 @@ import { InputNumberModule } from "primeng/inputnumber";
 import { InputTextModule } from "primeng/inputtext";
 import { InputMaskModule } from "primeng/inputmask";
 import { SliderModule } from "primeng/slider";
-import { GMapModule } from "primeng/gmap";
+// import { GMapModule } from "primeng/gmap";
 import { InputTextareaModule } from "primeng/inputtextarea";
 import { CarouselModule } from "primeng/carousel";
 import { DialogModule } from "primeng/dialog";
 import { MessagesModule } from "primeng/messages";
 import { MessageModule } from "primeng/message";
+import { ListboxModule } from "primeng/listbox";
 
 import { BasicelementsComponent } from "./basicelements/basicelements.component";
 import { NavigationComponent } from "./navigation/navigation.component";
@@ -58,13 +59,14 @@ import { AsignarDocenteComponent } from "./asignar-docente/asignar-docente.compo
     InputTextModule,
     InputMaskModule,
     SliderModule,
-    GMapModule,
+    // GMapModule,
     InputTextareaModule,
     CarouselModule,
     ReactiveFormsModule,
     DialogModule,
     MessagesModule,
     MessageModule,
+    ListboxModule,
 
     // GoogleMapsModule,
   ],

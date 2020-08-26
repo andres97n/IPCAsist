@@ -57,433 +57,554 @@
   <div class="section section-dark text-center">
     <div class="container">
       <h2 class="title">Registre un Pasante!!</h2>
-
-      <!-- Información Personal -->
-      <div class="row" style="margin-top: 3em;">
-        <div class="col-md-4 text-center seccion bg-dark">
-          <h3 class="title">Información Personal</h3>
-        </div>
-      </div>
-
-      <!-- Card Identificación -->
-      <div class="row justify-content-center" style="margin-top: 2em;">
-        <div class="col-md-5" id="card-cedula">
-          <p-card
-            header="Identificación"
-            subheader="Ingrese la identificación o pasaporte del Pasante."
-            styleClass="ui-card-shadow"
-          >
-            <p-header>
-              <div class="head">
-                <i class="far fa-id-card fa-3x fa-fw icono"></i>
-              </div>
-            </p-header>
-            <div class="form-group">
-              <br />
-              <p-autoComplete
-                styleClass="cedula"
-                [(ngModel)]="country"
-                [suggestions]="filteredCountriesSingle"
-                (completeMethod)="filterCountrySingle($event)"
-                field="name"
-                [size]="35"
-                placeholder="Identificación"
-                [minLength]="1"
-              ></p-autoComplete>
-            </div>
-            <!-- <p-footer>
-              <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-            </p-footer> -->
-          </p-card>
+      <form [formGroup]="forma" (ngSubmit)="guardarPasante()">
+        <!-- Información Personal -->
+        <div class="row justify-content-center" style="margin-top: 3em;">
+          <div class="col-md-10 seccion bg-dark">
+            <h3 class="title">INFORMACIÓN PERSONAL</h3>
+          </div>
         </div>
 
-        <!-- Nombre y Apellidos -->
-        <div class="col-md-5">
-          <p-card
-            header="Nombres y Apellidos"
-            subheader="Ingrese los nombres y los apellidos del Pasante."
-            styleClass="ui-card-shadow"
-          >
-            <p-header>
-              <div class="head">
-                <i class="fas fa-user fa-3x fa-fw icono"></i>
-              </div>
-            </p-header>
-            <div class="form-group">
-              <br />
-              <input type="text" placeholder="Nombres" pInputText size="35" />
-              <input type="text" placeholder="Apellidos" size="35" pInputText />
-            </div>
-            <!-- <p-footer>
-              <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-            </p-footer> -->
-          </p-card>
-        </div>
-      </div>
-      <br />
-
-      <!-- Card Sexo -->
-      <div class="row justify-content-center">
-        <div class="col-md-5">
-          <p-card
-            header="Sexo"
-            subheader="Ingrese el sexo del Pasante"
-            styleClass="ui-card-shadow"
-          >
-            <p-header>
-              <div style="background-color: #cfcfcf;">
-                <i class="fas fa-genderless fa-3x fa-fw icono"></i>
-              </div>
-            </p-header>
-            <div class="form-group">
-              <br />
-              <p-dropdown
-                [options]="sexo"
-                [(ngModel)]="selectedSex"
-                optionLabel="name"
-                (ngModelChange)="sexoSeleccionado($event)"
-                placeholder="Seleccione un sexo"
-              ></p-dropdown>
-            </div>
-            <!-- <p-footer>
-              <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-            </p-footer> -->
-          </p-card>
-        </div>
-
-        <!-- Card Edad -->
-        <div class="col-md-5">
-          <p-card
-            header="Edad"
-            subheader="Ingrese la edad del Pasante."
-            styleClass="ui-card-shadow"
-          >
-            <p-header>
-              <div style="background-color: #cfcfcf;">
-                <i class="fas fa-hourglass-half fa-3x fa-fw icono"></i>
-              </div>
-            </p-header>
-            <div class="form-group">
-              <br />
-              <p-inputNumber
-                [(ngModel)]="value4"
-                mode="decimal"
-                [min]="17"
-                [max]="100"
-                placeholder="Edad"
-                size="15"
-              >
-              </p-inputNumber>
-            </div>
-            <!-- <p-footer>
-              <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-            </p-footer> -->
-          </p-card>
-        </div>
-      </div>
-      <br />
-
-      <!-- Card Email -->
-      <div class="row justify-content-center">
-        <div class="col-md-5">
-          <p-card
-            header="Correo"
-            subheader="Ingrese el correo del Pasante, para mantenerse en contacto."
-            styleClass="ui-card-shadow"
-          >
-            <p-header>
-              <div style="background-color: #cfcfcf;">
-                <i class="far fa-envelope fa-3x fa-fw icono"></i>
-              </div>
-            </p-header>
-            <div class="form-group">
-              <br />
-              <input
-                type="email"
-                placeholder="Correo"
-                pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
-                pInputText
-                size="35"
-              />
-            </div>
-            <!-- <p-footer>
-              <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-            </p-footer> -->
-          </p-card>
-        </div>
-
-        <!-- Card Celular -->
-        <div class="col-md-5" style="margin-top: 0.5em;">
-          <p-card
-            header="Contacto"
-            subheader="Ingrese el número celular del Pasante, para cualquier aviso."
-            styleClass="ui-card-shadow"
-          >
-            <p-header>
-              <div style="background-color: #cfcfcf;">
-                <i class="fas fa-phone fa-3x fa-fw icono"></i>
-              </div>
-            </p-header>
-            <div class="form-group">
-              <br />
-              <p-inputMask
-                [(ngModel)]="celular"
-                mask="0999999999"
-                placeholder="Celular"
-              ></p-inputMask>
-            </div>
-            <!-- <p-footer>
-              <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-            </p-footer> -->
-          </p-card>
-        </div>
-      </div>
-      <br />
-
-      <!-- Card Sangre -->
-      <div class="row justify-content-center">
-        <div class="col-md-5">
-          <p-card
-            header="Tipo de Sangre"
-            subheader="Ingrese el tipo de sangre del Pasante."
-            styleClass="ui-card-shadow"
-          >
-            <p-header>
-              <div style="background-color: #cfcfcf;">
-                <i class="fas fa-syringe fa-3x fa-fw icono"></i>
-              </div>
-            </p-header>
-            <div class="form-group">
-              <br />
-              <p-dropdown
-                [options]="tipo_sangre"
-                [(ngModel)]="tipo"
-                optionLabel="name"
-                (ngModelChange)="sangreSeleccionada($event)"
-                placeholder="Seleccione un Tipo de Sangre "
-                size="30"
-                filter="true"
-              ></p-dropdown>
-            </div>
-            <!-- <p-footer>
-              <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-            </p-footer> -->
-          </p-card>
-        </div>
-      </div>
-      <br />
-      <br />
-
-      <!-- Información Adicional -->
-      <div class="row" style="margin-top: 3em;">
-        <div class="col-md-4 text-center seccion bg-dark">
-          <h3 class="title">Información Adicional</h3>
-        </div>
-      </div>
-
-      <div class="row justify-content-center" style="margin-top: 2em;">
-        <!-- Card Institución -->
-        <div class="col-md-5">
-          <p-card
-            header="Institución"
-            subheader="Ingrese el nombre de la Institución en la que se encuentra el pasante."
-            styleClass="ui-card-shadow"
-          >
-            <p-header>
-              <div class="head">
-                <i class="fas fa-university fa-3x fa-fw icono"></i>
-              </div>
-            </p-header>
-            <div class="form-group">
-              <br />
-              <p-dropdown
-                [options]="universidades"
-                [(ngModel)]="universidad"
-                optionLabel="name"
-                (ngModelChange)="universidadSeleccionada($event)"
-                filter="true"
-                placeholder="Seleccione un Instituto"
-              >
-                <ng-template
-                  *ngFor="let item of universidades"
-                  pTemplate="selectedItem"
-                >
-                  <img
-                    src="assets/img/Logos Universidades/{{ item.value }}.png"
-                    style="width: 16px; vertical-align: middle;"
-                  />
-                  <span style="vertical-align: middle; margin-left: 0.5em;">{{
-                    item.name
-                  }}</span>
-                </ng-template>
-                <ng-template
-                  *ngFor="let insti of universidades"
-                  pTemplate="item"
-                >
-                  <div
-                    class="ui-helper-clearfix"
-                    style="position: relative; height: 25px;"
-                  >
-                    <img
-                      src="assets/img/Logos Universidades/{{ insti.value }}.png"
-                      style="
-                        width: 24px;
-                        position: absolute;
-                        top: 1px;
-                        left: 5px;
-                      "
-                    />
-                    <div
-                      style="font-size: 14px; float: right; margin-top: 4px;"
-                    >
-                      {{ insti.name }}
-                    </div>
-                  </div>
-                </ng-template>
-              </p-dropdown>
-            </div>
-            <!-- <p-footer>
-              <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-            </p-footer> -->
-          </p-card>
-        </div>
-
-        <!-- Card Tutor -->
-        <div class="col-md-5" style="margin-top: 0.5em;">
-          <p-card
-            header="Tutor"
-            subheader="Ingrese el nombre del tutor a cargo del Pasante."
-            styleClass="ui-card-shadow"
-          >
-            <p-header>
-              <div class="head">
-                <i class="fab fa-leanpub fa-3x fa-fw icono"></i>
-              </div>
-            </p-header>
-            <div class="form-group">
-              <br />
-              <p-autoComplete
-                styleClass="cedula"
-                [(ngModel)]="country"
-                [suggestions]="filteredCountriesSingle"
-                (completeMethod)="filterCountrySingle($event)"
-                field="name"
-                [size]="35"
-                placeholder="Nombre o Identificación"
-                [minLength]="1"
-              ></p-autoComplete>
-            </div>
-            <!-- <p-footer>
-              <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-            </p-footer> -->
-          </p-card>
-        </div>
-      </div>
-
-      <div class="row justify-content-center" style="margin-top: 2em;">
-        <!-- Card Aula -->
-        <div class="col-md-5">
-          <p-card
-            header="Asignación a un Aula"
-            subheader="Ingrese el nombre del Aula al que pertenece el Pasante."
-            styleClass="ui-card-shadow"
-          >
-            <p-header>
-              <div class="head">
-                <i class="fas fa-child fa-3x fa-fw icono"></i>
-              </div>
-            </p-header>
-            <div class="form-group">
-              <br />
-              <p-autoComplete
-                styleClass="cedula"
-                [(ngModel)]="country"
-                [suggestions]="filteredCountriesSingle"
-                (completeMethod)="filterCountrySingle($event)"
-                field="name"
-                [size]="35"
-                placeholder="Aula"
-                [minLength]="1"
-              ></p-autoComplete>
-            </div>
-            <!-- <p-footer>
-              <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-            </p-footer> -->
-          </p-card>
-        </div>
-
-        <!-- Card Horas -->
-        <div class="col-md-5">
-          <p-card
-            header="Horas al Día"
-            subheader="Ingrese el número de horas promedio diarias que realiza el Pasante."
-            styleClass="ui-card-shadow"
-          >
-            <p-header>
-              <div class="head">
-                <i class="far fa-clock fa-3x fa-fw icono"></i>
-              </div>
-            </p-header>
-            <div class="form-group">
-              <h4>#Horas: {{ num_horas }}</h4>
-              <p-slider
-                [(ngModel)]="num_horas"
-                [style]="{ width: '14em' }"
-                [step]="1"
-                max="9"
-                id="horas"
-              ></p-slider>
-            </div>
-            <!-- <p-footer>
-              <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-            </p-footer> -->
-          </p-card>
-        </div>
-      </div>
-
-      <div class="row justify-content-center" style="margin-top: 2em;">
-        <!-- Card Fecha de Inicio -->
-        <div class="col-md-5">
-          <p-card
-            header="Fecha de Inicio"
-            subheader="Ingrese la Fecha de Inicio de las actividades del Pasante."
-            styleClass="ui-card-shadow"
-          >
-            <p-header>
-              <div class="head">
-                <i class="far fa-calendar-check fa-3x fa-fw icono"></i>
-              </div>
-            </p-header>
-            <div class="row">
-              <!-- Horario de Entrada-->
-              <div class="col-md-3">
-                <div class="form-group">
-                  <br />
-                  <p-calendar
-                    [(ngModel)]="date14"
-                    [inline]="true"
-                    [showWeek]="true"
-                    class="fecha"
-                    (onSelect)="mostrarFecha($event)"
-                    [locale]="es"
-                  ></p-calendar>
+        <!-- Card Identificación -->
+        <div class="row justify-content-center" style="margin-top: 2em;">
+          <div class="col-md-5" id="card-cedula">
+            <p-card
+              header="Identificación"
+              subheader="Ingrese la identificación o pasaporte del Pasante."
+              styleClass="ui-card-shadow"
+            >
+              <p-header>
+                <div class="head">
+                  <i class="far fa-id-card fa-3x fa-fw icono"></i>
+                </div>
+              </p-header>
+              <div class="form-group">
+                <br />
+                <p-autoComplete
+                  [suggestions]="filteredCountriesSingle"
+                  (completeMethod)="filterCountrySingle($event)"
+                  field="name"
+                  [size]="35"
+                  placeholder="Identificación"
+                  [minLength]="1"
+                  formControlName="identificacion"
+                ></p-autoComplete>
+                <div class="row justify-content-center">
+                  <p-message
+                    severity="error"
+                    text=" Se requiere la Identificación"
+                    *ngIf="invalidos('identificacion')"
+                    style="margin-top: 1em;"
+                  ></p-message>
                 </div>
               </div>
-            </div>
+            </p-card>
+          </div>
 
-            <!-- <p-footer>
-              <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-            </p-footer> -->
-          </p-card>
+          <!-- Nombre y Apellidos -->
+          <div class="col-md-5">
+            <p-card
+              header="Nombres y Apellidos"
+              subheader="Ingrese los nombres y los apellidos del Pasante."
+              styleClass="ui-card-shadow"
+            >
+              <p-header>
+                <div class="head">
+                  <i class="fas fa-user fa-3x fa-fw icono"></i>
+                </div>
+              </p-header>
+              <div class="form-group" formGroupName="identidad">
+                <br />
+                <input
+                  type="text"
+                  placeholder="Nombres"
+                  pInputText
+                  size="35"
+                  formControlName="nombres"
+                />
+                <div class="row justify-content-center">
+                  <p-message
+                    severity="error"
+                    text=" Se requiere el Nombre del Pasante"
+                    *ngIf="noNombres"
+                    style="margin-top: 1em; margin-bottom: 1em;"
+                  ></p-message>
+                </div>
+                <input
+                  type="text"
+                  placeholder="Apellidos"
+                  size="35"
+                  pInputText
+                  formControlName="apellidos"
+                />
+                <div class="row justify-content-center">
+                  <p-message
+                    severity="error"
+                    text=" Se requiere el Apellido del Pasante"
+                    *ngIf="noApellidos"
+                    style="margin-top: 1em;"
+                  ></p-message>
+                </div>
+              </div>
+            </p-card>
+          </div>
         </div>
-      </div>
-      <br />
+        <br />
 
-      <br />
+        <!-- Card Sexo -->
+        <div class="row justify-content-center">
+          <div class="col-md-5">
+            <p-card
+              header="Sexo"
+              subheader="Ingrese el sexo del Pasante"
+              styleClass="ui-card-shadow"
+            >
+              <p-header>
+                <div style="background-color: #cfcfcf;">
+                  <i class="fas fa-genderless fa-3x fa-fw icono"></i>
+                </div>
+              </p-header>
+              <div class="form-group">
+                <br />
+                <p-dropdown
+                  [options]="sexo"
+                  optionLabel="name"
+                  (ngModelChange)="sexoSeleccionado($event)"
+                  placeholder="Seleccione un sexo"
+                  formControlName="sexo"
+                ></p-dropdown>
+                <div class="row justify-content-center">
+                  <p-message
+                    severity="error"
+                    text=" Debe seleccionar el Sexo del Pasante"
+                    *ngIf="invalidos('sexo')"
+                    style="margin-top: 1em;"
+                  ></p-message>
+                </div>
+              </div>
+            </p-card>
+          </div>
 
-      <button type="button" class="btn btn-outline-neutral btn-round btn-lg">
-        <i class="fas fa-save fa-lg fa-fw"></i> Registrar Pasante
-      </button>
+          <!-- Card Edad -->
+          <div class="col-md-5">
+            <p-card
+              header="Edad"
+              subheader="Ingrese la edad del Pasante."
+              styleClass="ui-card-shadow"
+            >
+              <p-header>
+                <div style="background-color: #cfcfcf;">
+                  <i class="fas fa-hourglass-half fa-3x fa-fw icono"></i>
+                </div>
+              </p-header>
+              <div class="form-group">
+                <br />
+                <p-inputNumber
+                  mode="decimal"
+                  [min]="17"
+                  [max]="100"
+                  placeholder="Edad"
+                  size="15"
+                  formControlName="edad"
+                >
+                </p-inputNumber>
+                <div class="row justify-content-center">
+                  <p-message
+                    severity="error"
+                    text=" Debe ingresar la Edad del Pasante"
+                    *ngIf="invalidos('edad')"
+                    style="margin-top: 1em;"
+                  ></p-message>
+                </div>
+              </div>
+            </p-card>
+          </div>
+        </div>
+        <br />
+
+        <!-- Card Email -->
+        <div class="row justify-content-center">
+          <div class="col-md-5">
+            <p-card
+              header="Correo"
+              subheader="Ingrese el correo del Pasante, para mantenerse en contacto."
+              styleClass="ui-card-shadow"
+            >
+              <p-header>
+                <div style="background-color: #cfcfcf;">
+                  <i class="far fa-envelope fa-3x fa-fw icono"></i>
+                </div>
+              </p-header>
+              <div class="form-group">
+                <br />
+                <input
+                  type="email"
+                  placeholder="Correo"
+                  pInputText
+                  size="35"
+                  formControlName="correo"
+                />
+                <div class="row justify-content-center">
+                  <p-message
+                    severity="error"
+                    text=" Debe ingresar el Correo del Pasante"
+                    *ngIf="invalidos('correo')"
+                    style="margin-top: 1em;"
+                  ></p-message>
+                </div>
+              </div>
+            </p-card>
+          </div>
+
+          <!-- Card Celular -->
+          <div class="col-md-5" style="margin-top: 0.5em;">
+            <p-card
+              header="Contacto"
+              subheader="Ingrese el número celular del Pasante, para cualquier aviso."
+              styleClass="ui-card-shadow"
+            >
+              <p-header>
+                <div style="background-color: #cfcfcf;">
+                  <i class="fas fa-phone fa-3x fa-fw icono"></i>
+                </div>
+              </p-header>
+              <div class="form-group">
+                <br />
+                <p-inputMask
+                  mask="0999999999"
+                  placeholder="Celular"
+                  formControlName="contacto"
+                ></p-inputMask>
+                <div class="row justify-content-center">
+                  <p-message
+                    severity="error"
+                    text=" Debe ingresar el Contacto del Pasante"
+                    *ngIf="invalidos('contacto')"
+                    style="margin-top: 1em;"
+                  ></p-message>
+                </div>
+              </div>
+            </p-card>
+          </div>
+        </div>
+        <br />
+
+        <!-- Card Sangre -->
+        <!-- <div class="row justify-content-center">
+          <div class="col-md-5">
+            <p-card
+              header="Tipo de Sangre"
+              subheader="Ingrese el tipo de sangre del Pasante."
+              styleClass="ui-card-shadow"
+            >
+              <p-header>
+                <div style="background-color: #cfcfcf;">
+                  <i class="fas fa-syringe fa-3x fa-fw icono"></i>
+                </div>
+              </p-header>
+              <div class="form-group">
+                <br />
+                <p-dropdown
+                  [options]="tipo_sangre"
+                  optionLabel="name"
+                  (ngModelChange)="sangreSeleccionada($event)"
+                  placeholder="Seleccione un Tipo de Sangre "
+                  size="30"
+                  filter="true"
+                  formControlName="tipo_sangre"
+                ></p-dropdown>
+                <div class="row justify-content-center">
+                  <p-message
+                    severity="error"
+                    text=" Debe seleccionar un Tipo de Sangre"
+                    *ngIf="invalidos('tipo_sangre')"
+                    style="margin-top: 1em;"
+                  ></p-message>
+                </div>
+              </div>
+            </p-card>
+          </div>
+        </div> -->
+        <!-- <br /> -->
+        <br />
+
+        <!-- Información Adicional -->
+        <div class="row justify-content-center" style="margin-top: 3em;">
+          <div class="col-md-10 seccion bg-dark">
+            <h3 class="title">INFORMACIÓN ADICIONAL</h3>
+          </div>
+        </div>
+
+        <div class="row justify-content-center" style="margin-top: 2em;">
+          <!-- Card Institución -->
+          <div class="col-md-5">
+            <p-card
+              header="Institución"
+              subheader="Ingrese el nombre de la Institución en la que se encuentra el pasante."
+              styleClass="ui-card-shadow"
+            >
+              <p-header>
+                <div class="head">
+                  <i class="fas fa-university fa-3x fa-fw icono"></i>
+                </div>
+              </p-header>
+              <div class="form-group">
+                <br />
+                <p-dropdown
+                  [options]="universidades"
+                  optionLabel="name"
+                  (ngModelChange)="universidadSeleccionada($event)"
+                  filter="true"
+                  placeholder="Seleccione un Instituto"
+                  formControlName="institucion"
+                >
+                  <ng-template
+                    *ngFor="let item of universidades"
+                    pTemplate="selectedItem"
+                  >
+                    <img
+                      src="/assets/img/Logos Universidades/{{ item.value }}.png"
+                      style="width: 16px; vertical-align: middle;"
+                    />
+                    <span style="vertical-align: middle; margin-left: 0.5em;">{{
+                      item.name
+                    }}</span>
+                  </ng-template>
+                  <ng-template
+                    *ngFor="let insti of universidades"
+                    pTemplate="item"
+                  >
+                    <div
+                      class="ui-helper-clearfix"
+                      style="position: relative; height: 25px;"
+                    >
+                      <img
+                        src="/assets/img/Logos Universidades/{{
+                          insti.value
+                        }}.png"
+                        style="
+                          width: 24px;
+                          position: absolute;
+                          top: 1px;
+                          left: 5px;
+                        "
+                      />
+                      <div
+                        style="font-size: 14px; float: right; margin-top: 4px;"
+                      >
+                        {{ insti.name }}
+                      </div>
+                    </div>
+                  </ng-template>
+                </p-dropdown>
+                <div class="row justify-content-center">
+                  <p-message
+                    severity="error"
+                    text=" Debe seleccionar una Institución"
+                    *ngIf="invalidos('institucion')"
+                    style="margin-top: 1em;"
+                  ></p-message>
+                </div>
+              </div>
+            </p-card>
+          </div>
+
+          <!-- Card Tutor -->
+          <div class="col-md-5" style="margin-top: 0.5em;">
+            <p-card
+              header="Tutor"
+              subheader="Ingrese el nombre del tutor a cargo del Pasante."
+              styleClass="ui-card-shadow"
+            >
+              <p-header>
+                <div class="head">
+                  <i class="fab fa-leanpub fa-3x fa-fw icono"></i>
+                </div>
+              </p-header>
+              <div class="form-group">
+                <br />
+                <p-autoComplete
+                  [suggestions]="filteredCountriesSingle"
+                  (completeMethod)="filterCountrySingle($event)"
+                  field="name"
+                  [size]="35"
+                  placeholder="Nombre o Identificación"
+                  [minLength]="1"
+                  formControlName="tutor"
+                ></p-autoComplete>
+                <div class="row justify-content-center">
+                  <p-message
+                    severity="error"
+                    text=" Debe ingresar un Docente"
+                    *ngIf="invalidos('tutor')"
+                    style="margin-top: 1em;"
+                  ></p-message>
+                </div>
+              </div>
+            </p-card>
+          </div>
+        </div>
+
+        <div class="row justify-content-center" style="margin-top: 2em;">
+          <!-- Card Especialidad -->
+          <div class="col-md-5">
+            <p-card
+              header="Especialidad"
+              subheader="Ingrese la especialidad correspondiente al campo del Pasante."
+              styleClass="ui-card-shadow"
+            >
+              <p-header>
+                <div class="head">
+                  <i class="fas fa-user-md fa-3x fa-fw icono"></i>
+                </div>
+              </p-header>
+              <div class="form-group">
+                <br />
+                <input
+                  type="text"
+                  placeholder="Especialidad"
+                  pInputText
+                  size="35"
+                  formControlName="especialidad"
+                />
+                <div class="row justify-content-center">
+                  <p-message
+                    severity="error"
+                    text=" Debe ingresar una especialidad"
+                    *ngIf="invalidos('especialidad')"
+                    style="margin-top: 1em;"
+                  ></p-message>
+                </div>
+              </div>
+            </p-card>
+          </div>
+
+          <!-- Card Aula -->
+          <div class="col-md-5">
+            <p-card
+              header="Asignación a un Aula"
+              subheader="Ingrese el nombre del Aula al que pertenece el Pasante."
+              styleClass="ui-card-shadow"
+            >
+              <p-header>
+                <div class="head">
+                  <i class="fas fa-child fa-3x fa-fw icono"></i>
+                </div>
+              </p-header>
+              <div class="form-group">
+                <br />
+                <p-autoComplete
+                  [suggestions]="filteredCountriesSingle"
+                  (completeMethod)="filterCountrySingle($event)"
+                  field="name"
+                  [size]="35"
+                  placeholder="Aula"
+                  [minLength]="1"
+                  formControlName="asignacion_aula"
+                ></p-autoComplete>
+                <div class="row justify-content-center">
+                  <p-message
+                    severity="error"
+                    text=" Debe seleccionar un Aula"
+                    *ngIf="invalidos('asignacion_aula')"
+                    style="margin-top: 1em;"
+                  ></p-message>
+                </div>
+              </div>
+            </p-card>
+          </div>
+        </div>
+
+        <div class="row justify-content-center" style="margin-top: 2em;">
+          <!-- Card Fecha de Inicio -->
+          <div class="col-md-5">
+            <p-card
+              header="Fecha de Inicio"
+              subheader="Ingrese la Fecha de Inicio de las actividades del Pasante."
+              styleClass="ui-card-shadow"
+            >
+              <p-header>
+                <div class="head">
+                  <i class="far fa-calendar-check fa-3x fa-fw icono"></i>
+                </div>
+              </p-header>
+
+              <div class="form-group">
+                <br />
+                <p-calendar
+                  [locale]="es"
+                  dateFormat="dd/mm/yy"
+                  placeholder="Fecha de Visita"
+                  formControlName="fecha_visita"
+                  formControlName="fecha_inicio"
+                  (onSelect)="mostrarFecha($event)"
+                  [showWeek]="true"
+                ></p-calendar>
+                <!-- <p-calendar
+                      [inline]="true"
+                      [showWeek]="true"
+                      class="fecha"
+                      (onSelect)="mostrarFecha($event)"
+                      [locale]="es"
+                      formControlName="fecha_inicio"
+                    ></p-calendar> -->
+                <div class="row justify-content-center">
+                  <p-message
+                    severity="error"
+                    text=" Debe seleccionar el Día de Ingreso"
+                    *ngIf="invalidos('fecha_inicio')"
+                    style="margin-top: 1em;"
+                  ></p-message>
+                </div>
+              </div>
+            </p-card>
+          </div>
+
+          <!-- Card Horas -->
+          <div class="col-md-5">
+            <p-card
+              header="Horas al Día"
+              subheader="Ingrese el número de horas promedio diarias que realiza el Pasante."
+              styleClass="ui-card-shadow"
+            >
+              <p-header>
+                <div class="head">
+                  <i class="far fa-clock fa-3x fa-fw icono"></i>
+                </div>
+              </p-header>
+              <div class="form-group">
+                <h4 style="margin-bottom: 0.5em;">#Horas: {{ numHoras }}</h4>
+                <p-slider
+                  [style]="{ width: '14em' }"
+                  [step]="1"
+                  max="9"
+                  id="horas"
+                  formControlName="num_horas"
+                ></p-slider>
+                <div class="row justify-content-center">
+                  <p-message
+                    severity="error"
+                    text=" Debe seleccionar el Número de Horas"
+                    *ngIf="invalidos('num_horas')"
+                    style="margin-top: 1em;"
+                  ></p-message>
+                </div>
+              </div>
+            </p-card>
+          </div>
+        </div>
+        <br />
+
+        <br />
+
+        <button
+          type="submit"
+          class="btn btn-outline-neutral btn-round btn-lg"
+          [disabled]="!forma.valid"
+        >
+          <i class="fas fa-save fa-lg fa-fw"></i> Registrar Pasante
+        </button>
+      </form>
     </div>
   </div>
 
@@ -525,4 +646,39 @@
       </div>
     </div>
   </div>
+
+  <!-- <div class="section landing-section"> -->
+  <div class="container" style="margin-bottom: 10%;">
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <div class="row">
+          <div class="col-md-2">
+            <img
+              src="./assets/img/icons/comilla izquierda.png"
+              width="80px"
+              height="80px"
+            />
+          </div>
+          <div class="col-md-8">
+            <div class="row">
+              <h2>
+                Conóceme por mis habilidades, no por mis discapacidades.
+              </h2>
+              <h5 style="margin-left: 65%; margin-top: 5%;">
+                - Robert M. Hensel -
+              </h5>
+            </div>
+          </div>
+          <div class="col-md-2" style="margin-top: 10%;">
+            <img
+              src="./assets/img/icons/comilla derecha.png"
+              width="80"
+              height="80px"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- </div> -->
 </div>

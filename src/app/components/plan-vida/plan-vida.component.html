@@ -1,7 +1,7 @@
 <div
   class="page-header"
   data-parallax="true"
-  style="background-image: url('./assets/img/IPCA/plan de vida fondo.jpg');"
+  style="background-image: url('./assets/img/IPCA/plan de vida fondo.jpg')"
 >
   <div class="filter"></div>
   <div class="container">
@@ -52,191 +52,679 @@
   <div class="section section-dark text-center">
     <div class="container">
       <h2 class="title">A llenar Plan de Vida!!</h2>
+      <br />
       <div class="row justify-content-center">
         <div class="col-md-10 seccion bg-dark">
-          <h3 class="title">Información Personal</h3>
+          <h3 class="title">DATOS INFORMATIVOS</h3>
         </div>
       </div>
 
-      <div class="row justify-content-center" style="margin-top: 2em;">
-        <div class="col-md-5">
-          <!-- Card Docente -->
-          <div class="row">
-            <div class="col-md-12">
-              <p-card
-                header="Docente"
-                subheader="Ingrese la cédula o el nombre del Docente asignado."
-                styleClass="ui-card-shadow"
-              >
-                <p-header>
-                  <div class="head encabezado">
-                    <i class="fas fa-chalkboard-teacher fa-3x fa-fw icono"></i>
-                  </div>
-                </p-header>
-                <div
-                  class="componente ui-inputgroup row justify-content-center"
+      <!-- Formulario -->
+      <form [formGroup]="forma" (ngSubmit)="guardarPlan()">
+        <div class="row justify-content-center" style="margin-top: 2em">
+          <div class="col-md-5" style="margin-top: 1em">
+            <!-- Card Docente -->
+            <div class="row">
+              <div class="col-md-12">
+                <p-card
+                  header="Docente"
+                  subheader="Ingrese la cédula o el nombre del Docente asignado."
+                  styleClass="ui-card-shadow"
                 >
-                  <span class="ui-inputgroup-addon">
-                    <i class="fas fa-user-tie fa-lg" style="line-height: 1;"></i
-                  ></span>
-                  <p-autoComplete
-                    [(ngModel)]="country"
-                    [suggestions]="filteredCountriesSingle"
-                    (completeMethod)="filterCountrySingle($event)"
-                    field="name"
-                    [size]="35"
-                    placeholder="Identificación"
-                    [minLength]="1"
-                  ></p-autoComplete>
-                </div>
-                <br />
+                  <p-header>
+                    <div class="head encabezado">
+                      <i
+                        class="fas fa-chalkboard-teacher fa-3x fa-fw icono"
+                      ></i>
+                    </div>
+                  </p-header>
+                  <div
+                    class="componente ui-inputgroup row justify-content-center"
+                  >
+                    <span class="ui-inputgroup-addon">
+                      <i
+                        class="fas fa-user-tie fa-lg"
+                        style="line-height: 1"
+                      ></i
+                    ></span>
+                    <p-autoComplete
+                      [suggestions]="filteredCountriesSingle"
+                      (completeMethod)="filterCountrySingle($event)"
+                      field="name"
+                      [size]="35"
+                      placeholder="Nombre"
+                      [minLength]="1"
+                      formControlName="docente"
+                    ></p-autoComplete>
 
-                <!-- <p-footer>
-                  <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-                </p-footer> -->
-              </p-card>
-            </div>
-          </div>
-          <br />
-
-          <!-- Card Estudiante -->
-          <div class="row">
-            <div class="col-md-12">
-              <p-card
-                header="Estudiante"
-                subheader="Ingrese el nombre del estudiante correspondiente."
-                styleClass="ui-card-shadow"
-              >
-                <p-header>
-                  <div class="head encabezado">
-                    <i class="fas fa-child fa-3x fa-fw icono"></i>
+                    <p-message
+                      severity="error"
+                      text=" Se requiere al Docente"
+                      *ngIf="invalidos('docente')"
+                      class="error"
+                    ></p-message>
                   </div>
-                </p-header>
-                <div
-                  class="componente ui-inputgroup row justify-content-center"
-                >
-                  <span class="ui-inputgroup-addon">
-                    <i
-                      class="fas fa-user-circle fa-lg"
-                      style="line-height: 1;"
-                    ></i
-                  ></span>
-                  <p-autoComplete
-                    styleClass="cedula"
-                    [(ngModel)]="country"
-                    [suggestions]="filteredCountriesSingle"
-                    (completeMethod)="filterCountrySingle($event)"
-                    field="name"
-                    [size]="35"
-                    placeholder="Nombre"
-                    [minLength]="1"
-                  ></p-autoComplete>
-                </div>
-                <br />
-                <!-- <p-footer>
-                  <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-                </p-footer> -->
-              </p-card>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card Asignatura -->
-        <div class="col-md-5" style="margin-top: 1.5em;">
-          <p-card
-            header="Asignatura"
-            subheader="Ingrese el nombre/s de la Asignatura."
-            styleClass="ui-card-shadow"
-          >
-            <p-header>
-              <div class="head encabezado">
-                <i class="fas fa-book-reader fa-3x fa-fw icono"></i>
+                  <br />
+                </p-card>
               </div>
-            </p-header>
-
-            <div class="row justify-content-center componente">
-              <p-listbox
-                [options]="cities"
-                [(ngModel)]="selectedCities"
-                [multiple]="true"
-                [checkbox]="true"
-                [filter]="true"
-                optionLabel="name"
-                [listStyle]="{ 'max-height': '150px' }"
-              >
-                <p-header>
-                  Cities
-                </p-header>
-              </p-listbox>
-            </div>
-            <!-- <p-footer>
-              <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-            </p-footer> -->
-          </p-card>
-        </div>
-      </div>
-      <br />
-
-      <div class="row justify-content-center">
-        <!-- Card Aula -->
-        <div class="col-md-5" style="margin-top: 3em;">
-          <p-card
-            header="Aula"
-            subheader="Ingrese el nombre del Aula"
-            styleClass="ui-card-shadow"
-          >
-            <p-header>
-              <div class="head encabezado">
-                <i class="fas fa-school fa-3x fa-fw icono"></i>
-              </div>
-            </p-header>
-
-            <div class="componente ui-inputgroup row justify-content-center">
-              <span class="ui-inputgroup-addon">
-                <i class="fas fa-door-open fa-lg" style="line-height: 1;"></i
-              ></span>
-              <p-autoComplete
-                styleClass="cedula"
-                [(ngModel)]="country"
-                [suggestions]="filteredCountriesSingle"
-                (completeMethod)="filterCountrySingle($event)"
-                field="name"
-                [size]="35"
-                placeholder="Aula"
-                [minLength]="1"
-              ></p-autoComplete>
             </div>
             <br />
-            <!-- <p-footer>
-              <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-            </p-footer> -->
-          </p-card>
-        </div>
 
-        <!-- Card Descripción -->
-        <div class="col-md-5">
-          <p-card
-            header="Descripción General de la Experiencia"
-            subheader="Ingrese una breve descripción general sobre la experiencia que espera del estudiante."
-            styleClass="ui-card-shadow"
-          >
-            <p-header>
-              <div class="head encabezado">
-                <i class="fas fa-school fa-3x fa-fw icono"></i>
+            <!-- Card Estudiante -->
+            <div class="row">
+              <div class="col-md-12">
+                <p-card
+                  header="Estudiante"
+                  subheader="Ingrese el nombre del estudiante correspondiente."
+                  styleClass="ui-card-shadow"
+                >
+                  <p-header>
+                    <div class="head encabezado">
+                      <i class="fas fa-child fa-3x fa-fw icono"></i>
+                    </div>
+                  </p-header>
+                  <div
+                    class="componente ui-inputgroup row justify-content-center"
+                  >
+                    <span class="ui-inputgroup-addon">
+                      <i
+                        class="fas fa-user-circle fa-lg"
+                        style="line-height: 1"
+                      ></i
+                    ></span>
+                    <p-autoComplete
+                      [suggestions]="filteredCountriesSingle"
+                      (completeMethod)="filterCountrySingle($event)"
+                      field="name"
+                      [size]="35"
+                      placeholder="Nombre"
+                      [minLength]="1"
+                      formControlName="estudiante"
+                    ></p-autoComplete>
+
+                    <p-message
+                      severity="error"
+                      text=" Se requiere al Estudiante"
+                      *ngIf="invalidos('estudiante')"
+                      class="error"
+                    ></p-message>
+                  </div>
+                  <br />
+                </p-card>
               </div>
-            </p-header>
-
-            <div class="componente ui-inputgroup row justify-content-center">
-              <textarea rows="5" cols="50" pInputTextarea></textarea>
             </div>
             <br />
-            <!-- <p-footer>
-              <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-            </p-footer> -->
-          </p-card>
+
+            <!-- Card Aula -->
+            <div class="row">
+              <div class="col-md-12">
+                <p-card
+                  header="Aula"
+                  subheader="Ingrese el nombre del Aula"
+                  styleClass="ui-card-shadow"
+                >
+                  <p-header>
+                    <div class="head encabezado">
+                      <i class="fas fa-school fa-3x fa-fw icono"></i>
+                    </div>
+                  </p-header>
+
+                  <div
+                    class="componente ui-inputgroup row justify-content-center"
+                  >
+                    <span class="ui-inputgroup-addon">
+                      <i
+                        class="fas fa-door-open fa-lg"
+                        style="line-height: 1"
+                      ></i
+                    ></span>
+                    <p-autoComplete
+                      [suggestions]="filteredCountriesSingle"
+                      (completeMethod)="filterCountrySingle($event)"
+                      field="name"
+                      [size]="35"
+                      placeholder="Aula"
+                      [minLength]="1"
+                      formControlName="aula"
+                    ></p-autoComplete>
+
+                    <p-message
+                      severity="error"
+                      text=" Se requiere al Aula correspondiente"
+                      *ngIf="invalidos('aula')"
+                      class="error"
+                    ></p-message>
+                  </div>
+                  <br />
+                </p-card>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Asignatura -->
+          <div class="col-md-5">
+            <div class="row">
+              <div class="col-md-12">
+                <p-card
+                  header="Asignatura"
+                  subheader="Ingrese el nombre/s de la Asignatura."
+                  styleClass="ui-card-shadow"
+                >
+                  <p-header>
+                    <div class="head encabezado">
+                      <i class="fas fa-book-reader fa-3x fa-fw icono"></i>
+                    </div>
+                  </p-header>
+
+                  <div class="row justify-content-center componente">
+                    <p-listbox
+                      [options]="cities"
+                      [multiple]="true"
+                      [checkbox]="true"
+                      [filter]="true"
+                      optionLabel="name"
+                      [listStyle]="{
+                        'max-height': '150px'
+                      }"
+                      class="justify-content-between d-flex"
+                      formControlName="asignatura"
+                    >
+                      <p-header> Asignaturas </p-header>
+                    </p-listbox>
+                    <p-message
+                      severity="error"
+                      text=" Se debe seleccionar por lo menos una Asignatura"
+                      *ngIf="invalidos('asignatura')"
+                      class="error"
+                    ></p-message>
+                  </div>
+                  <br />
+                </p-card>
+              </div>
+            </div>
+            <br />
+
+            <!-- Card Descripción -->
+            <div class="row">
+              <div class="col-md-12">
+                <p-card
+                  header="Descripción General de la Experiencia"
+                  subheader="Ingrese una breve descripción general sobre la experiencia que espera del estudiante."
+                  styleClass="ui-card-shadow"
+                >
+                  <p-header>
+                    <div class="head encabezado">
+                      <i class="fas fa-comment fa-3x fa-fw icono"></i>
+                    </div>
+                  </p-header>
+
+                  <div
+                    class="componente ui-inputgroup row justify-content-center"
+                  >
+                    <textarea
+                      rows="5"
+                      cols="50"
+                      pInputTextarea
+                      formControlName="descripcion"
+                    ></textarea>
+                    <p-message
+                      severity="error"
+                      text=" Se necesita tener una Descripción General"
+                      *ngIf="invalidos('descripcion')"
+                      class="error"
+                    ></p-message>
+                  </div>
+                  <br />
+                </p-card>
+              </div>
+            </div>
+            <br />
+          </div>
         </div>
-      </div>
-      <br />
+        <br />
+
+        <div class="row justify-content-center">
+          <div class="col-md-10 seccion bg-dark">
+            <h3 class="title">PLANIFICACIÓN</h3>
+          </div>
+        </div>
+
+        <div class="row justify-content-center" style="margin-top: 2em">
+          <div class="col-md-5" style="margin-top: 1em">
+            <!-- Card Objetivo -->
+            <div class="row">
+              <div class="col-md-12">
+                <p-card
+                  header="Objetivo General"
+                  subheader="Ingrese el Objetivo General a desarrollar en el Estudiante."
+                  styleClass="ui-card-shadow"
+                >
+                  <p-header>
+                    <div class="head encabezado">
+                      <i class="fas fa-lightbulb fa-3x fa-fw icono"></i>
+                    </div>
+                  </p-header>
+
+                  <div
+                    class="componente ui-inputgroup row justify-content-center"
+                  >
+                    <textarea
+                      rows="5"
+                      cols="50"
+                      pInputTextarea
+                      formControlName="objetivo_general"
+                    ></textarea>
+                    <p-message
+                      severity="error"
+                      text=" Se necesita un Objetivo General"
+                      *ngIf="invalidos('objetivo_general')"
+                      class="error"
+                    ></p-message>
+                  </div>
+                  <br />
+                </p-card>
+              </div>
+            </div>
+            <br />
+
+            <!-- Card Visión -->
+            <div class="row">
+              <div class="col-md-12">
+                <p-card
+                  header="Visión"
+                  subheader="Ingrese la Visión o como se proyecta al Estudiante al finalizar el Período."
+                  styleClass="ui-card-shadow"
+                >
+                  <p-header>
+                    <div class="head encabezado">
+                      <i class="fas fa-binoculars fa-3x fa-fw icono"></i>
+                    </div>
+                  </p-header>
+
+                  <div
+                    class="componente ui-inputgroup row justify-content-center"
+                  >
+                    <textarea
+                      rows="5"
+                      cols="50"
+                      pInputTextarea
+                      formControlName="vision"
+                    ></textarea>
+                    <p-message
+                      severity="error"
+                      text=" Se necesita tener una Visión"
+                      *ngIf="invalidos('vision')"
+                      class="error"
+                    ></p-message>
+                  </div>
+                  <br />
+                </p-card>
+              </div>
+            </div>
+            <br />
+
+            <!-- Card Dominio -->
+            <div class="row">
+              <div class="col-md-12">
+                <p-card
+                  header="Dominio"
+                  subheader="Ingrese el nombre/s del Dominio correspondiente."
+                  styleClass="ui-card-shadow"
+                >
+                  <p-header>
+                    <div class="head encabezado">
+                      <i class="fas fa-book-open fa-3x fa-fw icono"></i>
+                    </div>
+                  </p-header>
+
+                  <div class="row justify-content-center componente">
+                    <p-listbox
+                      [options]="cities"
+                      [multiple]="true"
+                      [checkbox]="true"
+                      [filter]="true"
+                      optionLabel="name"
+                      [listStyle]="{
+                        'max-height': '150px'
+                      }"
+                      class="justify-content-between d-flex"
+                      formControlName="dominio"
+                    >
+                      <p-header> Dominios </p-header>
+                    </p-listbox>
+                    <p-message
+                      severity="error"
+                      text=" Se debe seleccionar por lo menos un Dominio"
+                      *ngIf="invalidos('dominio')"
+                      class="error"
+                    ></p-message>
+                  </div>
+                  <br />
+                </p-card>
+              </div>
+            </div>
+            <br />
+
+            <!-- Card Logros -->
+            <div class="row">
+              <div class="col-md-12">
+                <p-card
+                  header="Logros"
+                  subheader="Ingrese todos los logros que espera por el Estudiante."
+                  styleClass="ui-card-shadow"
+                >
+                  <p-header>
+                    <div class="head encabezado">
+                      <i class="fas fa-hand-point-up fa-3x fa-fw icono"></i>
+                    </div>
+                  </p-header>
+                  <p-chips
+                    styleClass="p-chips"
+                    formControlName="logros"
+                  ></p-chips>
+                  <p-message
+                    severity="error"
+                    text=" Debe ingresar los Logros que espera para del Estudiante."
+                    *ngIf="invalidos('logros')"
+                    class="error"
+                  ></p-message>
+                  <br />
+                </p-card>
+              </div>
+            </div>
+          </div>
+
+          <!-- Segunda Columna -->
+          <div class="col-md-5" style="margin-top: 1em">
+            <!-- Card Metas Específicas -->
+            <div class="row">
+              <div class="col-md-12">
+                <p-card
+                  header="Metas Específicas"
+                  subheader="Ingrese las Metas Específicas que espera obtener a lo largo del período con el Estudiante."
+                  styleClass="ui-card-shadow"
+                >
+                  <p-header>
+                    <div class="head encabezado">
+                      <i class="fas fa-bullseye fa-3x fa-fw icono"></i>
+                    </div>
+                  </p-header>
+                  <p-chips
+                    styleClass="p-chips"
+                    formControlName="metas_especificas"
+                  ></p-chips>
+                  <p-message
+                    severity="error"
+                    text=" Se debe ingresar por lo menos dos Metas Específicas"
+                    *ngIf="invalidos('metas_especificas')"
+                    class="error"
+                  ></p-message>
+
+                  <br />
+                </p-card>
+              </div>
+            </div>
+            <br />
+
+            <!-- Card Área -->
+            <div class="row">
+              <div class="col-md-12">
+                <p-card
+                  header="Área"
+                  subheader="Ingrese el nombre/s del Área correspondiente."
+                  styleClass="ui-card-shadow"
+                >
+                  <p-header>
+                    <div class="head encabezado">
+                      <i class="fas fa-book fa-3x fa-fw icono"></i>
+                    </div>
+                  </p-header>
+
+                  <div class="row justify-content-center componente">
+                    <p-listbox
+                      [options]="cities"
+                      [multiple]="true"
+                      [checkbox]="true"
+                      [filter]="true"
+                      optionLabel="name"
+                      [listStyle]="{
+                        'max-height': '150px'
+                      }"
+                      formControlName="area"
+                    >
+                      <p-header> Áreas </p-header>
+                    </p-listbox>
+                    <p-message
+                      severity="error"
+                      text=" Se debe seleccionar por lo menos un Área"
+                      *ngIf="invalidos('area')"
+                      class="error"
+                    ></p-message>
+                  </div>
+                  <br />
+                </p-card>
+              </div>
+            </div>
+            <br />
+
+            <!-- Card Necesidades -->
+            <div class="row">
+              <div class="col-md-12">
+                <p-card
+                  header="Necesidades"
+                  subheader="Ingrese las Necesidades que sean requeridas con su respetivo nombre haciendo referencia a su descripción"
+                  styleClass="ui-card-shadow"
+                >
+                  <p-header>
+                    <div class="head encabezado">
+                      <i class="fas fa-walking fa-3x fa-fw icono"></i>
+                    </div>
+                  </p-header>
+
+                  <div class="row justify-content-center componente">
+                    <div class="col-md-12">
+                      <table class="table">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">Necesidades del Estudiante</th>
+                          </tr>
+                        </thead>
+                        <tbody formArrayName="necesidades">
+                          <tr
+                            *ngFor="
+                              let form of necesidades.controls;
+                              let i = index
+                            "
+                          >
+                            <td>
+                              <div class="row justify-content-center">
+                                <!-- Componente Nombre -->
+                                <div class="col-md-10">
+                                  <div
+                                    class="ui-inputgroup"
+                                    [formGroupName]="i"
+                                  >
+                                    <span class="ui-inputgroup-addon">
+                                      <i
+                                        class="fas fa-pen-square fa-lg"
+                                        style="line-height: 1"
+                                      ></i
+                                    ></span>
+                                    <input
+                                      type="text"
+                                      size="30"
+                                      pInputText
+                                      [formControlName]="nombre"
+                                      placeholder="Nombre"
+                                    />
+                                  </div>
+                                </div>
+
+                                <!-- Componente Descripción -->
+                                <div class="col-md-10" style="margin-top: 1em">
+                                  <div
+                                    class="ui-inputgroup row justify-content-center"
+                                  >
+                                    <p-chips
+                                      styleClass="p-chips"
+                                      [formControlName]="descripcion"
+                                      placeholder="Descripción"
+                                    ></p-chips>
+                                  </div>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <button
+                        type="button"
+                        class="btn btn-neutral btn-round btn-lg"
+                        (click)="agregarNecesidad()"
+                      >
+                        <i class="fas fa-plus fa-lg fa-fw"></i> Agregar
+                        Necesidad
+                      </button>
+                    </div>
+                  </div>
+                  <br />
+                </p-card>
+              </div>
+            </div>
+            <br />
+
+            <div class="row">
+              <div class="col-md-12">
+                <p-card
+                  header="Observaciones"
+                  subheader="Ingrese las Observaciones necesarias sobre el Estudiante."
+                  styleClass="ui-card-shadow"
+                >
+                  <p-header>
+                    <div class="head encabezado">
+                      <i class="fas fa-eye fa-3x fa-fw icono"></i>
+                    </div>
+                  </p-header>
+
+                  <textarea
+                    rows="5"
+                    cols="50"
+                    pInputTextarea
+                    style="margin-top: 0.5em"
+                    formControlName="observaciones"
+                  ></textarea>
+                  <p-message
+                    severity="error"
+                    text=" Debe ingresar Observaciones sobre el Estudiante"
+                    *ngIf="invalidos('observaciones')"
+                    class="error"
+                  ></p-message>
+                  <br />
+                </p-card>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row justify-content-center" style="margin-top: 1em">
+          <div class="col-md-5" style="margin-top: 1em"></div>
+        </div>
+        <br />
+        <br />
+
+        <button type="submit" class="btn btn-outline-neutral btn-round btn-lg">
+          <i class="fas fa-save fa-lg fa-fw"></i> Guardar Plan de Vida
+        </button>
+      </form>
     </div>
   </div>
+
+  <div class="section landing-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 mr-auto ml-auto">
+          <h2 class="text-center">Listado de Planes de Vida</h2>
+          <br />
+
+          <p-chips [(ngModel)]="values1"></p-chips>
+
+          <p-listbox
+            [options]="cities"
+            [(ngModel)]="selectedCities"
+            [multiple]="true"
+            [checkbox]="true"
+            [filter]="true"
+            optionLabel="name"
+            [listStyle]="{
+              'max-height': '150px'
+            }"
+          >
+            <p-header> Cities </p-header>
+          </p-listbox>
+
+          <!-- <p-table
+            [value]="persons"
+            [columns]="cols"
+            [scrollable]="true"
+            scrollHeight="200px"
+            [resizableColumns]="true"
+          >
+            <ng-template pTemplate="colgroup" let-columns>
+              <colgroup>
+                <col *ngFor="let col of columns" />
+              </colgroup>
+            </ng-template>
+            <ng-template pTemplate="header">
+              <tr>
+                <th *ngFor="let col of cols" pResizableColumn>
+                  {{ col.header }}
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-person>
+              <tr>
+                <td *ngFor="let col of cols">
+                  {{ person[col.field] }}
+                </td>
+              </tr>
+            </ng-template>
+          </p-table> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="section landing-section"> -->
+  <div class="container" style="margin-bottom: 10%">
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <div class="row">
+          <div class="col-md-2">
+            <img
+              src="./assets/img/icons/comilla izquierda.png"
+              width="80px"
+              height="80px"
+            />
+          </div>
+          <div class="col-md-8">
+            <div class="row">
+              <h2>
+                La discapacidad limita al ser humano abriéndole un nuevo
+                universo de posibilidades.
+              </h2>
+              <h5 style="margin-left: 75%; margin-top: 5%">- Ítalo Violo -</h5>
+            </div>
+          </div>
+          <div class="col-md-2" style="margin-top: 10em">
+            <img
+              src="./assets/img/icons/comilla derecha.png"
+              width="80"
+              height="80px"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- </div> -->
 </div>

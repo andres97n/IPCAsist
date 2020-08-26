@@ -13,10 +13,41 @@
   text-shadow: 1px 1px 1px black;
 }
 
+.error {
+  margin-top: 1em;
+}
+
 .seccion {
   border: 4px solid #ffffff;
 }
 
 .componente {
   margin-top: 1em;
+}
+
+:host ::ng-deep p-listbox .ui-listbox {
+  width: 23rem;
+}
+
+:host ::ng-deep .p-chips > .ui-inputtext {
+  width: 25rem !important;
+  align-content: flex-start !important;
+  margin-top: 0.5em !important;
+}
+
+:host ::ng-deep p-chips .ui-chips-token {
+  margin: 0.5em !important;
+}
+
+:host ::ng-deep ui-inputtext > ui-float-label {
+  margin-left: 1em !important;
+}
+
+/* :host ::ng-deep p-listbox ui-listbox-item {
+  align-content: initial !important;
+} */
+
+:host ::ng-deep p-listbox .ui-listbox-header {
+  background-color: #32302f;
+  color: #ffffff;
 }

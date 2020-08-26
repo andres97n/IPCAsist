@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Persons } from "app/clases/persons";
 import { DocenteService } from "app/services/docente.service";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 @Component({
   selector: "app-pasante",
@@ -29,7 +30,58 @@ export class PasanteComponent implements OnInit {
   horario = Date;
   es: any;
 
-  constructor(private _docenteSrv: DocenteService) {}
+  forma: FormGroup;
+
+  constructor(private _docenteSrv: DocenteService, private fb: FormBuilder) {
+    this.crearFormulario();
+
+    this.universidades = [
+      {
+        name: "Universidad de Cuenca",
+        value: "UCUENCA",
+      },
+      {
+        name: "Universidad Católica de Cuenca",
+        value: "CATOCUENCA",
+      },
+      {
+        name: "Universidad del Azuay",
+        value: "UDA",
+      },
+      {
+        name: "Universidad Politécnica Salesiana",
+        value: "UPS",
+      },
+      {
+        name: "Universidad Nacional de Educación",
+        value: "UNAE",
+      },
+      {
+        name: "Instituo Superior Tecnológico del Azuay",
+        value: "ISTA",
+      },
+      {
+        name: "Instituto Tecnológico Sudamericano",
+        value: "SUDA",
+      },
+      {
+        name: "Instituto Tecnológico Superior San Gabriel",
+        value: "SAN GABRIEL",
+      },
+      {
+        name: "Instituto Tecnológico Superior American Collage",
+        value: "AMERICAN COLLAGE",
+      },
+      {
+        name: "Instituto Superior San Isidro",
+        value: "SAN ISIDRO",
+      },
+      {
+        name: "Otro",
+        value: "OTRO",
+      },
+    ];
+  }
 
   ngOnInit(): void {
     this._docenteSrv.getPersons().subscribe((persons: Persons[]) => {
@@ -84,53 +136,6 @@ export class PasanteComponent implements OnInit {
       },
     ];
 
-    this.universidades = [
-      {
-        name: "Universidad de Cuenca",
-        value: "UCUENCA",
-      },
-      {
-        name: "Universidad Católica de Cuenca",
-        value: "CATOCUENCA",
-      },
-      {
-        name: "Universidad del Azuay",
-        value: "UDA",
-      },
-      {
-        name: "Universidad Politécnica Salesiana",
-        value: "UPS",
-      },
-      {
-        name: "Universidad Nacional de Educación",
-        value: "UNAE",
-      },
-      {
-        name: "Instituo Superior Tecnológico del Azuay",
-        value: "ISTA",
-      },
-      {
-        name: "Instituto Tecnológico Sudamericano",
-        value: "SUDA",
-      },
-      {
-        name: "Instituto Tecnológico Superior San Gabriel",
-        value: "SAN GABRIEL",
-      },
-      {
-        name: "Instituto Tecnológico Superior American Collage",
-        value: "AMERICAN COLLAGE",
-      },
-      {
-        name: "Instituto Superior San Isidro",
-        value: "SAN ISIDRO",
-      },
-      {
-        name: "Otro",
-        value: "OTRO",
-      },
-    ];
-
     this.es = {
       firstDayOfWeek: 0,
       dayNames: [
@@ -179,6 +184,55 @@ export class PasanteComponent implements OnInit {
     };
   }
 
+  crearFormulario() {
+    this.forma = this.fb.group({
+      identificacion: ["", Validators.required],
+      identidad: this.fb.group({
+        nombres: ["", Validators.required],
+        apellidos: ["", Validators.required],
+      }),
+      sexo: ["", Validators.required],
+      edad: ["", Validators.required],
+      correo: [
+        "",
+        [
+          Validators.required,
+          Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$"),
+        ],
+      ],
+      contacto: ["", Validators.required],
+      // tipo_sangre: ["", Validators.required],
+      institucion: ["", Validators.required],
+      tutor: ["", Validators.required],
+      especialidad: ["", Validators.required],
+      asignacion_aula: ["", Validators.required],
+      num_horas: ["", Validators.required],
+      fecha_inicio: ["", Validators.required],
+    });
+  }
+
+  invalidos(form: string) {
+    return this.forma.get(form).invalid && this.forma.get(form).touched;
+  }
+
+  get noNombres() {
+    return (
+      this.forma.get("identidad.nombres").invalid &&
+      this.forma.get("identidad.nombres").touched
+    );
+  }
+
+  get noApellidos() {
+    return (
+      this.forma.get("identidad.apellidos").invalid &&
+      this.forma.get("identidad.apellidos").touched
+    );
+  }
+
+  get numHoras() {
+    return this.forma.get("num_horas").value;
+  }
+
   sexoSeleccionado(event) {
     console.log(event.value);
   }
@@ -193,5 +247,9 @@ export class PasanteComponent implements OnInit {
 
   mostrarFecha(event) {
     console.log(event);
+  }
+
+  guardarPasante() {
+    console.log(this.forma);
   }
 }

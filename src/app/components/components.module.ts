@@ -24,6 +24,7 @@ import { DialogModule } from "primeng/dialog";
 import { MessagesModule } from "primeng/messages";
 import { MessageModule } from "primeng/message";
 import { ListboxModule } from "primeng/listbox";
+import { ChipsModule } from "primeng/chips";
 
 import { BasicelementsComponent } from "./basicelements/basicelements.component";
 import { NavigationComponent } from "./navigation/navigation.component";
@@ -67,6 +68,7 @@ import { AsignarDocenteComponent } from "./asignar-docente/asignar-docente.compo
     MessagesModule,
     MessageModule,
     ListboxModule,
+    ChipsModule,
 
     // GoogleMapsModule,
   ],

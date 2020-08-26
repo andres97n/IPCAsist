@@ -14,12 +14,14 @@
 }
 
 .seccion {
-  border-radius: 42px 42px 42px 42px;
+  /* border-radius: 42px 42px 42px 42px;
   margin-left: 5em;
   border: 4px solid #ffffff;
   display: block;
   margin-left: auto;
-  margin-right: auto;
+  margin-right: auto; */
+
+  border: 4px solid #ffffff;
 }
 
 #horas {

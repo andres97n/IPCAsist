@@ -1,7 +1,7 @@
 <div
   class="page-header"
   data-parallax="true"
-  style="background-image: url('./assets/img/IPCA/visita ipca.jpg');"
+  style="background-image: url('./assets/img/IPCA/visita ipca.jpg')"
 >
   <div class="filter"></div>
   <div class="container">
@@ -54,306 +54,426 @@
     <div class="container">
       <h2 class="title">Registre una Visita</h2>
 
-      <!-- Información Empresa -->
-      <!-- <div class="row" style="margin-top: 3em;">
-        <div class="col-md-4 text-center seccion bg-dark">
-          <h3 class="title">Información Personal</h3>
-        </div>
-      </div> -->
+      <form [formGroup]="forma" (ngSubmit)="guardarVisita()">
+        <div class="row justify-content-center" style="margin-top: 2em">
+          <!-- Columna 1 -->
+          <div class="col-md-5" style="margin-top: 2em">
+            <!-- Nombre Empresa -->
+            <div class="row">
+              <div class="col-md-12">
+                <p-card
+                  header="Empresa"
+                  subheader="Ingrese el nombre de la Empresa o Institución visitante."
+                  styleClass="ui-card-shadow"
+                >
+                  <p-header>
+                    <div class="head">
+                      <i class="far fa-building fa-3x fa-fw icono"></i>
+                    </div>
+                  </p-header>
+                  <div class="row justify-content-center">
+                    <div class="ui-inputgroup">
+                      <span class="ui-inputgroup-addon">
+                        <i
+                          class="fas fa-signature fa-lg"
+                          style="line-height: 1"
+                        ></i
+                      ></span>
+                      <input
+                        type="text"
+                        placeholder="Nombre"
+                        pInputText
+                        size="30"
+                        formControlName="empresa"
+                      />
+                    </div>
 
-      <form>
-        <!-- Nombre Empresa -->
-        <div class="row justify-content-center" style="margin-top: 2em;">
-          <div class="col-md-5" id="card-cedula">
-            <p-card
-              header="Empresa"
-              subheader="Ingrese el nombre de la Empresa o Institución visitante."
-              styleClass="ui-card-shadow"
-            >
-              <p-header>
-                <div class="head">
-                  <i class="far fa-building fa-3x fa-fw icono"></i>
-                </div>
-              </p-header>
-              <div class="form-group">
-                <br />
-                <p-autoComplete
-                  styleClass="cedula"
-                  [(ngModel)]="country"
-                  [suggestions]="filteredCountriesSingle"
-                  (completeMethod)="filterCountrySingle($event)"
-                  field="name"
-                  [size]="35"
-                  placeholder="Nombre"
-                  [minLength]="1"
-                ></p-autoComplete>
-              </div>
-              <!-- <p-footer>
-                <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-              </p-footer> -->
-            </p-card>
-          </div>
-
-          <!-- Dirección -->
-          <div class="col-md-5">
-            <p-card
-              header="Dirección"
-              subheader="Ingrese la dirección de la Empresa o Institución visitante."
-              styleClass="ui-card-shadow"
-            >
-              <p-header>
-                <div class="head">
-                  <i class="fas fa-map-marker-alt fa-3x fa-fw icono"></i>
-                </div>
-              </p-header>
-              <div class="form-group">
-                <br />
-                <input
-                  type="text"
-                  placeholder="Calle Principal"
-                  pInputText
-                  size="35"
-                />
-                <input
-                  type="text"
-                  placeholder="Calle Secundaria"
-                  size="35"
-                  pInputText
-                />
-              </div>
-              <!-- <p-footer>
-                <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-              </p-footer> -->
-            </p-card>
-          </div>
-        </div>
-        <br />
-
-        <!-- Representante -->
-        <div class="row justify-content-center">
-          <div class="col-md-5">
-            <p-card
-              header="Representante"
-              subheader="Ingrese los nombres y los apellidos del Representante de la Empresa o Institución."
-              styleClass="ui-card-shadow"
-            >
-              <p-header>
-                <div class="head">
-                  <i class="fas fa-user fa-3x fa-fw icono"></i>
-                </div>
-              </p-header>
-              <div class="form-group">
-                <br />
-                <input type="text" placeholder="Nombres" pInputText size="35" />
-                <input
-                  type="text"
-                  placeholder="Apellidos"
-                  size="35"
-                  pInputText
-                />
-              </div>
-              <!-- <p-footer>
-              <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-            </p-footer> -->
-            </p-card>
-          </div>
-
-          <!-- Card Celular -->
-          <div class="col-md-5" style="margin-top: 1em;">
-            <p-card
-              header="Contacto"
-              subheader="Ingrese el número celular del Representante, para cualquier aviso."
-              styleClass="ui-card-shadow"
-            >
-              <p-header>
-                <div style="background-color: #cfcfcf;">
-                  <i class="fas fa-phone fa-3x fa-fw icono"></i>
-                </div>
-              </p-header>
-              <div class="form-group">
-                <br />
-                <p-inputMask
-                  [(ngModel)]="celular"
-                  mask="0999999999"
-                  placeholder="Celular"
-                ></p-inputMask>
-              </div>
-              <!-- <p-footer>
-                <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-              </p-footer> -->
-            </p-card>
-          </div>
-        </div>
-        <br />
-
-        <!-- Card Email -->
-        <div class="row justify-content-center">
-          <div class="col-md-5">
-            <p-card
-              header="Correo"
-              subheader="Ingrese el correo de la Empresa o Institución, para mantenerse en contacto."
-              styleClass="ui-card-shadow"
-            >
-              <p-header>
-                <div style="background-color: #cfcfcf;">
-                  <i class="far fa-envelope fa-3x fa-fw icono"></i>
-                </div>
-              </p-header>
-              <div class="form-group">
-                <br />
-                <input
-                  type="email"
-                  placeholder="Correo"
-                  pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
-                  pInputText
-                  size="35"
-                />
-              </div>
-              <!-- <p-footer>
-                <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-              </p-footer> -->
-            </p-card>
-          </div>
-
-          <!-- Card Guia -->
-          <div class="col-md-5" style="margin-top: 0.5em;">
-            <p-card
-              header="Guía"
-              subheader="Ingrese el nombre del Docente a cargo de la visita."
-              styleClass="ui-card-shadow"
-            >
-              <p-header>
-                <div class="head">
-                  <i class="fas fa-users fa-3x fa-fw icono"></i>
-                </div>
-              </p-header>
-              <div class="form-group">
-                <br />
-                <p-autoComplete
-                  styleClass="cedula"
-                  [(ngModel)]="country"
-                  [suggestions]="filteredCountriesSingle"
-                  (completeMethod)="filterCountrySingle($event)"
-                  field="name"
-                  [size]="35"
-                  placeholder="Nombre o Identificación"
-                  [minLength]="1"
-                ></p-autoComplete>
-              </div>
-              <!-- <p-footer>
-                <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-              </p-footer> -->
-            </p-card>
-          </div>
-        </div>
-        <br />
-
-        <!-- Card Fecha de Visita -->
-        <div class="row justify-content-center">
-          <div class="col-md-5" style="margin-top: 3.5em;">
-            <p-card
-              header="Fecha de la Visita"
-              subheader="Ingrese la Fecha en que se realizará la visita."
-              styleClass="ui-card-shadow"
-            >
-              <p-header>
-                <div class="head">
-                  <i class="far fa-calendar-check fa-3x fa-fw icono"></i>
-                </div>
-              </p-header>
-              <!-- <div class="row">
-              <div class="col-md-3"> -->
-              <div class="form-group">
-                <br />
-                <p-calendar
-                  [(ngModel)]="date2"
-                  [locale]="es"
-                  dateFormat="dd/mm/yy"
-                  placeholder="Fecha de Visita"
-                ></p-calendar>
-              </div>
-              <!-- </div>
-            </div> -->
-
-              <!-- <p-footer>
-                <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-              </p-footer> -->
-            </p-card>
-          </div>
-
-          <!-- Horario de Visita-->
-          <div class="col-md-5">
-            <p-card
-              header="Horario de la Visita"
-              subheader="Ingrese el horario en que se realizará la visita."
-              styleClass="ui-card-shadow"
-            >
-              <p-header>
-                <div style="background-color: #cfcfcf;">
-                  <i class="far fa-clock fa-3x fa-fw icono"></i>
-                </div>
-              </p-header>
-              <div class="row justify-content-center">
-                <!-- Horario de Entrada-->
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label>Horario de Entrada</label>
-                    <ngb-timepicker
-                      [(ngModel)]="time"
-                      [meridian]="meridian"
-                    ></ngb-timepicker>
+                    <div class="row justify-content-center">
+                      <p-message
+                        severity="error"
+                        text=" Se requiere el Nombre de la Empresa"
+                        *ngIf="invalidos('empresa')"
+                        style="margin-top: 1em"
+                      ></p-message>
+                    </div>
                   </div>
-                </div>
-                <!-- Horario de Salida -->
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label>Horario de Salida</label>
-                    <ngb-timepicker
-                      [(ngModel)]="time2"
-                      [meridian]="meridian"
-                    ></ngb-timepicker>
+                </p-card>
+              </div>
+            </div>
+
+            <!-- Representante -->
+            <div class="row margen">
+              <div class="col-md-12">
+                <p-card
+                  header="Representante"
+                  subheader="Ingrese los nombres y los apellidos del Representante de la Empresa o Institución."
+                  styleClass="ui-card-shadow"
+                >
+                  <p-header>
+                    <div class="head">
+                      <i class="fas fa-user fa-3x fa-fw icono"></i>
+                    </div>
+                  </p-header>
+                  <br />
+                  <div
+                    class="row justify-content-center"
+                    formGroupName="representante"
+                  >
+                    <div class="ui-inputgroup">
+                      <span class="ui-inputgroup-addon">
+                        <i
+                          class="fas fa-user-tie fa-lg"
+                          style="line-height: 1"
+                        ></i
+                      ></span>
+                      <input
+                        type="text"
+                        placeholder="Nombres"
+                        pInputText
+                        size="35"
+                        formControlName="nombres"
+                      />
+                    </div>
+                    <div class="row justify-content-center">
+                      <p-message
+                        severity="error"
+                        text=" Se requiere el Nombre del Representante"
+                        *ngIf="sinNombres"
+                        style="margin-top: 1em; margin-bottom: 1em"
+                      ></p-message>
+                    </div>
+                    <div class="ui-inputgroup">
+                      <span class="ui-inputgroup-addon">
+                        <i
+                          class="fas fa-user-tie fa-lg"
+                          style="line-height: 1"
+                        ></i
+                      ></span>
+                      <input
+                        type="text"
+                        placeholder="Apellidos"
+                        size="35"
+                        pInputText
+                        formControlName="apellidos"
+                      />
+                    </div>
+                    <div class="row justify-content-center">
+                      <p-message
+                        severity="error"
+                        text=" Se requiere el Apellido del Representante"
+                        *ngIf="sinApellidos"
+                        style="margin-top: 1em"
+                      ></p-message>
+                    </div>
                   </div>
-                </div>
+                </p-card>
               </div>
-              <!-- <p-footer>
-              <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-            </p-footer> -->
-            </p-card>
+            </div>
+
+            <!-- Card Correo -->
+            <div class="row margen">
+              <div class="col-md-12">
+                <p-card
+                  header="Correo"
+                  subheader="Ingrese el correo de la Empresa o Institución, para mantenerse en contacto."
+                  styleClass="ui-card-shadow"
+                >
+                  <p-header>
+                    <div style="background-color: #cfcfcf">
+                      <i class="far fa-envelope fa-3x fa-fw icono"></i>
+                    </div>
+                  </p-header>
+                  <br />
+                  <div class="row justify-content-center">
+                    <div class="ui-inputgroup">
+                      <span class="ui-inputgroup-addon">
+                        <i class="fas fa-at fa-lg" style="line-height: 1"></i
+                      ></span>
+                      <input
+                        type="email"
+                        placeholder="Correo"
+                        pInputText
+                        size="35"
+                        formControlName="correo"
+                      />
+                    </div>
+                    <div class="row justify-content-center">
+                      <p-message
+                        severity="error"
+                        text=" Se requiere el Correo de la Empresa"
+                        *ngIf="invalidos('correo')"
+                        style="margin-top: 1em"
+                      ></p-message>
+                    </div>
+                  </div>
+                </p-card>
+              </div>
+            </div>
+
+            <!-- Card Fecha de Visita -->
+            <div class="row margen">
+              <div class="col-md-12">
+                <p-card
+                  header="Fecha de la Visita"
+                  subheader="Ingrese la Fecha en que se realizará la visita."
+                  styleClass="ui-card-shadow"
+                >
+                  <p-header>
+                    <div class="head">
+                      <i class="far fa-calendar-check fa-3x fa-fw icono"></i>
+                    </div>
+                  </p-header>
+                  <br />
+                  <div class="row justify-content-center">
+                    <div class="ui-inputgroup">
+                      <span class="ui-inputgroup-addon">
+                        <i
+                          class="fas fa-calendar-alt fa-lg"
+                          style="line-height: 1"
+                        ></i
+                      ></span>
+                      <p-calendar
+                        [locale]="es"
+                        dateFormat="dd/mm/yy"
+                        placeholder="Fecha de Visita"
+                        formControlName="fecha_visita"
+                      ></p-calendar>
+                    </div>
+                    <div class="row justify-content-center">
+                      <p-message
+                        severity="error"
+                        text=" Se debe ingresar la Fecha de la Visita"
+                        *ngIf="invalidos('fecha_visita')"
+                        style="margin-top: 2em"
+                      ></p-message>
+                    </div>
+                  </div>
+                </p-card>
+              </div>
+            </div>
+
+            <!-- Card Observación -->
+            <div class="row margen">
+              <div class="col-md-12">
+                <p-card
+                  header="Observaciones"
+                  subheader="Ingrese alguna observación acerca de la visita."
+                  styleClass="ui-card-shadow"
+                >
+                  <p-header>
+                    <div class="head">
+                      <i class="fas fa-clipboard fa-3x fa-fw icono"></i>
+                    </div>
+                  </p-header>
+                  <div class="form-group">
+                    <br />
+                    <textarea
+                      rows="5"
+                      cols="50"
+                      placeholder="Observación"
+                      pInputTextarea
+                      formControlName="observacion"
+                    ></textarea>
+                    <div class="row justify-content-center">
+                      <p-message
+                        severity="error"
+                        text=" Se debe ingresar una Observación"
+                        *ngIf="invalidos('observacion')"
+                        style="margin-top: 1em"
+                      ></p-message>
+                    </div>
+                  </div>
+                </p-card>
+              </div>
+            </div>
+          </div>
+
+          <!-- Columna 2 -->
+          <div class="col-md-5">
+            <!-- Dirección -->
+            <div class="row margen">
+              <div class="col-md-12">
+                <p-card
+                  header="Dirección"
+                  subheader="Ingrese la dirección de la Empresa o Institución visitante."
+                  styleClass="ui-card-shadow"
+                >
+                  <p-header>
+                    <div class="head">
+                      <i class="fas fa-map-marker-alt fa-3x fa-fw icono"></i>
+                    </div>
+                  </p-header>
+                  <div class="form-group" formGroupName="direccion">
+                    <br />
+                    <input
+                      type="text"
+                      placeholder="Calle Principal"
+                      pInputText
+                      size="35"
+                      formControlName="calle_principal"
+                    />
+                    <div class="row justify-content-center">
+                      <p-message
+                        severity="error"
+                        text=" Se debe ingresar una Calle Principal"
+                        *ngIf="sinPrincipal"
+                        style="margin-top: 1em; margin-bottom: 1em"
+                      ></p-message>
+                    </div>
+                    <input
+                      type="text"
+                      placeholder="Calle Secundaria"
+                      size="35"
+                      pInputText
+                      formControlName="calle_secundaria"
+                    />
+                    <div class="row justify-content-center">
+                      <p-message
+                        severity="error"
+                        text=" Se debe ingresar una Calle Secundaria"
+                        *ngIf="sinSecundaria"
+                        style="margin-top: 1em"
+                      ></p-message>
+                    </div>
+                  </div>
+                </p-card>
+              </div>
+            </div>
+
+            <!-- Card Contacto -->
+            <div class="row margen">
+              <div class="col-md-12">
+                <p-card
+                  header="Contacto"
+                  subheader="Ingrese el número celular del Representante, para cualquier aviso."
+                  styleClass="ui-card-shadow"
+                >
+                  <p-header>
+                    <div style="background-color: #cfcfcf">
+                      <i class="fas fa-phone fa-3x fa-fw icono"></i>
+                    </div>
+                  </p-header>
+                  <div class="form-group">
+                    <br />
+                    <p-inputMask
+                      mask="0999999999"
+                      placeholder="Celular"
+                      formControlName="contacto"
+                    ></p-inputMask>
+                    <div class="row justify-content-center">
+                      <p-message
+                        severity="error"
+                        text=" Se debe ingresar un Contacto"
+                        *ngIf="invalidos('contacto')"
+                        style="margin-top: 1em"
+                      ></p-message>
+                    </div>
+                  </div>
+                </p-card>
+              </div>
+            </div>
+
+            <!-- Card Guia -->
+            <div class="row margen">
+              <div class="col-md-12">
+                <p-card
+                  header="Guía"
+                  subheader="Ingrese el nombre del Docente a cargo de la visita."
+                  styleClass="ui-card-shadow"
+                >
+                  <p-header>
+                    <div class="head">
+                      <i class="fas fa-users fa-3x fa-fw icono"></i>
+                    </div>
+                  </p-header>
+                  <div class="form-group">
+                    <br />
+                    <p-autoComplete
+                      [suggestions]="filteredCountriesSingle"
+                      (completeMethod)="filterCountrySingle($event)"
+                      field="name"
+                      [size]="35"
+                      placeholder="Nombre o Identificación"
+                      [minLength]="1"
+                      formControlName="guia"
+                    ></p-autoComplete>
+                    <div class="row justify-content-center">
+                      <p-message
+                        severity="error"
+                        text=" Se debe ingresar una Persona a Cargo"
+                        *ngIf="invalidos('guia')"
+                        style="margin-top: 1em"
+                      ></p-message>
+                    </div>
+                  </div>
+                </p-card>
+              </div>
+            </div>
+
+            <!-- Horario de Visita-->
+            <div class="row margen">
+              <div class="col-md-12">
+                <p-card
+                  header="Horario de la Visita"
+                  subheader="Ingrese el horario en que se realizará la visita."
+                  styleClass="ui-card-shadow"
+                >
+                  <p-header>
+                    <div style="background-color: #cfcfcf">
+                      <i class="far fa-clock fa-3x fa-fw icono"></i>
+                    </div>
+                  </p-header>
+                  <div
+                    class="row justify-content-center"
+                    formGroupName="horario_visita"
+                  >
+                    <!-- Horario de Entrada-->
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Hora de Entrada</label>
+                        <ngb-timepicker
+                          [meridian]="meridian"
+                          formControlName="horario_entrada"
+                        ></ngb-timepicker>
+
+                        <p-message
+                          severity="error"
+                          text=" Se debe ingresar la Hora de Entrada"
+                          *ngIf="noHoraEntrada"
+                          style="margin-top: 1em"
+                        ></p-message>
+                      </div>
+                    </div>
+                    <!-- Horario de Salida -->
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Hora de Salida</label>
+                        <ngb-timepicker
+                          [meridian]="meridian"
+                          formControlName="horario_salida"
+                        ></ngb-timepicker>
+                        <p-message
+                          severity="error"
+                          text=" Se debe ingresar la Hora de Salida"
+                          *ngIf="noHoraSalida"
+                          style="margin-top: 1em"
+                        ></p-message>
+                      </div>
+                    </div>
+                  </div>
+                </p-card>
+              </div>
+            </div>
           </div>
         </div>
         <br />
-
-        <!-- Card Observación-->
-        <div class="row justify-content-center">
-          <div class="col-md-6">
-            <p-card
-              header="Observaciones"
-              subheader="Ingrese alguna observación acerca de la visita."
-              styleClass="ui-card-shadow"
-            >
-              <p-header>
-                <div class="head">
-                  <i class="fas fa-clipboard fa-3x fa-fw icono"></i>
-                </div>
-              </p-header>
-              <div class="form-group">
-                <br />
-                <textarea
-                  rows="5"
-                  cols="50"
-                  placeholder="Observación"
-                  pInputTextarea
-                ></textarea>
-                <!-- <textarea rows="5" cols="30" pInputTextarea autoResize="autoResize"></textarea> -->
-              </div>
-            </p-card>
-          </div>
-        </div>
-
-        <br />
         <br />
 
-        <button type="button" class="btn btn-outline-neutral btn-round btn-lg">
+        <button
+          type="submit"
+          class="btn btn-outline-neutral btn-round btn-lg"
+          [disabled]="!forma.valid"
+        >
           <i class="fas fa-save fa-lg fa-fw"></i> Registrar Visita
         </button>
       </form>
@@ -398,4 +518,39 @@
       </div>
     </div>
   </div>
+
+  <!-- <div class="section"> -->
+  <div class="container" style="margin-bottom: 10%">
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <div class="row">
+          <div class="col-md-2">
+            <img
+              src="./assets/img/icons/comilla izquierda.png"
+              width="80px"
+              height="80px"
+            />
+          </div>
+          <div class="col-md-8">
+            <div class="row">
+              <h2>
+                Cualquier vida es única e irrepetible y tiene tanto valor como
+                otra. Si hubiese una vida sin importancia, ninguna sería
+                importante.
+              </h2>
+              <h5 style="margin-left: 75%; margin-top: 5%">- Olga Bejano -</h5>
+            </div>
+          </div>
+          <div class="col-md-2" style="margin-top: 20%">
+            <img
+              src="./assets/img/icons/comilla derecha.png"
+              width="80"
+              height="80px"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- </div> -->
 </div>

@@ -9,10 +9,6 @@
   background-color: #cfcfcf;
 }
 
-#card-cedula {
-  margin-top: 1em;
-}
-
 .seccion {
   border-radius: 42px 42px 42px 42px;
   margin-left: 5em;
@@ -30,4 +26,8 @@
 
 .fecha {
   margin-left: 1em;
+}
+
+.margen {
+  margin-top: 2em;
 }

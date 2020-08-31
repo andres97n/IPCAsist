@@ -24,6 +24,7 @@ export class PasanteComponent implements OnInit {
 
   universidades: Array<any>;
   universidad: string;
+  mostrarModal: boolean = false;
 
   num_horas: number;
 
@@ -202,7 +203,7 @@ export class PasanteComponent implements OnInit {
       ],
       contacto: ["", Validators.required],
       // tipo_sangre: ["", Validators.required],
-      institucion: ["", Validators.required],
+      institucion: [this.universidad, Validators.required],
       tutor: ["", Validators.required],
       especialidad: ["", Validators.required],
       asignacion_aula: ["", Validators.required],
@@ -242,7 +243,17 @@ export class PasanteComponent implements OnInit {
   }
 
   universidadSeleccionada(event) {
-    console.log(event.value);
+    this.universidad = event.option.name;
+    if (this.universidad === "Otro") {
+      this.mostrarModal = true;
+    }
+
+    console.log(event.option.name);
+  }
+
+  cerrarModal() {
+    this.mostrarModal = false;
+    console.log(this.universidad);
   }
 
   mostrarFecha(event) {

@@ -71,7 +71,7 @@
                       <i class="far fa-building fa-3x fa-fw icono"></i>
                     </div>
                   </p-header>
-                  <div class="row justify-content-center">
+                  <div class="row justify-content-center componente">
                     <div class="ui-inputgroup">
                       <span class="ui-inputgroup-addon">
                         <i
@@ -114,9 +114,8 @@
                       <i class="fas fa-user fa-3x fa-fw icono"></i>
                     </div>
                   </p-header>
-                  <br />
                   <div
-                    class="row justify-content-center"
+                    class="row justify-content-center componente"
                     formGroupName="representante"
                   >
                     <div class="ui-inputgroup">
@@ -183,8 +182,7 @@
                       <i class="far fa-envelope fa-3x fa-fw icono"></i>
                     </div>
                   </p-header>
-                  <br />
-                  <div class="row justify-content-center">
+                  <div class="row justify-content-center componente">
                     <div class="ui-inputgroup">
                       <span class="ui-inputgroup-addon">
                         <i class="fas fa-at fa-lg" style="line-height: 1"></i
@@ -223,8 +221,7 @@
                       <i class="far fa-calendar-check fa-3x fa-fw icono"></i>
                     </div>
                   </p-header>
-                  <br />
-                  <div class="row justify-content-center">
+                  <div class="row justify-content-center componente">
                     <div class="ui-inputgroup">
                       <span class="ui-inputgroup-addon">
                         <i
@@ -240,12 +237,14 @@
                       ></p-calendar>
                     </div>
                     <div class="row justify-content-center">
-                      <p-message
-                        severity="error"
-                        text=" Se debe ingresar la Fecha de la Visita"
-                        *ngIf="invalidos('fecha_visita')"
-                        style="margin-top: 2em"
-                      ></p-message>
+                      <div class="col-md-12">
+                        <br />
+                        <p-message
+                          severity="error"
+                          text=" Se debe ingresar la Fecha de la Visita"
+                          *ngIf="invalidos('fecha_visita')"
+                        ></p-message>
+                      </div>
                     </div>
                   </div>
                 </p-card>
@@ -265,8 +264,7 @@
                       <i class="fas fa-clipboard fa-3x fa-fw icono"></i>
                     </div>
                   </p-header>
-                  <div class="form-group">
-                    <br />
+                  <div class="form-group componente">
                     <textarea
                       rows="5"
                       cols="50"
@@ -303,15 +301,27 @@
                       <i class="fas fa-map-marker-alt fa-3x fa-fw icono"></i>
                     </div>
                   </p-header>
-                  <div class="form-group" formGroupName="direccion">
-                    <br />
-                    <input
-                      type="text"
-                      placeholder="Calle Principal"
-                      pInputText
-                      size="35"
-                      formControlName="calle_principal"
-                    />
+
+                  <div
+                    class="row justify-content-center componente"
+                    formGroupName="direccion"
+                  >
+                    <div class="ui-inputgroup">
+                      <span class="ui-inputgroup-addon">
+                        <i
+                          class="fas fa-map-marked-alt fa-lg"
+                          style="line-height: 1"
+                        ></i
+                      ></span>
+                      <input
+                        type="text"
+                        placeholder="Calle Principal"
+                        pInputText
+                        size="35"
+                        formControlName="calle_principal"
+                      />
+                    </div>
+
                     <div class="row justify-content-center">
                       <p-message
                         severity="error"
@@ -320,13 +330,21 @@
                         style="margin-top: 1em; margin-bottom: 1em"
                       ></p-message>
                     </div>
-                    <input
-                      type="text"
-                      placeholder="Calle Secundaria"
-                      size="35"
-                      pInputText
-                      formControlName="calle_secundaria"
-                    />
+                    <div class="ui-inputgroup">
+                      <span class="ui-inputgroup-addon">
+                        <i
+                          class="fas fa-map-marked-alt fa-lg"
+                          style="line-height: 1"
+                        ></i
+                      ></span>
+                      <input
+                        type="text"
+                        placeholder="Calle Secundaria"
+                        size="35"
+                        pInputText
+                        formControlName="calle_secundaria"
+                      />
+                    </div>
                     <div class="row justify-content-center">
                       <p-message
                         severity="error"
@@ -353,13 +371,20 @@
                       <i class="fas fa-phone fa-3x fa-fw icono"></i>
                     </div>
                   </p-header>
-                  <div class="form-group">
-                    <br />
-                    <p-inputMask
-                      mask="0999999999"
-                      placeholder="Celular"
-                      formControlName="contacto"
-                    ></p-inputMask>
+                  <div class="row justify-content-center componente">
+                    <div class="ui-inputgroup">
+                      <span class="ui-inputgroup-addon">
+                        <i
+                          class="fas fa-phone-square-alt fa-lg"
+                          style="line-height: 1"
+                        ></i
+                      ></span>
+                      <p-inputMask
+                        mask="0999999999"
+                        placeholder="Celular"
+                        formControlName="contacto"
+                      ></p-inputMask>
+                    </div>
                     <div class="row justify-content-center">
                       <p-message
                         severity="error"
@@ -386,17 +411,24 @@
                       <i class="fas fa-users fa-3x fa-fw icono"></i>
                     </div>
                   </p-header>
-                  <div class="form-group">
-                    <br />
-                    <p-autoComplete
-                      [suggestions]="filteredCountriesSingle"
-                      (completeMethod)="filterCountrySingle($event)"
-                      field="name"
-                      [size]="35"
-                      placeholder="Nombre o Identificación"
-                      [minLength]="1"
-                      formControlName="guia"
-                    ></p-autoComplete>
+                  <div class="row justify-content-center componente">
+                    <div class="ui-inputgroup">
+                      <span class="ui-inputgroup-addon">
+                        <i
+                          class="fas fa-user-check fa-lg"
+                          style="line-height: 1"
+                        ></i
+                      ></span>
+                      <p-autoComplete
+                        [suggestions]="filteredCountriesSingle"
+                        (completeMethod)="filterCountrySingle($event)"
+                        field="name"
+                        [size]="35"
+                        placeholder="Nombre o Identificación"
+                        [minLength]="1"
+                        formControlName="guia"
+                      ></p-autoComplete>
+                    </div>
                     <div class="row justify-content-center">
                       <p-message
                         severity="error"

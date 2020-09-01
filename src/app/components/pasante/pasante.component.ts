@@ -251,6 +251,11 @@ export class PasanteComponent implements OnInit {
     console.log(event.option.name);
   }
 
+  nuevaInstitucion(e) {
+    this.universidad = e.target.value;
+    console.log(this.universidad);
+  }
+
   cerrarModal() {
     this.mostrarModal = false;
     console.log(this.universidad);

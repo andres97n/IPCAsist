@@ -67,276 +67,295 @@
 
         <!-- Card Identificación -->
         <div class="row justify-content-center" style="margin-top: 2em">
-          <div class="col-md-5" id="card-cedula">
-            <p-card
-              header="Identificación"
-              subheader="Ingrese la identificación o pasaporte del Pasante."
-              styleClass="ui-card-shadow"
-            >
-              <p-header>
-                <div class="head">
-                  <i class="far fa-id-card fa-3x fa-fw icono"></i>
-                </div>
-              </p-header>
-              <div class="row justify-content-center componente">
-                <div class="ui-inputgroup">
-                  <span class="ui-inputgroup-addon">
-                    <i
-                      class="fas fa-id-card-alt fa-lg"
-                      style="line-height: 1"
-                    ></i
-                  ></span>
-                  <p-autoComplete
-                    [suggestions]="filteredCountriesSingle"
-                    (completeMethod)="filterCountrySingle($event)"
-                    field="name"
-                    [size]="35"
-                    placeholder="Identificación"
-                    [minLength]="1"
-                    formControlName="identificacion"
-                  ></p-autoComplete>
-                </div>
-                <div class="row justify-content-center">
-                  <p-message
-                    severity="error"
-                    text=" Se requiere la Identificación"
-                    *ngIf="invalidos('identificacion')"
-                    style="margin-top: 1em"
-                  ></p-message>
-                </div>
+          <div class="col-md-5">
+            <div class="row">
+              <div class="col-md-12">
+                <p-card
+                  header="Identificación"
+                  subheader="Ingrese la identificación o pasaporte del Pasante."
+                  styleClass="ui-card-shadow"
+                >
+                  <p-header>
+                    <div class="head">
+                      <i class="far fa-id-card fa-3x fa-fw icono"></i>
+                    </div>
+                  </p-header>
+                  <div class="row justify-content-center componente">
+                    <div class="ui-inputgroup">
+                      <span class="ui-inputgroup-addon">
+                        <i
+                          class="fas fa-id-card-alt fa-lg"
+                          style="line-height: 1"
+                        ></i
+                      ></span>
+                      <p-autoComplete
+                        [suggestions]="filteredCountriesSingle"
+                        (completeMethod)="filterCountrySingle($event)"
+                        field="name"
+                        [size]="35"
+                        placeholder="Identificación"
+                        [minLength]="1"
+                        formControlName="identificacion"
+                      ></p-autoComplete>
+                    </div>
+                    <div class="row justify-content-center">
+                      <p-message
+                        severity="error"
+                        text=" Se requiere la Identificación"
+                        *ngIf="invalidos('identificacion')"
+                        style="margin-top: 1em"
+                      ></p-message>
+                    </div>
+                  </div>
+                </p-card>
               </div>
-            </p-card>
+            </div>
+            <br />
+
+            <!-- Card Sexo -->
+            <div class="row">
+              <div class="col-md-12">
+                <p-card
+                  header="Sexo"
+                  subheader="Ingrese el sexo del Pasante"
+                  styleClass="ui-card-shadow"
+                >
+                  <p-header>
+                    <div style="background-color: #cfcfcf">
+                      <i class="fas fa-genderless fa-3x fa-fw icono"></i>
+                    </div>
+                  </p-header>
+                  <div class="row justify-content-center componente">
+                    <div class="ui-inputgroup">
+                      <span class="ui-inputgroup-addon">
+                        <i
+                          class="fas fa-hand-point-right fa-lg"
+                          style="line-height: 1"
+                        ></i
+                      ></span>
+                      <p-dropdown
+                        [options]="sexo"
+                        optionLabel="name"
+                        (ngModelChange)="sexoSeleccionado($event)"
+                        placeholder="Seleccione un sexo"
+                        formControlName="sexo"
+                      ></p-dropdown>
+                    </div>
+                    <div
+                      class="row justify-content-center"
+                      style="margin-top: 0.5em"
+                    >
+                      <div class="col-md-12">
+                        <p-message
+                          severity="error"
+                          text=" Debe seleccionar el Sexo del Pasante"
+                          *ngIf="invalidos('sexo')"
+                        ></p-message>
+                      </div>
+                    </div>
+                  </div>
+                </p-card>
+              </div>
+            </div>
+            <br />
+
+            <!-- Card Correo -->
+            <div class="row">
+              <div class="col-md-12">
+                <p-card
+                  header="Correo"
+                  subheader="Ingrese el correo del Pasante, para mantenerse en contacto."
+                  styleClass="ui-card-shadow"
+                >
+                  <p-header>
+                    <div style="background-color: #cfcfcf">
+                      <i class="far fa-envelope fa-3x fa-fw icono"></i>
+                    </div>
+                  </p-header>
+                  <div class="row justify-content-center componente">
+                    <div class="ui-inputgroup">
+                      <span class="ui-inputgroup-addon">
+                        <i class="fas fa-at fa-lg" style="line-height: 1"></i
+                      ></span>
+                      <input
+                        type="email"
+                        placeholder="Correo"
+                        pInputText
+                        size="35"
+                        formControlName="correo"
+                      />
+                    </div>
+                    <div class="row justify-content-center">
+                      <p-message
+                        severity="error"
+                        text=" Debe ingresar el Correo del Pasante"
+                        *ngIf="invalidos('correo')"
+                        style="margin-top: 1em"
+                      ></p-message>
+                    </div>
+                  </div>
+                </p-card>
+              </div>
+            </div>
           </div>
 
           <!-- Nombre y Apellidos -->
           <div class="col-md-5">
-            <p-card
-              header="Nombres y Apellidos"
-              subheader="Ingrese los nombres y los apellidos del Pasante."
-              styleClass="ui-card-shadow"
-            >
-              <p-header>
-                <div class="head">
-                  <i class="fas fa-user fa-3x fa-fw icono"></i>
-                </div>
-              </p-header>
-              <div
-                class="row justify-content-center componente"
-                formGroupName="identidad"
-              >
-                <div class="ui-inputgroup">
-                  <span class="ui-inputgroup-addon">
-                    <i class="fas fa-signature fa-lg" style="line-height: 1"></i
-                  ></span>
-                  <input
-                    type="text"
-                    placeholder="Nombres"
-                    pInputText
-                    size="35"
-                    formControlName="nombres"
-                  />
-                </div>
-
-                <div class="row justify-content-center">
-                  <p-message
-                    severity="error"
-                    text=" Se requiere el Nombre del Pasante"
-                    *ngIf="noNombres"
-                    style="margin-top: 1em; margin-bottom: 1em"
-                  ></p-message>
-                </div>
-                <div class="ui-inputgroup">
-                  <span class="ui-inputgroup-addon">
-                    <i class="fas fa-signature fa-lg" style="line-height: 1"></i
-                  ></span>
-                  <input
-                    type="text"
-                    placeholder="Apellidos"
-                    size="35"
-                    pInputText
-                    formControlName="apellidos"
-                  />
-                </div>
-                <div class="row justify-content-center">
-                  <p-message
-                    severity="error"
-                    text=" Se requiere el Apellido del Pasante"
-                    *ngIf="noApellidos"
-                    style="margin-top: 1em"
-                  ></p-message>
-                </div>
-              </div>
-            </p-card>
-          </div>
-        </div>
-        <br />
-
-        <!-- Card Sexo -->
-        <div class="row justify-content-center">
-          <div class="col-md-5">
-            <p-card
-              header="Sexo"
-              subheader="Ingrese el sexo del Pasante"
-              styleClass="ui-card-shadow"
-            >
-              <p-header>
-                <div style="background-color: #cfcfcf">
-                  <i class="fas fa-genderless fa-3x fa-fw icono"></i>
-                </div>
-              </p-header>
-              <div class="row justify-content-center componente">
-                <div class="ui-inputgroup">
-                  <span class="ui-inputgroup-addon">
-                    <i
-                      class="fas fa-hand-point-right fa-lg"
-                      style="line-height: 1"
-                    ></i
-                  ></span>
-                  <p-dropdown
-                    [options]="sexo"
-                    optionLabel="name"
-                    (ngModelChange)="sexoSeleccionado($event)"
-                    placeholder="Seleccione un sexo"
-                    formControlName="sexo"
-                  ></p-dropdown>
-                </div>
-                <div
-                  class="row justify-content-center"
-                  style="margin-top: 0.5em"
+            <div class="row">
+              <div class="col-md-12">
+                <p-card
+                  header="Nombres y Apellidos"
+                  subheader="Ingrese los nombres y los apellidos del Pasante."
+                  styleClass="ui-card-shadow"
                 >
-                  <div class="col-md-12">
-                    <p-message
-                      severity="error"
-                      text=" Debe seleccionar el Sexo del Pasante"
-                      *ngIf="invalidos('sexo')"
-                    ></p-message>
-                  </div>
-                </div>
-              </div>
-            </p-card>
-          </div>
-
-          <!-- Card Edad -->
-          <div class="col-md-5">
-            <p-card
-              header="Edad"
-              subheader="Ingrese la edad del Pasante."
-              styleClass="ui-card-shadow"
-            >
-              <p-header>
-                <div style="background-color: #cfcfcf">
-                  <i class="fas fa-hourglass-half fa-3x fa-fw icono"></i>
-                </div>
-              </p-header>
-              <div class="row justify-content-center componente">
-                <div class="ui-inputgroup">
-                  <span class="ui-inputgroup-addon">
-                    <i
-                      class="fas fa-user-clock fa-lg"
-                      style="line-height: 1"
-                    ></i
-                  ></span>
-                  <p-inputNumber
-                    mode="decimal"
-                    [min]="17"
-                    [max]="100"
-                    placeholder="Edad"
-                    size="15"
-                    formControlName="edad"
+                  <p-header>
+                    <div class="head">
+                      <i class="fas fa-user fa-3x fa-fw icono"></i>
+                    </div>
+                  </p-header>
+                  <div
+                    class="row justify-content-center componente"
+                    formGroupName="identidad"
                   >
-                  </p-inputNumber>
-                </div>
-                <div class="row justify-content-center">
-                  <p-message
-                    severity="error"
-                    text=" Debe ingresar la Edad del Pasante"
-                    *ngIf="invalidos('edad')"
-                    style="margin-top: 1em"
-                  ></p-message>
-                </div>
+                    <div class="ui-inputgroup">
+                      <span class="ui-inputgroup-addon">
+                        <i
+                          class="fas fa-signature fa-lg"
+                          style="line-height: 1"
+                        ></i
+                      ></span>
+                      <input
+                        type="text"
+                        placeholder="Nombres"
+                        pInputText
+                        size="35"
+                        formControlName="nombres"
+                      />
+                    </div>
+
+                    <div class="row justify-content-center">
+                      <p-message
+                        severity="error"
+                        text=" Se requiere el Nombre del Pasante"
+                        *ngIf="noNombres"
+                        style="margin-top: 1em; margin-bottom: 1em"
+                      ></p-message>
+                    </div>
+                    <div class="ui-inputgroup">
+                      <span class="ui-inputgroup-addon">
+                        <i
+                          class="fas fa-signature fa-lg"
+                          style="line-height: 1"
+                        ></i
+                      ></span>
+                      <input
+                        type="text"
+                        placeholder="Apellidos"
+                        size="35"
+                        pInputText
+                        formControlName="apellidos"
+                      />
+                    </div>
+                    <div class="row justify-content-center">
+                      <p-message
+                        severity="error"
+                        text=" Se requiere el Apellido del Pasante"
+                        *ngIf="noApellidos"
+                        style="margin-top: 1em"
+                      ></p-message>
+                    </div>
+                  </div>
+                </p-card>
               </div>
-            </p-card>
+            </div>
+            <br />
+
+            <!-- Card Edad -->
+            <div class="row">
+              <div class="col-md-12">
+                <p-card
+                  header="Edad"
+                  subheader="Ingrese la edad del Pasante."
+                  styleClass="ui-card-shadow"
+                >
+                  <p-header>
+                    <div style="background-color: #cfcfcf">
+                      <i class="fas fa-hourglass-half fa-3x fa-fw icono"></i>
+                    </div>
+                  </p-header>
+                  <div class="row justify-content-center componente">
+                    <div class="ui-inputgroup">
+                      <span class="ui-inputgroup-addon">
+                        <i
+                          class="fas fa-user-clock fa-lg"
+                          style="line-height: 1"
+                        ></i
+                      ></span>
+                      <p-inputNumber
+                        mode="decimal"
+                        [min]="17"
+                        [max]="100"
+                        placeholder="Edad"
+                        size="15"
+                        formControlName="edad"
+                      >
+                      </p-inputNumber>
+                    </div>
+                    <div class="row justify-content-center">
+                      <p-message
+                        severity="error"
+                        text=" Debe ingresar la Edad del Pasante"
+                        *ngIf="invalidos('edad')"
+                        style="margin-top: 1em"
+                      ></p-message>
+                    </div>
+                  </div>
+                </p-card>
+              </div>
+            </div>
+            <br />
+
+            <!-- Card Contacto -->
+            <div class="row">
+              <div class="col-md-12">
+                <p-card
+                  header="Contacto"
+                  subheader="Ingrese el número celular del Pasante, para cualquier aviso."
+                  styleClass="ui-card-shadow"
+                >
+                  <p-header>
+                    <div style="background-color: #cfcfcf">
+                      <i class="fas fa-phone fa-3x fa-fw icono"></i>
+                    </div>
+                  </p-header>
+                  <div class="row justify-content-center componente">
+                    <div class="ui-inputgroup">
+                      <span class="ui-inputgroup-addon">
+                        <i
+                          class="fas fa-phone-square-alt fa-lg"
+                          style="line-height: 1"
+                        ></i
+                      ></span>
+                      <p-inputMask
+                        mask="0999999999"
+                        placeholder="Celular"
+                        formControlName="contacto"
+                      ></p-inputMask>
+                    </div>
+                    <div class="row justify-content-center">
+                      <p-message
+                        severity="error"
+                        text=" Debe ingresar el Contacto del Pasante"
+                        *ngIf="invalidos('contacto')"
+                        style="margin-top: 1em"
+                      ></p-message>
+                    </div>
+                  </div>
+                </p-card>
+              </div>
+            </div>
           </div>
         </div>
-        <br />
-
-        <!-- Card Email -->
-        <div class="row justify-content-center">
-          <div class="col-md-5">
-            <p-card
-              header="Correo"
-              subheader="Ingrese el correo del Pasante, para mantenerse en contacto."
-              styleClass="ui-card-shadow"
-            >
-              <p-header>
-                <div style="background-color: #cfcfcf">
-                  <i class="far fa-envelope fa-3x fa-fw icono"></i>
-                </div>
-              </p-header>
-              <div class="row justify-content-center componente">
-                <div class="ui-inputgroup">
-                  <span class="ui-inputgroup-addon">
-                    <i class="fas fa-at fa-lg" style="line-height: 1"></i
-                  ></span>
-                  <input
-                    type="email"
-                    placeholder="Correo"
-                    pInputText
-                    size="35"
-                    formControlName="correo"
-                  />
-                </div>
-                <div class="row justify-content-center">
-                  <p-message
-                    severity="error"
-                    text=" Debe ingresar el Correo del Pasante"
-                    *ngIf="invalidos('correo')"
-                    style="margin-top: 1em"
-                  ></p-message>
-                </div>
-              </div>
-            </p-card>
-          </div>
-
-          <!-- Card Celular -->
-          <div class="col-md-5" style="margin-top: 0.5em">
-            <p-card
-              header="Contacto"
-              subheader="Ingrese el número celular del Pasante, para cualquier aviso."
-              styleClass="ui-card-shadow"
-            >
-              <p-header>
-                <div style="background-color: #cfcfcf">
-                  <i class="fas fa-phone fa-3x fa-fw icono"></i>
-                </div>
-              </p-header>
-              <div class="row justify-content-center componente">
-                <div class="ui-inputgroup">
-                  <span class="ui-inputgroup-addon">
-                    <i
-                      class="fas fa-phone-square-alt fa-lg"
-                      style="line-height: 1"
-                    ></i
-                  ></span>
-                  <p-inputMask
-                    mask="0999999999"
-                    placeholder="Celular"
-                    formControlName="contacto"
-                  ></p-inputMask>
-                </div>
-                <div class="row justify-content-center">
-                  <p-message
-                    severity="error"
-                    text=" Debe ingresar el Contacto del Pasante"
-                    *ngIf="invalidos('contacto')"
-                    style="margin-top: 1em"
-                  ></p-message>
-                </div>
-              </div>
-            </p-card>
-          </div>
-        </div>
-        <br />
 
         <!-- Card Sangre -->
         <!-- <div class="row justify-content-center">
@@ -417,7 +436,7 @@
                             width="48"
                           />
                           <div class="row justify-content-center">
-                            <span style="float: right; margin: 20px 10px 0 0">{{
+                            <span style="float: right; margin: 10px 10px 0 0">{{
                               item.name
                             }}</span>
                           </div>
@@ -442,6 +461,7 @@
                             pInputText
                             formControlName="institucion"
                             placeholder="Ingrese Nombre"
+                            (change)="nuevaInstitucion($event)"
                           />
                         </div>
                       </div>

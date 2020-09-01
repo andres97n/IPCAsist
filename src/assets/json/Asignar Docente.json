@@ -1,0 +1,35 @@
+[
+  {
+    "docente": {
+      "id": "_nfnwejnjwefweinfweefew",
+      "identificacion": "0104785962",
+      "primer_nombre": "Juan",
+      "segundo_nombre": "Felipe",
+      "primer_apellido": "Calle",
+      "segundo_apellido": "Borbón",
+      "edad": 31,
+      "genero": "Masculino",
+      "fecha_nacimiento": "24/08/84",
+      "tipo_titulo": "3er Nivel",
+      "titulo": "Psicólogo"
+    },
+    "horario_entrada": {
+      "periodo": "AM",
+      "hora": "07:30"
+    },
+    "horario_salida": {
+      "periodo": "PM",
+      "hora": "3:00"
+    },
+    "aula": {
+      "nombre": "",
+      "capacidad": "",
+      "ubicación": "",
+      "encargado": {
+        "nombres": "",
+        "apellidos": "",
+        "cargo": ""
+      }
+    }
+  }
+]

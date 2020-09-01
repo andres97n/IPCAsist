@@ -1,0 +1,30 @@
+[
+  {
+    "empresa": "",
+    "direccion": {
+      "calle_principal": "",
+      "calle_secundaria": ""
+    },
+    "representante": {
+      "primer_nombre": "",
+      "segundo_nombre": "",
+      "primer_apellido": "",
+      "segundo_apellido": ""
+    },
+    "contacto": "0987458794",
+    "correo": "",
+    "docente": {
+      "identificacion": "",
+      "primer_nombre": "",
+      "segundo_nombre": "",
+      "primer_apellido": "",
+      "segundo_apellido": ""
+    },
+    "fecha_visita": "21/06/2020",
+    "hora_visita": {
+      "periodo": "PM",
+      "hora": "3:00"
+    },
+    "observaciones": ""
+  }
+]

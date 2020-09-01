@@ -1,0 +1,29 @@
+[
+  {
+    "_id": "_5565fwe5f4ew65f65efwe",
+    "identificacion": "",
+    "primer_nombre": "",
+    "segundo_nombre": "",
+    "primer_apellido": "",
+    "segundo_apellido": "",
+    "edad": 22,
+    "sexo": "M",
+    "correo": "",
+    "contacto": "",
+    "institución": "",
+    "docente": {
+      "identificacion": "",
+      "primer_nombre": "",
+      "segundo_nombre": "",
+      "primer_apellido": "",
+      "segundo_apellido": ""
+    },
+    "aula": {
+      "nombre": "",
+      "ubicación": ""
+    },
+    "especialidad": "",
+    "num_horas": 5,
+    "fecha_inicio": "12/05/2020"
+  }
+]

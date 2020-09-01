@@ -1,0 +1,139 @@
+[
+  {
+    "docente": {
+      "identificacion": "",
+      "primer_nombre": "",
+      "segundo_nombre": "",
+      "primer_apellido": "",
+      "segundo_apellido": ""
+    },
+    "estudiante": {
+      "identificacion": "",
+      "primer_nombre": "",
+      "segundo_nombre": "",
+      "primer_apellido": "",
+      "segundo_apellido": "",
+      "carnet_conadis": ""
+    },
+    "asignaturas": [
+      {
+        "nombre": "",
+        "asignacion": ""
+      },
+      {
+        "nombre": "",
+        "asignacion": ""
+      },
+      {
+        "nombre": "",
+        "asignacion": ""
+      }
+    ],
+    "aula": {
+      "nombre": "",
+      "ubicación": ""
+    },
+    "descripcion": "",
+    "objetivo_general": "",
+    "metas_especificas": ["", "", "", ""],
+    "vision": "",
+    "areas": [
+      {
+        "nombre": "",
+        "asignacion": ""
+      },
+      {
+        "nombre": "",
+        "asignacion": ""
+      },
+      {
+        "nombre": "",
+        "asignacion": ""
+      }
+    ],
+    "dominio": [
+      {
+        "nombre": "",
+        "asignacion": ""
+      },
+      {
+        "nombre": "",
+        "asignacion": ""
+      },
+      {
+        "nombre": "",
+        "asignacion": ""
+      }
+    ],
+    "necesidades": [
+      {
+        "titulo": "",
+        "descripcion": ["", ""]
+      },
+      {
+        "titulo": "",
+        "descripcion": ["", ""]
+      },
+      {
+        "titulo": "",
+        "descripcion": ["", ""]
+      }
+    ],
+    "potencialidades": [
+      {
+        "titulo": "",
+        "descripcion": ["", ""]
+      },
+      {
+        "titulo": "",
+        "descripcion": ["", ""]
+      },
+      {
+        "titulo": "",
+        "descripcion": ["", ""]
+      }
+    ],
+    "gustos": [
+      {
+        "titulo": "",
+        "descripcion": ["", ""]
+      },
+      {
+        "titulo": "",
+        "descripcion": ["", ""]
+      }
+    ],
+    "disgustos": [
+      {
+        "titulo": "",
+        "descripcion": ["", ""]
+      },
+      {
+        "titulo": "",
+        "descripcion": ["", ""]
+      }
+    ],
+    "deseos": [
+      {
+        "titulo": "",
+        "descripcion": ["", ""]
+      },
+      {
+        "titulo": "",
+        "descripcion": ["", ""]
+      }
+    ],
+    "sueños": [
+      {
+        "titulo": "",
+        "descripcion": ["", ""]
+      },
+      {
+        "titulo": "",
+        "descripcion": ["", ""]
+      }
+    ],
+    "logros": ["", "", ""],
+    "observaciones": ""
+  }
+]

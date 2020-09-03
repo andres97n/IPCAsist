@@ -1,139 +1,308 @@
 [
   {
+    "_id": "_021561efew1fwe54ewfef45",
     "docente": {
-      "identificacion": "",
-      "primer_nombre": "",
-      "segundo_nombre": "",
-      "primer_apellido": "",
-      "segundo_apellido": ""
+      "identificacion": "0104472014",
+      "primer_nombre": "Adriana",
+      "segundo_nombre": "Natalia",
+      "primer_apellido": "Prado",
+      "segundo_apellido": "Gimenez"
     },
     "estudiante": {
-      "identificacion": "",
-      "primer_nombre": "",
-      "segundo_nombre": "",
-      "primer_apellido": "",
-      "segundo_apellido": "",
-      "carnet_conadis": ""
+      "identificacion": "0104578213",
+      "primer_nombre": "Evangeline",
+      "segundo_nombre": "Veronica",
+      "primer_apellido": "Murdoch",
+      "segundo_apellido": "Washington",
+      "carnet_conadis": "12.6488"
     },
     "asignaturas": [
       {
-        "nombre": "",
+        "nombre": "Vinculación Emocional y Social",
         "asignacion": ""
       },
       {
-        "nombre": "",
+        "nombre": "Descubrimiento del Medio Natural",
         "asignacion": ""
       },
       {
-        "nombre": "",
+        "nombre": "Manifestación del Lenguaje",
         "asignacion": ""
       }
     ],
     "aula": {
-      "nombre": "",
+      "nombre": "Inicial",
       "ubicación": ""
     },
-    "descripcion": "",
-    "objetivo_general": "",
-    "metas_especificas": ["", "", "", ""],
+    "descripcion": "Con el estudiante el trabajo estará enfocado en el desarrollo de habilidades de alimentación, identidad, cambios de posición y exploración del medio usando sus miembros superiores mediante actividades significativas, cotidianas y lúdicas que se llevará a cabo en diferentes ámbitos y espacios.",
+    "objetivo_general": "Lograr el mayor grado de independecia en el ámbito de la vida diaria e interacción social mediante rutinas establecidas y adaptación de recursos para realizar las diferentes actividades.",
+    "metas_especificas": [
+      "Masticar sólidos",
+      "Girar de boca arriba a boca abajo",
+      "Agarrar objetos con sus manos por períodos largos de tiempo",
+      "Reaccionar cuando escuche su nombre"
+    ],
     "vision": "",
     "areas": [
       {
-        "nombre": "",
+        "nombre": "Vinculación Emocional y Social",
         "asignacion": ""
       },
       {
-        "nombre": "",
+        "nombre": "Descubrimiento del Medio Natural",
         "asignacion": ""
       },
       {
-        "nombre": "",
+        "nombre": "Manifestación del Lenguaje Verbal y No Verbal",
         "asignacion": ""
       }
     ],
     "dominio": [
       {
-        "nombre": "",
+        "nombre": "Estimulación Sensorial",
         "asignacion": ""
       },
       {
-        "nombre": "",
+        "nombre": "Alimentación",
         "asignacion": ""
       },
       {
-        "nombre": "",
+        "nombre": "Cuidado personal",
         "asignacion": ""
       }
     ],
     "necesidades": [
       {
-        "titulo": "",
-        "descripcion": ["", ""]
+        "titulo": "Comunicación",
+        "descripcion": ["Claves objetos y movimiento coactivo"]
       },
       {
-        "titulo": "",
-        "descripcion": ["", ""]
+        "titulo": "Estado de Salud",
+        "descripcion": [
+          "terapia física",
+          "estimulación temprana",
+          "terapia de lenguaje",
+          "silla de ruedas"
+        ]
       },
       {
-        "titulo": "",
-        "descripcion": ["", ""]
+        "titulo": "Físicas",
+        "descripcion": ["Coordinación motriz general"]
+      },
+      {
+        "titulo": "Autonomía",
+        "descripcion": ["Alimentación", "Masticación", "Deglución de Sólidos"]
       }
     ],
     "potencialidades": [
       {
-        "titulo": "",
-        "descripcion": ["", ""]
-      },
-      {
-        "titulo": "",
-        "descripcion": ["", ""]
-      },
-      {
-        "titulo": "",
-        "descripcion": ["", ""]
+        "titulo": "Actividades",
+        "descripcion": [
+          "Agarra objetos por períodos cortos de tiempo",
+          "gira hacia el lado derecho de manera parcial",
+          "Mastica alimentos semisólidos",
+          "Lleva sus manos a la boca",
+          "Realiza sonidos guturales y sonríe"
+        ]
       }
     ],
     "gustos": [
       {
-        "titulo": "",
-        "descripcion": ["", ""]
+        "titulo": "Objetos",
+        "descripcion": [
+          "Que le hagan masajes",
+          "El sonido de canciones infantiles"
+        ]
       },
       {
-        "titulo": "",
-        "descripcion": ["", ""]
+        "titulo": "Posiciones",
+        "descripcion": ["Domir", "Estar acostado boca arriba"]
+      },
+      {
+        "titulo": "Comida",
+        "descripcion": ["Le gusta la comida dulce"]
+      },
+      {
+        "titulo": "Lugares",
+        "descripcion": ["Estar en el agua"]
       }
     ],
     "disgustos": [
       {
-        "titulo": "",
-        "descripcion": ["", ""]
-      },
-      {
-        "titulo": "",
-        "descripcion": ["", ""]
+        "titulo": "Actividades",
+        "descripcion": [
+          "Que le pongan boca abajo",
+          "Que le despierten",
+          "Estar con mucha ropa"
+        ]
       }
     ],
     "deseos": [
       {
-        "titulo": "",
-        "descripcion": ["", ""]
-      },
-      {
-        "titulo": "",
-        "descripcion": ["", ""]
+        "titulo": "Acitividades",
+        "descripcion": ["Pronunciar correctamente", "Caminar por su cuenta"]
       }
     ],
     "sueños": [
       {
-        "titulo": "",
-        "descripcion": ["", ""]
-      },
-      {
-        "titulo": "",
-        "descripcion": ["", ""]
+        "titulo": "Actividades",
+        "descripcion": ["Se profesional", "Ser autónomo"]
       }
     ],
-    "logros": ["", "", ""],
-    "observaciones": ""
+    "logros": ["Motrocidad completa", "Se cambia de ropa solo"],
+    "observaciones": "Ninguna observación"
+  },
+  {
+    "_id": "_021561efngej64818fef45",
+    "docente": {
+      "identificacion": "01023245894",
+      "primer_nombre": "Paúl",
+      "segundo_nombre": "Gabriel",
+      "primer_apellido": "Torres",
+      "segundo_apellido": "Gonzales"
+    },
+    "estudiante": {
+      "identificacion": "0104578213",
+      "primer_nombre": "Antonio",
+      "segundo_nombre": "Miguel",
+      "primer_apellido": "Velesaca",
+      "segundo_apellido": "Correa",
+      "carnet_conadis": "11.6978"
+    },
+    "asignaturas": [
+      {
+        "nombre": "Vinculación Emocional y Social",
+        "asignacion": ""
+      },
+      {
+        "nombre": "Descubrimiento del Medio Natural",
+        "asignacion": ""
+      },
+      {
+        "nombre": "Manifestación del Lenguaje",
+        "asignacion": ""
+      }
+    ],
+    "aula": {
+      "nombre": "Inicial",
+      "ubicación": ""
+    },
+    "descripcion": "Con el estudiante el trabajo estará enfocado en el desarrollo de habilidades de alimentación, identidad, cambios de posición y exploración del medio usando sus miembros superiores mediante actividades significativas, cotidianas y lúdicas que se llevará a cabo en diferentes ámbitos y espacios.",
+    "objetivo_general": "Lograr el mayor grado de independecia en el ámbito de la vida diaria e interacción social mediante rutinas establecidas y adaptación de recursos para realizar las diferentes actividades.",
+    "metas_especificas": [
+      "Masticar sólidos",
+      "Girar de boca arriba a boca abajo",
+      "Agarrar objetos con sus manos por períodos largos de tiempo",
+      "Reaccionar cuando escuche su nombre"
+    ],
+    "vision": "",
+    "areas": [
+      {
+        "nombre": "Vinculación Emocional y Social",
+        "asignacion": ""
+      },
+      {
+        "nombre": "Descubrimiento del Medio Natural",
+        "asignacion": ""
+      },
+      {
+        "nombre": "Manifestación del Lenguaje Verbal y No Verbal",
+        "asignacion": ""
+      }
+    ],
+    "dominio": [
+      {
+        "nombre": "Estimulación Sensorial",
+        "asignacion": ""
+      },
+      {
+        "nombre": "Alimentación",
+        "asignacion": ""
+      },
+      {
+        "nombre": "Cuidado personal",
+        "asignacion": ""
+      }
+    ],
+    "necesidades": [
+      {
+        "titulo": "Comunicación",
+        "descripcion": ["Claves objetos y movimiento coactivo"]
+      },
+      {
+        "titulo": "Estado de Salud",
+        "descripcion": [
+          "terapia física",
+          "estimulación temprana",
+          "terapia de lenguaje",
+          "silla de ruedas"
+        ]
+      },
+      {
+        "titulo": "Físicas",
+        "descripcion": ["Coordinación motriz general"]
+      },
+      {
+        "titulo": "Autonomía",
+        "descripcion": ["Alimentación", "Masticación", "Deglución de Sólidos"]
+      }
+    ],
+    "potencialidades": [
+      {
+        "titulo": "Actividades",
+        "descripcion": [
+          "Agarra objetos por períodos cortos de tiempo",
+          "gira hacia el lado derecho de manera parcial",
+          "Mastica alimentos semisólidos",
+          "Lleva sus manos a la boca",
+          "Realiza sonidos guturales y sonríe"
+        ]
+      }
+    ],
+    "gustos": [
+      {
+        "titulo": "Objetos",
+        "descripcion": [
+          "Que le hagan masajes",
+          "El sonido de canciones infantiles"
+        ]
+      },
+      {
+        "titulo": "Posiciones",
+        "descripcion": ["Domir", "Estar acostado boca arriba"]
+      },
+      {
+        "titulo": "Comida",
+        "descripcion": ["Le gusta la comida dulce"]
+      },
+      {
+        "titulo": "Lugares",
+        "descripcion": ["Estar en el agua"]
+      }
+    ],
+    "disgustos": [
+      {
+        "titulo": "Actividades",
+        "descripcion": [
+          "Que le pongan boca abajo",
+          "Que le despierten",
+          "Estar con mucha ropa"
+        ]
+      }
+    ],
+    "deseos": [
+      {
+        "titulo": "Acitividades",
+        "descripcion": ["Pronunciar correctamente", "Caminar por su cuenta"]
+      }
+    ],
+    "sueños": [
+      {
+        "titulo": "Actividades",
+        "descripcion": ["Se profesional", "Ser autónomo"]
+      }
+    ],
+    "logros": ["Motrocidad completa", "Se cambia de ropa solo"],
+    "observaciones": "Ninguna observación"
   }
 ]

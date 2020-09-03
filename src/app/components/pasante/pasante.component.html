@@ -645,8 +645,56 @@
             </div>
             <br />
 
-            <!-- Card Aula -->
+            <!-- Card Fecha de Inicio -->
             <div class="row">
+              <div class="col-md-12">
+                <p-card
+                  header="Fecha de Inicio"
+                  subheader="Ingrese la Fecha de Inicio de las actividades del Pasante."
+                  styleClass="ui-card-shadow"
+                >
+                  <p-header>
+                    <div class="head">
+                      <i class="far fa-calendar-check fa-3x fa-fw icono"></i>
+                    </div>
+                  </p-header>
+
+                  <div class="row justify-content-center componente">
+                    <div class="ui-inputgroup">
+                      <span class="ui-inputgroup-addon">
+                        <i
+                          class="fas fa-calendar-alt fa-lg"
+                          style="line-height: 1"
+                        ></i
+                      ></span>
+                      <p-calendar
+                        [locale]="es"
+                        dateFormat="dd/mm/yy"
+                        placeholder="Fecha de Visita"
+                        formControlName="fecha_visita"
+                        formControlName="fecha_inicio"
+                        (onSelect)="mostrarFecha($event)"
+                        [showWeek]="true"
+                      ></p-calendar>
+                    </div>
+                    <div class="row justify-content-center">
+                      <div class="col-md-12">
+                        <br />
+                        <p-message
+                          severity="error"
+                          text=" Debe seleccionar el Día de Ingreso"
+                          *ngIf="invalidos('fecha_inicio')"
+                        ></p-message>
+                      </div>
+                    </div>
+                  </div>
+                </p-card>
+              </div>
+            </div>
+            <br />
+
+            <!-- Card Aula -->
+            <!-- <div class="row">
               <div class="col-md-12">
                 <p-card
                   header="Asignación a un Aula"
@@ -688,7 +736,7 @@
                 </p-card>
               </div>
             </div>
-            <br />
+            <br /> -->
 
             <!-- Card Horas -->
             <div class="row">
@@ -727,53 +775,12 @@
           </div>
         </div>
 
-        <div class="row justify-content-center" style="margin-top: 2em">
-          <!-- Card Fecha de Inicio -->
+        <!-- <div class="row justify-content-center" style="margin-top: 2em">
           <div class="col-md-5">
-            <p-card
-              header="Fecha de Inicio"
-              subheader="Ingrese la Fecha de Inicio de las actividades del Pasante."
-              styleClass="ui-card-shadow"
-            >
-              <p-header>
-                <div class="head">
-                  <i class="far fa-calendar-check fa-3x fa-fw icono"></i>
-                </div>
-              </p-header>
-
-              <div class="row justify-content-center componente">
-                <div class="ui-inputgroup">
-                  <span class="ui-inputgroup-addon">
-                    <i
-                      class="fas fa-calendar-alt fa-lg"
-                      style="line-height: 1"
-                    ></i
-                  ></span>
-                  <p-calendar
-                    [locale]="es"
-                    dateFormat="dd/mm/yy"
-                    placeholder="Fecha de Visita"
-                    formControlName="fecha_visita"
-                    formControlName="fecha_inicio"
-                    (onSelect)="mostrarFecha($event)"
-                    [showWeek]="true"
-                  ></p-calendar>
-                </div>
-                <div class="row justify-content-center">
-                  <div class="col-md-12">
-                    <br />
-                    <p-message
-                      severity="error"
-                      text=" Debe seleccionar el Día de Ingreso"
-                      *ngIf="invalidos('fecha_inicio')"
-                    ></p-message>
-                  </div>
-                </div>
-              </div>
-            </p-card>
+            
           </div>
         </div>
-        <br />
+        <br /> -->
 
         <br />
 

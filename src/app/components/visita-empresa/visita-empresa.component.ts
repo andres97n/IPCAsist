@@ -86,10 +86,11 @@ export class VisitaEmpresaComponent implements OnInit {
   crearFormulario() {
     this.forma = this.fb.group({
       empresa: ["", Validators.required],
-      direccion: this.fb.group({
-        calle_principal: ["", Validators.required],
-        calle_secundaria: ["", Validators.required],
-      }),
+      // direccion: this.fb.group({
+      //   calle_principal: ["", Validators.required],
+      //   calle_secundaria: ["", Validators.required],
+      // }),
+      motivo_visita: ["", Validators.required],
       representante: this.fb.group({
         nombres: ["", Validators.required],
         apellidos: ["", Validators.required],

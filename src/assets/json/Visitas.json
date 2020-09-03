@@ -1,30 +1,83 @@
 [
   {
-    "empresa": "",
+    "empresa": "Coca-Cola",
     "direccion": {
-      "calle_principal": "",
-      "calle_secundaria": ""
+      "calle_principal": "Av. Cornelio Vintimilla",
+      "calle_secundaria": "Av. Octavio Chacón"
     },
     "representante": {
-      "primer_nombre": "",
-      "segundo_nombre": "",
-      "primer_apellido": "",
-      "segundo_apellido": ""
+      "nombre": "Andrés",
+      "apellido": "Córdova"
     },
     "contacto": "0987458794",
-    "correo": "",
+    "correo": "cuenca@cocacola.com",
+    "motivo_visita": "Paseo a la ciudad de Cuenca",
     "docente": {
-      "identificacion": "",
-      "primer_nombre": "",
-      "segundo_nombre": "",
-      "primer_apellido": "",
-      "segundo_apellido": ""
+      "identificacion": "0104472014",
+      "primer_nombre": "Adriana",
+      "segundo_nombre": "Natalia",
+      "primer_apellido": "Prado",
+      "segundo_apellido": "Gimenez"
     },
     "fecha_visita": "21/06/2020",
     "hora_visita": {
-      "periodo": "PM",
-      "hora": "3:00"
+      "periodo": "AM",
+      "hora": "10:00"
     },
-    "observaciones": ""
+    "observaciones": "Ninguna novedad"
+  },
+  {
+    "empresa": "KFC",
+    "direccion": {
+      "calle_principal": "Mall del Río",
+      "calle_secundaria": ""
+    },
+    "representante": {
+      "nombre": "Carlos",
+      "apellido": "Andrade"
+    },
+    "contacto": "0952134565",
+    "correo": "cuenca@kfc.com",
+    "motivo_visita": "Invitar a comer a los niños en KFC",
+    "docente": {
+      "identificacion": "01023245894",
+      "primer_nombre": "Paúl",
+      "segundo_nombre": "Gabriel",
+      "primer_apellido": "Torres",
+      "segundo_apellido": "Gonzales"
+    },
+    "fecha_visita": "23/08/2020",
+    "hora_visita": {
+      "periodo": "AM",
+      "hora": "10:00"
+    },
+    "observaciones": "Ninguna novedad"
+  },
+  {
+    "empresa": "Tutto Fredo",
+    "direccion": {
+      "calle_principal": "Av. de las Américas",
+      "calle_secundaria": ""
+    },
+    "representante": {
+      "nombre": "Mauricio",
+      "apellido": "Encalada"
+    },
+    "contacto": "098523164",
+    "correo": "mauricioe@tuttofredo.com",
+    "motivo_visita": "Invitar a comer helados de la franquicia.",
+    "docente": {
+      "identificacion": "01023245894",
+      "primer_nombre": "Paúl",
+      "segundo_nombre": "Gabriel",
+      "primer_apellido": "Torres",
+      "segundo_apellido": "Gonzales"
+    },
+    "fecha_visita": "15/05/2020",
+    "hora_visita": {
+      "periodo": "AM",
+      "hora": "10:30"
+    },
+    "observaciones": "Ninguna novedad"
   }
 ]

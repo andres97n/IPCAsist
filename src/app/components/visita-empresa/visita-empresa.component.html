@@ -289,7 +289,7 @@
           <!-- Columna 2 -->
           <div class="col-md-5">
             <!-- Dirección -->
-            <div class="row margen">
+            <!-- <div class="row margen">
               <div class="col-md-12">
                 <p-card
                   header="Dirección"
@@ -350,6 +350,41 @@
                         severity="error"
                         text=" Se debe ingresar una Calle Secundaria"
                         *ngIf="sinSecundaria"
+                        style="margin-top: 1em"
+                      ></p-message>
+                    </div>
+                  </div>
+                </p-card>
+              </div>
+            </div> -->
+
+            <!-- Card Motivo -->
+            <div class="row margen">
+              <div class="col-md-12">
+                <p-card
+                  header="Motivo de la Visita"
+                  subheader="Ingrese el motivo por el cual la empresa hace la visita."
+                  styleClass="ui-card-shadow"
+                >
+                  <p-header>
+                    <div class="head">
+                      <i class="fas fa-map-marker-alt fa-3x fa-fw icono"></i>
+                    </div>
+                  </p-header>
+
+                  <div class="form-group componente">
+                    <textarea
+                      rows="3"
+                      cols="50"
+                      placeholder="Motivo"
+                      pInputTextarea
+                      formControlName="motivo_visita"
+                    ></textarea>
+                    <div class="row justify-content-center">
+                      <p-message
+                        severity="error"
+                        text=" Debe ingresar el motivo de la visita"
+                        *ngIf="invalidos('motivo_visita')"
                         style="margin-top: 1em"
                       ></p-message>
                     </div>

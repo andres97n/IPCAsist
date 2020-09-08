@@ -39,6 +39,7 @@ import { PlanVidaComponent } from "./plan-vida/plan-vida.component";
 import { PasanteComponent } from "./pasante/pasante.component";
 import { VisitaEmpresaComponent } from "./visita-empresa/visita-empresa.component";
 import { AsignarDocenteComponent } from "./asignar-docente/asignar-docente.component";
+import { AyudaComponentesComponent } from './ayuda-componentes/ayuda-componentes.component';
 
 // import { GoogleMapsModule } from "@angular/google-maps";
 
@@ -86,6 +87,7 @@ import { AsignarDocenteComponent } from "./asignar-docente/asignar-docente.compo
     PasanteComponent,
     VisitaEmpresaComponent,
     AsignarDocenteComponent,
+    AyudaComponentesComponent,
   ],
   entryComponents: [NgbdModalContent],
   exports: [ComponentsComponent],

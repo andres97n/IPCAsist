@@ -13,6 +13,7 @@ import { VisitaEmpresaComponent } from "./components/visita-empresa/visita-empre
 import { PasanteComponent } from "./components/pasante/pasante.component";
 import { PlanVidaComponent } from "./components/plan-vida/plan-vida.component";
 import { AsignarDocenteComponent } from "./components/asignar-docente/asignar-docente.component";
+import { AyudaComponentesComponent } from "./components/ayuda-componentes/ayuda-componentes.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: "pasante", component: PasanteComponent },
   { path: "plan-vida", component: PlanVidaComponent },
   { path: "asignar-docente", component: AsignarDocenteComponent },
+  { path: "ayuda-componentes", component: AyudaComponentesComponent },
 ];
 
 @NgModule({

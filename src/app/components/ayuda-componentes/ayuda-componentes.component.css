@@ -1,3 +1,40 @@
 .titulo {
   text-shadow: 1px 1px 1px black;
 }
+
+.head {
+  background-color: #cfcfcf;
+}
+
+.icono {
+  margin: 5px;
+}
+
+.espacio {
+  margin-top: 1.5em;
+}
+
+.componente {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+:host ::ng-deep p-listbox .ui-listbox {
+  width: 23rem;
+}
+
+:host ::ng-deep .p-chips > .ui-inputtext {
+  width: 25rem !important;
+  /* align-content: flex-start !important; */
+  margin-top: 0.5em !important;
+}
+
+:host ::ng-deep p-chips .ui-chips-token {
+  margin: 0.3em !important;
+}
+
+#horas {
+  position: relative;
+  left: 30%;
+  margin-left: auto;
+}

@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Persons } from "app/clases/persons";
 import { DocenteService } from "app/services/docente.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { EjemplosService } from "app/services/ejemplos.service";
 
 @Component({
   selector: "app-visita-empresa",
@@ -16,12 +17,12 @@ export class VisitaEmpresaComponent implements OnInit {
 
   forma: FormGroup;
 
-  constructor(private _docenteSrv: DocenteService, private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private _ejemplosSrv: EjemplosService) {
     this.crearFormulario();
   }
 
   ngOnInit(): void {
-    this._docenteSrv.getPersons().subscribe((persons: Persons[]) => {
+    this._ejemplosSrv.getPersons().subscribe((persons: Persons[]) => {
       console.log(persons);
 
       this.persons = persons;

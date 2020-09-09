@@ -10,6 +10,7 @@ import {
   style,
 } from "@angular/animations";
 import { Car } from "app/clases/cars";
+import { EjemplosService } from "app/services/ejemplos.service";
 @Component({
   selector: "app-asignar-docente",
   templateUrl: "./asignar-docente.component.html",
@@ -57,12 +58,12 @@ export class AsignarDocenteComponent implements OnInit {
   cars: Car[];
   cols2: any[];
 
-  constructor(private _docenteSrv: DocenteService, private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private _ejemSrv: EjemplosService) {
     this.crearFormulario();
   }
 
   ngOnInit(): void {
-    this._docenteSrv.getPersons().subscribe((persons: Persons[]) => {
+    this._ejemSrv.getPersons().subscribe((persons: Persons[]) => {
       console.log(persons);
 
       this.persons = persons;
@@ -188,7 +189,7 @@ export class AsignarDocenteComponent implements OnInit {
   filterCountrySingle(event) {
     let query = event.query;
 
-    this._docenteSrv.getCountries().subscribe((data: any[]) => {
+    this._ejemSrv.getCountries().subscribe((data: any[]) => {
       // console.log(data);
 
       this.filteredCountriesSingle = this.filterCountry(query, data);

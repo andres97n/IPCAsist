@@ -24,7 +24,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-8 mr-auto ml-auto">
-          <h2 class="title">Objetivo Principal</h2>
+          <h2 class="title">Objetivo</h2>
           <h5 class="description">
             Esta página tiene como propósito capacitar a los usuarios de
             IPCAsist en el uso de los componentes utilizados en cada uno de los
@@ -33,7 +33,8 @@
             <br />
             <span
               >A continuación se presenta breves ejemplos con cada uno de los
-              componentes, para mejorar la experiencia del usuario.
+              componentes, para mejorar la experiencia del usuario. <br /><br />
+              Siéntase libre de interactuar con cada uno de ellos.
             </span>
           </h5>
         </div>
@@ -42,9 +43,325 @@
   </div>
 
   <!-- Sección Ejemplos -->
-  <div class="section text-center">
+  <div class="section text-center" style="background-color: #ccb334">
     <div class="container">
       <h2 class="title">Interactue con los Componentes</h2>
+      <div class="row justify-content-center" style="margin-top: 2em">
+        <!-- Columna 1 -->
+        <div class="col-md-6" style="margin-top: 1em">
+          <!-- Caja de Texto -->
+          <div class="row">
+            <div class="col-md-12">
+              <p-card
+                header="Caja de Texto"
+                subheader="El siguiente componente se utiliza para ingresar texto."
+                styleClass="ui-card-shadow"
+              >
+                <p-header>
+                  <div class="head">
+                    <i class="fas fa-user-circle fa-3x fa-fw icono"></i>
+                  </div>
+                </p-header>
+                <div class="row justify-content-center componente">
+                  <div class="ui-inputgroup">
+                    <span class="ui-inputgroup-addon">
+                      <i class="fas fa-edit fa-lg" style="line-height: 1"></i
+                    ></span>
+                    <input
+                      type="text"
+                      placeholder="Como ejemplo, ingrese su plato favorito"
+                      pInputText
+                      size="35"
+                    />
+                  </div>
+                </div>
+              </p-card>
+            </div>
+          </div>
+
+          <!-- Caja de Autollenado -->
+          <div class="row espacio">
+            <div class="col-md-12">
+              <p-card
+                header="Caja de Autollenado"
+                subheader="El siguiente componente se utiliza para ingresar texto y a la vez realizar autollenado."
+                styleClass="ui-card-shadow"
+              >
+                <p-header>
+                  <div class="head">
+                    <i class="fas fa-user-circle fa-3x fa-fw icono"></i>
+                  </div>
+                </p-header>
+                <div class="row justify-content-center componente">
+                  <div class="ui-inputgroup">
+                    <span class="ui-inputgroup-addon">
+                      <i class="fas fa-edit fa-lg" style="line-height: 1"></i
+                    ></span>
+                    <p-autoComplete
+                      [suggestions]="filteredCountriesSingle"
+                      (completeMethod)="filterCountrySingle($event)"
+                      field="name"
+                      [size]="35"
+                      placeholder="Ingrese un País, ejemplo: Ecuador"
+                      [minLength]="1"
+                    ></p-autoComplete>
+                  </div>
+                </div>
+              </p-card>
+            </div>
+          </div>
+
+          <div class="row espacio">
+            <div class="col-md-12">
+              <p-card
+                header="Caja de Multitexto - Chips"
+                subheader="El siguiente componente se utiliza para ingresar texto múltiples veces, presionando la tecla ENTER."
+                styleClass="ui-card-shadow"
+              >
+                <p-header>
+                  <div class="head">
+                    <i class="fas fa-user-circle fa-3x fa-fw icono"></i>
+                  </div>
+                </p-header>
+                <p-chips
+                  styleClass="p-chips"
+                  placeholder="Logros"
+                  class="componente"
+                ></p-chips>
+              </p-card>
+            </div>
+          </div>
+
+          <!-- Calendario -->
+          <div class="row espacio">
+            <div class="col-md-12">
+              <p-card
+                header="Calendario"
+                subheader="El siguiente componente sirve para escoger una fecha en concreto, 
+                haciendo click en la siguiente caja."
+                styleClass="ui-card-shadow"
+              >
+                <p-header>
+                  <div class="head">
+                    <i class="fas fa-user-circle fa-3x fa-fw icono"></i>
+                  </div>
+                </p-header>
+                <div class="row justify-content-center componente">
+                  <div class="ui-inputgroup">
+                    <span class="ui-inputgroup-addon">
+                      <i
+                        class="fas fa-calendar-alt fa-lg"
+                        style="line-height: 1"
+                      ></i
+                    ></span>
+                    <p-calendar
+                      [locale]="es"
+                      dateFormat="dd/mm/yy"
+                      [(ngModel)]="calendario"
+                      [monthNavigator]="true"
+                      [yearNavigator]="true"
+                      yearRange="1950:2010"
+                      placeholder="Fecha de Nacimiento"
+                    ></p-calendar>
+                  </div>
+                </div>
+              </p-card>
+            </div>
+          </div>
+
+          <!-- Horario -->
+          <div class="row espacio">
+            <div class="col-md-12">
+              <p-card
+                header="Horario"
+                subheader="Este componente sirve para ingresar una hora en concreto."
+                styleClass="ui-card-shadow"
+              >
+                <p-header>
+                  <div class="head">
+                    <i class="fas fa-user-circle fa-3x fa-fw icono"></i>
+                  </div>
+                </p-header>
+                <div class="row justify-content-center">
+                  <div class="form-group">
+                    <label>Hora de Entrada</label>
+                    <ngb-timepicker
+                      [meridian]="meridian"
+                      [(ngModel)]="hora"
+                    ></ngb-timepicker>
+                  </div>
+                </div>
+              </p-card>
+            </div>
+          </div>
+
+          <!-- Slider -->
+          <div class="row espacio">
+            <div class="col-md-12">
+              <p-card
+                header="Slider"
+                subheader="Este componente sirve para escoger un valor, arrastrando el punto 
+                de inicio hacia la derecha; de esta manera hasta llegar al valor a escoger."
+                styleClass="ui-card-shadow"
+              >
+                <p-header>
+                  <div class="head">
+                    <i class="fas fa-user-circle fa-3x fa-fw icono"></i>
+                  </div>
+                </p-header>
+                <div class="form-group">
+                  <h4>#Horas: {{ num_horas }}</h4>
+                  <p-slider
+                    [style]="{ width: '14em' }"
+                    [step]="1"
+                    max="10"
+                    [(ngModel)]="num_horas"
+                    id="horas"
+                  ></p-slider>
+                </div>
+              </p-card>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna 2 -->
+        <div class="col-md-6" style="margin-top: 1em">
+          <!-- Caja de Lista -->
+          <div class="row">
+            <div class="col-md-12">
+              <p-card
+                header="Caja de Lista"
+                subheader="Este componente se utiliza para seleccionar una o varias opciones."
+                styleClass="ui-card-shadow"
+              >
+                <p-header>
+                  <div class="head">
+                    <i class="fas fa-user-circle fa-3x fa-fw icono"></i>
+                  </div>
+                </p-header>
+                <div class="row justify-content-center componente">
+                  <p-listbox
+                    [options]="materias"
+                    [multiple]="true"
+                    [checkbox]="true"
+                    [filter]="true"
+                    optionLabel="name"
+                    [listStyle]="{
+                      'max-height': '150px'
+                    }"
+                    class="justify-content-between d-flex"
+                    [(ngModel)]="opciones"
+                  >
+                    <p-header> Asignaturas </p-header>
+                  </p-listbox>
+                  <p style="margin-top: 0.5em">
+                    <span style="font-weight: bold">
+                      Opciones Seleccionadas:
+                    </span>
+                    <span
+                      *ngFor="let opcion of opciones"
+                      style="margin-right: 10px"
+                      >{{ opcion.name }}</span
+                    >
+                  </p>
+                </div>
+              </p-card>
+            </div>
+          </div>
+
+          <!-- Área de Texto -->
+          <div class="row espacio">
+            <div class="col-md-12">
+              <p-card
+                header="Área de Texto"
+                subheader="Este componente sirve para ingresar gran cantidad de texto; también se puede ajustar al 
+                tamaño que se desea desde la parte inferior derecha."
+                styleClass="ui-card-shadow"
+              >
+                <p-header>
+                  <div class="head">
+                    <i class="fas fa-user-circle fa-3x fa-fw icono"></i>
+                  </div>
+                </p-header>
+                <div class="row justify-content-center componente">
+                  <textarea
+                    rows="5"
+                    cols="50"
+                    pInputTextarea
+                    placeholder="Ingrese una frase, como ejemplo"
+                  ></textarea>
+                </div>
+              </p-card>
+            </div>
+          </div>
+
+          <!-- Caja de Texto Numérico -->
+          <div class="row espacio">
+            <div class="col-md-12">
+              <p-card
+                header="Caja de Texto Numérico"
+                subheader="Este componente sirve para ingresar solamente números, en este caso solo para 
+                ingresar números telefónicos."
+                styleClass="ui-card-shadow"
+              >
+                <p-header>
+                  <div class="head">
+                    <i class="fas fa-user-circle fa-3x fa-fw icono"></i>
+                  </div>
+                </p-header>
+                <div class="row justify-content-center componente">
+                  <div class="ui-inputgroup">
+                    <span class="ui-inputgroup-addon">
+                      <i
+                        class="fas fa-phone-square-alt fa-lg"
+                        style="line-height: 1"
+                      ></i
+                    ></span>
+                    <p-inputMask
+                      mask="0999999999"
+                      placeholder="Número Celular"
+                    ></p-inputMask>
+                  </div>
+                </div>
+              </p-card>
+            </div>
+          </div>
+
+          <!-- Seleccionador -->
+          <div class="row espacio">
+            <div class="col-md-12">
+              <p-card
+                header="Seleccionador"
+                subheader="Este componente sirve para seleccionar solo una opción de todas las que se ofrecen."
+                styleClass="ui-card-shadow"
+              >
+                <p-header>
+                  <div class="head">
+                    <i class="fas fa-user-circle fa-3x fa-fw icono"></i>
+                  </div>
+                </p-header>
+                <div class="row justify-content-center componente">
+                  <div class="ui-inputgroup">
+                    <span class="ui-inputgroup-addon">
+                      <i
+                        class="fas fa-hand-point-right fa-lg"
+                        style="line-height: 1"
+                      ></i
+                    ></span>
+                    <p-dropdown
+                      [options]="sexo"
+                      optionLabel="name"
+                      (ngModelChange)="sexoSeleccionado($event)"
+                      placeholder="Seleccione un sexo"
+                      [(ngModel)]="selectedSex"
+                    ></p-dropdown>
+                  </div>
+                </div>
+              </p-card>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

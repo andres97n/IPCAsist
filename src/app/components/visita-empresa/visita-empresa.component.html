@@ -419,14 +419,16 @@
                         placeholder="Celular"
                         formControlName="contacto"
                       ></p-inputMask>
-                    </div>
-                    <div class="row justify-content-center">
-                      <p-message
-                        severity="error"
-                        text=" Se debe ingresar un Contacto"
-                        *ngIf="invalidos('contacto')"
-                        style="margin-top: 1em"
-                      ></p-message>
+                      <div class="row justify-content-center">
+                        <div class="col-md-12">
+                          <p-message
+                            severity="error"
+                            text=" Se debe ingresar un Contacto"
+                            *ngIf="invalidos('contacto')"
+                            style="margin-top: 1em"
+                          ></p-message>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </p-card>

@@ -11,6 +11,9 @@ import {
 } from "@angular/animations";
 import { Car } from "app/clases/cars";
 import { EjemplosService } from "app/services/ejemplos.service";
+import { AsignarDocente } from "app/clases/asignar-docente";
+import { Docente } from "app/clases/docente";
+import { Aula } from "app/clases/aula";
 @Component({
   selector: "app-asignar-docente",
   templateUrl: "./asignar-docente.component.html",
@@ -51,15 +54,40 @@ export class AsignarDocenteComponent implements OnInit {
   displayDialog: boolean;
   person: Persons = {};
   selectedPerson: Persons;
-  newPerson: boolean;
 
   forma: FormGroup;
 
   cars: Car[];
   cols2: any[];
 
-  constructor(private fb: FormBuilder, private _ejemSrv: EjemplosService) {
+  asignaciones: AsignarDocente[];
+  asignacion: AsignarDocente;
+  asignacion_seleccionada: AsignarDocente;
+  nueva_asignacion: boolean;
+
+  docente: Docente;
+  docentes: Docente[];
+  docentesFiltrados: Docente[];
+
+  constructor(
+    private fb: FormBuilder,
+    private _ejemSrv: EjemplosService,
+    private _docenteSrv: DocenteService
+  ) {
     this.crearFormulario();
+
+    this.asignacion = {
+      docente: new Docente(),
+      horario_entrada: {
+        periodo: "",
+        hora: "",
+      },
+      horario_salida: {
+        periodo: "",
+        hora: "",
+      },
+      aula: new Aula(),
+    };
   }
 
   ngOnInit(): void {
@@ -69,6 +97,18 @@ export class AsignarDocenteComponent implements OnInit {
       this.persons = persons;
     });
 
+    this._docenteSrv
+      .getAsignaciones()
+      .subscribe((asignaciones: AsignarDocente[]) => {
+        this.asignaciones = asignaciones;
+        console.log(this.asignaciones);
+      });
+
+    this._docenteSrv.getDocentes().subscribe((docentes: Docente[]) => {
+      this.docentes = docentes;
+      console.log(this.docentes);
+    });
+
     // this._docenteSrv.getCarsSmall().subscribe((cars: Car[]) => {
     //   console.log(cars);
 
@@ -76,11 +116,12 @@ export class AsignarDocenteComponent implements OnInit {
     // });
 
     this.cols = [
-      { field: "_id", header: "ID" },
-      { field: "name", header: "Name" },
-      { field: "age", header: "Age" },
-      { field: "email", header: "Email" },
-      { field: "phone", header: "Phone" },
+      { field: "docente.persona.identificacion", header: "CÉDULA" },
+      { field: "docente.persona.primer_nombre", header: "NOMBRE" },
+      { field: "docente.persona.primer_apellido", header: "APELLIDO" },
+      { field: "horario_entrada.hora", header: "HORARIO DE ENTRADA" },
+      { field: "horario_salida.hora", header: "HORARIO DE SALIDA" },
+      { field: "aula.nombre", header: "AULA" },
     ];
 
     // this.cols2 = [
@@ -103,14 +144,14 @@ export class AsignarDocenteComponent implements OnInit {
   }
 
   showDialogToAdd() {
-    this.newPerson = true;
-    this.person = {};
+    this.nueva_asignacion = true;
+    this.asignacion_seleccionada = {};
     this.displayDialog = true;
   }
 
   save() {
     let persons = [...this.persons];
-    if (this.newPerson) persons.push(this.person);
+    if (this.nueva_asignacion) persons.push(this.person);
     else persons[this.persons.indexOf(this.selectedPerson)] = this.person;
 
     this.persons = persons;
@@ -126,17 +167,17 @@ export class AsignarDocenteComponent implements OnInit {
   }
 
   onRowSelect(event) {
-    this.newPerson = false;
-    this.person = this.clonePerson(event.data);
+    this.nueva_asignacion = false;
+    this.asignacion_seleccionada = this.cloneAsignacion(event.data);
     this.displayDialog = true;
   }
 
-  clonePerson(c: Persons): Persons {
-    let person = {};
+  cloneAsignacion(c: AsignarDocente): AsignarDocente {
+    let asignacion = {};
     for (let prop in c) {
-      person[prop] = c[prop];
+      asignacion[prop] = c[prop];
     }
-    return person;
+    return asignacion;
   }
 
   asignarDocente() {
@@ -173,6 +214,36 @@ export class AsignarDocenteComponent implements OnInit {
   //     }
   //   });
   // }
+
+  filtrarDocentes(query, docentes: Docente[]): Docente[] {
+    let filtered: any[] = [];
+    for (let i = 0; i < docentes.length; i++) {
+      let docente = docentes[i];
+
+      if (
+        docente.persona.primer_apellido
+          .toLowerCase()
+          .indexOf(query.toLowerCase()) == 0
+      ) {
+        filtered.push(docente);
+      }
+      // if(docente.persona.identificacion.indexOf(query) == 0){
+      //   filtered.push(docente);
+      // }
+    }
+    return filtered;
+  }
+
+  filtrarDocente(event) {
+    let query = event.query;
+    this.docentesFiltrados = this.filtrarDocentes(query, this.docentes);
+
+    // this._ejemSrv.getCountries().subscribe((data: any[]) => {
+    //   // console.log(data);
+
+    //   this.filteredCountriesSingle = this.filterCountry(query, data);
+    // });
+  }
 
   filterCountry(query, countries: any[]): any[] {
     let filtered: any[] = [];

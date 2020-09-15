@@ -197,30 +197,7 @@
 
           <!-- Slider -->
           <div class="row espacio">
-            <div class="col-md-12">
-              <p-card
-                header="Slider"
-                subheader="Este componente sirve para escoger un valor, arrastrando el punto 
-                de inicio hacia la derecha; de esta manera hasta llegar al valor a escoger."
-                styleClass="ui-card-shadow"
-              >
-                <p-header>
-                  <div class="head">
-                    <i class="fas fa-user-circle fa-3x fa-fw icono"></i>
-                  </div>
-                </p-header>
-                <div class="form-group">
-                  <h4>#Horas: {{ num_horas }}</h4>
-                  <p-slider
-                    [style]="{ width: '14em' }"
-                    [step]="1"
-                    max="10"
-                    [(ngModel)]="num_horas"
-                    id="horas"
-                  ></p-slider>
-                </div>
-              </p-card>
-            </div>
+            <div class="col-md-12"></div>
           </div>
         </div>
 
@@ -360,6 +337,33 @@
               </p-card>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center componente">
+        <div class="col-md-6">
+          <p-card
+            header="Slider"
+            subheader="Este componente sirve para escoger un valor, arrastrando el punto 
+        de inicio hacia la derecha; de esta manera hasta llegar al valor a escoger."
+            styleClass="ui-card-shadow"
+          >
+            <p-header>
+              <div class="head">
+                <i class="fas fa-user-circle fa-3x fa-fw icono"></i>
+              </div>
+            </p-header>
+            <div class="form-group">
+              <h4>#Horas: {{ num_horas }}</h4>
+              <p-slider
+                [style]="{ width: '14em' }"
+                [step]="1"
+                max="10"
+                [(ngModel)]="num_horas"
+                id="horas"
+              ></p-slider>
+            </div>
+          </p-card>
         </div>
       </div>
     </div>

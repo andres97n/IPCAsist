@@ -1,0 +1,167 @@
+[
+  {
+    "_id": "_efnwefn8349u3kferkj3453fferge",
+    "docente": {
+      "_id": "_nfnwejnjwefweinfweefew",
+      "persona": {
+        "_id": "_jewjfio483njwefio38r4njf",
+        "identificacion": "0104785962",
+        "primer_nombre": "Juan",
+        "segundo_nombre": "Felipe",
+        "primer_apellido": "Calle",
+        "segundo_apellido": "Borbón",
+        "edad": 31,
+        "genero": "Masculino",
+        "fecha_nacimiento": "24/08/84"
+      },
+      "nivel_formacion": "3er Nivel",
+      "titulo": "Psicólogo"
+    },
+    "horario_entrada": {
+      "periodo": "AM",
+      "hora": "07:30"
+    },
+    "horario_salida": {
+      "periodo": "PM",
+      "hora": "3:00"
+    },
+    "aula": {
+      "_id": "_73njfnj439nrnke90345dsfds",
+      "nombre": "Inicial I",
+      "capacidad": 15,
+      "ubicación": "Final Pasillo Derecho"
+    }
+  },
+  {
+    "_id": "_whfnew8r3ndkf349r43095nwjeknew",
+    "docente": {
+      "_id": "_enwefwe6465ew654618w",
+      "persona": {
+        "_id": "_fwhebf47348njkefw48yndds",
+        "identificacion": "0105876213",
+        "primer_nombre": "Fernando",
+        "segundo_nombre": "Fabián",
+        "primer_apellido": "Guzman",
+        "segundo_apellido": "Carrión",
+        "edad": 31,
+        "genero": "Masculino",
+        "fecha_nacimiento": "15/10/88"
+      },
+      "nivel_formacion": "3er Nivel",
+      "titulo": "Psicólogo"
+    },
+    "horario_entrada": {
+      "periodo": "AM",
+      "hora": "07:30"
+    },
+    "horario_salida": {
+      "periodo": "PM",
+      "hora": "3:15"
+    },
+    "aula": {
+      "_id": "_85njfner8349njreg49nj",
+      "nombre": "Inicial",
+      "capacidad": 15,
+      "ubicación": "Final Pasillo Derecho"
+    }
+  },
+  {
+    "_id": "_eujkd843873nf394909ujfkenk",
+    "docente": {
+      "_id": "_732jewfnjwef242nwece",
+      "persona": {
+        "_id": "_uwefuwn324234kefkw84893nejw",
+        "identificacion": "0102687954",
+        "primer_nombre": "Julián",
+        "segundo_nombre": "ALberto",
+        "primer_apellido": "García",
+        "segundo_apellido": "Malo",
+        "edad": 31,
+        "genero": "Masculino",
+        "fecha_nacimiento": "05/11/90"
+      },
+      "nivel_formacion": "3er Nivel",
+      "titulo": "Terapeuta"
+    },
+    "horario_entrada": {
+      "periodo": "AM",
+      "hora": "07:30"
+    },
+    "horario_salida": {
+      "periodo": "PM",
+      "hora": "2:00"
+    },
+    "aula": {
+      "_id": "_fuhfuer83nj39i93nk343",
+      "nombre": "Inicial",
+      "capacidad": 15,
+      "ubicación": "Final Pasillo Derecho"
+    }
+  },
+  {
+    "_id": "_83548hjfnfne948runfnefw43i3",
+    "docente": {
+      "_id": "_hfew7438nfjw39495weffs4353",
+      "persona": {
+        "_id": "_643jfwj89nwjkf43nwf493",
+        "identificacion": "0105876482",
+        "primer_nombre": "Carlos",
+        "segundo_nombre": "Marcelo",
+        "primer_apellido": "Crespo",
+        "segundo_apellido": "Galián",
+        "edad": 29,
+        "genero": "Masculino",
+        "fecha_nacimiento": "05/11/92"
+      },
+      "nivel_formacion": "4er Nivel",
+      "titulo": "FísicoTerapeuta"
+    },
+    "horario_entrada": {
+      "periodo": "AM",
+      "hora": "07:30"
+    },
+    "horario_salida": {
+      "periodo": "PM",
+      "hora": "2:00"
+    },
+    "aula": {
+      "_id": "_35bhjebw72y7823bjfer93frnke",
+      "nombre": "Inicial",
+      "capacidad": 15,
+      "ubicación": "Final Pasillo Derecho"
+    }
+  },
+  {
+    "_id": "_532fbhjbf4783yrnfkfmkwe834u438fwf",
+    "docente": {
+      "_id": "_hfurfuei3849nfjwj4383ndkfe",
+      "persona": {
+        "_id": "_jfnrwiu839i3nfjke340994dsnksnddf",
+        "identificacion": "1248753216",
+        "primer_nombre": "Daniela",
+        "segundo_nombre": "Augusta",
+        "primer_apellido": "Damián",
+        "segundo_apellido": "Gonzales",
+        "edad": 32,
+        "genero": "Femenino",
+        "fecha_nacimiento": "05/11/88"
+      },
+      "nivel_formacion": "4er Nivel",
+      "titulo": "FísicoTerapeuta"
+    },
+    "horario_entrada": {
+      "periodo": "AM",
+      "hora": "07:30"
+    },
+    "horario_salida": {
+      "periodo": "PM",
+      "hora": "2:00"
+    },
+    "aula": {
+      "_id": "_fuenri39irernk339038nfejrk",
+      "nombre": "Segundo Grado",
+      "capacidad": 15,
+      "ubicación": "Final Pasillo Izquierdo"
+    }
+  }
+]

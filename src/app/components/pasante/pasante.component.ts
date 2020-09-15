@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Persons } from "app/clases/persons";
 import { DocenteService } from "app/services/docente.service";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { EjemplosService } from "app/services/ejemplos.service";
 
 @Component({
   selector: "app-pasante",
@@ -33,59 +34,62 @@ export class PasanteComponent implements OnInit {
 
   forma: FormGroup;
 
-  constructor(private _docenteSrv: DocenteService, private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private _ejemplosSrv: EjemplosService) {
     this.crearFormulario();
 
-    this.universidades = [
-      {
-        name: "Universidad de Cuenca",
-        value: "UCUENCA",
-      },
-      {
-        name: "Universidad Católica de Cuenca",
-        value: "CATOCUENCA",
-      },
-      {
-        name: "Universidad del Azuay",
-        value: "UDA",
-      },
-      {
-        name: "Universidad Politécnica Salesiana",
-        value: "UPS",
-      },
-      {
-        name: "Universidad Nacional de Educación",
-        value: "UNAE",
-      },
-      {
-        name: "Instituo Superior Tecnológico del Azuay",
-        value: "ISTA",
-      },
-      {
-        name: "Instituto Tecnológico Sudamericano",
-        value: "SUDA",
-      },
-      {
-        name: "Instituto Tecnológico Superior San Gabriel",
-        value: "SAN GABRIEL",
-      },
-      {
-        name: "Instituto Tecnológico Superior American Collage",
-        value: "AMERICAN COLLAGE",
-      },
-      {
-        name: "Instituto Superior San Isidro",
-        value: "SAN ISIDRO",
-      },
-      {
-        name: "Otro",
-        value: "OTRO",
-      },
-    ];
+    this.universidades = this._ejemplosSrv.getUniversidades();
+    // console.log(this.universidades);
+
+    // this.universidades = [
+    //   {
+    //     name: "Universidad de Cuenca",
+    //     value: "UCUENCA",
+    //   },
+    //   {
+    //     name: "Universidad Católica de Cuenca",
+    //     value: "CATOCUENCA",
+    //   },
+    //   {
+    //     name: "Universidad del Azuay",
+    //     value: "UDA",
+    //   },
+    //   {
+    //     name: "Universidad Politécnica Salesiana",
+    //     value: "UPS",
+    //   },
+    //   {
+    //     name: "Universidad Nacional de Educación",
+    //     value: "UNAE",
+    //   },
+    //   {
+    //     name: "Instituo Superior Tecnológico del Azuay",
+    //     value: "ISTA",
+    //   },
+    //   {
+    //     name: "Instituto Tecnológico Sudamericano",
+    //     value: "SUDA",
+    //   },
+    //   {
+    //     name: "Instituto Tecnológico Superior San Gabriel",
+    //     value: "SAN GABRIEL",
+    //   },
+    //   {
+    //     name: "Instituto Tecnológico Superior American Collage",
+    //     value: "AMERICAN COLLAGE",
+    //   },
+    //   {
+    //     name: "Instituto Superior San Isidro",
+    //     value: "SAN ISIDRO",
+    //   },
+    //   {
+    //     name: "Otro",
+    //     value: "OTRO",
+    //   },
+    // ];
   }
 
   ngOnInit(): void {
-    this._docenteSrv.getPersons().subscribe((persons: Persons[]) => {
+    this._ejemplosSrv.getPersons().subscribe((persons: Persons[]) => {
       console.log(persons);
 
       this.persons = persons;

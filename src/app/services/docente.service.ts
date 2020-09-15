@@ -8,6 +8,14 @@ import { Persons } from "app/clases/persons";
 export class DocenteService {
   constructor(private http: HttpClient) {}
 
+  getAsignaciones() {
+    return this.http.get("/assets/json/Asignar-Docente.json");
+  }
+
+  getDocentes() {
+    return this.http.get("/assets/json/Docentes.json");
+  }
+
   getCountries() {
     return this.http.get("/assets/json/countries.json");
     // .toPromise()

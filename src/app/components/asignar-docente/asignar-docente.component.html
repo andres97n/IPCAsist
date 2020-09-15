@@ -1,7 +1,7 @@
 <div
   class="page-header"
   data-parallax="true"
-  style="background-image: url('./assets/img/IPCA/portada docentes.jpg');"
+  style="background-image: url('./assets/img/IPCA/portada docentes.jpg')"
 >
   <div class="filter"></div>
   <div class="container">
@@ -41,7 +41,7 @@
           </h5>
           <br />
           <a
-            href="#paper-kit"
+            [routerLink]="['/ayuda-componentes']"
             class="btn btn-outline-default btn-round"
             target="_blank"
             ><i class="fas fa-question fa-lg fa-fw"></i>Ayuda de Componentes</a
@@ -127,14 +127,14 @@
               styleClass="ui-card-shadow"
             >
               <p-header>
-                <div style="background-color: #cfcfcf;">
+                <div style="background-color: #cfcfcf">
                   <i class="fas fa-chalkboard-teacher fa-4x fa-fw icono"></i>
                 </div>
               </p-header>
               <br />
               <div class="ui-inputgroup row justify-content-center">
                 <span class="ui-inputgroup-addon">
-                  <i class="fas fa-user-tie fa-lg" style="line-height: 1;"></i
+                  <i class="fas fa-user-tie fa-lg" style="line-height: 1"></i
                 ></span>
                 <p-autoComplete
                   styleClass="cedula"
@@ -146,6 +146,39 @@
                   [minLength]="1"
                   formControlName="identificacion"
                 ></p-autoComplete>
+                <p-autoComplete
+                  [suggestions]="docentesFiltrados"
+                  (completeMethod)="filtrarDocente($event)"
+                  [size]="30"
+                  [minLength]="1"
+                  placeholder="Docente"
+                  [dropdown]="true"
+                >
+                  <ng-template let-brand pTemplate="item">
+                    <div
+                      class="ui-helper-clearfix"
+                      style="border-bottom: 1px solid #d5d5d5"
+                    >
+                      <img
+                        src="assets/showcase/images/demo/car/{{ brand }}.png"
+                        style="
+                          width: 32px;
+                          display: inline-block;
+                          margin: 5px 0 2px 5px;
+                        "
+                      />
+                      <div
+                        style="
+                          font-size: 18px;
+                          float: right;
+                          margin: 10px 10px 0 0;
+                        "
+                      >
+                        {{ brand }}
+                      </div>
+                    </div>
+                  </ng-template>
+                </p-autoComplete>
               </div>
               <br />
               <div class="row justify-content-center">
@@ -153,7 +186,7 @@
                   severity="error"
                   text=" Se requiere la Identificación"
                   *ngIf="invalidos('identificacion')"
-                  style="margin-top: 1em;"
+                  style="margin-top: 1em"
                 ></p-message>
               </div>
               <p-footer>
@@ -173,7 +206,7 @@
               styleClass="ui-card-shadow"
             >
               <p-header>
-                <div style="background-color: #cfcfcf;">
+                <div style="background-color: #cfcfcf">
                   <!-- <i class="fa fa-clock-o "fa-4x fa-fw aria-hidden="true"></i> -->
                   <i class="far fa-clock fa-4x fa-fw icono"></i>
                   <!-- <i class="fab fa-adobe"></i> -->
@@ -182,7 +215,7 @@
 
               <div
                 class="row justify-content-center"
-                style="margin-top: 1em;"
+                style="margin-top: 1em"
                 formGroupName="horario"
               >
                 <!-- Horario de Entrada-->
@@ -303,7 +336,7 @@
               styleClass="ui-card-shadow"
             >
               <p-header>
-                <div style="background-color: #cfcfcf;">
+                <div style="background-color: #cfcfcf">
                   <i class="fas fa-school fa-4x fa-fw icono"></i>
                 </div>
               </p-header>
@@ -311,10 +344,7 @@
                 <br />
                 <div class="ui-inputgroup row justify-content-center">
                   <span class="ui-inputgroup-addon">
-                    <i
-                      class="fas fa-door-open fa-lg"
-                      style="line-height: 1;"
-                    ></i
+                    <i class="fas fa-door-open fa-lg" style="line-height: 1"></i
                   ></span>
                   <p-autoComplete
                     styleClass="cedula"
@@ -336,7 +366,7 @@
                     severity="error"
                     text="  Se requiere el nombre del Aula"
                     *ngIf="invalidos('aula')"
-                    style="margin-top: 1em !important;"
+                    style="margin-top: 1em !important"
                   ></p-message>
                 </div>
               </div>
@@ -363,14 +393,14 @@
   <div class="section landing-section">
     <div class="container">
       <div class="row">
-        <div class="col-md-8 mr-auto ml-auto">
+        <div class="col-md-10 mr-auto ml-auto">
           <h2 class="text-center">Asignaciones a un Aula</h2>
 
           <br />
 
           <p-table
             [columns]="cols"
-            [value]="persons"
+            [value]="asignaciones"
             dataKey="_id"
             [resizableColumns]="true"
             [scrollable]="true"
@@ -388,7 +418,7 @@
             </ng-template>
             <ng-template pTemplate="header" let-columns>
               <tr>
-                <th style="width: 3em;"></th>
+                <th style="width: 3em"></th>
                 <th *ngFor="let col of columns" pResizableColumn>
                   {{ col.header }}
                 </th>
@@ -401,7 +431,7 @@
               let-columns="columns"
             >
               <tr [pSelectableRow]="rowData">
-                <td style="width: 3em;">
+                <td style="width: 3em">
                   <a href="#" [pRowToggler]="rowData">
                     <i
                       [ngClass]="
@@ -410,7 +440,10 @@
                     ></i>
                   </a>
                 </td>
-                <td *ngFor="let col of columns" class="ui-resizable-column">
+                <td
+                  *ngFor="let col of columns; let i = index"
+                  class="ui-resizable-column"
+                >
                   {{ rowData[col.field] }}
                 </td>
               </tr>
@@ -424,22 +457,55 @@
                 <td [attr.colspan]="columns.length + 1">
                   <div
                     class="p-grid ui-fluid"
-                    style="font-size: 16px; padding: 20px;"
+                    style="font-size: 16px; padding: 20px"
                     [@rowExpansionTrigger]="'active'"
                   >
-                    <div class="p-col-12 p-md-9">
-                      <div class="p-grid">
-                        <div class="p-col-12">
-                          <b>Vin:</b> {{ rowData._id }}
+                    <div class="row justify-content-center">
+                      <div class="col-md-6">
+                        <div class="p-grid">
+                          <div class="p-col-12">
+                            <b>Cédula:</b>
+                            {{ rowData.docente.persona.identificacion }}
+                          </div>
+                          <div class="p-col-12">
+                            <b>Nombres:</b>
+                            {{ rowData.docente.persona.primer_nombre }}
+                            {{ rowData.docente.persona.segundo_nombre }}
+                          </div>
+                          <div class="p-col-12">
+                            <b>Apellidos:</b>
+                            {{ rowData.docente.persona.primer_apellido }}
+                            {{ rowData.docente.persona.segundo_apellido }}
+                          </div>
+                          <div class="p-col-12">
+                            <b>Nivel de Formación:</b>
+                            {{ rowData.docente.nivel_formacion }}
+                          </div>
+                          <div class="p-col-12">
+                            <b>Título:</b> {{ rowData.docente.titulo }}
+                          </div>
                         </div>
-                        <div class="p-col-12">
-                          <b>Year:</b> {{ rowData.name }}
-                        </div>
-                        <div class="p-col-12">
-                          <b>Brand:</b> {{ rowData.email }}
-                        </div>
-                        <div class="p-col-12">
-                          <b>Color:</b> {{ rowData.phone }}
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="p-grid">
+                          <div class="p-col-12">
+                            <b>Horario de Entrada:</b>
+                            {{ rowData.horario_entrada.hora }}
+                            {{ rowData.horario_entrada.periodo }}
+                          </div>
+                          <div class="p-col-12">
+                            <b>Horario de Salida:</b>
+                            {{ rowData.horario_salida.hora }}
+                            {{ rowData.horario_salida.periodo }}
+                          </div>
+                          <div class="p-col-12">
+                            <b>Nombre de Aula:</b>
+                            {{ rowData.aula.nombre }}
+                          </div>
+                          <!-- <div class="p-col-12">
+                            <b>Título:</b> {{ rowData.docente.titulo }}
+                          </div> -->
                         </div>
                       </div>
                     </div>
@@ -457,12 +523,59 @@
             [modal]="true"
             [style]="{ width: '300px' }"
           >
-            <div class="p-grid ui-fluid" *ngIf="person">
+            <div class="p-grid ui-fluid" *ngIf="asignacion_seleccionada">
               <div class="p-col-4">
-                <label for="_id">ID</label>
+                <label for="_id">CÉDULA</label>
               </div>
               <div class="p-col-8">
-                <input pInputText id="_id" [(ngModel)]="person._id" autofocus />
+                <input
+                  pInputText
+                  id="_id"
+                  [(ngModel)]="
+                    asignacion_seleccionada.docente.persona.identificacion
+                  "
+                  autofocus
+                />
+              </div>
+              <!-- Prueba -->
+              <div class="p-col-4">
+                <label for="_id">CÉDULA</label>
+              </div>
+              <div class="p-col-8">
+                <p-autoComplete
+                  [(ngModel)]="brand"
+                  [suggestions]="filteredBrands"
+                  (completeMethod)="filterBrands($event)"
+                  [size]="30"
+                  [minLength]="1"
+                  placeholder="Hint: type 'v' or 'f'"
+                  [dropdown]="true"
+                >
+                  <ng-template let-brand pTemplate="item">
+                    <div
+                      class="ui-helper-clearfix"
+                      style="border-bottom: 1px solid #d5d5d5"
+                    >
+                      <img
+                        src="assets/showcase/images/demo/car/{{ brand }}.png"
+                        style="
+                          width: 32px;
+                          display: inline-block;
+                          margin: 5px 0 2px 5px;
+                        "
+                      />
+                      <div
+                        style="
+                          font-size: 18px;
+                          float: right;
+                          margin: 10px 10px 0 0;
+                        "
+                      >
+                        {{ brand }}
+                      </div>
+                    </div>
+                  </ng-template>
+                </p-autoComplete>
               </div>
               <div class="p-col-4">
                 <label for="name">Name</label>
@@ -568,7 +681,7 @@
   </div>
 
   <!-- <div class="section landing-section"> -->
-  <div class="container" style="margin-bottom: 10%;">
+  <div class="container" style="margin-bottom: 10%">
     <div class="row justify-content-center">
       <div class="col-md-10">
         <div class="row">
@@ -586,12 +699,10 @@
                 la adversidad. La discapacidad es un arte, es una forma
                 ingeniosa de vivir.
               </h2>
-              <h5 style="margin-left: 75%; margin-top: 5%;">
-                - Neil Marcus -
-              </h5>
+              <h5 style="margin-left: 75%; margin-top: 5%">- Neil Marcus -</h5>
             </div>
           </div>
-          <div class="col-md-2" style="margin-top: 20%;">
+          <div class="col-md-2" style="margin-top: 20%">
             <img
               src="./assets/img/icons/comilla derecha.png"
               width="80"

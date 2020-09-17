@@ -59,8 +59,8 @@
       "hora": "3:15"
     },
     "aula": {
-      "_id": "_85njfner8349njreg49nj",
-      "nombre": "Inicial",
+      "_id": "_73njfnj439nrnke90345dsfds",
+      "nombre": "Tercero B",
       "capacidad": 15,
       "ubicación": "Final Pasillo Derecho"
     }
@@ -92,8 +92,8 @@
       "hora": "2:00"
     },
     "aula": {
-      "_id": "_fuhfuer83nj39i93nk343",
-      "nombre": "Inicial",
+      "_id": "_73njfnj439nrnke90345dsfds",
+      "nombre": "Tercero A",
       "capacidad": 15,
       "ubicación": "Final Pasillo Derecho"
     }
@@ -125,9 +125,9 @@
       "hora": "2:00"
     },
     "aula": {
-      "_id": "_35bhjebw72y7823bjfer93frnke",
-      "nombre": "Inicial",
-      "capacidad": 15,
+      "_id": "_73njfnj439nrnke90345dsfds",
+      "nombre": "Segundo B",
+      "capacidad": 20,
       "ubicación": "Final Pasillo Derecho"
     }
   },

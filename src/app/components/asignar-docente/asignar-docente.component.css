@@ -5,3 +5,11 @@
 .icono {
   margin: 5px;
 }
+
+.edicion {
+  margin-top: 0.5em;
+}
+
+/* :host ::ng-deep p-autoComplete .ui-autocomplete-items {
+  background-color: #32302f !important;
+} */

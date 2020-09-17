@@ -7,6 +7,7 @@ export class Pasante {
   nombre_institucion: string;
   especialidad: string;
   tutor: Docente;
+  fecha_inicio?: Date;
   horas_diarias?: number;
   fecha_creacion: Date;
 }

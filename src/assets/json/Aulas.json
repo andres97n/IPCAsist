@@ -1,0 +1,38 @@
+[
+  {
+    "_id": "_73njfnj439nrnke90345dsfds",
+    "nombre": "Inicial I",
+    "capacidad": 15,
+    "ubicación": "Final Pasillo Derecho"
+  },
+  {
+    "_id": "_hwuefb8934jbt34nfk4f3n",
+    "nombre": "Inicial II",
+    "capacidad": 17,
+    "ubicación": "Final Pasillo Derecho"
+  },
+  {
+    "_id": "_73njfnj439nrnke90345dsfds",
+    "nombre": "Segundo A",
+    "capacidad": 14,
+    "ubicación": "Pasillo Central"
+  },
+  {
+    "_id": "_73njfnj439nrnke90345dsfds",
+    "nombre": "Segundo B",
+    "capacidad": 20,
+    "ubicación": "Pasillo Central"
+  },
+  {
+    "_id": "_73njfnj439nrnke90345dsfds",
+    "nombre": "Tercero A",
+    "capacidad": 15,
+    "ubicación": "Final Pasillo Izquierdo"
+  },
+  {
+    "_id": "_73njfnj439nrnke90345dsfds",
+    "nombre": "Tercero B",
+    "capacidad": 15,
+    "ubicación": "Final Pasillo Izquierdo"
+  }
+]

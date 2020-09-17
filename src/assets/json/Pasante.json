@@ -1,22 +1,26 @@
 [
   {
     "_id": "_5565fwe5f4ew65f65efwe",
-    "identificacion": "0107894531",
-    "primer_nombre": "Karla",
-    "segundo_nombre": "Estefania",
-    "primer_apellido": "Quito",
-    "segundo_apellido": "Alvarez",
-    "edad": 22,
-    "sexo": "F",
-    "correo": "karla@gmail.com",
-    "contacto": "0985461238",
+    "persona": {
+      "identificacion": "0107894531",
+      "primer_nombre": "Karla",
+      "segundo_nombre": "Estefania",
+      "primer_apellido": "Quito",
+      "segundo_apellido": "Alvarez",
+      "edad": 22,
+      "sexo": "F",
+      "correo": "karla@gmail.com",
+      "contacto": "0985461238"
+    },
     "institución": "UDA",
     "docente": {
-      "identificacion": "01023245894",
-      "primer_nombre": "Paúl",
-      "segundo_nombre": "Gabriel",
-      "primer_apellido": "Torres",
-      "segundo_apellido": "Gonzales"
+      "persona": {
+        "identificacion": "01023245894",
+        "primer_nombre": "Paúl",
+        "segundo_nombre": "Gabriel",
+        "primer_apellido": "Torres",
+        "segundo_apellido": "Gonzales"
+      }
     },
     "especialidad": "Dentista",
     "num_horas": 3,
@@ -24,22 +28,26 @@
   },
   {
     "_id": "_wfw566516efw1w1e2wefw32e",
-    "identificacion": "1874562135",
-    "primer_nombre": "Daniela",
-    "segundo_nombre": "Mercedes",
-    "primer_apellido": "Alvarado",
-    "segundo_apellido": "Ortiz",
-    "edad": 23,
-    "sexo": "F",
-    "correo": "danielam@hotmail.com",
-    "contacto": "0978456217",
+    "persona": {
+      "identificacion": "1874562135",
+      "primer_nombre": "Daniela",
+      "segundo_nombre": "Mercedes",
+      "primer_apellido": "Alvarado",
+      "segundo_apellido": "Ortiz",
+      "edad": 23,
+      "sexo": "F",
+      "correo": "danielam@hotmail.com",
+      "contacto": "0978456217"
+    },
     "institución": "ucuenca",
     "docente": {
-      "identificacion": "0104472014",
-      "primer_nombre": "Adriana",
-      "segundo_nombre": "Natalia",
-      "primer_apellido": "Prado",
-      "segundo_apellido": "Gimenez"
+      "persona": {
+        "identificacion": "0104472014",
+        "primer_nombre": "Adriana",
+        "segundo_nombre": "Natalia",
+        "primer_apellido": "Prado",
+        "segundo_apellido": "Gimenez"
+      }
     },
     "especialidad": "Terapeuta",
     "num_horas": 3,
@@ -47,25 +55,83 @@
   },
   {
     "_id": "_4688fwefw5410266ew64fwef48",
-    "identificacion": "0104875621",
-    "primer_nombre": "Yolanda",
-    "segundo_nombre": "Germania",
-    "primer_apellido": "Calderón",
-    "segundo_apellido": "Barros",
-    "edad": 21,
-    "sexo": "F",
-    "correo": "yoligermania@gmail.com",
-    "contacto": "0965324517",
+    "persona": {
+      "identificacion": "0104875621",
+      "primer_nombre": "Yolanda",
+      "segundo_nombre": "Germania",
+      "primer_apellido": "Calderón",
+      "segundo_apellido": "Barros",
+      "edad": 21,
+      "sexo": "F",
+      "correo": "yoligermania@gmail.com",
+      "contacto": "0965324517"
+    },
     "institución": "ucuenca",
     "docente": {
-      "identificacion": "0104472014",
-      "primer_nombre": "Adriana",
-      "segundo_nombre": "Natalia",
-      "primer_apellido": "Prado",
-      "segundo_apellido": "Gimenez"
+      "persona": {
+        "identificacion": "0104472014",
+        "primer_nombre": "Adriana",
+        "segundo_nombre": "Natalia",
+        "primer_apellido": "Prado",
+        "segundo_apellido": "Gimenez"
+      }
     },
     "especialidad": "Terapeuta",
     "num_horas": 3,
     "fecha_inicio": "13/05/2020"
+  },
+  {
+    "_id": "_fwbebfe823bj43fjbfj4334",
+    "persona": {
+      "identificacion": "0104875621",
+      "primer_nombre": "Daniela",
+      "segundo_nombre": "Estafania",
+      "primer_apellido": "Uyauri",
+      "segundo_apellido": "Gonzales",
+      "edad": 23,
+      "sexo": "F",
+      "correo": "danyest@gmail.com",
+      "contacto": "0954762354"
+    },
+    "institución": "uda",
+    "docente": {
+      "persona": {
+        "identificacion": "0104472014",
+        "primer_nombre": "Adriana",
+        "segundo_nombre": "Natalia",
+        "primer_apellido": "Prado",
+        "segundo_apellido": "Gimenez"
+      }
+    },
+    "especialidad": "Terapeuta",
+    "num_horas": 4,
+    "fecha_inicio": "15/05/2020"
+  },
+  {
+    "_id": "_nfwjenew7437854n343409nrj34",
+    "persona": {
+      "identificacion": "0107548324",
+      "primer_nombre": "Carlos",
+      "segundo_nombre": "Fabricio",
+      "primer_apellido": "Saquicela",
+      "segundo_apellido": "Ortiz",
+      "edad": 22,
+      "sexo": "M",
+      "correo": "fabricarlos@gmail.com",
+      "contacto": "0954721430"
+    },
+    "institución": "ups",
+    "docente": {
+      "persona": {
+        "identificacion": "0147684258",
+        "primer_nombre": "María",
+        "segundo_nombre": "Belén",
+        "primer_apellido": "García",
+        "segundo_apellido": "Morales"
+      }
+    },
+    "especialidad": "Terapeuta",
+    "num_horas": 3,
+    "fecha_inicio": "16/05/2020"
   }
 ]

@@ -16,6 +16,10 @@ export class DocenteService {
     return this.http.get("/assets/json/Docentes.json");
   }
 
+  getAulas() {
+    return this.http.get("/assets/json/Aulas.json");
+  }
+
   getCountries() {
     return this.http.get("/assets/json/countries.json");
     // .toPromise()

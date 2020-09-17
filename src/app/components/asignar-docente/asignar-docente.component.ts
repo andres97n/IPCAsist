@@ -57,17 +57,30 @@ export class AsignarDocenteComponent implements OnInit {
 
   forma: FormGroup;
 
-  cars: Car[];
-  cols2: any[];
+  // cars: Car[];
+  // cols2: any[];
 
   asignaciones: AsignarDocente[];
   asignacion: AsignarDocente;
   asignacion_seleccionada: AsignarDocente;
+  asignacion_editar: AsignarDocente;
   nueva_asignacion: boolean;
 
   docente: Docente;
   docentes: Docente[];
-  docentesFiltrados: Docente[];
+  docentes_filtrados: Docente[];
+  docentes_editados: Docente[];
+  identificacion: string;
+
+  hora_entrada: any;
+  hora_salida: any;
+  dia: Date;
+
+  aula_filtrada: Aula;
+  aulas: Aula[];
+  aulas_filtradas: Aula[];
+  aulas_editadas: Aula[];
+  nombre_aula: string;
 
   constructor(
     private fb: FormBuilder,
@@ -105,8 +118,14 @@ export class AsignarDocenteComponent implements OnInit {
       });
 
     this._docenteSrv.getDocentes().subscribe((docentes: Docente[]) => {
+      console.log(docentes);
       this.docentes = docentes;
-      console.log(this.docentes);
+    });
+
+    this._docenteSrv.getAulas().subscribe((aulas: Aula[]) => {
+      this.aulas = aulas;
+
+      console.log(this.aulas);
     });
 
     // this._docenteSrv.getCarsSmall().subscribe((cars: Car[]) => {
@@ -117,8 +136,8 @@ export class AsignarDocenteComponent implements OnInit {
 
     this.cols = [
       { field: "docente.persona.identificacion", header: "CÉDULA" },
-      { field: "docente.persona.primer_nombre", header: "NOMBRE" },
-      { field: "docente.persona.primer_apellido", header: "APELLIDO" },
+      { field: "docente.persona.primer_nombre", header: "NOMBRES" },
+      { field: "docente.persona.primer_apellido", header: "APELLIDOS" },
       { field: "horario_entrada.hora", header: "HORARIO DE ENTRADA" },
       { field: "horario_salida.hora", header: "HORARIO DE SALIDA" },
       { field: "aula.nombre", header: "AULA" },
@@ -134,56 +153,16 @@ export class AsignarDocenteComponent implements OnInit {
 
   crearFormulario() {
     this.forma = this.fb.group({
-      identificacion: ["", [Validators.required, Validators.minLength(2)]],
+      identificacion: [
+        this.identificacion,
+        [Validators.required, Validators.minLength(2)],
+      ],
       horario: this.fb.group({
-        horario_entrada: ["", Validators.required],
-        horario_salida: ["", Validators.required],
+        horario_entrada: [this.time, Validators.required],
+        horario_salida: [this.time2, Validators.required],
       }),
-      aula: ["", [Validators.required, Validators.minLength(2)]],
+      aula: [this.nombre_aula, [Validators.required, Validators.minLength(2)]],
     });
-  }
-
-  showDialogToAdd() {
-    this.nueva_asignacion = true;
-    this.asignacion_seleccionada = {};
-    this.displayDialog = true;
-  }
-
-  save() {
-    let persons = [...this.persons];
-    if (this.nueva_asignacion) persons.push(this.person);
-    else persons[this.persons.indexOf(this.selectedPerson)] = this.person;
-
-    this.persons = persons;
-    this.person = null;
-    this.displayDialog = false;
-  }
-
-  delete() {
-    let index = this.persons.indexOf(this.selectedPerson);
-    this.persons = this.persons.filter((val, i) => i != index);
-    this.person = null;
-    this.displayDialog = false;
-  }
-
-  onRowSelect(event) {
-    this.nueva_asignacion = false;
-    this.asignacion_seleccionada = this.cloneAsignacion(event.data);
-    this.displayDialog = true;
-  }
-
-  cloneAsignacion(c: AsignarDocente): AsignarDocente {
-    let asignacion = {};
-    for (let prop in c) {
-      asignacion[prop] = c[prop];
-    }
-    return asignacion;
-  }
-
-  asignarDocente() {
-    console.log(this.forma);
-
-    // this.forma.reset();
   }
 
   invalidos(form: string) {
@@ -204,6 +183,57 @@ export class AsignarDocenteComponent implements OnInit {
     );
   }
 
+  save() {
+    let persons = [...this.persons];
+    if (this.nueva_asignacion) persons.push(this.person);
+    else persons[this.persons.indexOf(this.selectedPerson)] = this.person;
+
+    this.persons = persons;
+    this.person = null;
+    this.displayDialog = false;
+  }
+
+  delete() {
+    let index = this.persons.indexOf(this.selectedPerson);
+    this.persons = this.persons.filter((val, i) => i != index);
+    this.person = null;
+    this.displayDialog = false;
+  }
+
+  cloneAsignacion(c: AsignarDocente): AsignarDocente {
+    let asignacion = {};
+    for (let prop in c) {
+      asignacion[prop] = c[prop];
+    }
+    return asignacion;
+  }
+
+  onRowSelect(event) {
+    this.nueva_asignacion = false;
+    this.asignacion_editar = this.cloneAsignacion(event.data);
+    this.dia = new Date();
+    console.log(this.dia);
+
+    this.dia = new Date(
+      Number(this.dia.getFullYear.toString),
+      Number(this.dia.getMonth.toString),
+      Number(this.dia.getDay.toString),
+      12,
+      30,
+      0,
+      this.dia.getTimezoneOffset() * 60 * 1000
+    );
+    console.log(this.dia);
+
+    this.displayDialog = true;
+  }
+
+  asignarDocente() {
+    console.log(this.forma);
+
+    // this.forma.reset();
+  }
+
   // buscarPersona(event) {
   //   let persona = event.query;
   //   console.log(persona);
@@ -215,8 +245,17 @@ export class AsignarDocenteComponent implements OnInit {
   //   });
   // }
 
-  filtrarDocentes(query, docentes: Docente[]): Docente[] {
-    let filtered: any[] = [];
+  // seleccion(event) {
+  //   console.log(event);
+  //   this.cedula = event.persona.identificacion;
+  //   console.log(this.cedula);
+  // }
+
+  filtrarDocente(event) {
+    let query = event.query;
+    let docentes: Docente[] = this.docentes;
+
+    this.docentes_filtrados = [];
     for (let i = 0; i < docentes.length; i++) {
       let docente = docentes[i];
 
@@ -225,24 +264,65 @@ export class AsignarDocenteComponent implements OnInit {
           .toLowerCase()
           .indexOf(query.toLowerCase()) == 0
       ) {
-        filtered.push(docente);
+        this.docentes_filtrados.push(docente);
+      } else {
+        if (docente.persona.identificacion.indexOf(query) == 0) {
+          this.docentes_filtrados.push(docente);
+        }
       }
-      // if(docente.persona.identificacion.indexOf(query) == 0){
-      //   filtered.push(docente);
-      // }
     }
-    return filtered;
+
+    // this.docentesFiltrados = this.filtrarDocentes(query, this.docentes);
   }
 
-  filtrarDocente(event) {
+  filtrarAula(event) {
     let query = event.query;
-    this.docentesFiltrados = this.filtrarDocentes(query, this.docentes);
+    let aulas: Aula[] = this.aulas;
 
-    // this._ejemSrv.getCountries().subscribe((data: any[]) => {
-    //   // console.log(data);
+    this.aulas_filtradas = [];
+    for (let i = 0; i < aulas.length; i++) {
+      let aula = aulas[i];
 
-    //   this.filteredCountriesSingle = this.filterCountry(query, data);
-    // });
+      if (aula.nombre.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+        this.aulas_filtradas.push(aula);
+      }
+    }
+  }
+
+  filtrarAulaEditar(event) {
+    let query = event.query;
+    let aulas: Aula[] = this.aulas;
+
+    this.aulas_editadas = [];
+    for (let i = 0; i < aulas.length; i++) {
+      let aula = aulas[i];
+
+      if (aula.nombre.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+        this.aulas_editadas.push(aula);
+      }
+    }
+  }
+
+  filtrarDocenteEditar(event) {
+    let query = event.query;
+    let docentes: Docente[] = this.docentes;
+
+    this.docentes_editados = [];
+    for (let i = 0; i < docentes.length; i++) {
+      let docente = docentes[i];
+
+      if (
+        docente.persona.primer_apellido
+          .toLowerCase()
+          .indexOf(query.toLowerCase()) == 0
+      ) {
+        this.docentes_editados.push(docente);
+      } else {
+        if (docente.persona.identificacion.indexOf(query) == 0) {
+          this.docentes_editados.push(docente);
+        }
+      }
+    }
   }
 
   filterCountry(query, countries: any[]): any[] {

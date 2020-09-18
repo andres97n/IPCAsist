@@ -1,18 +1,46 @@
 import { Component, OnInit } from "@angular/core";
 import { Persons } from "app/clases/persons";
-import { DocenteService } from "app/services/docente.service";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { EjemplosService } from "app/services/ejemplos.service";
+import { PasantesService } from "app/services/pasantes.service";
+import { Pasante } from "app/clases/pasante";
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from "@angular/animations";
 
 @Component({
   selector: "app-pasante",
   templateUrl: "./pasante.component.html",
   styleUrls: ["./pasante.component.css"],
+  animations: [
+    trigger("rowExpansionTrigger", [
+      state(
+        "void",
+        style({
+          transform: "translateX(-10%)",
+          opacity: 0,
+        })
+      ),
+      state(
+        "active",
+        style({
+          transform: "translateX(0)",
+          opacity: 1,
+        })
+      ),
+      transition("* <=> *", animate("400ms cubic-bezier(0.86, 0, 0.07, 1)")),
+    ]),
+  ],
 })
 export class PasanteComponent implements OnInit {
   persons: Persons[] = [];
 
   cols: any[];
+  displayDialog: boolean;
 
   sexo: Array<any>;
   selectedSex: string;
@@ -34,58 +62,20 @@ export class PasanteComponent implements OnInit {
 
   forma: FormGroup;
 
-  constructor(private fb: FormBuilder, private _ejemplosSrv: EjemplosService) {
+  pasantes: Pasante[];
+  pasante: Pasante;
+  pasante_seleccionado: Pasante;
+  pasante_editar: Pasante;
+  nuevo_pasante: boolean;
+
+  constructor(
+    private fb: FormBuilder,
+    private _ejemplosSrv: EjemplosService,
+    private _pasanteSrv: PasantesService
+  ) {
     this.crearFormulario();
 
     this.universidades = this._ejemplosSrv.getUniversidades();
-    // console.log(this.universidades);
-
-    // this.universidades = [
-    //   {
-    //     name: "Universidad de Cuenca",
-    //     value: "UCUENCA",
-    //   },
-    //   {
-    //     name: "Universidad Católica de Cuenca",
-    //     value: "CATOCUENCA",
-    //   },
-    //   {
-    //     name: "Universidad del Azuay",
-    //     value: "UDA",
-    //   },
-    //   {
-    //     name: "Universidad Politécnica Salesiana",
-    //     value: "UPS",
-    //   },
-    //   {
-    //     name: "Universidad Nacional de Educación",
-    //     value: "UNAE",
-    //   },
-    //   {
-    //     name: "Instituo Superior Tecnológico del Azuay",
-    //     value: "ISTA",
-    //   },
-    //   {
-    //     name: "Instituto Tecnológico Sudamericano",
-    //     value: "SUDA",
-    //   },
-    //   {
-    //     name: "Instituto Tecnológico Superior San Gabriel",
-    //     value: "SAN GABRIEL",
-    //   },
-    //   {
-    //     name: "Instituto Tecnológico Superior American Collage",
-    //     value: "AMERICAN COLLAGE",
-    //   },
-    //   {
-    //     name: "Instituto Superior San Isidro",
-    //     value: "SAN ISIDRO",
-    //   },
-    //   {
-    //     name: "Otro",
-    //     value: "OTRO",
-    //   },
-    // ];
   }
 
   ngOnInit(): void {
@@ -95,12 +85,17 @@ export class PasanteComponent implements OnInit {
       this.persons = persons;
     });
 
+    this._pasanteSrv.getPasantes().subscribe((pasantes: Pasante[]) => {
+      console.log(pasantes);
+      this.pasantes = pasantes;
+    });
+
     this.cols = [
-      { field: "_id", header: "ID" },
-      { field: "name", header: "Name" },
-      { field: "age", header: "Age" },
-      { field: "email", header: "Email" },
-      { field: "phone", header: "Phone" },
+      { field: "persona.identificacion", header: "CÉDULA" },
+      { field: "persona.primer_nombre", header: "NOMBRES" },
+      { field: "persona.primer_apellido", header: "APELLIDOS" },
+      { field: "institución", header: "INSTITUCIÓN" },
+      { field: "docente.primer_nombre", header: "TUTOR" },
     ];
 
     this.sexo = [
@@ -271,5 +266,33 @@ export class PasanteComponent implements OnInit {
 
   guardarPasante() {
     console.log(this.forma);
+  }
+
+  onRowSelect(event) {
+    this.nuevo_pasante = false;
+    this.pasante_editar = this.clonePasante(event.data);
+    // this.dia = new Date();
+    // console.log(this.dia);
+
+    // this.dia = new Date(
+    //   Number(this.dia.getFullYear.toString),
+    //   Number(this.dia.getMonth.toString),
+    //   Number(this.dia.getDay.toString),
+    //   12,
+    //   30,
+    //   0,
+    //   this.dia.getTimezoneOffset() * 60 * 1000
+    // );
+    // console.log(this.dia);
+
+    this.displayDialog = true;
+  }
+
+  clonePasante(c: Pasante): Pasante {
+    let pasante = {};
+    for (let prop in c) {
+      pasante[prop] = c[prop];
+    }
+    return pasante;
   }
 }

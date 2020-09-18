@@ -51,6 +51,10 @@ export class EjemplosService {
         value: "UNAE",
       },
       {
+        name: "Universidad Técnica Particular de Loja",
+        value: "UTPL",
+      },
+      {
         name: "Instituo Superior Tecnológico del Azuay",
         value: "ISTA",
       },

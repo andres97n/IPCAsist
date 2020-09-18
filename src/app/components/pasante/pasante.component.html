@@ -88,7 +88,7 @@
                           style="line-height: 1"
                         ></i
                       ></span>
-                      <p-autoComplete
+                      <!-- <p-autoComplete
                         [suggestions]="filteredCountriesSingle"
                         (completeMethod)="filterCountrySingle($event)"
                         field="name"
@@ -96,7 +96,14 @@
                         placeholder="Identificación"
                         [minLength]="1"
                         formControlName="identificacion"
-                      ></p-autoComplete>
+                      ></p-autoComplete> -->
+                      <input
+                        type="text"
+                        placeholder="Identificación"
+                        pInputText
+                        size="35"
+                        formControlName="identificacion"
+                      />
                     </div>
                     <div class="row justify-content-center">
                       <p-message
@@ -479,64 +486,7 @@
                         </div>
                       </p-footer>
                     </p-dialog>
-                    <!-- <div class="ui-inputgroup">
-                      <span class="ui-inputgroup-addon">
-                        <i
-                          class="fas fa-hand-point-right fa-lg"
-                          style="line-height: 1"
-                        ></i
-                      ></span>
-                      <p-dropdown
-                        [options]="universidades"
-                        optionLabel="name"
-                        (ngModelChange)="universidadSeleccionada($event)"
-                        filter="true"
-                        placeholder="Seleccione un Instituto"
-                        formControlName="institucion"
-                      >
-                        <ng-template
-                          *ngFor="let item of universidades"
-                          pTemplate="selectedItem"
-                        >
-                          <img
-                            src="/assets/img/Logos Universidades/{{
-                              item.value
-                            }}.png"
-                            style="width: 16px; vertical-align: middle"
-                          />
-                          <span
-                            style="vertical-align: middle; margin-left: 0.5em"
-                            >{{ item.name }}</span
-                          >
-                        </ng-template>
-                        <ng-template
-                          *ngFor="let insti of universidades"
-                          pTemplate="item"
-                        >
-                          <div
-                            class="ui-helper-clearfix"
-                            style="position: relative; height: 25px"
-                          >
-                            <img
-                              src="/assets/img/Logos Universidades/{{
-                                insti.value
-                              }}.png"
-                              style="
-                                width: 24px;
-                                position: absolute;
-                                top: 1px;
-                                left: 5px;
-                              "
-                            />
-                            <div
-                              style="font-size: 14px; float: right; margin-top: 4px"
-                            >
-                              {{ insti.name }}
-                            </div>
-                          </div>
-                        </ng-template>
-                      </p-dropdown>
-                    </div> -->
+
                     <div
                       class="row justify-content-center"
                       style="margin-top: 0.5em"
@@ -774,14 +724,6 @@
             </div>
           </div>
         </div>
-
-        <!-- <div class="row justify-content-center" style="margin-top: 2em">
-          <div class="col-md-5">
-            
-          </div>
-        </div>
-        <br /> -->
-
         <br />
 
         <button
@@ -803,6 +745,222 @@
           <br />
 
           <p-table
+            [columns]="cols"
+            [value]="pasantes"
+            dataKey="_id"
+            [resizableColumns]="true"
+            [scrollable]="true"
+            scrollHeight="400px"
+            styleClass="ui-table-summary"
+            selectionMode="single"
+            [(selection)]="pasante_seleccionado"
+            (onRowSelect)="onRowSelect($event)"
+          >
+            <ng-template pTemplate="colgroup" let-columns>
+              <colgroup>
+                <col />
+                <col *ngFor="let col of columns" />
+              </colgroup>
+            </ng-template>
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th style="width: 3em"></th>
+                <th *ngFor="let col of columns" pResizableColumn>
+                  {{ col.header }}
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template
+              pTemplate="body"
+              let-rowData
+              let-expanded="expanded"
+              let-columns="columns"
+            >
+              <tr [pSelectableRow]="rowData">
+                <td style="width: 3em">
+                  <a href="#" [pRowToggler]="rowData">
+                    <i
+                      [ngClass]="
+                        expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'
+                      "
+                    ></i>
+                  </a>
+                </td>
+                <td>
+                  {{ rowData.persona.identificacion }}
+                </td>
+                <td>
+                  {{ rowData.persona.primer_nombre }}
+                  {{ rowData.persona.segundo_nombre }}
+                </td>
+                <td>
+                  {{ rowData.persona.primer_apellido }}
+                  {{ rowData.persona.segundo_apellido }}
+                </td>
+                <td>
+                  {{ rowData.institucion }}
+                </td>
+                <td>
+                  {{ rowData.tutor.persona.primer_nombre }}
+                  {{ rowData.tutor.persona.primer_apellido }}
+                </td>
+
+                <!-- <td
+                  *ngFor="let col of columns; let i = index"
+                  class="ui-resizable-column"
+                >
+                  {{ rowData[col.field] }}
+                </td> -->
+              </tr>
+            </ng-template>
+            <ng-template
+              pTemplate="rowexpansion"
+              let-rowData
+              let-columns="columns"
+            >
+              <tr>
+                <td [attr.colspan]="columns.length + 1">
+                  <div
+                    class="p-grid ui-fluid"
+                    style="font-size: 16px; padding: 20px"
+                    [@rowExpansionTrigger]="'active'"
+                  >
+                    <div class="row justify-content-center">
+                      <div class="col-md-6">
+                        <div class="p-grid">
+                          <div class="p-col-12">
+                            <b>Cédula:</b>
+                            {{ rowData.persona.identificacion }}
+                          </div>
+                          <div class="p-col-12">
+                            <b>Nombres:</b>
+                            {{ rowData.persona.primer_nombre }}
+                            {{ rowData.persona.segundo_nombre }}
+                          </div>
+                          <div class="p-col-12">
+                            <b>Apellidos:</b>
+                            {{ rowData.persona.primer_apellido }}
+                            {{ rowData.persona.segundo_apellido }}
+                          </div>
+                          <div class="p-col-12">
+                            <b>Correo:</b>
+                            {{ rowData.persona.correo }}
+                          </div>
+                          <div class="p-col-12">
+                            <b>Contacto:</b> {{ rowData.persona.contacto }}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="p-grid">
+                          <div class="p-col-12">
+                            <b>Institución:</b>
+                            {{ rowData.institucion }}
+                          </div>
+                          <div class="p-col-12">
+                            <b>Instructor:</b>
+                            {{ rowData.tutor.persona.primer_nombre }}
+                            {{ rowData.tutor.persona.primer_apellido }}
+                          </div>
+                          <div class="p-col-12">
+                            <b>Especialidad:</b>
+                            {{ rowData.especialidad }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+
+          <p-dialog
+            header="Detalles de Persona"
+            [(visible)]="displayDialog"
+            [focusOnShow]="false"
+            showEffect="fade"
+            [modal]="true"
+            [style]="{ width: '300px' }"
+          >
+            <div class="p-grid ui-fluid" *ngIf="pasante_editar">
+              <div class="p-col-4">
+                <label for="_id">IDENTIFICACIÓN</label>
+              </div>
+              <div class="p-col-8">
+                <input
+                  type="text"
+                  placeholder="Identificación"
+                  pInputText
+                  size="35"
+                />
+              </div>
+              <div class="p-col-4 edicion">
+                <label for="name">HORA DE ENTRADA</label>
+              </div>
+              <div class="p-col-8">
+                <p-calendar
+                  [(ngModel)]="hora_entrada"
+                  [timeOnly]="true"
+                ></p-calendar>
+              </div>
+              <div class="p-col-4 edicion">
+                <label for="age">HORA DE SALIDA</label>
+              </div>
+              <div class="p-col-8">
+                <p-calendar
+                  [(ngModel)]="hora_salida"
+                  [timeOnly]="true"
+                ></p-calendar>
+              </div>
+              <div class="p-col-4 edicion">
+                <label for="email">AULA</label>
+              </div>
+              <div class="p-col-8" style="margin-bottom: 0.5em">
+                <!-- <p-autoComplete
+                  [suggestions]="aulas_editadas"
+                  (completeMethod)="filtrarAulaEditar($event)"
+                  [size]="30"
+                  [minLength]="1"
+                  placeholder="Aula"
+                  [dropdown]="true"
+                  [(ngModel)]="asignacion_editar.aula"
+                  field="nombre"
+                >
+                  <ng-template let-brand pTemplate="item">
+                    <div class="ui-helper-clearfix">
+                      <div style="font-size: 15px; margin: 0.5em">
+                        {{ brand.nombre }}
+                      </div>
+                    </div>
+                  </ng-template>
+                </p-autoComplete> -->
+              </div>
+            </div>
+            <p-footer>
+              <div
+                class="ui-dialog-buttonpane ui-helper-clearfix row justify-content-center"
+              >
+                <button
+                  type="button"
+                  class="btn btn-outline-danger btn-round btn-sm"
+                  (click)="delete()"
+                >
+                  <i class="fas fa-trash-alt fa-lg fa-fw"></i> Borrar
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-outline-success btn-round btn-sm"
+                  (click)="save()"
+                >
+                  <i class="fas fa-save fa-lg fa-fw"></i> Guardar
+                </button>
+              </div>
+            </p-footer>
+          </p-dialog>
+
+          <!-- <p-table
             [value]="persons"
             [columns]="cols"
             [scrollable]="true"
@@ -828,7 +986,7 @@
                 </td>
               </tr>
             </ng-template>
-          </p-table>
+          </p-table> -->
         </div>
       </div>
     </div>

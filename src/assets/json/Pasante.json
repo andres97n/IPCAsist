@@ -12,8 +12,8 @@
       "correo": "karla@gmail.com",
       "contacto": "0985461238"
     },
-    "institución": "UDA",
-    "docente": {
+    "institucion": "Universidad del Azuay",
+    "tutor": {
       "persona": {
         "identificacion": "01023245894",
         "primer_nombre": "Paúl",
@@ -39,8 +39,8 @@
       "correo": "danielam@hotmail.com",
       "contacto": "0978456217"
     },
-    "institución": "ucuenca",
-    "docente": {
+    "institucion": "Universidad de Cuenca",
+    "tutor": {
       "persona": {
         "identificacion": "0104472014",
         "primer_nombre": "Adriana",
@@ -66,8 +66,8 @@
       "correo": "yoligermania@gmail.com",
       "contacto": "0965324517"
     },
-    "institución": "ucuenca",
-    "docente": {
+    "institucion": "Universidad de Cuenca",
+    "tutor": {
       "persona": {
         "identificacion": "0104472014",
         "primer_nombre": "Adriana",
@@ -93,8 +93,8 @@
       "correo": "danyest@gmail.com",
       "contacto": "0954762354"
     },
-    "institución": "uda",
-    "docente": {
+    "institucion": "Universidad del Azuay",
+    "tutor": {
       "persona": {
         "identificacion": "0104472014",
         "primer_nombre": "Adriana",
@@ -120,8 +120,8 @@
       "correo": "fabricarlos@gmail.com",
       "contacto": "0954721430"
     },
-    "institución": "ups",
-    "docente": {
+    "institucion": "Universidad Politécnica Salesiana",
+    "tutor": {
       "persona": {
         "identificacion": "0147684258",
         "primer_nombre": "María",

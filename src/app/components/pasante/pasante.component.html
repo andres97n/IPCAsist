@@ -621,7 +621,6 @@
                         [locale]="es"
                         dateFormat="dd/mm/yy"
                         placeholder="Fecha de Visita"
-                        formControlName="fecha_visita"
                         formControlName="fecha_inicio"
                         (onSelect)="mostrarFecha($event)"
                         [showWeek]="true"
@@ -730,6 +729,7 @@
           type="submit"
           class="btn btn-outline-neutral btn-round btn-lg"
           [disabled]="!forma.valid"
+          style="margin-top: 1em"
         >
           <i class="fas fa-save fa-lg fa-fw"></i> Registrar Pasante
         </button>
@@ -877,65 +877,214 @@
           </p-table>
 
           <p-dialog
-            header="Detalles de Persona"
+            header="DETALLES DE PASANTE"
             [(visible)]="displayDialog"
             [focusOnShow]="false"
             showEffect="fade"
             [modal]="true"
-            [style]="{ width: '300px' }"
+            [style]="{ width: '650px' }"
           >
-            <div class="p-grid ui-fluid" *ngIf="pasante_editar">
-              <div class="p-col-4">
-                <label for="_id">IDENTIFICACIÓN</label>
+            <div class="row justify-content-center" *ngIf="pasante_editar">
+              <div class="col-md-4">
+                <div class="row">
+                  <div class="col-md-12">
+                    <label for="_id" class="fuente">IDENTIFICACIÓN</label>
+                    <input
+                      type="text"
+                      placeholder="Identificación"
+                      pInputText
+                      size="20"
+                      [(ngModel)]="pasante_editar.persona.identificacion"
+                    />
+                  </div>
+                </div>
+                <div class="row justify-content-center edicion">
+                  <div class="col-md-12">
+                    <label class="fuente">NOMBRES Y APELLIDOS</label>
+                    <input
+                      type="text"
+                      placeholder="Primer Nombre"
+                      pInputText
+                      size="20"
+                      [(ngModel)]="pasante_editar.persona.primer_nombre"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Segundo Nombre"
+                      pInputText
+                      size="20"
+                      [(ngModel)]="pasante_editar.persona.segundo_nombre"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Primer Apellido"
+                      pInputText
+                      size="20"
+                      [(ngModel)]="pasante_editar.persona.primer_apellido"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Segundo Apellido"
+                      pInputText
+                      size="20"
+                      [(ngModel)]="pasante_editar.persona.segundo_apellido"
+                    />
+                  </div>
+                </div>
+                <div class="row edicion">
+                  <div class="col-md-12">
+                    <label class="fuente">CORREO</label>
+                    <input
+                      type="email"
+                      placeholder="Correo"
+                      pInputText
+                      size="20"
+                      [(ngModel)]="pasante_editar.persona.correo"
+                    />
+                  </div>
+                </div>
               </div>
-              <div class="p-col-8">
-                <input
-                  type="text"
-                  placeholder="Identificación"
-                  pInputText
-                  size="35"
-                />
+              <div class="col-md-4">
+                <div class="row edicion">
+                  <div class="col-md-12">
+                    <label for="tutor" class="fuente">FECHA DE INICIO</label>
+                    <p-calendar
+                      [locale]="es"
+                      dateFormat="dd/mm/yy"
+                      placeholder="Fecha de Visita"
+                      [(ngModel)]="pasante_editar.fecha_inicio"
+                      (onSelect)="mostrarFecha($event)"
+                      [showWeek]="true"
+                    ></p-calendar>
+                  </div>
+                </div>
+                <div class="row edicion">
+                  <div class="col-md-12">
+                    <label for="email" class="fuente">EDAD</label>
+                    <p-inputNumber
+                      mode="decimal"
+                      [min]="17"
+                      [max]="80"
+                      placeholder="Edad"
+                      size="20"
+                      [(ngModel)]="pasante_editar.persona.edad"
+                    >
+                    </p-inputNumber>
+                  </div>
+                </div>
+                <div class="row edicion">
+                  <div class="col-md-12">
+                    <label class="fuente">GÉNERO</label>
+                    <p-dropdown
+                      [options]="sexo"
+                      optionLabel="name"
+                      (ngModelChange)="sexoSeleccionado($event)"
+                      placeholder="Seleccione un sexo"
+                      [(ngModel)]="selectedSex"
+                      [style]="{ minWidth: '170px', width: '170px' }"
+                    ></p-dropdown>
+                  </div>
+                </div>
+                <div class="row edicion">
+                  <div class="col-md-12">
+                    <label class="fuente">CONTACTO</label>
+                    <p-inputMask
+                      mask="0999999999"
+                      placeholder="Celular"
+                      [(ngModel)]="pasante_editar.persona.contacto"
+                    ></p-inputMask>
+                  </div>
+                </div>
               </div>
-              <div class="p-col-4 edicion">
-                <label for="name">HORA DE ENTRADA</label>
-              </div>
-              <div class="p-col-8">
-                <p-calendar
-                  [(ngModel)]="hora_entrada"
-                  [timeOnly]="true"
-                ></p-calendar>
-              </div>
-              <div class="p-col-4 edicion">
-                <label for="age">HORA DE SALIDA</label>
-              </div>
-              <div class="p-col-8">
-                <p-calendar
-                  [(ngModel)]="hora_salida"
-                  [timeOnly]="true"
-                ></p-calendar>
-              </div>
-              <div class="p-col-4 edicion">
-                <label for="email">AULA</label>
-              </div>
-              <div class="p-col-8" style="margin-bottom: 0.5em">
-                <!-- <p-autoComplete
-                  [suggestions]="aulas_editadas"
-                  (completeMethod)="filtrarAulaEditar($event)"
-                  [size]="30"
-                  [minLength]="1"
-                  placeholder="Aula"
-                  [dropdown]="true"
-                  [(ngModel)]="asignacion_editar.aula"
-                  field="nombre"
-                >
-                  <ng-template let-brand pTemplate="item">
-                    <div class="ui-helper-clearfix">
-                      <div style="font-size: 15px; margin: 0.5em">
-                        {{ brand.nombre }}
-                      </div>
-                    </div>
-                  </ng-template>
-                </p-autoComplete> -->
+
+              <div class="col-md-4">
+                <div class="row edicion">
+                  <div class="col-md-12">
+                    <label class="fuente">INSTITUCIÓN</label>
+                    <p-autoComplete
+                      [suggestions]="universidades_editar"
+                      (completeMethod)="filtrarUniversidad($event)"
+                      [size]="15"
+                      [minLength]="1"
+                      placeholder="Institución"
+                      [dropdown]="true"
+                      [(ngModel)]="auto_universidad"
+                      field="name"
+                    >
+                      <ng-template let-brand pTemplate="item">
+                        <div class="ui-helper-clearfix">
+                          <div style="font-size: 12px; margin: 0.5em">
+                            {{ brand.name }}
+                          </div>
+                        </div>
+                      </ng-template>
+                    </p-autoComplete>
+                  </div>
+                </div>
+                <div class="row edicion">
+                  <div class="col-md-12">
+                    <label for="tutor" class="fuente">TUTOR</label>
+                    <p-autoComplete
+                      [suggestions]="docentes_filtrados"
+                      (completeMethod)="filtrarDocente($event)"
+                      [size]="15"
+                      name="tutor"
+                      [minLength]="1"
+                      placeholder="Docente"
+                      [dropdown]="true"
+                      [(ngModel)]="pasante_editar.tutor"
+                      field="persona.identificacion"
+                    >
+                      <ng-template let-brand pTemplate="item">
+                        <div class="ui-helper-clearfix">
+                          <div
+                            style="
+                              font-size: 10px;
+                              display: inline-block;
+                              margin: 5px 5px 0 0;
+                            "
+                          >
+                            {{ brand.persona.identificacion }}
+                          </div>
+                          <div
+                            style="
+                              font-size: 12px;
+                              float: right;
+                              margin: 8px 3px 0 0;
+                            "
+                          >
+                            {{ brand.persona.primer_nombre }}
+                            {{ brand.persona.primer_apellido }}
+                          </div>
+                        </div>
+                      </ng-template>
+                    </p-autoComplete>
+                  </div>
+                </div>
+                <div class="row edicion">
+                  <div class="col-md-12">
+                    <label for="tutor" class="fuente">ESPECIALIDAD</label>
+                    <input
+                      type="text"
+                      placeholder="Especialidad"
+                      pInputText
+                      size="20"
+                      [(ngModel)]="pasante_editar.especialidad"
+                    />
+                  </div>
+                </div>
+                <div class="row edicion">
+                  <div class="col-md-12">
+                    <label class="fuente">HORAS AL DÍA</label>
+                    <h6>#Horas: {{ pasante_editar.num_horas }}</h6>
+                    <p-slider
+                      [style]="{ width: '10em' }"
+                      [step]="1"
+                      max="9"
+                      [(ngModel)]="pasante_editar.num_horas"
+                    ></p-slider>
+                  </div>
+                </div>
               </div>
             </div>
             <p-footer>
@@ -959,34 +1108,6 @@
               </div>
             </p-footer>
           </p-dialog>
-
-          <!-- <p-table
-            [value]="persons"
-            [columns]="cols"
-            [scrollable]="true"
-            scrollHeight="200px"
-            [resizableColumns]="true"
-          >
-            <ng-template pTemplate="colgroup" let-columns>
-              <colgroup>
-                <col *ngFor="let col of columns" />
-              </colgroup>
-            </ng-template>
-            <ng-template pTemplate="header">
-              <tr>
-                <th *ngFor="let col of cols" pResizableColumn>
-                  {{ col.header }}
-                </th>
-              </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-person>
-              <tr>
-                <td *ngFor="let col of cols">
-                  {{ person[col.field] }}
-                </td>
-              </tr>
-            </ng-template>
-          </p-table> -->
         </div>
       </div>
     </div>
@@ -998,26 +1119,20 @@
       <div class="col-md-10">
         <div class="row">
           <div class="col-md-2">
-            <img
-              src="./assets/img/icons/comilla izquierda.png"
-              width="80px"
-              height="80px"
-            />
+            <i class="fas fa-quote-left fa-7x fa-fw"></i>
           </div>
           <div class="col-md-8">
-            <div class="row">
+            <div class="row text-center">
               <h2>Conóceme por mis habilidades, no por mis discapacidades.</h2>
-              <h5 style="margin-left: 65%; margin-top: 5%">
+            </div>
+            <div class="row">
+              <h5 style="margin-left: 70%; margin-top: 0.5em">
                 - Robert M. Hensel -
               </h5>
             </div>
           </div>
-          <div class="col-md-2" style="margin-top: 10%">
-            <img
-              src="./assets/img/icons/comilla derecha.png"
-              width="80"
-              height="80px"
-            />
+          <div class="col-md-2" style="margin-top: 12%">
+            <i class="fas fa-quote-right fa-7x fa-fw"></i>
           </div>
         </div>
       </div>

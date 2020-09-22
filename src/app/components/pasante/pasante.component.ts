@@ -11,6 +11,8 @@ import {
   transition,
   trigger,
 } from "@angular/animations";
+import { DocenteService } from "app/services/docente.service";
+import { Docente } from "app/clases/docente";
 
 @Component({
   selector: "app-pasante",
@@ -43,7 +45,7 @@ export class PasanteComponent implements OnInit {
   displayDialog: boolean;
 
   sexo: Array<any>;
-  selectedSex: string;
+  selectedSex: any;
 
   edad: number;
   celular: number;
@@ -51,9 +53,11 @@ export class PasanteComponent implements OnInit {
   tipo_sangre: Array<any>;
   tipo: string;
 
-  universidades: Array<any>;
+  universidades: any[];
+  universidades_editar: any[];
   universidad: string;
   mostrarModal: boolean = false;
+  auto_universidad: any;
 
   num_horas: number;
 
@@ -68,10 +72,14 @@ export class PasanteComponent implements OnInit {
   pasante_editar: Pasante;
   nuevo_pasante: boolean;
 
+  docentes: Docente[];
+  docentes_filtrados: Docente[];
+
   constructor(
     private fb: FormBuilder,
     private _ejemplosSrv: EjemplosService,
-    private _pasanteSrv: PasantesService
+    private _pasanteSrv: PasantesService,
+    private _docenteSrv: DocenteService
   ) {
     this.crearFormulario();
 
@@ -90,6 +98,11 @@ export class PasanteComponent implements OnInit {
       this.pasantes = pasantes;
     });
 
+    this._docenteSrv.getDocentes().subscribe((docentes: Docente[]) => {
+      console.log(docentes);
+      this.docentes = docentes;
+    });
+
     this.cols = [
       { field: "persona.identificacion", header: "CÉDULA" },
       { field: "persona.primer_nombre", header: "NOMBRES" },
@@ -99,9 +112,9 @@ export class PasanteComponent implements OnInit {
     ];
 
     this.sexo = [
-      { name: "Masculino", value: 1 },
-      { name: "Femenino", value: 2 },
-      { name: "Otro", value: 3 },
+      { name: "Masculino", value: "M" },
+      { name: "Femenino", value: "F" },
+      { name: "Otro", value: "O" },
     ];
 
     this.tipo_sangre = [
@@ -271,21 +284,28 @@ export class PasanteComponent implements OnInit {
   onRowSelect(event) {
     this.nuevo_pasante = false;
     this.pasante_editar = this.clonePasante(event.data);
-    // this.dia = new Date();
-    // console.log(this.dia);
-
-    // this.dia = new Date(
-    //   Number(this.dia.getFullYear.toString),
-    //   Number(this.dia.getMonth.toString),
-    //   Number(this.dia.getDay.toString),
-    //   12,
-    //   30,
-    //   0,
-    //   this.dia.getTimezoneOffset() * 60 * 1000
-    // );
-    // console.log(this.dia);
-
     this.displayDialog = true;
+    switch (this.pasante_editar.persona.sexo) {
+      case "F":
+        this.selectedSex = {
+          name: "Femenino",
+          value: "F",
+        };
+        break;
+      case "M":
+        this.selectedSex = {
+          name: "Masculino",
+          value: "M",
+        };
+        break;
+      case "O":
+        this.selectedSex = {
+          name: "Otro",
+          value: "O",
+        };
+        break;
+    }
+    this.editarUniversidad(this.pasante_editar.institucion);
   }
 
   clonePasante(c: Pasante): Pasante {
@@ -294,5 +314,52 @@ export class PasanteComponent implements OnInit {
       pasante[prop] = c[prop];
     }
     return pasante;
+  }
+
+  editarUniversidad(u: string) {
+    this.universidades.forEach((institucion) => {
+      if (institucion.name === u) {
+        this.auto_universidad = institucion;
+      }
+    });
+    console.log(this.auto_universidad);
+  }
+
+  filtrarUniversidad(event) {
+    let query = event.query;
+    let instituciones: any[] = this.universidades;
+
+    this.universidades_editar = [];
+    for (let i = 0; i < instituciones.length - 1; i++) {
+      let institucion = instituciones[i];
+
+      if (institucion.name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+        this.universidades_editar.push(institucion);
+      }
+    }
+  }
+
+  filtrarDocente(event) {
+    let query = event.query;
+    let docentes: Docente[] = this.docentes;
+
+    this.docentes_filtrados = [];
+    for (let i = 0; i < docentes.length; i++) {
+      let docente = docentes[i];
+
+      if (
+        docente.persona.primer_apellido
+          .toLowerCase()
+          .indexOf(query.toLowerCase()) == 0
+      ) {
+        this.docentes_filtrados.push(docente);
+      } else {
+        if (docente.persona.identificacion.indexOf(query) == 0) {
+          this.docentes_filtrados.push(docente);
+        }
+      }
+    }
+
+    // this.docentesFiltrados = this.filtrarDocentes(query, this.docentes);
   }
 }

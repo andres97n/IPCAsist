@@ -75,6 +75,8 @@ export class PasanteComponent implements OnInit {
   docentes: Docente[];
   docentes_filtrados: Docente[];
 
+  hora_visita: Date;
+
   constructor(
     private fb: FormBuilder,
     private _ejemplosSrv: EjemplosService,

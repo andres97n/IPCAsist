@@ -1,82 +1,217 @@
 [
   {
-    "empresa": "Coca-Cola",
-    "direccion": {
-      "calle_principal": "Av. Cornelio Vintimilla",
-      "calle_secundaria": "Av. Octavio Chacón"
+    "_id": "_475347bdhjfbsd43hjbvw89r3fbg",
+    "empresa": {
+      "_id": "_dnj384jgb3tnjgb34tr",
+      "nombre": "Coca-Cola",
+      "representante": {
+        "persona": {
+          "cedula": "0105874328",
+          "primer_nombre": "Andrés",
+          "primer_apellido": "Córdova",
+          "contacto": "0987458794",
+          "correo": "cuenca@cocacola.com"
+        }
+      },
+      "direccion": {
+        "calle_principal": "Av. Cornelio Vintimilla",
+        "calle_secundaria": "Av. Octavio Chacón"
+      }
     },
-    "representante": {
-      "nombre": "Andrés",
-      "apellido": "Córdova"
-    },
-    "contacto": "0987458794",
-    "correo": "cuenca@cocacola.com",
     "motivo_visita": "Paseo a la ciudad de Cuenca",
-    "docente": {
-      "identificacion": "0104472014",
-      "primer_nombre": "Adriana",
-      "segundo_nombre": "Natalia",
-      "primer_apellido": "Prado",
-      "segundo_apellido": "Gimenez"
+    "encargado_visita": {
+      "persona": {
+        "identificacion": "0104472014",
+        "primer_nombre": "Adriana",
+        "segundo_nombre": "Natalia",
+        "primer_apellido": "Prado",
+        "segundo_apellido": "Gimenez"
+      }
     },
     "fecha_visita": "21/06/2020",
     "hora_visita": {
-      "periodo": "AM",
+      "formato_hora": "AM",
       "hora": "10:00"
     },
     "observaciones": "Ninguna novedad"
   },
   {
-    "empresa": "KFC",
-    "direccion": {
-      "calle_principal": "Mall del Río",
-      "calle_secundaria": ""
+    "_id": "_473489bhjdnf3478y3rb3784bfhr3b4t",
+    "empresa": {
+      "_id": "_4893jh3b4htj3f8943tb3hb34j",
+      "nombre": "KFC",
+      "representante": {
+        "persona": {
+          "cedula": "0102358731",
+          "primer_nombre": "Carlos",
+          "primer_apellido": "Andrade",
+          "contacto": "0952134565",
+          "correo": "cuenca@kfc.com"
+        }
+      },
+      "direccion": {
+        "calle_principal": "Mall del Río",
+        "calle_secundaria": ""
+      }
     },
-    "representante": {
-      "nombre": "Carlos",
-      "apellido": "Andrade"
-    },
-    "contacto": "0952134565",
-    "correo": "cuenca@kfc.com",
     "motivo_visita": "Invitar a comer a los niños en KFC",
-    "docente": {
-      "identificacion": "01023245894",
-      "primer_nombre": "Paúl",
-      "segundo_nombre": "Gabriel",
-      "primer_apellido": "Torres",
-      "segundo_apellido": "Gonzales"
+    "encargado_visita": {
+      "persona": {
+        "identificacion": "01023245894",
+        "primer_nombre": "Paúl",
+        "segundo_nombre": "Gabriel",
+        "primer_apellido": "Torres",
+        "segundo_apellido": "Gonzales"
+      }
     },
     "fecha_visita": "23/08/2020",
     "hora_visita": {
-      "periodo": "AM",
+      "formato_hora": "AM",
       "hora": "10:00"
     },
     "observaciones": "Ninguna novedad"
   },
   {
-    "empresa": "Tutto Fredo",
-    "direccion": {
-      "calle_principal": "Av. de las Américas",
-      "calle_secundaria": ""
+    "_id": "_48753yb3yu483rb34u289b",
+    "empresa": {
+      "_id": "_47354b3384934hb387r34bh",
+      "nombre": "Tutto Fredo",
+      "representante": {
+        "persona": {
+          "cedula": "1458962158",
+          "primer_nombre": "Mauricio",
+          "primer_apellido": "Encalada",
+          "contacto": "098523164",
+          "correo": "mauricioe@tuttofredo.com"
+        }
+      },
+      "direccion": {
+        "calle_principal": "Av. de las Américas",
+        "calle_secundaria": ""
+      }
     },
-    "representante": {
-      "nombre": "Mauricio",
-      "apellido": "Encalada"
-    },
-    "contacto": "098523164",
-    "correo": "mauricioe@tuttofredo.com",
     "motivo_visita": "Invitar a comer helados de la franquicia.",
-    "docente": {
-      "identificacion": "01023245894",
-      "primer_nombre": "Paúl",
-      "segundo_nombre": "Gabriel",
-      "primer_apellido": "Torres",
-      "segundo_apellido": "Gonzales"
+    "encargado_visita": {
+      "persona": {
+        "identificacion": "01023245894",
+        "primer_nombre": "Paúl",
+        "segundo_nombre": "Gabriel",
+        "primer_apellido": "Torres",
+        "segundo_apellido": "Gonzales"
+      }
     },
     "fecha_visita": "15/05/2020",
     "hora_visita": {
-      "periodo": "AM",
+      "formato_hora": "AM",
       "hora": "10:30"
+    },
+    "observaciones": "Ninguna novedad"
+  },
+  {
+    "_id": "_ferbfe483b34h3489tb34hjtb3",
+    "empresa": {
+      "_id": "_47354b3384934hb387r34bh",
+      "nombre": "Monte Bianco",
+      "representante": {
+        "persona": {
+          "cedula": "0106598452",
+          "primer_nombre": "Juan",
+          "primer_apellido": "Piedra",
+          "contacto": "0968523178",
+          "correo": "juanp98@montebianco.com"
+        }
+      },
+      "direccion": {
+        "calle_principal": "Av. Remigio Crespo",
+        "calle_secundaria": ""
+      }
+    },
+    "motivo_visita": "Invitar a comer postres de la franquicia.",
+    "encargado_visita": {
+      "persona": {
+        "identificacion": "1248753216",
+        "primer_nombre": "Daniela",
+        "segundo_nombre": "Augusta",
+        "primer_apellido": "Damián",
+        "segundo_apellido": "Gonzales"
+      }
+    },
+    "fecha_visita": "20/06/2020",
+    "hora_visita": {
+      "formato_hora": "AM",
+      "hora": "10:00"
+    },
+    "observaciones": "Ninguna novedad"
+  },
+  {
+    "_id": "_745b3h34y3485b34hb34sdf",
+    "empresa": {
+      "_id": "_fhfb438b4h34rb43u53",
+      "nombre": "Tranvía",
+      "representante": {
+        "persona": {
+          "cedula": "0108965237",
+          "primer_nombre": "Carlos",
+          "primer_apellido": "Crespo",
+          "contacto": "0965821320",
+          "correo": "ccrespo@tranviacuenca.com"
+        }
+      },
+      "direccion": {
+        "calle_principal": "Av. México",
+        "calle_secundaria": "Calle Honduras"
+      }
+    },
+    "motivo_visita": "Pasear en tranvía por la ciudad.",
+    "encargado_visita": {
+      "persona": {
+        "identificacion": "0105876482",
+        "primer_nombre": "Carlos",
+        "segundo_nombre": "Marcelo",
+        "primer_apellido": "Crespo",
+        "segundo_apellido": "Galián"
+      }
+    },
+    "fecha_visita": "10/02/2020",
+    "hora_visita": {
+      "formato_hora": "AM",
+      "hora": "09:30"
+    },
+    "observaciones": "Ninguna novedad"
+  },
+  {
+    "_id": "_rfbe48berhb348tbgb334tfg",
+    "empresa": {
+      "_id": "_bdfgerb83rg5h3t3bb3tubs",
+      "nombre": "Multicines",
+      "representante": {
+        "persona": {
+          "cedula": "1458936540",
+          "primer_nombre": "Daniela",
+          "primer_apellido": "Romo",
+          "contacto": "0985642150",
+          "correo": "danyromo@multicines.com"
+        }
+      },
+      "direccion": {
+        "calle_principal": "Av. Jose Ortega",
+        "calle_secundaria": "Calle Felipe Segundo"
+      }
+    },
+    "motivo_visita": "Visualizar películas con los chicos",
+    "encargado_visita": {
+      "persona": {
+        "identificacion": "0105876482",
+        "primer_nombre": "Carlos",
+        "segundo_nombre": "Marcelo",
+        "primer_apellido": "Crespo",
+        "segundo_apellido": "Galián"
+      }
+    },
+    "fecha_visita": "10/02/2020",
+    "hora_visita": {
+      "formato_hora": "AM",
+      "hora": "09:30"
     },
     "observaciones": "Ninguna novedad"
   }

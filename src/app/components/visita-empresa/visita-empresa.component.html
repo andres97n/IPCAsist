@@ -457,14 +457,39 @@
                         ></i
                       ></span>
                       <p-autoComplete
-                        [suggestions]="filteredCountriesSingle"
-                        (completeMethod)="filterCountrySingle($event)"
-                        field="name"
-                        [size]="35"
-                        placeholder="Nombre o Identificación"
+                        [suggestions]="docentes_filtrados"
+                        (completeMethod)="filtrarDocente($event)"
+                        [size]="15"
                         [minLength]="1"
+                        placeholder="Guía"
+                        [dropdown]="true"
                         formControlName="guia"
-                      ></p-autoComplete>
+                        field="persona.identificacion"
+                      >
+                        <ng-template let-brand pTemplate="item">
+                          <div class="ui-helper-clearfix">
+                            <div
+                              style="
+                                font-size: 10px;
+                                display: inline-block;
+                                margin: 5px 5px 0 0;
+                              "
+                            >
+                              {{ brand.persona.identificacion }}
+                            </div>
+                            <div
+                              style="
+                                font-size: 12px;
+                                float: right;
+                                margin: 8px 3px 0 0;
+                              "
+                            >
+                              {{ brand.persona.primer_nombre }}
+                              {{ brand.persona.primer_apellido }}
+                            </div>
+                          </div>
+                        </ng-template>
+                      </p-autoComplete>
                     </div>
                     <div class="row justify-content-center">
                       <p-message
@@ -557,32 +582,338 @@
           <br />
 
           <p-table
-            [value]="persons"
             [columns]="cols"
-            [scrollable]="true"
-            scrollHeight="200px"
+            [value]="visitas"
+            dataKey="_id"
             [resizableColumns]="true"
+            [scrollable]="true"
+            scrollHeight="400px"
+            styleClass="ui-table-summary"
+            selectionMode="single"
+            [(selection)]="visita"
+            (onRowSelect)="onRowSelect($event)"
           >
             <ng-template pTemplate="colgroup" let-columns>
               <colgroup>
+                <col />
                 <col *ngFor="let col of columns" />
               </colgroup>
             </ng-template>
-            <ng-template pTemplate="header">
+            <ng-template pTemplate="header" let-columns>
               <tr>
-                <th *ngFor="let col of cols" pResizableColumn>
+                <th style="width: 3em"></th>
+                <th *ngFor="let col of columns" pResizableColumn>
                   {{ col.header }}
                 </th>
               </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-person>
+            <ng-template
+              pTemplate="body"
+              let-rowData
+              let-expanded="expanded"
+              let-columns="columns"
+            >
+              <tr [pSelectableRow]="rowData">
+                <td style="width: 3em">
+                  <a href="#" [pRowToggler]="rowData">
+                    <i
+                      [ngClass]="
+                        expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'
+                      "
+                    ></i>
+                  </a>
+                </td>
+                <td>
+                  {{ rowData.empresa.nombre }}
+                </td>
+                <td>
+                  {{ rowData.empresa.representante.persona.primer_nombre }}
+                  {{ rowData.empresa.representante.persona.primer_apellido }}
+                </td>
+                <td>
+                  {{ rowData.encargado_visita.persona.primer_nombre }}
+                  {{ rowData.encargado_visita.persona.primer_apellido }}
+                </td>
+                <td>
+                  {{ rowData.fecha_visita }}
+                </td>
+                <td>
+                  {{ rowData.hora_visita.hora }}
+                  {{ rowData.hora_visita.formato_hora }}
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template
+              pTemplate="rowexpansion"
+              let-rowData
+              let-columns="columns"
+            >
               <tr>
-                <td *ngFor="let col of cols">
-                  {{ person[col.field] }}
+                <td [attr.colspan]="columns.length + 1">
+                  <div
+                    class="p-grid ui-fluid"
+                    style="font-size: 16px; padding: 20px"
+                    [@rowExpansionTrigger]="'active'"
+                  >
+                    <div class="row justify-content-center">
+                      <div class="col-md-6">
+                        <div class="p-grid">
+                          <div class="p-col-12">
+                            <b>Nombre de Empresa:</b>
+                            {{ rowData.empresa.nombre }}
+                          </div>
+                          <div class="p-col-12">
+                            <b>Dirección:</b>
+                            {{ rowData.empresa.direccion.calle_principal }}
+                            Y
+                            {{ rowData.empresa.direccion.calle_secundaria }}
+                          </div>
+                          <div class="p-col-12">
+                            <b>Representante:</b>
+                            {{
+                              rowData.empresa.representante.persona
+                                .primer_nombre
+                            }}
+                            {{
+                              rowData.empresa.representante.persona
+                                .primer_apellido
+                            }}
+                          </div>
+                          <div class="p-col-12">
+                            <b>Correo:</b>
+                            {{ rowData.empresa.representante.persona.correo }}
+                          </div>
+                          <div class="p-col-12">
+                            <b>Contacto:</b>
+                            {{ rowData.empresa.representante.persona.contacto }}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="p-grid">
+                          <div class="p-col-12">
+                            <b>Motivo de Visita:</b>
+                            {{ rowData.motivo_visita }}
+                          </div>
+                          <div class="p-col-12">
+                            <b>Encargado de Visita:</b>
+                            {{ rowData.encargado_visita.persona.primer_nombre }}
+                            {{
+                              rowData.encargado_visita.persona.primer_apellido
+                            }}
+                          </div>
+                          <div class="p-col-12">
+                            <b>Fecha de Visita:</b>
+                            {{ rowData.fecha_visita }}
+                          </div>
+                          <div class="p-col-12">
+                            <b>Hora de Visita:</b>
+                            {{ rowData.hora_visita.hora }}
+                            {{ rowData.hora_visita.formato_hora }}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="p-col-12" style="margin-top: 0.5em">
+                          <b>Observaciones:</b>
+                          {{ rowData.observaciones }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </td>
               </tr>
             </ng-template>
           </p-table>
+
+          <p-dialog
+            header="DETALLES DE PASANTE"
+            [(visible)]="displayDialog"
+            [focusOnShow]="false"
+            showEffect="fade"
+            [modal]="true"
+            [style]="{ width: '700px' }"
+          >
+            <div class="row justify-content-center" *ngIf="visita_editar">
+              <div class="col-md-4">
+                <div class="row">
+                  <div class="col-md-12">
+                    <label for="_id" class="fuente">NOMBRE DE EMPRESA</label>
+                    <input
+                      type="text"
+                      placeholder="Empresa"
+                      pInputText
+                      size="20"
+                      [(ngModel)]="visita_editar.empresa.nombre"
+                    />
+                  </div>
+                </div>
+                <div class="row justify-content-center edicion">
+                  <div class="col-md-12">
+                    <label class="fuente">REPRESENTANTE</label>
+                    <input
+                      type="text"
+                      placeholder="Nombre"
+                      pInputText
+                      size="20"
+                      [(ngModel)]="
+                        visita_editar.empresa.representante.persona
+                          .primer_nombre
+                      "
+                    />
+                    <input
+                      type="text"
+                      placeholder="Apellido"
+                      pInputText
+                      size="20"
+                      [(ngModel)]="
+                        visita_editar.empresa.representante.persona
+                          .primer_apellido
+                      "
+                    />
+                  </div>
+                </div>
+                <div class="row edicion">
+                  <div class="col-md-12">
+                    <label class="fuente">CORREO</label>
+                    <input
+                      type="email"
+                      placeholder="Correo"
+                      pInputText
+                      size="20"
+                      [(ngModel)]="
+                        visita_editar.empresa.representante.persona.correo
+                      "
+                    />
+                  </div>
+                </div>
+                <div class="row edicion">
+                  <div class="col-md-12">
+                    <label class="fuente">CONTACTO</label>
+                    <p-inputMask
+                      mask="0999999999"
+                      placeholder="Celular"
+                      [(ngModel)]="
+                        visita_editar.empresa.representante.persona.contacto
+                      "
+                    ></p-inputMask>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="row">
+                  <div class="col-md-12">
+                    <label for="email" class="fuente">GUÍA</label>
+                    <p-autoComplete
+                      [suggestions]="docentes_filtrados"
+                      (completeMethod)="filtrarDocente($event)"
+                      [size]="15"
+                      [minLength]="1"
+                      placeholder="Guía"
+                      [dropdown]="true"
+                      [(ngModel)]="visita_editar.encargado_visita"
+                      field="persona.identificacion"
+                    >
+                      <ng-template let-brand pTemplate="item">
+                        <div class="ui-helper-clearfix">
+                          <div
+                            style="
+                              font-size: 10px;
+                              display: inline-block;
+                              margin: 5px 5px 0 0;
+                            "
+                          >
+                            {{ brand.persona.identificacion }}
+                          </div>
+                          <div
+                            style="
+                              font-size: 12px;
+                              float: right;
+                              margin: 8px 3px 0 0;
+                            "
+                          >
+                            {{ brand.persona.primer_nombre }}
+                            {{ brand.persona.primer_apellido }}
+                          </div>
+                        </div>
+                      </ng-template>
+                    </p-autoComplete>
+                  </div>
+                </div>
+                <div class="row edicion">
+                  <div class="col-md-12">
+                    <label for="tutor" class="fuente">FECHA DE VISITA</label>
+                    <p-calendar
+                      [locale]="es"
+                      dateFormat="dd/mm/yy"
+                      placeholder="Fecha de Visita"
+                      [(ngModel)]="visita_editar.fecha_visita"
+                      (onSelect)="mostrarFecha($event)"
+                      [showWeek]="true"
+                    ></p-calendar>
+                  </div>
+                </div>
+
+                <div class="row edicion">
+                  <div class="col-md-12">
+                    <label class="fuente">HORA DE VISITA</label>
+                    <p-calendar
+                      [(ngModel)]="hora_visita"
+                      [timeOnly]="true"
+                    ></p-calendar>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="row">
+                  <div class="col-md-12">
+                    <label class="fuente">MOTIVO DE VISITA</label>
+                    <textarea
+                      rows="4"
+                      cols="23"
+                      placeholder="Motivo de Visita"
+                      pInputTextarea
+                      [(ngModel)]="visita_editar.motivo_visita"
+                    ></textarea>
+                  </div>
+                </div>
+                <div class="row edicion">
+                  <div class="col-md-12">
+                    <label for="tutor" class="fuente">OBSERVACIONES</label>
+                    <textarea
+                      rows="5"
+                      cols="23"
+                      placeholder="Motivo de Visita"
+                      pInputTextarea
+                      [(ngModel)]="visita_editar.observaciones"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p-footer>
+              <div
+                class="ui-dialog-buttonpane ui-helper-clearfix row justify-content-center"
+              >
+                <button
+                  type="button"
+                  class="btn btn-outline-danger btn-round btn-sm"
+                  (click)="delete()"
+                >
+                  <i class="fas fa-trash-alt fa-lg fa-fw"></i> Borrar
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-outline-success btn-round btn-sm"
+                  (click)="save()"
+                >
+                  <i class="fas fa-save fa-lg fa-fw"></i> Guardar
+                </button>
+              </div>
+            </p-footer>
+          </p-dialog>
         </div>
       </div>
     </div>
@@ -592,7 +923,30 @@
   <div class="container" style="margin-bottom: 10%">
     <div class="row justify-content-center">
       <div class="col-md-10">
-        <div class="row">
+        <div class="row justify-content-center">
+          <div class="col-md-2">
+            <i class="fas fa-quote-left fa-7x fa-fw"></i>
+          </div>
+          <div class="col-md-8">
+            <div class="row text-center">
+              <h2>
+                Cualquier vida es única e irrepetible y tiene tanto valor como
+                otra. Si hubiese una vida sin importancia, ninguna sería
+                importante.
+              </h2>
+            </div>
+            <div class="row">
+              <h5 style="margin-left: 75%; margin-top: 0.5em">
+                - Olga Bejano -
+              </h5>
+            </div>
+          </div>
+          <div class="col-md-2" style="margin-top: 25%">
+            <i class="fas fa-quote-right fa-7x fa-fw"></i>
+          </div>
+        </div>
+
+        <!-- <div class="row">
           <div class="col-md-2">
             <img
               src="./assets/img/icons/comilla izquierda.png"
@@ -617,7 +971,7 @@
               height="80px"
             />
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

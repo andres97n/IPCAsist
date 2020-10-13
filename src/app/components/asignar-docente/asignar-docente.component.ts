@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { DocenteService } from "app/services/docente.service";
 import { Persons } from "app/clases/persons";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
 import {
   trigger,
   state,
@@ -43,12 +43,6 @@ export class AsignarDocenteComponent implements OnInit {
   time2 = { hour: 13, minute: 30 };
   meridian = false;
 
-  country: any;
-
-  countries: any[];
-
-  filteredCountriesSingle: any[];
-
   persons: Persons[];
   cols: any[];
   displayDialog: boolean;
@@ -56,12 +50,10 @@ export class AsignarDocenteComponent implements OnInit {
   selectedPerson: Persons;
 
   forma: FormGroup;
-
-  // cars: Car[];
-  // cols2: any[];
+  forma_editar: FormGroup;
 
   asignaciones: AsignarDocente[];
-  asignacion: AsignarDocente;
+  asignacion: AsignarDocente = {};
   asignacion_seleccionada: AsignarDocente;
   asignacion_editar: AsignarDocente;
   nueva_asignacion: boolean;
@@ -72,8 +64,8 @@ export class AsignarDocenteComponent implements OnInit {
   docentes_editados: Docente[];
   identificacion: string;
 
-  hora_entrada: any;
-  hora_salida: any;
+  // hora_entrada: any;
+  // hora_salida: any;
   dia: Date;
 
   aula_filtrada: Aula;
@@ -84,13 +76,23 @@ export class AsignarDocenteComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private _ejemSrv: EjemplosService,
+    // private _ejemSrv: EjemplosService,
     private _docenteSrv: DocenteService
   ) {
     this.crearFormulario();
+  }
 
+  ngOnInit(): void {
     this.asignacion = {
-      docente: new Docente(),
+      docente: {
+        persona: {
+          identificacion: "",
+          primer_nombre: "",
+          segundo_nombre: "",
+          primer_apellido: "",
+          segundo_apellido: "",
+        },
+      },
       horario_entrada: {
         periodo: "",
         hora: "",
@@ -99,16 +101,10 @@ export class AsignarDocenteComponent implements OnInit {
         periodo: "",
         hora: "",
       },
-      aula: new Aula(),
+      aula: {
+        nombre: "",
+      },
     };
-  }
-
-  ngOnInit(): void {
-    this._ejemSrv.getPersons().subscribe((persons: Persons[]) => {
-      console.log(persons);
-
-      this.persons = persons;
-    });
 
     this._docenteSrv
       .getAsignaciones()
@@ -128,12 +124,6 @@ export class AsignarDocenteComponent implements OnInit {
       console.log(this.aulas);
     });
 
-    // this._docenteSrv.getCarsSmall().subscribe((cars: Car[]) => {
-    //   console.log(cars);
-
-    //   this.cars = cars;
-    // });
-
     this.cols = [
       { field: "docente.persona.identificacion", header: "CÉDULA" },
       { field: "docente.persona.primer_nombre", header: "NOMBRES" },
@@ -142,26 +132,40 @@ export class AsignarDocenteComponent implements OnInit {
       { field: "horario_salida.hora", header: "HORARIO DE SALIDA" },
       { field: "aula.nombre", header: "AULA" },
     ];
-
-    // this.cols2 = [
-    //   { field: "vin", header: "Vin" },
-    //   { field: "year", header: "Year" },
-    //   { field: "brand", header: "Brand" },
-    //   { field: "color", header: "Color" },
-    // ];
   }
 
   crearFormulario() {
     this.forma = this.fb.group({
+      // identificacion: new FormControl(this.identificacion, [Validators.required, Validators.minLength(2)]),
       identificacion: [
+        // this.asignacion.docente.persona.identificacion,
         this.identificacion,
         [Validators.required, Validators.minLength(2)],
       ],
       horario: this.fb.group({
-        horario_entrada: [this.time, Validators.required],
-        horario_salida: [this.time2, Validators.required],
+        horario_entrada: [this.asignacion.horario_entrada, Validators.required],
+        horario_salida: [this.asignacion.horario_salida, Validators.required],
       }),
-      aula: [this.nombre_aula, [Validators.required, Validators.minLength(2)]],
+      aula: [
+        // this.asignacion.aula.nombre,
+        this.nombre_aula,
+        [Validators.required, Validators.minLength(2)],
+      ],
+    });
+  }
+
+  crearFormularioEditar(asignacion: AsignarDocente) {
+    this.forma_editar = this.fb.group({
+      identificacion: [
+        asignacion.docente.persona.identificacion,
+        [Validators.required, Validators.minLength(2)],
+      ],
+      horario_entrada: ["", Validators.required],
+      horario_salida: ["", Validators.required],
+      aula: [
+        asignacion.aula.nombre,
+        [Validators.required, Validators.minLength(2)],
+      ],
     });
   }
 
@@ -209,8 +213,11 @@ export class AsignarDocenteComponent implements OnInit {
   }
 
   onRowSelect(event) {
+    console.log(this.asignacion_seleccionada);
+
     this.nueva_asignacion = false;
     this.asignacion_editar = this.cloneAsignacion(event.data);
+    this.crearFormularioEditar(this.asignacion_editar);
     this.dia = new Date();
     console.log(this.dia);
 
@@ -234,22 +241,9 @@ export class AsignarDocenteComponent implements OnInit {
     // this.forma.reset();
   }
 
-  // buscarPersona(event) {
-  //   let persona = event.query;
-  //   console.log(persona);
-
-  //   this.libro = this.libros.filter((book: string) => {
-  //     if (book.includes(persona)) {
-  //       return book;
-  //     }
-  //   });
-  // }
-
-  // seleccion(event) {
-  //   console.log(event);
-  //   this.cedula = event.persona.identificacion;
-  //   console.log(this.cedula);
-  // }
+  editarDocente() {
+    console.log(this.forma_editar);
+  }
 
   filtrarDocente(event) {
     let query = event.query;
@@ -323,27 +317,5 @@ export class AsignarDocenteComponent implements OnInit {
         }
       }
     }
-  }
-
-  filterCountry(query, countries: any[]): any[] {
-    let filtered: any[] = [];
-    for (let i = 0; i < countries.length; i++) {
-      let country = countries[i];
-
-      if (country.name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
-        filtered.push(country);
-      }
-    }
-    return filtered;
-  }
-
-  filterCountrySingle(event) {
-    let query = event.query;
-
-    this._ejemSrv.getCountries().subscribe((data: any[]) => {
-      // console.log(data);
-
-      this.filteredCountriesSingle = this.filterCountry(query, data);
-    });
   }
 }

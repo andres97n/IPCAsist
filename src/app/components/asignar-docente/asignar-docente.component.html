@@ -114,6 +114,7 @@
     </div>
   </div>
 
+  <!-- FORMULARIO -->
   <div class="section section-dark text-center">
     <div class="container">
       <h2 class="title">Asigne a un Docente!!</h2>
@@ -136,16 +137,6 @@
                 <span class="ui-inputgroup-addon">
                   <i class="fas fa-user-tie fa-lg" style="line-height: 1"></i
                 ></span>
-                <!-- <p-autoComplete
-                  styleClass="cedula"
-                  [suggestions]="filteredCountriesSingle"
-                  (completeMethod)="filterCountrySingle($event)"
-                  field="name"
-                  [size]="35"
-                  placeholder="Docente"
-                  [minLength]="1"
-                  formControlName="identificacion"
-                ></p-autoComplete> -->
                 <p-autoComplete
                   [suggestions]="docentes_filtrados"
                   (completeMethod)="filtrarDocente($event)"
@@ -187,7 +178,6 @@
                   severity="error"
                   text=" Se requiere la Identificación"
                   *ngIf="invalidos('identificacion')"
-                  style="margin-top: 1em"
                 ></p-message>
               </div>
               <p-footer>
@@ -208,9 +198,7 @@
             >
               <p-header>
                 <div style="background-color: #cfcfcf">
-                  <!-- <i class="fa fa-clock-o "fa-4x fa-fw aria-hidden="true"></i> -->
                   <i class="far fa-clock fa-4x fa-fw icono"></i>
-                  <!-- <i class="fab fa-adobe"></i> -->
                 </div>
               </p-header>
 
@@ -221,22 +209,20 @@
               >
                 <!-- Horario de Entrada-->
                 <div class="col-md-4">
-                  <div>
-                    <label>Horario de Entrada</label>
-                    <ngb-timepicker
-                      [meridian]="meridian"
-                      formControlName="horario_entrada"
-                    ></ngb-timepicker>
-                    <!-- <p-calendar
+                  <label>Horario de Entrada</label>
+                  <ngb-timepicker
+                    [meridian]="meridian"
+                    formControlName="horario_entrada"
+                  ></ngb-timepicker>
+                  <!-- <p-calendar
                       formControlName="horario_entrada"
                       [timeOnly]="true"
                     ></p-calendar> -->
-                    <p-message
-                      severity="error"
-                      text=" Se requiere el Horario de Entrada del Docente"
-                      *ngIf="noEntrada"
-                    ></p-message>
-                  </div>
+                  <p-message
+                    severity="error"
+                    text=" Se requiere el Horario de Entrada del Docente"
+                    *ngIf="noEntrada"
+                  ></p-message>
                   <!-- <div class="card card-profile card-plain">
             <div class="card-avatar">
               <a href="#avatar"
@@ -348,16 +334,6 @@
                   <span class="ui-inputgroup-addon">
                     <i class="fas fa-door-open fa-lg" style="line-height: 1"></i
                   ></span>
-                  <!-- <p-autoComplete
-                    styleClass="cedula"
-                    [suggestions]="filteredCountriesSingle"
-                    (completeMethod)="filterCountrySingle($event)"
-                    field="name"
-                    [size]="35"
-                    placeholder="Aula"
-                    [minLength]="1"
-                    formControlName="aula"
-                  ></p-autoComplete> -->
                   <p-autoComplete
                     [suggestions]="aulas_filtradas"
                     (completeMethod)="filtrarAula($event)"
@@ -386,7 +362,6 @@
                     severity="error"
                     text="  Se requiere el nombre del Aula"
                     *ngIf="invalidos('aula')"
-                    style="margin-top: 1em !important"
                   ></p-message>
                 </div>
               </div>
@@ -531,7 +506,7 @@
                       </div>
 
                       <div class="col-md-6">
-                        <div class="p-grid">
+                        <div class="p-grid" style="margin-top: 1em">
                           <div class="p-col-12">
                             <b>Horario de Entrada:</b>
                             {{ rowData.horario_entrada.hora }}
@@ -546,9 +521,6 @@
                             <b>Nombre de Aula:</b>
                             {{ rowData.aula.nombre }}
                           </div>
-                          <!-- <div class="p-col-12">
-                            <b>Título:</b> {{ rowData.docente.titulo }}
-                          </div> -->
                         </div>
                       </div>
                     </div>
@@ -566,115 +538,111 @@
             [modal]="true"
             [style]="{ width: '300px' }"
           >
-            <div class="p-grid ui-fluid" *ngIf="asignacion_editar">
-              <div class="p-col-4">
-                <label for="_id">CÉDULA</label>
-              </div>
-              <div class="p-col-8">
-                <!-- <input
-                  pInputText
-                  id="_id"
-                  
-                  autofocus
-                /> -->
-                <p-autoComplete
-                  [suggestions]="docentes_editados"
-                  (completeMethod)="filtrarDocenteEditar($event)"
-                  [size]="30"
-                  [minLength]="1"
-                  placeholder="Docente"
-                  [dropdown]="true"
-                  [(ngModel)]="asignacion_editar.docente"
-                  field="persona.identificacion"
-                >
-                  <ng-template let-brand pTemplate="item">
-                    <div class="ui-helper-clearfix">
-                      <div
-                        style="
-                          font-size: 10px;
-                          display: inline-block;
-                          margin: 10px 10px 0 0;
-                        "
-                      >
-                        {{ brand.persona.identificacion }}
+            <form [formGroup]="forma_editar" (ngSubmit)="editarDocente()">
+              <div class="p-grid ui-fluid" *ngIf="asignacion_editar">
+                <div class="p-col-4">
+                  <label for="_id" class="fuente"
+                    >IDENTIFICACIÓN DE DOCENTE</label
+                  >
+                </div>
+                <div class="p-col-8">
+                  <p-autoComplete
+                    [suggestions]="docentes_editados"
+                    (completeMethod)="filtrarDocenteEditar($event)"
+                    [size]="30"
+                    [minLength]="1"
+                    placeholder="Docente"
+                    [dropdown]="true"
+                    formControlName="identificacion"
+                    field="persona.identificacion"
+                  >
+                    <ng-template let-brand pTemplate="item">
+                      <div class="ui-helper-clearfix">
+                        <div
+                          style="
+                            font-size: 10px;
+                            display: inline-block;
+                            margin: 10px 10px 0 0;
+                          "
+                        >
+                          {{ brand.persona.identificacion }}
+                        </div>
+                        <div
+                          style="
+                            font-size: 12px;
+                            float: right;
+                            margin: 10px 10px 0 0;
+                          "
+                        >
+                          {{ brand.persona.primer_nombre }}
+                          {{ brand.persona.primer_apellido }}
+                        </div>
                       </div>
-                      <div
-                        style="
-                          font-size: 12px;
-                          float: right;
-                          margin: 10px 10px 0 0;
-                        "
-                      >
-                        {{ brand.persona.primer_nombre }}
-                        {{ brand.persona.primer_apellido }}
+                    </ng-template>
+                  </p-autoComplete>
+                </div>
+                <div class="p-col-4 edicion">
+                  <label class="fuente">HORA DE ENTRADA</label>
+                </div>
+                <div class="p-col-8">
+                  <p-calendar
+                    formControlName="horario_entrada"
+                    [timeOnly]="true"
+                  ></p-calendar>
+                </div>
+                <div class="p-col-4 edicion">
+                  <label class="fuente">HORA DE SALIDA</label>
+                </div>
+                <div class="p-col-8">
+                  <p-calendar
+                    formControlName="horario_salida"
+                    [timeOnly]="true"
+                  ></p-calendar>
+                </div>
+                <div class="p-col-4 edicion">
+                  <label class="fuente">AULA</label>
+                </div>
+                <div class="p-col-8" style="margin-bottom: 0.5em">
+                  <p-autoComplete
+                    [suggestions]="aulas_editadas"
+                    (completeMethod)="filtrarAulaEditar($event)"
+                    [size]="30"
+                    [minLength]="1"
+                    placeholder="Aula"
+                    [dropdown]="true"
+                    formControlName="aula"
+                    field="nombre"
+                  >
+                    <ng-template let-brand pTemplate="item">
+                      <div class="ui-helper-clearfix">
+                        <div style="font-size: 15px; margin: 0.5em">
+                          {{ brand.nombre }}
+                        </div>
                       </div>
-                    </div>
-                  </ng-template>
-                </p-autoComplete>
+                    </ng-template>
+                  </p-autoComplete>
+                </div>
               </div>
-              <div class="p-col-4 edicion">
-                <label for="name">HORA DE ENTRADA</label>
-              </div>
-              <div class="p-col-8">
-                <p-calendar
-                  [(ngModel)]="hora_entrada"
-                  [timeOnly]="true"
-                ></p-calendar>
-              </div>
-              <div class="p-col-4 edicion">
-                <label for="age">HORA DE SALIDA</label>
-              </div>
-              <div class="p-col-8">
-                <p-calendar
-                  [(ngModel)]="hora_salida"
-                  [timeOnly]="true"
-                ></p-calendar>
-              </div>
-              <div class="p-col-4 edicion">
-                <label for="email">AULA</label>
-              </div>
-              <div class="p-col-8" style="margin-bottom: 0.5em">
-                <!-- <input pInputText id="email" [(ngModel)]="person.email" /> -->
-                <p-autoComplete
-                  [suggestions]="aulas_editadas"
-                  (completeMethod)="filtrarAulaEditar($event)"
-                  [size]="30"
-                  [minLength]="1"
-                  placeholder="Aula"
-                  [dropdown]="true"
-                  [(ngModel)]="asignacion_editar.aula"
-                  field="nombre"
+              <p-footer>
+                <div
+                  class="ui-dialog-buttonpane ui-helper-clearfix row justify-content-center"
                 >
-                  <ng-template let-brand pTemplate="item">
-                    <div class="ui-helper-clearfix">
-                      <div style="font-size: 15px; margin: 0.5em">
-                        {{ brand.nombre }}
-                      </div>
-                    </div>
-                  </ng-template>
-                </p-autoComplete>
-              </div>
-            </div>
-            <p-footer>
-              <div
-                class="ui-dialog-buttonpane ui-helper-clearfix row justify-content-center"
-              >
-                <button
-                  type="button"
-                  class="btn btn-outline-danger btn-round btn-sm"
-                  (click)="delete()"
-                >
-                  <i class="fas fa-trash-alt fa-lg fa-fw"></i> Borrar
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-outline-success btn-round btn-sm"
-                  (click)="save()"
-                >
-                  <i class="fas fa-save fa-lg fa-fw"></i> Guardar
-                </button>
-              </div>
-            </p-footer>
+                  <button
+                    type="button"
+                    class="btn btn-outline-danger btn-round btn-sm"
+                    (click)="delete()"
+                  >
+                    <i class="fas fa-trash-alt fa-lg fa-fw"></i> Borrar
+                  </button>
+                  <button
+                    type="submit"
+                    class="btn btn-outline-success btn-round btn-sm"
+                  >
+                    <i class="fas fa-save fa-lg fa-fw"></i> Guardar
+                  </button>
+                </div>
+              </p-footer>
+            </form>
           </p-dialog>
 
           <!-- <form class="contact-form">

@@ -10,6 +10,10 @@
   margin-top: 0.5em;
 }
 
+.fuente {
+  font-weight: bold;
+}
+
 /* :host ::ng-deep p-autoComplete .ui-autocomplete-items {
   background-color: #32302f !important;
 } */

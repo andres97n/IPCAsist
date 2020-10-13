@@ -1,9 +1,17 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class PlanVidaService {
+  constructor(private http: HttpClient) {}
 
-  constructor() { }
+  getEstudiantes() {
+    return this.http.get("/assets/json/Estudiante.json");
+  }
+
+  getPlanesVida(){
+    return this.http.get("/assets/json/Plan_Vida.json");
+  }
 }

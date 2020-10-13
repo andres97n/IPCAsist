@@ -2,19 +2,26 @@
   {
     "_id": "_021561efew1fwe54ewfef45",
     "docente": {
-      "identificacion": "0104472014",
-      "primer_nombre": "Adriana",
-      "segundo_nombre": "Natalia",
-      "primer_apellido": "Prado",
-      "segundo_apellido": "Gimenez"
+      "_id": "_ui3490ng3jsnf930nerg",
+      "persona": {
+        "identificacion": "0104472014",
+        "primer_nombre": "Adriana",
+        "segundo_nombre": "Natalia",
+        "primer_apellido": "Prado",
+        "segundo_apellido": "Gimenez"
+      }
     },
     "estudiante": {
-      "identificacion": "0104578213",
-      "primer_nombre": "Evangeline",
-      "segundo_nombre": "Veronica",
-      "primer_apellido": "Murdoch",
-      "segundo_apellido": "Washington",
-      "carnet_conadis": "12.6488"
+      "_id": "_fdfun43t9g3590tn3509tn",
+      "persona": {
+        "identificacion": "0104578213",
+        "primer_nombre": "Evangeline",
+        "segundo_nombre": "Veronica",
+        "primer_apellido": "Murdoch",
+        "segundo_apellido": "Washington",
+        "carnet_conadis": "12.6488"
+      }
+      
     },
     "asignaturas": [
       {
@@ -143,7 +150,7 @@
         "descripcion": ["Pronunciar correctamente", "Caminar por su cuenta"]
       }
     ],
-    "sueños": [
+    "suenos": [
       {
         "titulo": "Actividades",
         "descripcion": ["Se profesional", "Ser autónomo"]
@@ -153,21 +160,29 @@
     "observaciones": "Ninguna observación"
   },
   {
-    "_id": "_021561efngej64818fef45",
+    "_id": "_021561efngej64818fef4555dnogd",
     "docente": {
-      "identificacion": "01023245894",
-      "primer_nombre": "Paúl",
-      "segundo_nombre": "Gabriel",
-      "primer_apellido": "Torres",
-      "segundo_apellido": "Gonzales"
+      "_id": "_nsduifwt4390fjjgh390gn",
+      "persona": {
+        "identificacion": "01023245894",
+        "primer_nombre": "Paúl",
+        "segundo_nombre": "Gabriel",
+        "primer_apellido": "Torres",
+        "segundo_apellido": "Gonzales"
+      }
+      
     },
     "estudiante": {
-      "identificacion": "0104578213",
-      "primer_nombre": "Antonio",
-      "segundo_nombre": "Miguel",
-      "primer_apellido": "Velesaca",
-      "segundo_apellido": "Correa",
-      "carnet_conadis": "11.6978"
+      "_id": "_fbu3t390fng39e0ng534ui30fdsgfs",
+      "persona": {
+        "identificacion": "0104578213",
+        "primer_nombre": "Antonio",
+        "segundo_nombre": "Miguel",
+        "primer_apellido": "Velesaca",
+        "segundo_apellido": "Correa",
+        "carnet_conadis": "11.6978"
+      }
+      
     },
     "asignaturas": [
       {
@@ -296,7 +311,7 @@
         "descripcion": ["Pronunciar correctamente", "Caminar por su cuenta"]
       }
     ],
-    "sueños": [
+    "suenos": [
       {
         "titulo": "Actividades",
         "descripcion": ["Se profesional", "Ser autónomo"]

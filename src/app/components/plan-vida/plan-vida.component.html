@@ -9,12 +9,6 @@
       <h1 class="titulo">IPCAsist</h1>
       <h3 class="titulo">Plan de Vida</h3>
       <br />
-      <!-- <a
-        href="https://www.youtube.com/watch?v=EvJjh_zYQzE"
-        class="btn btn-outline-neutral btn-round"
-        target="_blank"
-        ><i class="fa fa-play fa-lg fa-fw"></i> Vídeo Informativo
-      </a> -->
     </div>
   </div>
 </div>
@@ -87,7 +81,43 @@
                         style="line-height: 1"
                       ></i
                     ></span>
+
                     <p-autoComplete
+                      [suggestions]="docentes_filtrados"
+                      (completeMethod)="filtrarDocente($event)"
+                      [size]="30"
+                      [minLength]="1"
+                      placeholder="Docente"
+                      [dropdown]="true"
+                      formControlName="docente"
+                      field="persona.identificacion"
+                    >
+                      <ng-template let-brand pTemplate="item">
+                        <div class="ui-helper-clearfix">
+                          <div
+                            style="
+                              font-size: 10px;
+                              display: inline-block;
+                              margin: 10px 10px 0 0;
+                            "
+                          >
+                            {{ brand.persona.identificacion }}
+                          </div>
+                          <div
+                            style="
+                              font-size: 12px;
+                              float: right;
+                              margin: 10px 10px 0 0;
+                            "
+                          >
+                            {{ brand.persona.primer_nombre }}
+                            {{ brand.persona.primer_apellido }}
+                          </div>
+                        </div>
+                      </ng-template>
+                    </p-autoComplete>
+
+                    <!-- <p-autoComplete
                       [suggestions]="filteredCountriesSingle"
                       (completeMethod)="filterCountrySingle($event)"
                       field="name"
@@ -95,7 +125,7 @@
                       placeholder="Nombre"
                       [minLength]="1"
                       formControlName="docente"
-                    ></p-autoComplete>
+                    ></p-autoComplete> -->
 
                     <p-message
                       severity="error"
@@ -132,7 +162,7 @@
                         style="line-height: 1"
                       ></i
                     ></span>
-                    <p-autoComplete
+                    <!-- <p-autoComplete
                       [suggestions]="filteredCountriesSingle"
                       (completeMethod)="filterCountrySingle($event)"
                       field="name"
@@ -140,7 +170,42 @@
                       placeholder="Nombre"
                       [minLength]="1"
                       formControlName="estudiante"
-                    ></p-autoComplete>
+                    ></p-autoComplete> -->
+
+                    <p-autoComplete
+                      [suggestions]="estudiantes_filtrados"
+                      (completeMethod)="filtrarEstudiante($event)"
+                      [size]="30"
+                      [minLength]="1"
+                      placeholder="Estudiante"
+                      [dropdown]="true"
+                      formControlName="estudiante"
+                      field="persona.identificacion"
+                    >
+                      <ng-template let-brand pTemplate="item">
+                        <div class="ui-helper-clearfix">
+                          <div
+                            style="
+                              font-size: 10px;
+                              display: inline-block;
+                              margin: 10px 10px 0 0;
+                            "
+                          >
+                            {{ brand.persona.identificacion }}
+                          </div>
+                          <div
+                            style="
+                              font-size: 12px;
+                              float: right;
+                              margin: 10px 10px 0 0;
+                            "
+                          >
+                            {{ brand.persona.primer_nombre }}
+                            {{ brand.persona.primer_apellido }}
+                          </div>
+                        </div>
+                      </ng-template>
+                    </p-autoComplete>
 
                     <p-message
                       severity="error"
@@ -178,15 +243,25 @@
                         style="line-height: 1"
                       ></i
                     ></span>
+
                     <p-autoComplete
-                      [suggestions]="filteredCountriesSingle"
-                      (completeMethod)="filterCountrySingle($event)"
-                      field="name"
-                      [size]="35"
-                      placeholder="Aula"
+                      [suggestions]="aulas_filtradas"
+                      (completeMethod)="filtrarAula($event)"
+                      [size]="30"
                       [minLength]="1"
+                      placeholder="Aula"
+                      [dropdown]="true"
                       formControlName="aula"
-                    ></p-autoComplete>
+                      field="nombre"
+                    >
+                      <ng-template let-brand pTemplate="item">
+                        <div class="ui-helper-clearfix">
+                          <div style="font-size: 15px; margin: 0.5em">
+                            {{ brand.nombre }}
+                          </div>
+                        </div>
+                      </ng-template>
+                    </p-autoComplete>
 
                     <p-message
                       severity="error"
@@ -408,34 +483,265 @@
             </div>
             <br />
 
-            <!-- Card Logros -->
+            <!-- Card Potencialidades -->
             <div class="row">
               <div class="col-md-12">
                 <p-card
-                  header="Logros"
-                  subheader="Ingrese todos los logros que espera por el Estudiante."
+                  header="Potencialidades"
+                  subheader="Ingrese las Potencialidades que sean requeridas con su respetivo nombre haciendo referencia a su descripción."
                   styleClass="ui-card-shadow"
                 >
                   <p-header>
                     <div class="head encabezado">
-                      <i class="fas fa-hand-point-up fa-3x fa-fw icono"></i>
+                      <i class="fas fa-fist-raised fa-3x fa-fw icono"></i>
                     </div>
                   </p-header>
-                  <p-chips
-                    styleClass="p-chips"
-                    placeholder="Logros"
-                    formControlName="logros"
-                  ></p-chips>
-                  <p-message
-                    severity="error"
-                    text=" Debe ingresar los Logros que espera para del Estudiante."
-                    *ngIf="invalidos('logros')"
-                    class="error"
-                  ></p-message>
+
+                  <div class="row justify-content-center componente">
+                    <div class="col-md-12">
+                      <table class="table">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">Potencialidades del Estudiante</th>
+                          </tr>
+                        </thead>
+                        <tbody formArrayName="potencialidades">
+                          <tr
+                            *ngFor="
+                              let form of potencialidades.controls;
+                              let i = index
+                            "
+                          >
+                            <td>
+                              <div class="row justify-content-center" [formGroupName]="i">
+                                <!-- Componente Nombre -->
+                                <div class="col-md-10">
+                                  <div
+                                    class="ui-inputgroup"
+                                    
+                                  >
+                                    <span class="ui-inputgroup-addon">
+                                      <i
+                                        class="fas fa-pen-square fa-lg"
+                                        style="line-height: 1"
+                                      ></i
+                                    ></span>
+                                    <input
+                                      type="text"
+                                      size="30"
+                                      pInputText
+                                      formControlName="nombre"
+                                      placeholder="Nombre"
+                                    />
+                                  </div>
+                                </div>
+
+                                <!-- Componente Descripción -->
+                                <div class="col-md-10" style="margin-top: 1em">
+                                  <div
+                                    class="ui-inputgroup row justify-content-center"
+                                  >
+                                    <p-chips
+                                      styleClass="p-chips"
+                                      formControlName="descripcion"
+                                      placeholder="Descripción"
+                                    ></p-chips>
+                                  </div>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <button
+                        type="button"
+                        class="btn btn-neutral btn-round btn-lg"
+                        (click)="agregarPotencialidad()"
+                      >
+                        <i class="fas fa-plus fa-lg fa-fw"></i> Agregar
+                        Potencialidad
+                      </button>
+                    </div>
+                  </div>
                   <br />
                 </p-card>
               </div>
             </div>
+            <br>
+
+          <!-- Card Disgustos -->
+            <div class="row">
+              <div class="col-md-12">
+                <p-card
+                  header="Disgustos"
+                  subheader="Ingrese los Disgutos que tenga el Estudiate de acuerdo a tipo que considere."
+                  styleClass="ui-card-shadow"
+                >
+                  <p-header>
+                    <div class="head encabezado">
+                      <i class="far fa-angry fa-3x fa-fw icono"></i>
+                    </div>
+                  </p-header>
+
+                  <div class="row justify-content-center componente">
+                    <div class="col-md-12">
+                      <table class="table">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">Disgustos del Estudiante</th>
+                          </tr>
+                        </thead>
+                        <tbody formArrayName="disgustos">
+                          <tr
+                            *ngFor="
+                              let form of disgustos.controls;
+                              let i = index
+                            "
+                          >
+                            <td>
+                              <div class="row justify-content-center" [formGroupName]="i">
+                                <!-- Componente Nombre -->
+                                <div class="col-md-10">
+                                  <div
+                                    class="ui-inputgroup"
+                                    
+                                  >
+                                    <span class="ui-inputgroup-addon">
+                                      <i
+                                        class="fas fa-pen-square fa-lg"
+                                        style="line-height: 1"
+                                      ></i
+                                    ></span>
+                                    <input
+                                      type="text"
+                                      size="30"
+                                      pInputText
+                                      formControlName="nombre"
+                                      placeholder="Nombre"
+                                    />
+                                  </div>
+                                </div>
+
+                                <!-- Componente Descripción -->
+                                <div class="col-md-10" style="margin-top: 1em">
+                                  <div
+                                    class="ui-inputgroup row justify-content-center"
+                                  >
+                                    <p-chips
+                                      styleClass="p-chips"
+                                      formControlName="descripcion"
+                                      placeholder="Descripción"
+                                    ></p-chips>
+                                  </div>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <button
+                        type="button"
+                        class="btn btn-neutral btn-round btn-lg"
+                        (click)="agregarDisgusto()"
+                      >
+                        <i class="fas fa-plus fa-lg fa-fw"></i> Agregar
+                        Disgustos
+                      </button>
+                    </div>
+                  </div>
+                  <br />
+                </p-card>
+              </div>
+            </div>
+            <br>
+
+            <!-- Card Sueños -->
+            <div class="row">
+              <div class="col-md-12">
+                <p-card
+                  header="Sueños"
+                  subheader="Ingrese los Sueños que considera tenga el Estudiante de acuerdo a una categorización."
+                  styleClass="ui-card-shadow"
+                >
+                  <p-header>
+                    <div class="head encabezado">
+                      <i class="fas fa-cloud fa-3x fa-fw icono"></i>
+                    </div>
+                  </p-header>
+
+                  <div class="row justify-content-center componente">
+                    <div class="col-md-12">
+                      <table class="table">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">Sueños del Estudiante</th>
+                          </tr>
+                        </thead>
+                        <tbody formArrayName="suenos">
+                          <tr
+                            *ngFor="
+                              let form of suenos.controls;
+                              let i = index
+                            "
+                          >
+                            <td>
+                              <div class="row justify-content-center" [formGroupName]="i">
+                                <!-- Componente Nombre -->
+                                <div class="col-md-10">
+                                  <div
+                                    class="ui-inputgroup"
+                                    
+                                  >
+                                    <span class="ui-inputgroup-addon">
+                                      <i
+                                        class="fas fa-pen-square fa-lg"
+                                        style="line-height: 1"
+                                      ></i
+                                    ></span>
+                                    <input
+                                      type="text"
+                                      size="30"
+                                      pInputText
+                                      formControlName="nombre"
+                                      placeholder="Nombre"
+                                    />
+                                  </div>
+                                </div>
+
+                                <!-- Componente Descripción -->
+                                <div class="col-md-10" style="margin-top: 1em">
+                                  <div
+                                    class="ui-inputgroup row justify-content-center"
+                                  >
+                                    <p-chips
+                                      styleClass="p-chips"
+                                      formControlName="descripcion"
+                                      placeholder="Descripción"
+                                    ></p-chips>
+                                  </div>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <button
+                        type="button"
+                        class="btn btn-neutral btn-round btn-lg"
+                        (click)="agregarSueno()"
+                      >
+                        <i class="fas fa-plus fa-lg fa-fw"></i> Agregar
+                        Sueños
+                      </button>
+                    </div>
+                  </div>
+                  <br />
+                </p-card>
+              </div>
+            </div>
+            <br>
+
+            
           </div>
 
           <!-- Segunda Columna -->
@@ -542,12 +848,12 @@
                             "
                           >
                             <td>
-                              <div class="row justify-content-center">
+                              <div class="row justify-content-center" [formGroupName]="i">
                                 <!-- Componente Nombre -->
                                 <div class="col-md-10">
                                   <div
                                     class="ui-inputgroup"
-                                    [formGroupName]="i"
+                                    
                                   >
                                     <span class="ui-inputgroup-addon">
                                       <i
@@ -559,7 +865,7 @@
                                       type="text"
                                       size="30"
                                       pInputText
-                                      [formControlName]="nombre"
+                                      formControlName="nombre"
                                       placeholder="Nombre"
                                     />
                                   </div>
@@ -572,7 +878,7 @@
                                   >
                                     <p-chips
                                       styleClass="p-chips"
-                                      [formControlName]="descripcion"
+                                      formControlName="descripcion"
                                       placeholder="Descripción"
                                     ></p-chips>
                                   </div>
@@ -597,6 +903,178 @@
               </div>
             </div>
             <br />
+
+            <!-- Card Gustos -->
+            <div class="row">
+              <div class="col-md-12">
+                <p-card
+                  header="Gustos"
+                  subheader="Ingrese los Gustos del Estudiante de acuerdo a la categorización que considere."
+                  styleClass="ui-card-shadow"
+                >
+                  <p-header>
+                    <div class="head encabezado">
+                      <i class="far fa-smile-beam fa-3x fa-fw icono"></i>
+                    </div>
+                  </p-header>
+
+                  <div class="row justify-content-center componente">
+                    <div class="col-md-12">
+                      <table class="table">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">Gustos del Estudiante</th>
+                          </tr>
+                        </thead>
+                        <tbody formArrayName="gustos">
+                          <tr
+                            *ngFor="
+                              let form of gustos.controls;
+                              let i = index
+                            "
+                          >
+                            <td>
+                              <div class="row justify-content-center" [formGroupName]="i">
+                                <!-- Componente Nombre -->
+                                <div class="col-md-10">
+                                  <div
+                                    class="ui-inputgroup"
+                                    
+                                  >
+                                    <span class="ui-inputgroup-addon">
+                                      <i
+                                        class="fas fa-pen-square fa-lg"
+                                        style="line-height: 1"
+                                      ></i
+                                    ></span>
+                                    <input
+                                      type="text"
+                                      size="30"
+                                      pInputText
+                                      formControlName="nombre"
+                                      placeholder="Nombre"
+                                    />
+                                  </div>
+                                </div>
+
+                                <!-- Componente Descripción -->
+                                <div class="col-md-10" style="margin-top: 1em">
+                                  <div
+                                    class="ui-inputgroup row justify-content-center"
+                                  >
+                                    <p-chips
+                                      styleClass="p-chips"
+                                      formControlName="descripcion"
+                                      placeholder="Descripción"
+                                    ></p-chips>
+                                  </div>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <button
+                        type="button"
+                        class="btn btn-neutral btn-round btn-lg"
+                        (click)="agregarGusto()"
+                      >
+                        <i class="fas fa-plus fa-lg fa-fw"></i> Agregar
+                        Gustos
+                      </button>
+                    </div>
+                  </div>
+                  <br />
+                </p-card>
+              </div>
+            </div>
+            <br>
+
+            <!-- Card Deseos -->
+            <div class="row">
+              <div class="col-md-12">
+                <p-card
+                  header="Deseos"
+                  subheader="Ingrese los Deseps del Estudiante de acuerdo a la categorización que considere."
+                  styleClass="ui-card-shadow"
+                >
+                  <p-header>
+                    <div class="head encabezado">
+                      <i class="fab fa-accessible-icon fa-3x fa-fw icono"></i>
+                    </div>
+                  </p-header>
+
+                  <div class="row justify-content-center componente">
+                    <div class="col-md-12">
+                      <table class="table">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">Deseos del Estudiante</th>
+                          </tr>
+                        </thead>
+                        <tbody formArrayName="deseos">
+                          <tr
+                            *ngFor="
+                              let form of deseos.controls;
+                              let i = index
+                            "
+                          >
+                            <td>
+                              <div class="row justify-content-center" [formGroupName]="i">
+                                <!-- Componente Nombre -->
+                                <div class="col-md-10">
+                                  <div
+                                    class="ui-inputgroup"
+                                    
+                                  >
+                                    <span class="ui-inputgroup-addon">
+                                      <i
+                                        class="fas fa-pen-square fa-lg"
+                                        style="line-height: 1"
+                                      ></i
+                                    ></span>
+                                    <input
+                                      type="text"
+                                      size="30"
+                                      pInputText
+                                      formControlName="nombre"
+                                      placeholder="Nombre"
+                                    />
+                                  </div>
+                                </div>
+
+                                <!-- Componente Descripción -->
+                                <div class="col-md-10" style="margin-top: 1em">
+                                  <div
+                                    class="ui-inputgroup row justify-content-center"
+                                  >
+                                    <p-chips
+                                      styleClass="p-chips"
+                                      formControlName="descripcion"
+                                      placeholder="Descripción"
+                                    ></p-chips>
+                                  </div>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <button
+                        type="button"
+                        class="btn btn-neutral btn-round btn-lg"
+                        (click)="agregarDeseo()"
+                      >
+                        <i class="fas fa-plus fa-lg fa-fw"></i> Agregar
+                        Deseo
+                      </button>
+                    </div>
+                  </div>
+                  <br />
+                </p-card>
+              </div>
+            </div>
+            <br>
 
             <!-- Card Observaciones -->
             <div class="row">
@@ -630,6 +1108,37 @@
                 </p-card>
               </div>
             </div>
+            <br>
+
+            <!-- Card Logros -->
+            <div class="row">
+              <div class="col-md-12">
+                <p-card
+                  header="Logros"
+                  subheader="Ingrese todos los logros que espera por el Estudiante."
+                  styleClass="ui-card-shadow"
+                >
+                  <p-header>
+                    <div class="head encabezado">
+                      <i class="fas fa-hand-point-up fa-3x fa-fw icono"></i>
+                    </div>
+                  </p-header>
+                  <p-chips
+                    styleClass="p-chips"
+                    placeholder="Logros"
+                    formControlName="logros"
+                  ></p-chips>
+                  <p-message
+                    severity="error"
+                    text=" Debe ingresar los Logros que espera para del Estudiante."
+                    *ngIf="invalidos('logros')"
+                    class="error"
+                  ></p-message>
+                  <br />
+                </p-card>
+              </div>
+            </div>
+
           </div>
         </div>
 
@@ -639,7 +1148,7 @@
         <br />
         <br />
 
-        <button type="submit" class="btn btn-outline-neutral btn-round btn-lg">
+        <button type="submit" class="btn btn-outline-neutral btn-round btn-lg" [disabled]="!forma.valid">
           <i class="fas fa-save fa-lg fa-fw"></i> Guardar Plan de Vida
         </button>
       </form>
@@ -653,7 +1162,7 @@
           <h2 class="text-center">Listado de Planes de Vida</h2>
           <br />
 
-          <p-chips [(ngModel)]="values1"></p-chips>
+          <!-- <p-chips [(ngModel)]="values1"></p-chips>
 
           <p-listbox
             [options]="cities"
@@ -667,35 +1176,177 @@
             }"
           >
             <p-header> Cities </p-header>
-          </p-listbox>
+          </p-listbox> -->
 
-          <!-- <p-table
-            [value]="persons"
+          <p-table
             [columns]="cols"
-            [scrollable]="true"
-            scrollHeight="200px"
+            [value]="planes_vida"
+            dataKey="_id"
             [resizableColumns]="true"
+            [scrollable]="true"
+            scrollHeight="400px"
+            styleClass="ui-table-summary"
+            selectionMode="single"
+            [(selection)]="plan_vida"
+            (onRowSelect)="onRowSelect($event)"
           >
             <ng-template pTemplate="colgroup" let-columns>
               <colgroup>
+                <col />
                 <col *ngFor="let col of columns" />
               </colgroup>
             </ng-template>
-            <ng-template pTemplate="header">
+            <ng-template pTemplate="header" let-columns>
               <tr>
-                <th *ngFor="let col of cols" pResizableColumn>
+                <th style="width: 3em"></th>
+                <th *ngFor="let col of columns" pResizableColumn>
                   {{ col.header }}
                 </th>
               </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-person>
-              <tr>
-                <td *ngFor="let col of cols">
-                  {{ person[col.field] }}
+            <ng-template
+              pTemplate="body"
+              let-rowData
+              let-expanded="expanded"
+              let-columns="columns"
+            >
+              <tr [pSelectableRow]="rowData">
+                <td style="width: 3em">
+                  <a href="#" [pRowToggler]="rowData">
+                    <i
+                      [ngClass]="
+                        expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'
+                      "
+                    ></i>
+                  </a>
+                </td>
+                <td>
+                  {{ rowData.docente.persona.primer_nombre }}
+                  {{ rowData.docente.persona.primer_apellido }}
+                </td>
+                <td>
+                  {{ rowData.estudiante.persona.primer_nombre}}
+                  {{ rowData.estudiante.persona.primer_apellido }}
+                </td>
+                <td>
+                  {{ rowData.aula.nombre }}
+                </td>
+                <td>
+                  {{ rowData.vision }}
+                </td>
+                <td>
+                  {{ rowData.observaciones }}
                 </td>
               </tr>
             </ng-template>
-          </p-table> -->
+            <ng-template
+              pTemplate="rowexpansion"
+              let-rowData
+              let-columns="columns"
+            >
+              <tr>
+                <td [attr.colspan]="columns.length + 1">
+                  <div
+                    class="p-grid ui-fluid"
+                    style="font-size: 16px; padding: 20px"
+                    [@rowExpansionTrigger]="'active'"
+                  >
+                    <div class="row justify-content-center">
+                      <div class="col-md-6">
+                        <div class="p-grid">
+                          <div class="p-col-12">
+                            <b>Docente:</b>
+                            {{ rowData.docente.persona.primer_nombre }}
+                            {{ rowData.docente.persona.primer_apellido }}
+                          </div>
+                          <div class="p-col-12">
+                            <b>Estudiante:</b>
+                            {{ rowData.estudiante.persona.primer_nombre}}
+                            {{ rowData.estudiante.persona.primer_apellido }}
+                          </div>
+                          <div class="p-col-12">
+                            <b>Aula:</b>
+                            {{ rowData.aula.nombre }}
+                          </div>
+                          <div class="p-col-12">
+                            <b>Necesidades:</b>
+                            {{ rowData.necesidades[0].titulo }}
+                            ->
+                            {{ rowData.necesidades[0].descripcion }}
+                          </div>
+                          <div class="p-col-12">
+                            <b>Deseos:</b>
+                            {{ rowData.deseos[0].titulo }}
+                            ->
+                            {{
+                              rowData.deseos[0].descripcion
+                            }}
+                          </div>
+                          <div class="p-col-12">
+                            <b>Sueños:</b>
+                            {{ rowData.deseos[0].titulo }}
+                            ->
+                            {{
+                              rowData.deseos[0].descripcion
+                            }}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="p-grid">
+                          <div class="p-col-12">
+                            <b>Potencialidades:</b>
+                            {{ rowData.potencialidades[0].titulo }}
+                            ->
+                            {{ rowData.potencialidades[0].descripcion }}
+                          </div>
+                          <div class="p-col-12">
+                            <b>Gustos:</b>
+                            {{ rowData.gustos[0].titulo }}
+                            ->
+                            {{
+                              rowData.gustos[0].descripcion
+                            }}
+                          </div>
+                          <!-- <div class="p-col-12">
+                            <b>Deseos:</b>
+                            {{ rowData.deseos[0].titulo }}
+                            ->
+                            {{
+                              rowData.deseos[0].descripcion
+                            }}
+                          </div> -->
+                          <div class="p-col-12">
+                            <b>Disgustos:</b>
+                            {{ rowData.disgustos[0].titulo }}
+                            ->
+                            {{
+                              rowData.disgustos[0].descripcion
+                            }}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="p-col-12" style="margin-top: 0.5em">
+                          <b>Descripción:</b>
+                            {{ rowData.descripcion }}
+                        </div>
+                        <div class="p-col-12" style="margin-top: 0.5em">
+                          <b>Objetivo General:</b>
+                            {{ rowData.objetivo_general }}
+                        </div>
+                        <div class="p-col-12" style="margin-top: 0.5em">
+                          <b>Observaciones:</b>
+                          {{ rowData.observaciones }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
         </div>
       </div>
     </div>
@@ -705,33 +1356,29 @@
   <div class="container" style="margin-bottom: 10%">
     <div class="row justify-content-center">
       <div class="col-md-10">
-        <div class="row">
-          <div class="col-md-2">
-            <img
-              src="./assets/img/icons/comilla izquierda.png"
-              width="80px"
-              height="80px"
-            />
-          </div>
-          <div class="col-md-8">
-            <div class="row">
-              <h2>
-                La discapacidad limita al ser humano abriéndole un nuevo
+          <div class="row justify-content-center">
+            <div class="col-md-2">
+              <i class="fas fa-quote-left fa-7x fa-fw"></i>
+            </div>
+            <div class="col-md-8">
+              <div class="row text-center">
+                <h2>
+                  La discapacidad limita al ser humano abriéndole un nuevo
                 universo de posibilidades.
-              </h2>
-              <h5 style="margin-left: 75%; margin-top: 5%">- Ítalo Violo -</h5>
+                </h2>
+              </div>
+              <div class="row">
+                <h5 style="margin-left: 80%; margin-top: 0.5em">
+                  - Ítalo Violo -
+                </h5>
+              </div>
+            </div>
+            <div class="col-md-2" style="margin-top: 17%">
+              <i class="fas fa-quote-right fa-7x fa-fw"></i>
             </div>
           </div>
-          <div class="col-md-2" style="margin-top: 10em">
-            <img
-              src="./assets/img/icons/comilla derecha.png"
-              width="80"
-              height="80px"
-            />
-          </div>
-        </div>
       </div>
     </div>
   </div>
-  <!-- </div> -->
+
 </div>

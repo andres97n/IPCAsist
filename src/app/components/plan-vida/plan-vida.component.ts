@@ -25,12 +25,15 @@ export class PlanVidaComponent implements OnInit {
 
   docentes: Docente[];
   docentes_filtrados: Docente[];
+  // docentes_editados: Docente[];
 
   aulas: Aula[];
   aulas_filtradas: Aula[];
+  // aulas_editadas: Aula[];
 
   estudiantes: Estudiante[];
   estudiantes_filtrados: Estudiante[];
+  // estudiantes_editados: Estudiante[];
 
   planes_vida: Plan_Vida[];
   plan_vida: Plan_Vida;
@@ -43,7 +46,48 @@ export class PlanVidaComponent implements OnInit {
     private _docenteSrv: DocenteService,
     private _planSrv: PlanVidaService
   ) {
+
+    this.plan_vida = {
+      docente: {
+        persona : {
+          identificacion : "",
+          primer_nombre: "",
+          segundo_nombre: "",
+          primer_apellido : "",
+          segundo_apellido: ""
+        }
+      },
+      aula: {
+        nombre: ""
+      },
+      estudiante: {
+        persona: {
+          identificacion: "",
+          primer_nombre: "",
+          segundo_apellido: "",
+          primer_apellido: "",
+          segundo_nombre: ""
+        }
+      },
+      asignaturas: [],
+      descripcion: "",
+      objetivo_general: "",
+      metas_especificas: [],
+      vision: "",
+      areas: [],
+      dominio: [],
+      necesidades: [],
+      potencialidades: [],
+      gustos: [],
+      disgustos: [],
+      deseos: [],
+      suenos: [ ],
+      logros: [],
+      observaciones: ""
+    }
+
     this.crearFormulario();
+
   }
 
   ngOnInit(): void {
@@ -87,16 +131,16 @@ export class PlanVidaComponent implements OnInit {
 
   crearFormulario() {
     this.forma = this.fb.group({
-      docente: this.fb.control("", Validators.required),
-      estudiante: this.fb.control("", Validators.required),
-      aula: this.fb.control("", Validators.required),
-      asignatura: this.fb.control("", Validators.required),
-      descripcion: this.fb.control("", Validators.required),
-      objetivo_general: this.fb.control("", Validators.required),
-      metas_especificas: this.fb.control("", Validators.required),
-      vision: this.fb.control("", Validators.required),
-      area: this.fb.control("", Validators.required),
-      dominio: this.fb.control("", Validators.required),
+      docente: this.fb.control(this.plan_vida.docente.persona.identificacion, Validators.required),
+      estudiante: this.fb.control(this.plan_vida.estudiante.persona.identificacion, Validators.required),
+      aula: this.fb.control(this.plan_vida.aula.nombre, Validators.required),
+      asignatura: this.fb.control(this.plan_vida.asignaturas, Validators.required),
+      descripcion: this.fb.control(this.plan_vida.descripcion, Validators.required),
+      objetivo_general: this.fb.control(this.plan_vida.objetivo_general, Validators.required),
+      metas_especificas: this.fb.control(this.plan_vida.metas_especificas, Validators.required),
+      vision: this.fb.control(this.plan_vida.vision, Validators.required),
+      area: this.fb.control(this.plan_vida.areas, Validators.required),
+      dominio: this.fb.control(this.plan_vida.dominio, Validators.required),
       necesidades: this.fb.array([
         // this.fb.group({})
       ]),
@@ -105,8 +149,8 @@ export class PlanVidaComponent implements OnInit {
       disgustos: this.fb.array([]),
       deseos: this.fb.array([]),
       suenos: this.fb.array([]),
-      logros: this.fb.control("", Validators.required),
-      observaciones: this.fb.control("", Validators.required),
+      logros: this.fb.control(this.plan_vida.logros, Validators.required),
+      observaciones: this.fb.control(this.plan_vida.observaciones, Validators.required),
     });
   }
 
@@ -197,6 +241,32 @@ export class PlanVidaComponent implements OnInit {
     )
   }
 
+  // Borrar Formularios Dinámicos
+
+  borrarNecesidad(i: number){
+    this.necesidades.removeAt(i);
+  }
+
+  borrarGustos(i: number){
+    this.gustos.removeAt(i);
+  }
+
+  borrarDeseos(i: number){
+    this.deseos.removeAt(i);
+  }
+
+  borrarPotencialidad(i: number){
+    this.potencialidades.removeAt(i);
+  }
+
+  borrarDisgustos(i: number){
+    this.disgustos.removeAt(i);
+  }
+
+  borrarSuenos(i: number){
+    this.suenos.removeAt(i);
+  }
+
 // Guardar datos de Plan de Vida
   guardarPlan() {
     console.log(this.forma);
@@ -214,7 +284,7 @@ export class PlanVidaComponent implements OnInit {
     this.nuevo_plan = false;
     this.plan_editar = this.clonePlan(event.data);
     this.displayDialog = true;
-    console.log(this.planes_vida);
+    console.log(this.plan_vida);
 
     // this.editarUniversidad(this.pasante_editar.institucion);
   }
@@ -241,6 +311,28 @@ export class PlanVidaComponent implements OnInit {
     }
   }
 
+  // filtrarDocenteEditado(e: any) {
+  //   let query = e.query;
+  //   let docentes: Docente[] = this.docentes;
+
+  //   this.docentes_editados = [];
+  //   for (let i = 0; i < docentes.length; i++) {
+  //     let docente = docentes[i];
+
+  //     if (
+  //       docente.persona.primer_apellido
+  //         .toLowerCase()
+  //         .indexOf(query.toLowerCase()) == 0
+  //     ) {
+  //       this.docentes_editados.push(docente);
+  //     } else {
+  //       if (docente.persona.identificacion.indexOf(query) == 0) {
+  //         this.docentes_editados.push(docente);
+  //       }
+  //     }
+  //   }
+  // }
+
   filtrarEstudiante(e: any) {
     let query = e.query;
     let estudiantes: Estudiante[] = this.estudiantes;
@@ -257,7 +349,7 @@ export class PlanVidaComponent implements OnInit {
         this.estudiantes_filtrados.push(estudiante);
       } else {
         if (estudiante.persona.identificacion.indexOf(query) == 0) {
-          this.docentes_filtrados.push(estudiante);
+          this.estudiantes_filtrados.push(estudiante);
         }
       }
     }
@@ -276,4 +368,40 @@ export class PlanVidaComponent implements OnInit {
       }
     }
   }
+
+  // filtrarAulaEditada(event) {
+  //   let query = event.query;
+  //   let aulas: Aula[] = this.aulas;
+
+  //   this.aulas_editadas = [];
+  //   for (let i = 0; i < aulas.length; i++) {
+  //     let aula = aulas[i];
+
+  //     if (aula.nombre.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+  //       this.aulas_editadas.push(aula);
+  //     }
+  //   }
+  // }
+
+  // filtrarEstudianteEditar(e: any) {
+  //   let query = e.query;
+  //   let estudiantes: Estudiante[] = this.estudiantes;
+
+  //   this.estudiantes_editados = [];
+  //   for (let i = 0; i < estudiantes.length; i++) {
+  //     let estudiante = estudiantes[i];
+
+  //     if (
+  //       estudiante.persona.primer_apellido
+  //         .toLowerCase()
+  //         .indexOf(query.toLowerCase()) == 0
+  //     ) {
+  //       this.estudiantes_editados.push(estudiante);
+  //     } else {
+  //       if (estudiante.persona.identificacion.indexOf(query) == 0) {
+  //         this.estudiantes_editados.push(estudiante);
+  //       }
+  //     }
+  //   }
+  // }
 }

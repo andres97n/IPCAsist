@@ -56,9 +56,9 @@
       <!-- Formulario -->
       <form [formGroup]="forma" (ngSubmit)="guardarPlan()">
         <div class="row justify-content-center" style="margin-top: 2em">
-          <div class="col-md-5" style="margin-top: 1em">
+          <div class="col-md-5" >
             <!-- Card Docente -->
-            <div class="row">
+            <div class="row espacio_dinformativos">
               <div class="col-md-12">
                 <p-card
                   header="Docente"
@@ -68,7 +68,7 @@
                   <p-header>
                     <div class="head encabezado">
                       <i
-                        class="fas fa-chalkboard-teacher fa-3x fa-fw icono"
+                        class="fas fa-chalkboard-teacher fa-4x fa-fw icono"
                       ></i>
                     </div>
                   </p-header>
@@ -116,17 +116,6 @@
                         </div>
                       </ng-template>
                     </p-autoComplete>
-
-                    <!-- <p-autoComplete
-                      [suggestions]="filteredCountriesSingle"
-                      (completeMethod)="filterCountrySingle($event)"
-                      field="name"
-                      [size]="35"
-                      placeholder="Nombre"
-                      [minLength]="1"
-                      formControlName="docente"
-                    ></p-autoComplete> -->
-
                     <p-message
                       severity="error"
                       text=" Se requiere al Docente"
@@ -138,10 +127,10 @@
                 </p-card>
               </div>
             </div>
-            <br />
+            <!-- <br /> -->
 
             <!-- Card Estudiante -->
-            <div class="row">
+            <div class="row espacio_dinformativos">
               <div class="col-md-12">
                 <p-card
                   header="Estudiante"
@@ -150,7 +139,7 @@
                 >
                   <p-header>
                     <div class="head encabezado">
-                      <i class="fas fa-child fa-3x fa-fw icono"></i>
+                      <i class="fas fa-child fa-4x fa-fw icono"></i>
                     </div>
                   </p-header>
                   <div
@@ -162,16 +151,6 @@
                         style="line-height: 1"
                       ></i
                     ></span>
-                    <!-- <p-autoComplete
-                      [suggestions]="filteredCountriesSingle"
-                      (completeMethod)="filterCountrySingle($event)"
-                      field="name"
-                      [size]="35"
-                      placeholder="Nombre"
-                      [minLength]="1"
-                      formControlName="estudiante"
-                    ></p-autoComplete> -->
-
                     <p-autoComplete
                       [suggestions]="estudiantes_filtrados"
                       (completeMethod)="filtrarEstudiante($event)"
@@ -218,7 +197,7 @@
                 </p-card>
               </div>
             </div>
-            <br />
+            <!-- <br /> -->
 
             <!-- Card Aula -->
             <div class="row">
@@ -230,7 +209,7 @@
                 >
                   <p-header>
                     <div class="head encabezado">
-                      <i class="fas fa-school fa-3x fa-fw icono"></i>
+                      <i class="fas fa-school fa-4x fa-fw icono"></i>
                     </div>
                   </p-header>
 
@@ -368,7 +347,7 @@
         <div class="row justify-content-center" style="margin-top: 2em">
           <div class="col-md-5" style="margin-top: 1em">
             <!-- Card Objetivo -->
-            <div class="row">
+            <div class="row espacio_planificacion">
               <div class="col-md-12">
                 <p-card
                   header="Objetivo General"
@@ -402,10 +381,10 @@
                 </p-card>
               </div>
             </div>
-            <br />
+            <!-- <br /> -->
 
             <!-- Card Visión -->
-            <div class="row">
+            <div class="row espacio_planificacion">
               <div class="col-md-12">
                 <p-card
                   header="Visión"
@@ -439,10 +418,10 @@
                 </p-card>
               </div>
             </div>
-            <br />
+            <!-- <br /> -->
 
             <!-- Card Dominio -->
-            <div class="row">
+            <div class="row espacio_planificacion">
               <div class="col-md-12">
                 <p-card
                   header="Dominio"
@@ -481,10 +460,10 @@
                 </p-card>
               </div>
             </div>
-            <br />
+            <!-- <br /> -->
 
             <!-- Card Potencialidades -->
-            <div class="row">
+            <div class="row espacio_planificacion">
               <div class="col-md-12">
                 <p-card
                   header="Potencialidades"
@@ -548,6 +527,17 @@
                                     ></p-chips>
                                   </div>
                                 </div>
+
+                                <div class="row justify-content-center boton">
+                                  <button 
+                                  type="button" 
+                                  class="btn btn-outline-danger btn-round btn-sm" 
+                                  (click)="borrarPotencialidad(i)">
+                                  <i class="fas fa-trash-alt fa-lg fa-fw"></i>
+                                  BORRAR
+                                  
+                                </button>
+                              </div>
                               </div>
                             </td>
                           </tr>
@@ -563,14 +553,12 @@
                       </button>
                     </div>
                   </div>
-                  <br />
                 </p-card>
               </div>
             </div>
-            <br>
 
           <!-- Card Disgustos -->
-            <div class="row">
+            <div class="row espacio_planificacion">
               <div class="col-md-12">
                 <p-card
                   header="Disgustos"
@@ -634,6 +622,17 @@
                                     ></p-chips>
                                   </div>
                                 </div>
+
+                                <div class="row justify-content-center boton">
+                                  <button 
+                                  type="button" 
+                                  class="btn btn-outline-danger btn-round btn-sm" 
+                                  (click)="borrarDisgustos(i)">
+                                  <i class="fas fa-trash-alt fa-lg fa-fw"></i>
+                                  BORRAR
+                                  
+                                </button>
+                              </div>
                               </div>
                             </td>
                           </tr>
@@ -649,11 +648,10 @@
                       </button>
                     </div>
                   </div>
-                  <br />
                 </p-card>
               </div>
             </div>
-            <br>
+            <!-- <br> -->
 
             <!-- Card Sueños -->
             <div class="row">
@@ -720,6 +718,17 @@
                                     ></p-chips>
                                   </div>
                                 </div>
+
+                                <div class="row justify-content-center boton">
+                                  <button 
+                                  type="button" 
+                                  class="btn btn-outline-danger btn-round btn-sm" 
+                                  (click)="borrarSuenos(i)">
+                                  <i class="fas fa-trash-alt fa-lg fa-fw"></i>
+                                  BORRAR
+                                  
+                                </button>
+                              </div>
                               </div>
                             </td>
                           </tr>
@@ -735,7 +744,6 @@
                       </button>
                     </div>
                   </div>
-                  <br />
                 </p-card>
               </div>
             </div>
@@ -747,7 +755,7 @@
           <!-- Segunda Columna -->
           <div class="col-md-5" style="margin-top: 1em">
             <!-- Card Metas Específicas -->
-            <div class="row">
+            <div class="row espacio">
               <div class="col-md-12">
                 <p-card
                   header="Metas Específicas"
@@ -775,10 +783,10 @@
                 </p-card>
               </div>
             </div>
-            <br />
+            <!-- <br /> -->
 
             <!-- Card Área -->
-            <div class="row">
+            <div class="row espacio" >
               <div class="col-md-12">
                 <p-card
                   header="Área"
@@ -816,10 +824,10 @@
                 </p-card>
               </div>
             </div>
-            <br />
+            <!-- <br /> -->
 
             <!-- Card Necesidades -->
-            <div class="row">
+            <div class="row espacio">
               <div class="col-md-12">
                 <p-card
                   header="Necesidades"
@@ -868,7 +876,15 @@
                                       formControlName="nombre"
                                       placeholder="Nombre"
                                     />
+<!-- 
+                                    <p-message
+                                    severity="error"
+                                    text=" Se debe ingresar un nombre como identificador"
+                                    *ngIf="necesidades[i].get('nombre')"
+                                    class="error"
+                                  ></p-message> -->
                                   </div>
+                                  
                                 </div>
 
                                 <!-- Componente Descripción -->
@@ -882,8 +898,21 @@
                                       placeholder="Descripción"
                                     ></p-chips>
                                   </div>
+                                 
                                 </div>
+                                <div class="row justify-content-center boton">
+                                
+                                  <button 
+                                  type="button" 
+                                  class="btn btn-outline-danger btn-round btn-sm" 
+                                  (click)="borrarNecesidad(i)">
+                                  <i class="fas fa-trash-alt fa-lg fa-fw"></i>
+                                  BORRAR
+                                  
+                                </button>
                               </div>
+                            </div>
+                              <!-- <br> -->
                             </td>
                           </tr>
                         </tbody>
@@ -898,14 +927,14 @@
                       </button>
                     </div>
                   </div>
-                  <br />
+                  <!-- <br /> -->
                 </p-card>
               </div>
             </div>
-            <br />
+            <!-- <br /> -->
 
             <!-- Card Gustos -->
-            <div class="row">
+            <div class="row espacio">
               <div class="col-md-12">
                 <p-card
                   header="Gustos"
@@ -969,6 +998,18 @@
                                     ></p-chips>
                                   </div>
                                 </div>
+
+                                <div class="row justify-content-center boton">
+                                
+                                  <button 
+                                  type="button" 
+                                  class="btn btn-outline-danger btn-round btn-sm" 
+                                  (click)="borrarGustos(i)">
+                                  <i class="fas fa-trash-alt fa-lg fa-fw"></i>
+                                  BORRAR
+                                  
+                                </button>
+                              </div>
                               </div>
                             </td>
                           </tr>
@@ -984,14 +1025,12 @@
                       </button>
                     </div>
                   </div>
-                  <br />
                 </p-card>
               </div>
             </div>
-            <br>
 
             <!-- Card Deseos -->
-            <div class="row">
+            <div class="row espacio">
               <div class="col-md-12">
                 <p-card
                   header="Deseos"
@@ -1055,6 +1094,18 @@
                                     ></p-chips>
                                   </div>
                                 </div>
+
+                                <div class="row justify-content-center boton">
+                                
+                                  <button 
+                                  type="button" 
+                                  class="btn btn-outline-danger btn-round btn-sm" 
+                                  (click)="borrarDeseos(i)">
+                                  <i class="fas fa-trash-alt fa-lg fa-fw"></i>
+                                  BORRAR
+                                  
+                                </button>
+                              </div>
                               </div>
                             </td>
                           </tr>
@@ -1070,48 +1121,13 @@
                       </button>
                     </div>
                   </div>
-                  <br />
                 </p-card>
               </div>
             </div>
-            <br>
-
-            <!-- Card Observaciones -->
-            <div class="row">
-              <div class="col-md-12">
-                <p-card
-                  header="Observaciones"
-                  subheader="Ingrese las Observaciones necesarias sobre el Estudiante."
-                  styleClass="ui-card-shadow"
-                >
-                  <p-header>
-                    <div class="head encabezado">
-                      <i class="fas fa-eye fa-3x fa-fw icono"></i>
-                    </div>
-                  </p-header>
-
-                  <textarea
-                    rows="5"
-                    cols="50"
-                    pInputTextarea
-                    placeholder="Observaciones"
-                    style="margin-top: 0.5em"
-                    formControlName="observaciones"
-                  ></textarea>
-                  <p-message
-                    severity="error"
-                    text=" Debe ingresar Observaciones sobre el Estudiante"
-                    *ngIf="invalidos('observaciones')"
-                    class="error"
-                  ></p-message>
-                  <br />
-                </p-card>
-              </div>
-            </div>
-            <br>
+            <!-- <br> -->
 
             <!-- Card Logros -->
-            <div class="row">
+            <div class="row espacio">
               <div class="col-md-12">
                 <p-card
                   header="Logros"
@@ -1139,16 +1155,47 @@
               </div>
             </div>
 
+            <!-- Card Observaciones -->
+            <div class="row ">
+              <div class="col-md-12">
+                <p-card
+                  header="Observaciones"
+                  subheader="Ingrese las Observaciones necesarias sobre el Estudiante."
+                  styleClass="ui-card-shadow"
+                >
+                  <p-header>
+                    <div class="head encabezado">
+                      <i class="fas fa-eye fa-3x fa-fw icono"></i>
+                    </div>
+                  </p-header>
+
+                  <textarea
+                    rows="5"
+                    cols="50"
+                    pInputTextarea
+                    placeholder="Observaciones"
+                    style="margin-top: 0.5em"
+                    formControlName="observaciones"
+                  ></textarea>
+                  <p-message
+                    severity="error"
+                    text=" Debe ingresar Observaciones sobre el Estudiante"
+                    *ngIf="invalidos('observaciones')"
+                    class="error"
+                  ></p-message>
+                  <!-- <br /> -->
+                </p-card>
+              </div>
+            </div>
+            <!-- <br> -->
           </div>
         </div>
 
-        <div class="row justify-content-center" style="margin-top: 1em">
-          <div class="col-md-5" style="margin-top: 1em"></div>
-        </div>
-        <br />
-        <br />
-
-        <button type="submit" class="btn btn-outline-neutral btn-round btn-lg" [disabled]="!forma.valid">
+        <button 
+          type="submit" 
+          class="btn btn-outline-neutral btn-round btn-lg" 
+          [disabled]="!forma.valid" 
+          style="margin-top: 3em">
           <i class="fas fa-save fa-lg fa-fw"></i> Guardar Plan de Vida
         </button>
       </form>
@@ -1232,7 +1279,7 @@
                   {{ rowData.aula.nombre }}
                 </td>
                 <td>
-                  {{ rowData.vision }}
+                  {{ rowData.vision || "Ninguna Visión"}}
                 </td>
                 <td>
                   {{ rowData.observaciones }}

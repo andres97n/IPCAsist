@@ -25,6 +25,22 @@
   margin-top: 1em;
 }
 
+.boton {
+  margin: 0.5em;
+}
+
+.espacio_dinformativos {
+  margin-bottom: 2.4em;
+}
+
+.espacio_planificacion {
+  margin-bottom: 3em;
+}
+
+.espacio {
+  margin-bottom: 1.6em;
+}
+
 :host ::ng-deep p-listbox .ui-listbox {
   width: 23rem;
 }

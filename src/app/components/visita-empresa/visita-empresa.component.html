@@ -68,7 +68,7 @@
                 >
                   <p-header>
                     <div class="head">
-                      <i class="far fa-building fa-3x fa-fw icono"></i>
+                      <i class="far fa-building fa-4x fa-fw icono"></i>
                     </div>
                   </p-header>
                   <div class="row justify-content-center componente">
@@ -102,7 +102,7 @@
             </div>
 
             <!-- Representante -->
-            <div class="row margen">
+            <div class="row espacio">
               <div class="col-md-12">
                 <p-card
                   header="Representante"
@@ -111,7 +111,7 @@
                 >
                   <p-header>
                     <div class="head">
-                      <i class="fas fa-user fa-3x fa-fw icono"></i>
+                      <i class="fas fa-user fa-4x fa-fw icono"></i>
                     </div>
                   </p-header>
                   <div
@@ -170,7 +170,7 @@
             </div>
 
             <!-- Card Correo -->
-            <div class="row margen">
+            <div class="row espacio">
               <div class="col-md-12">
                 <p-card
                   header="Correo"
@@ -179,7 +179,7 @@
                 >
                   <p-header>
                     <div style="background-color: #cfcfcf">
-                      <i class="far fa-envelope fa-3x fa-fw icono"></i>
+                      <i class="far fa-envelope fa-4x fa-fw icono"></i>
                     </div>
                   </p-header>
                   <div class="row justify-content-center componente">
@@ -208,51 +208,10 @@
               </div>
             </div>
 
-            <!-- Card Fecha de Visita -->
-            <div class="row margen">
-              <div class="col-md-12">
-                <p-card
-                  header="Fecha de la Visita"
-                  subheader="Ingrese la Fecha en que se realizará la visita."
-                  styleClass="ui-card-shadow"
-                >
-                  <p-header>
-                    <div class="head">
-                      <i class="far fa-calendar-check fa-3x fa-fw icono"></i>
-                    </div>
-                  </p-header>
-                  <div class="row justify-content-center componente">
-                    <div class="ui-inputgroup">
-                      <span class="ui-inputgroup-addon">
-                        <i
-                          class="fas fa-calendar-alt fa-lg"
-                          style="line-height: 1"
-                        ></i
-                      ></span>
-                      <p-calendar
-                        [locale]="es"
-                        dateFormat="dd/mm/yy"
-                        placeholder="Fecha de Visita"
-                        formControlName="fecha_visita"
-                      ></p-calendar>
-                    </div>
-                    <div class="row justify-content-center">
-                      <div class="col-md-12">
-                        <br />
-                        <p-message
-                          severity="error"
-                          text=" Se debe ingresar la Fecha de la Visita"
-                          *ngIf="invalidos('fecha_visita')"
-                        ></p-message>
-                      </div>
-                    </div>
-                  </div>
-                </p-card>
-              </div>
-            </div>
+            
 
             <!-- Card Observación -->
-            <div class="row margen">
+            <div class="row espacio">
               <div class="col-md-12">
                 <p-card
                   header="Observaciones"
@@ -261,7 +220,7 @@
                 >
                   <p-header>
                     <div class="head">
-                      <i class="fas fa-clipboard fa-3x fa-fw icono"></i>
+                      <i class="fas fa-clipboard fa-4x fa-fw icono"></i>
                     </div>
                   </p-header>
                   <div class="form-group componente">
@@ -393,6 +352,49 @@
               </div>
             </div>
 
+            <!-- Card Fecha de Visita -->
+            <div class="row margen">
+              <div class="col-md-12">
+                <p-card
+                  header="Fecha de la Visita"
+                  subheader="Ingrese la Fecha en que se realizará la visita."
+                  styleClass="ui-card-shadow"
+                >
+                  <p-header>
+                    <div class="head">
+                      <i class="far fa-calendar-check fa-3x fa-fw icono"></i>
+                    </div>
+                  </p-header>
+                  <div class="row justify-content-center componente">
+                    <div class="ui-inputgroup">
+                      <span class="ui-inputgroup-addon">
+                        <i
+                          class="fas fa-calendar-alt fa-lg"
+                          style="line-height: 1"
+                        ></i
+                      ></span>
+                      <p-calendar
+                        [locale]="es"
+                        dateFormat="dd/mm/yy"
+                        placeholder="Fecha de Visita"
+                        formControlName="fecha_visita"
+                      ></p-calendar>
+                    </div>
+                    <div class="row justify-content-center">
+                      <div class="col-md-12">
+                        <br />
+                        <p-message
+                          severity="error"
+                          text=" Se debe ingresar la Fecha de la Visita"
+                          *ngIf="invalidos('fecha_visita')"
+                        ></p-message>
+                      </div>
+                    </div>
+                  </div>
+                </p-card>
+              </div>
+            </div>
+
             <!-- Card Contacto -->
             <div class="row margen">
               <div class="col-md-12">
@@ -419,13 +421,14 @@
                         placeholder="Celular"
                         formControlName="contacto"
                       ></p-inputMask>
+                      <br>
                       <div class="row justify-content-center">
                         <div class="col-md-12">
                           <p-message
                             severity="error"
                             text=" Se debe ingresar un Contacto"
                             *ngIf="invalidos('contacto')"
-                            style="margin-top: 1em"
+                            style="margin-top: 2em"
                           ></p-message>
                         </div>
                       </div>
@@ -560,13 +563,14 @@
             </div>
           </div>
         </div>
-        <br />
-        <br />
+        <!-- <br />
+        <br /> -->
 
         <button
           type="submit"
           class="btn btn-outline-neutral btn-round btn-lg"
           [disabled]="!forma.valid"
+          style="margin-top: 3em"
         >
           <i class="fas fa-save fa-lg fa-fw"></i> Registrar Visita
         </button>

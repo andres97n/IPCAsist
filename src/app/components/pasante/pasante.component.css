@@ -35,6 +35,14 @@
   font-weight: bold;
 }
 
+.espacio {
+  margin-top: 2em;
+}
+
+.espacio_info {
+  margin-top: 2.9em;
+}
+
 .fecha {
   margin-left: 1em;
 }

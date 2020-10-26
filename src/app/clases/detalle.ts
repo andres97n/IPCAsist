@@ -1,5 +1,5 @@
 export class Detalle {
-  titulo: string;
+  nombre: string;
   descripcion?: string[];
   fecha_creacion?: Date;
 }

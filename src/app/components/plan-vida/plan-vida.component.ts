@@ -1,8 +1,14 @@
+import { state } from "@angular/animations";
+import { style } from "@angular/animations";
+import { animate } from "@angular/animations";
+import { transition } from "@angular/animations";
+import { trigger } from "@angular/animations";
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, FormArray, Validators } from "@angular/forms";
 import { Aula } from "app/clases/aula";
 import { Docente } from "app/clases/docente";
 import { Estudiante } from "app/clases/estudiante";
+import { Materia } from "app/clases/materia";
 import { Plan_Vida } from "app/clases/plan-vida";
 import { DocenteService } from "app/services/docente.service";
 import { PlanVidaService } from "app/services/plan-vida.service";
@@ -11,10 +17,32 @@ import { PlanVidaService } from "app/services/plan-vida.service";
   selector: "app-plan-vida",
   templateUrl: "./plan-vida.component.html",
   styleUrls: ["./plan-vida.component.css"],
+  animations: [
+    trigger("rowExpansionTrigger", [
+      state(
+        "void",
+        style({
+          transform: "translateX(-10%)",
+          opacity: 0,
+        })
+      ),
+      state(
+        "active",
+        style({
+          transform: "translateX(0)",
+          opacity: 1,
+        })
+      ),
+      transition("* <=> *", animate("400ms cubic-bezier(0.86, 0, 0.07, 1)")),
+    ]),
+  ],
 })
+
 export class PlanVidaComponent implements OnInit {
   cities: any[];
   selectedCities: any[];
+
+  materias: Materia[];
 
   values1: string[];
 
@@ -91,13 +119,22 @@ export class PlanVidaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cities = [
-      { name: "Vinculación Emocional y Social", code: "NY" },
-      { name: "Descubrimiento del Método Natural y Cultural", code: "RM" },
-      { name: "Manifestación del Lenguaje Verbal y No Verbal", code: "LDN" },
-      { name: "Exploración del Cuerpo y Motricidad", code: "IST" },
-      { name: "Paris", code: "PRS" },
-    ];
+
+    // this.cities = [
+    //   { name: "Vinculación Emocional y Social", code: "NY" },
+    //   { name: "Descubrimiento del Método Natural y Cultural", code: "RM" },
+    //   { name: "Manifestación del Lenguaje Verbal y No Verbal", code: "LDN" },
+    //   { name: "Exploración del Cuerpo y Motricidad", code: "IST" },
+    //   { name: "Paris", code: "PRS" },
+    // ];
+
+    this.materias = [
+      { nombre: "Vinculación Emocional y Social" , asignacion: "VES" },
+      { nombre: "Descubrimiento del Método Natural y Cultural" , asignacion: "DMNC" },
+      { nombre: "Manifestación del Lenguaje Verbal y No Verbal" , asignacion: "MLVNV" },
+      { nombre: "Exploración del Cuerpo y Motricidad" , asignacion: "ECM" },
+      { nombre: "Lengua y Comunicación" , asignacion: "LC" }
+    ]
 
     this._docenteSrv.getDocentes().subscribe((docentes: Docente[]) => {
       console.log(docentes);
@@ -188,8 +225,6 @@ export class PlanVidaComponent implements OnInit {
   agregarNecesidad() {
     this.necesidades.push(
       this.fb.group({
-        // nombre: ["", Validators.required],
-        // descripcion: ["", Validators.required]
         nombre: this.fb.control("", Validators.required),
         descripcion: this.fb.control("", Validators.required)
       })
@@ -267,9 +302,15 @@ export class PlanVidaComponent implements OnInit {
     this.suenos.removeAt(i);
   }
 
+  limpiarArrays(){
+    // this.necesidades.length = 0
+  }
+
 // Guardar datos de Plan de Vida
   guardarPlan() {
     console.log(this.forma);
+    console.log(this.plan_vida);
+    
   }
 
   clonePlan(c: Plan_Vida): Plan_Vida {
@@ -285,6 +326,55 @@ export class PlanVidaComponent implements OnInit {
     this.plan_editar = this.clonePlan(event.data);
     this.displayDialog = true;
     console.log(this.plan_vida);
+
+    // this.necesidades.setValue(this.plan_vida.necesidades);
+
+    this.limpiarArrays();
+
+    this.plan_vida.necesidades.forEach( necesidad =>{
+      this.agregarNecesidad() 
+    } )
+
+    this.plan_vida.potencialidades.forEach(potencialidad => {
+      this.agregarPotencialidad();
+    } )
+
+    this.plan_vida.disgustos.forEach( disgusto => {
+      this.agregarDisgusto();
+    } )
+
+    this.plan_vida.suenos.forEach( sueno => {
+      this.agregarSueno();
+    } )
+
+    this.plan_vida.gustos.forEach( seguro => {
+      this.agregarGusto();
+    } )
+
+    this.plan_vida.deseos.forEach( deseo => {
+      this.agregarDeseo();
+    } )
+
+    this.forma.setValue({
+      docente: this.plan_vida.docente,
+      estudiante: this.plan_vida.estudiante,
+      aula: this.plan_vida.aula,
+      asignatura: this.plan_vida.asignaturas,
+      descripcion: this.plan_vida.descripcion,
+      objetivo_general: this.plan_vida.objetivo_general,
+      metas_especificas: this.plan_vida.metas_especificas,
+      vision: this.plan_vida.vision,
+      area: this.plan_vida.areas,
+      dominio: this.plan_vida.dominio,
+      necesidades: this.plan_vida.necesidades,
+      potencialidades: this.plan_vida.potencialidades,
+      gustos: this.plan_vida.gustos,
+      disgustos: this.plan_vida.disgustos,
+      deseos: this.plan_vida.deseos,
+      suenos: this.plan_vida.suenos,
+      logros: this.plan_vida.logros,
+      observaciones: this.plan_vida.observaciones
+    });
 
     // this.editarUniversidad(this.pasante_editar.institucion);
   }

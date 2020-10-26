@@ -80,11 +80,11 @@
     ],
     "necesidades": [
       {
-        "titulo": "Comunicación",
+        "nombre": "Comunicación",
         "descripcion": ["Claves objetos y movimiento coactivo"]
       },
       {
-        "titulo": "Estado de Salud",
+        "nombre": "Estado de Salud",
         "descripcion": [
           "terapia física",
           "estimulación temprana",
@@ -93,17 +93,17 @@
         ]
       },
       {
-        "titulo": "Físicas",
+        "nombre": "Físicas",
         "descripcion": ["Coordinación motriz general"]
       },
       {
-        "titulo": "Autonomía",
+        "nombre": "Autonomía",
         "descripcion": ["Alimentación", "Masticación", "Deglución de Sólidos"]
       }
     ],
     "potencialidades": [
       {
-        "titulo": "Actividades",
+        "nombre": "Actividades",
         "descripcion": [
           "Agarra objetos por períodos cortos de tiempo",
           "gira hacia el lado derecho de manera parcial",
@@ -115,28 +115,28 @@
     ],
     "gustos": [
       {
-        "titulo": "Objetos",
+        "nombre": "Objetos",
         "descripcion": [
           "Que le hagan masajes",
           "El sonido de canciones infantiles"
         ]
       },
       {
-        "titulo": "Posiciones",
+        "nombre": "Posiciones",
         "descripcion": ["Domir", "Estar acostado boca arriba"]
       },
       {
-        "titulo": "Comida",
+        "nombre": "Comida",
         "descripcion": ["Le gusta la comida dulce"]
       },
       {
-        "titulo": "Lugares",
+        "nombre": "Lugares",
         "descripcion": ["Estar en el agua"]
       }
     ],
     "disgustos": [
       {
-        "titulo": "Actividades",
+        "nombre": "Actividades",
         "descripcion": [
           "Que le pongan boca abajo",
           "Que le despierten",
@@ -146,13 +146,13 @@
     ],
     "deseos": [
       {
-        "titulo": "Acitividades",
+        "nombre": "Acitividades",
         "descripcion": ["Pronunciar correctamente", "Caminar por su cuenta"]
       }
     ],
     "suenos": [
       {
-        "titulo": "Actividades",
+        "nombre": "Actividades",
         "descripcion": ["Se profesional", "Ser autónomo"]
       }
     ],
@@ -241,7 +241,7 @@
     ],
     "necesidades": [
       {
-        "titulo": "Comunicación",
+        "nombre": "Comunicación",
         "descripcion": ["Claves objetos y movimiento coactivo"]
       },
       {
@@ -254,17 +254,17 @@
         ]
       },
       {
-        "titulo": "Físicas",
+        "nombre": "Físicas",
         "descripcion": ["Coordinación motriz general"]
       },
       {
-        "titulo": "Autonomía",
+        "nombre": "Autonomía",
         "descripcion": ["Alimentación", "Masticación", "Deglución de Sólidos"]
       }
     ],
     "potencialidades": [
       {
-        "titulo": "Actividades",
+        "nombre": "Actividades",
         "descripcion": [
           "Agarra objetos por períodos cortos de tiempo",
           "gira hacia el lado derecho de manera parcial",
@@ -276,28 +276,28 @@
     ],
     "gustos": [
       {
-        "titulo": "Objetos",
+        "nombre": "Objetos",
         "descripcion": [
           "Que le hagan masajes",
           "El sonido de canciones infantiles"
         ]
       },
       {
-        "titulo": "Posiciones",
+        "nombre": "Posiciones",
         "descripcion": ["Domir", "Estar acostado boca arriba"]
       },
       {
-        "titulo": "Comida",
+        "nombre": "Comida",
         "descripcion": ["Le gusta la comida dulce"]
       },
       {
-        "titulo": "Lugares",
+        "nombre": "Lugares",
         "descripcion": ["Estar en el agua"]
       }
     ],
     "disgustos": [
       {
-        "titulo": "Actividades",
+        "nombre": "Actividades",
         "descripcion": [
           "Que le pongan boca abajo",
           "Que le despierten",
@@ -307,13 +307,13 @@
     ],
     "deseos": [
       {
-        "titulo": "Acitividades",
+        "nombre": "Acitividades",
         "descripcion": ["Pronunciar correctamente", "Caminar por su cuenta"]
       }
     ],
     "suenos": [
       {
-        "titulo": "Actividades",
+        "nombre": "Actividades",
         "descripcion": ["Se profesional", "Ser autónomo"]
       }
     ],

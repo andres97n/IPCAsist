@@ -3,9 +3,11 @@ import { Estudiante } from "./estudiante";
 import { Materia } from "./materia";
 import { Aula } from "./aula";
 import { Detalle } from "./detalle";
+import { Periodo_Lectivo } from "./periodo_lectivo";
 
 export class Plan_Vida {
   _id?: string;
+  periodo_lectivo?: Periodo_Lectivo;
   docente?: Docente;
   estudiante?: Estudiante;
   asignaturas?: Materia[];
@@ -14,7 +16,7 @@ export class Plan_Vida {
   objetivo_general?: string;
   metas_especificas?: string[];
   vision?: string;
-  areas?: Materia[];
+  ambitos?: Materia[];
   dominio?: Materia[];
   necesidades?: Detalle[];
   potencialidades?: Detalle[];

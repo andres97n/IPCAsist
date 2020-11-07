@@ -14,4 +14,8 @@ export class PlanVidaService {
   getPlanesVida(){
     return this.http.get("/assets/json/Plan_Vida.json");
   }
+
+  getPeriodoLectivo(){
+    return this.http.get("/assets/json/Periodo_Lectivo.json");
+  }
 }

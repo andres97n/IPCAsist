@@ -14,6 +14,8 @@ import { EjemplosService } from "app/services/ejemplos.service";
 import { AsignarDocente } from "app/clases/asignar-docente";
 import { Docente } from "app/clases/docente";
 import { Aula } from "app/clases/aula";
+import { Periodo_Lectivo } from "app/clases/periodo_lectivo";
+import { PlanVidaService } from "app/services/plan-vida.service";
 @Component({
   selector: "app-asignar-docente",
   templateUrl: "./asignar-docente.component.html",
@@ -74,16 +76,24 @@ export class AsignarDocenteComponent implements OnInit {
   aulas_editadas: Aula[];
   nombre_aula: string;
 
+  periodo_lectivo: Periodo_Lectivo;
+  periodos_lectivos: Periodo_Lectivo[];
+  periodos_filrados: Periodo_Lectivo[];
+
   constructor(
     private fb: FormBuilder,
     // private _ejemSrv: EjemplosService,
-    private _docenteSrv: DocenteService
+    private _docenteSrv: DocenteService,
+    private _planSrv: PlanVidaService
   ) {
     this.crearFormulario();
   }
 
   ngOnInit(): void {
     this.asignacion = {
+      periodo_lectivo: {
+        nombre: ""
+      },
       docente: {
         persona: {
           identificacion: "",
@@ -105,6 +115,12 @@ export class AsignarDocenteComponent implements OnInit {
         nombre: "",
       },
     };
+
+    this._planSrv.getPeriodoLectivo().subscribe( (periodos_lectivos: Periodo_Lectivo[]) =>{
+      
+      this.periodos_lectivos = periodos_lectivos;
+      console.log(this.periodos_lectivos);
+    } )
 
     this._docenteSrv
       .getAsignaciones()
@@ -137,6 +153,10 @@ export class AsignarDocenteComponent implements OnInit {
   crearFormulario() {
     this.forma = this.fb.group({
       // identificacion: new FormControl(this.identificacion, [Validators.required, Validators.minLength(2)]),
+      periodo_lectivo: [
+        this.asignacion.periodo_lectivo,
+        Validators.required
+      ],
       identificacion: [
         // this.asignacion.docente.persona.identificacion,
         this.identificacion,

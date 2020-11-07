@@ -57,6 +57,54 @@
       <form [formGroup]="forma" (ngSubmit)="guardarPlan()">
         <div class="row justify-content-center" style="margin-top: 2em">
           <div class="col-md-5" >
+
+            <!-- Card Período Lectivo -->
+            <div class="row espacio_dinformativos">
+              <div class="col-md-12">
+                <p-card
+              header="Período Lectivo"
+              subheader="Seleccione el Período Lectivo que corresponde."
+              styleClass="ui-card-shadow"
+            >
+              <p-header>
+                <div style="background-color: #cfcfcf">
+                  <i class="fas fa-calendar-alt fa-3x fa-fw icono"></i>
+                </div>
+              </p-header>
+              <br />
+              <div class="ui-inputgroup row justify-content-center">
+                <span class="ui-inputgroup-addon">
+                <i class="far fa-calendar-check fa-lg" style="line-height: 1"></i></span>
+                <p-dropdown [options]="periodos_lectivos" 
+                          filter="true" 
+                          optionLabel="nombre"
+                          placeholder="Período Lectivo"
+                          formControlName="periodo_lectivo">
+                <ng-template let-item pTemplate="selectedItem">
+                    <span style="vertical-align:middle;">{{item.label}}</span>
+                </ng-template>
+                <ng-template let-periodo pTemplate="item">
+                    <div class="ui-helper-clearfix" style="height: 25px;">
+                        <div style="font-size:14px; text-align:middle">{{periodo.label}}</div>
+                    </div>
+                </ng-template>
+              </p-dropdown>
+              </div>
+              <br />
+              <div class="row justify-content-center">
+                <p-message
+                  severity="error"
+                  text=" Se requiere el Período"
+                  *ngIf="invalidos('periodo_lectivo')"
+                ></p-message>
+              </div>
+              <p-footer>
+                <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
+              </p-footer>
+            </p-card>
+                </div>
+            </div>
+
             <!-- Card Docente -->
             <div class="row espacio_dinformativos">
               <div class="col-md-12">
@@ -199,60 +247,7 @@
             </div>
             <!-- <br /> -->
 
-            <!-- Card Aula -->
-            <div class="row">
-              <div class="col-md-12">
-                <p-card
-                  header="Aula"
-                  subheader="Ingrese el nombre del Aula"
-                  styleClass="ui-card-shadow"
-                >
-                  <p-header>
-                    <div class="head encabezado">
-                      <i class="fas fa-school fa-4x fa-fw icono"></i>
-                    </div>
-                  </p-header>
-
-                  <div
-                    class="componente ui-inputgroup row justify-content-center"
-                  >
-                    <span class="ui-inputgroup-addon">
-                      <i
-                        class="fas fa-door-open fa-lg"
-                        style="line-height: 1"
-                      ></i
-                    ></span>
-
-                    <p-autoComplete
-                      [suggestions]="aulas_filtradas"
-                      (completeMethod)="filtrarAula($event)"
-                      [size]="30"
-                      [minLength]="1"
-                      placeholder="Aula"
-                      [dropdown]="true"
-                      formControlName="aula"
-                      field="nombre"
-                    >
-                      <ng-template let-brand pTemplate="item">
-                        <div class="ui-helper-clearfix">
-                          <div style="font-size: 15px; margin: 0.5em">
-                            {{ brand.nombre }}
-                          </div>
-                        </div>
-                      </ng-template>
-                    </p-autoComplete>
-
-                    <p-message
-                      severity="error"
-                      text=" Se requiere al Aula correspondiente"
-                      *ngIf="invalidos('aula')"
-                      class="error"
-                    ></p-message>
-                  </div>
-                  <br />
-                </p-card>
-              </div>
-            </div>
+            
           </div>
 
           <!-- Card Asignatura -->
@@ -283,8 +278,57 @@
                       class="justify-content-between d-flex"
                       formControlName="asignatura"
                     >
-                      <p-header> Asignaturas </p-header>
+                      <p-header>
+                        <div class="row">
+                          <div class="col-md-10">
+                            <h5>
+                              Asignaturas 
+                            </h5>
+                          </div>
+                          <div class="col-md-2">
+                            <button
+                              type="button"
+                              class="btn btn-neutral btn-just-icon agregar_materias"
+                              (click)="asignaturaSeleccionada($event)"
+                            >
+                              <i class="fas fa-plus fa-sm"></i>
+                            </button>
+  
+                          </div>
+                        </div> 
+                      </p-header>
                     </p-listbox>
+                    <p-dialog
+                      header="Nueva Asignatura"
+                      [(visible)]="mostrar_nueva_asignatura"
+                      [focusOnShow]="false"
+                      showEffect="fade"
+                      [modal]="true"
+                      [style]="{ width: '300px' }"
+                    >
+                      <div class="p-grid ui-fluid">
+                        <div class="p-col-8">
+                          <input
+                            pInputText
+                            formControlName="ambito"
+                            placeholder="Ingrese Nombre"
+                          />
+                        </div>
+                      </div>
+                      <p-footer>
+                        <div
+                          class="ui-dialog-buttonpane ui-helper-clearfix row justify-content-center"
+                        >
+                          <button
+                            type="button"
+                            class="btn btn-outline-success btn-round btn-sm"
+                            (click)="nuevaAsignatura()"
+                          >
+                            <i class="fas fa-save fa-lg fa-fw"></i> Guardar
+                          </button>
+                        </div>
+                      </p-footer>
+                    </p-dialog>
                     <p-message
                       severity="error"
                       text=" Se debe seleccionar por lo menos una Asignatura"
@@ -334,6 +378,61 @@
               </div>
             </div>
             <br />
+          </div>
+
+        </div>
+        <!-- Card Aula -->
+        <div class="row row justify-content-center espacio_dinformativos">
+          <div class="col-md-5">
+            <p-card
+              header="Aula"
+              subheader="Ingrese el nombre del Aula"
+              styleClass="ui-card-shadow"
+            >
+              <p-header>
+                <div class="head encabezado">
+                  <i class="fas fa-school fa-4x fa-fw icono"></i>
+                </div>
+              </p-header>
+
+              <div
+                class="componente ui-inputgroup row justify-content-center"
+              >
+                <span class="ui-inputgroup-addon">
+                  <i
+                    class="fas fa-door-open fa-lg"
+                    style="line-height: 1"
+                  ></i
+                ></span>
+
+                <p-autoComplete
+                  [suggestions]="aulas_filtradas"
+                  (completeMethod)="filtrarAula($event)"
+                  [size]="30"
+                  [minLength]="1"
+                  placeholder="Aula"
+                  [dropdown]="true"
+                  formControlName="aula"
+                  field="nombre"
+                >
+                  <ng-template let-brand pTemplate="item">
+                    <div class="ui-helper-clearfix">
+                      <div style="font-size: 15px; margin: 0.5em">
+                        {{ brand.nombre }}
+                      </div>
+                    </div>
+                  </ng-template>
+                </p-autoComplete>
+
+                <p-message
+                  severity="error"
+                  text=" Se requiere al Aula correspondiente"
+                  *ngIf="invalidos('aula')"
+                  class="error"
+                ></p-message>
+              </div>
+              <br />
+            </p-card>
           </div>
         </div>
         <br />
@@ -447,8 +546,52 @@
                       class="justify-content-between d-flex"
                       formControlName="dominio"
                     >
-                      <p-header> Dominios </p-header>
+                      <p-header> 
+                        <h5>
+                          Dominio 
+                        </h5>
+                        <div>
+                          <button
+                              type="button"
+                              class="btn btn-neutral btn-just-icon agregar_materias"
+                              (click)="dominioSeleccionado($event)"
+                          >
+                            <i class="fas fa-plus fa-sm"></i>
+                          </button>
+                        </div>    
+                      </p-header>
                     </p-listbox>
+                    <p-dialog
+                      header="Nuevo Dominio"
+                      [(visible)]="mostrar_nuevo_dominio"
+                      [focusOnShow]="false"
+                      showEffect="fade"
+                      [modal]="true"
+                      [style]="{ width: '300px' }"
+                    >
+                      <div class="p-grid ui-fluid">
+                        <div class="p-col-8">
+                          <input
+                            pInputText
+                            formControlName="ambito"
+                            placeholder="Ingrese Nombre"
+                          />
+                        </div>
+                      </div>
+                      <p-footer>
+                        <div
+                          class="ui-dialog-buttonpane ui-helper-clearfix row justify-content-center"
+                        >
+                          <button
+                            type="button"
+                            class="btn btn-outline-success btn-round btn-sm"
+                            (click)="nuevoDominio()"
+                          >
+                            <i class="fas fa-save fa-lg fa-fw"></i> Guardar
+                          </button>
+                        </div>
+                      </p-footer>
+                    </p-dialog>
                     <p-message
                       severity="error"
                       text=" Se debe seleccionar por lo menos un Dominio"
@@ -785,11 +928,11 @@
             </div>
             <!-- <br /> -->
 
-            <!-- Card Área -->
+            <!-- Card Ámbito -->
             <div class="row espacio" >
               <div class="col-md-12">
                 <p-card
-                  header="Área"
+                  header="Ámbito"
                   subheader="Ingrese el nombre/s del Área correspondiente."
                   styleClass="ui-card-shadow"
                 >
@@ -799,7 +942,7 @@
                     </div>
                   </p-header>
 
-                  <div class="row justify-content-center componente">
+                  <div class=" row justify-content-center componente">
                     <p-listbox
                       [options]="materias"
                       [multiple]="true"
@@ -809,14 +952,64 @@
                       [listStyle]="{
                         'max-height': '150px'
                       }"
-                      formControlName="area"
+                      formControlName="ambito"
                     >
-                      <p-header> Áreas </p-header>
+                    <p-header>
+                      <div class="row">
+                        <div class="col-md-10">
+                          <h5>
+
+                            Ámbito 
+                          </h5>
+                        </div>
+                        <div class="col-md-2">
+                          <button
+                            type="button"
+                            class="btn btn-neutral btn-just-icon agregar_materias"
+                            (click)="ambitoSeleccionado($event)"
+                          >
+                            <i class="fas fa-plus fa-sm"></i>
+                          </button>
+
+                        </div>
+                      </div>
+                    </p-header>
                     </p-listbox>
+                    <p-dialog
+                      header="Nuevo Ámbito"
+                      [(visible)]="mostrar_nuevo_ambito"
+                      [focusOnShow]="false"
+                      showEffect="fade"
+                      [modal]="true"
+                      [style]="{ width: '300px' }"
+                    >
+                      <div class="p-grid ui-fluid">
+                        <div class="p-col-8">
+                          <input
+                            pInputText
+                            formControlName="ambito"
+                            placeholder="Ingrese Nombre"
+                          />
+                        </div>
+                      </div>
+                      <p-footer>
+                        <div
+                          class="ui-dialog-buttonpane ui-helper-clearfix row justify-content-center"
+                        >
+                          <button
+                            type="button"
+                            class="btn btn-outline-success btn-round btn-sm"
+                            (click)="nuevoAmbito()"
+                          >
+                            <i class="fas fa-save fa-lg fa-fw"></i> Guardar
+                          </button>
+                        </div>
+                      </p-footer>
+                    </p-dialog>
                     <p-message
                       severity="error"
                       text=" Se debe seleccionar por lo menos un Área"
-                      *ngIf="invalidos('area')"
+                      *ngIf="invalidos('ambito')"
                       class="error"
                     ></p-message>
                   </div>
@@ -1236,7 +1429,45 @@
             selectionMode="single"
             [(selection)]="plan_vida"
             (onRowSelect)="onRowSelect($event)"
+            #dt
           >
+          <ng-template pTemplate="caption">
+            <div style="text-align: right">   
+              <p-dropdown [options]="periodos_lectivos" 
+                          [(ngModel)]="periodo_lectivo" 
+                          filter="true" 
+                          optionLabel="nombre"
+                          placeholder="Período Lectivo"
+                          (onChange)="filtrarContenido($event)">
+                <ng-template let-item pTemplate="selectedItem">
+                    <span style="vertical-align:middle;">{{item.label}}</span>
+                </ng-template>
+                <ng-template let-periodo pTemplate="item">
+                    <div class="ui-helper-clearfix" style="height: 25px;">
+                        <div style="font-size:14px; text-align:middle">{{periodo.label}}</div>
+                    </div>
+                </ng-template>
+              </p-dropdown>
+              <!-- <p-autoComplete
+                      [suggestions]="periodos_filrados"
+                      (completeMethod)="filtrarPeriodo($event)"
+                      [size]="15"
+                      [minLength]="1"
+                      placeholder="Periodo Lectivo"
+                      [dropdown]="true"
+                      field="nombre"
+                      (input)="dt.filterGlobal($event.target.value, cols.field, 'contains')"
+                    >
+                      <ng-template let-brand pTemplate="item">
+                        <div class="ui-helper-clearfix">
+                          <div style="font-size: 15px; margin: 0.5em">
+                            {{ brand.nombre }}
+                          </div>
+                        </div>
+                      </ng-template>
+                </p-autoComplete>      -->
+            </div>
+        </ng-template>
             <ng-template pTemplate="colgroup" let-columns>
               <colgroup>
                 <col />
@@ -1257,7 +1488,7 @@
               let-expanded="expanded"
               let-columns="columns"
             >
-              <tr [pSelectableRow]="rowData">
+              <tr [pSelectableRow]="rowData" >
                 <td style="width: 3em">
                   <a href="#" [pRowToggler]="rowData">
                     <i
@@ -1267,7 +1498,7 @@
                     ></i>
                   </a>
                 </td>
-                <td>
+                <td >
                   {{ rowData.docente.persona.primer_nombre }}
                   {{ rowData.docente.persona.primer_apellido }}
                 </td>
@@ -1275,11 +1506,11 @@
                   {{ rowData.estudiante.persona.primer_nombre}}
                   {{ rowData.estudiante.persona.primer_apellido }}
                 </td>
-                <td>
+                <td >
                   {{ rowData.aula.nombre }}
                 </td>
                 <td>
-                  {{ rowData.vision || "Ninguna Visión"}}
+                  {{ rowData.periodo_lectivo.nombre}}
                 </td>
                 <td>
                   {{ rowData.observaciones }}

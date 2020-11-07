@@ -3,15 +3,17 @@ import { style } from "@angular/animations";
 import { animate } from "@angular/animations";
 import { transition } from "@angular/animations";
 import { trigger } from "@angular/animations";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormGroup, FormBuilder, FormArray, Validators } from "@angular/forms";
 import { Aula } from "app/clases/aula";
 import { Docente } from "app/clases/docente";
 import { Estudiante } from "app/clases/estudiante";
 import { Materia } from "app/clases/materia";
+import { Periodo_Lectivo } from "app/clases/periodo_lectivo";
 import { Plan_Vida } from "app/clases/plan-vida";
 import { DocenteService } from "app/services/docente.service";
 import { PlanVidaService } from "app/services/plan-vida.service";
+import { Table } from "primeng/table";
 
 @Component({
   selector: "app-plan-vida",
@@ -51,6 +53,10 @@ export class PlanVidaComponent implements OnInit {
   displayDialog: boolean;
   cols: any[];
 
+  mostrar_nuevo_ambito: boolean;
+  mostrar_nueva_asignatura: boolean;
+  mostrar_nuevo_dominio: boolean;
+
   docentes: Docente[];
   docentes_filtrados: Docente[];
   // docentes_editados: Docente[];
@@ -67,6 +73,16 @@ export class PlanVidaComponent implements OnInit {
   plan_vida: Plan_Vida;
   nuevo_plan: boolean;
   plan_editar: Plan_Vida;
+
+  ambito: string;
+  asignatura: string;
+  dominio: string;
+
+  periodo_lectivo: Periodo_Lectivo;
+  periodos_lectivos: Periodo_Lectivo[];
+  periodos_filrados: Periodo_Lectivo[];
+
+  @ViewChild('dt') table: Table;
   
 
   constructor(
@@ -76,6 +92,9 @@ export class PlanVidaComponent implements OnInit {
   ) {
 
     this.plan_vida = {
+      periodo_lectivo: {
+        nombre: ""
+      },
       docente: {
         persona : {
           identificacion : "",
@@ -102,7 +121,7 @@ export class PlanVidaComponent implements OnInit {
       objetivo_general: "",
       metas_especificas: [],
       vision: "",
-      areas: [],
+      ambitos: [],
       dominio: [],
       necesidades: [],
       potencialidades: [],
@@ -136,6 +155,12 @@ export class PlanVidaComponent implements OnInit {
       { nombre: "Lengua y Comunicación" , asignacion: "LC" }
     ]
 
+    this._planSrv.getPeriodoLectivo().subscribe( (periodos_lectivos: Periodo_Lectivo[]) =>{
+      
+      this.periodos_lectivos = periodos_lectivos;
+      console.log(this.periodos_lectivos);
+    } )
+
     this._docenteSrv.getDocentes().subscribe((docentes: Docente[]) => {
       console.log(docentes);
       this.docentes = docentes;
@@ -158,16 +183,17 @@ export class PlanVidaComponent implements OnInit {
     } )
 
     this.cols = [
-      { field: "docente.persona", header: "DOCENTE" },
-      { field: "estudiante.persona", header: "ESTUDIANTE" },
-      { field: "aula.nombre", header: "AULA" },
-      { field: "vision", header: "VISIÓN" },
+      { field: "docente", header: "DOCENTE" },
+      { field: "estudiante", header: "ESTUDIANTE" },
+      { field: "aula", header: "AULA" },
+      { field: "periodo_lectivo", header: "PERÍODO LECTIVO" },
       { field: "observaciones", header: "OBSERVACIONES" },
     ];
   }
 
   crearFormulario() {
     this.forma = this.fb.group({
+      periodo_lectivo: this.fb.control(this.plan_vida.periodo_lectivo, Validators.required),
       docente: this.fb.control(this.plan_vida.docente.persona.identificacion, Validators.required),
       estudiante: this.fb.control(this.plan_vida.estudiante.persona.identificacion, Validators.required),
       aula: this.fb.control(this.plan_vida.aula.nombre, Validators.required),
@@ -176,7 +202,7 @@ export class PlanVidaComponent implements OnInit {
       objetivo_general: this.fb.control(this.plan_vida.objetivo_general, Validators.required),
       metas_especificas: this.fb.control(this.plan_vida.metas_especificas, Validators.required),
       vision: this.fb.control(this.plan_vida.vision, Validators.required),
-      area: this.fb.control(this.plan_vida.areas, Validators.required),
+      ambito: this.fb.control(this.plan_vida.ambitos, Validators.required),
       dominio: this.fb.control(this.plan_vida.dominio, Validators.required),
       necesidades: this.fb.array([
         // this.fb.group({})
@@ -194,6 +220,10 @@ export class PlanVidaComponent implements OnInit {
   invalidos(form: string) {
     return this.forma.get(form).invalid && this.forma.get(form).touched;
   }
+
+  // get ambito{
+  //   return this.forma
+  // }
 
   // Retorno de Array's
 
@@ -276,6 +306,49 @@ export class PlanVidaComponent implements OnInit {
     )
   }
 
+  // Agregar Materias
+
+  ambitoSeleccionado(e: any){
+    this.mostrar_nuevo_ambito = true;
+  }
+
+  nuevoAmbito(){
+    if(this.forma.get("ambito").value){
+      this.materias.push({
+        nombre: this.forma.get("ambito").value,
+        asignacion: "NO"
+      })
+    }
+    console.log(this.materias);
+    this.mostrar_nuevo_ambito = false;
+  }
+
+  asignaturaSeleccionada(e: any){
+    this.mostrar_nueva_asignatura = true;
+  }
+
+  nuevaAsignatura(){
+    if(this.forma.get("asignatura").value){
+      this.materias.push({
+        nombre: this.forma.get("asignatura").value,
+        asignacion: "NO"
+      })
+    }
+  }
+
+  dominioSeleccionado(){
+    this.mostrar_nuevo_dominio = true;
+  }
+
+  nuevoDominio(){
+    if(this.forma.get("dominio").value){
+      this.materias.push({
+        nombre: this.forma.get("dominio").value,
+        asignacion: "NO"
+      })
+    }
+  }
+
   // Borrar Formularios Dinámicos
 
   borrarNecesidad(i: number){
@@ -303,7 +376,12 @@ export class PlanVidaComponent implements OnInit {
   }
 
   limpiarArrays(){
-    // this.necesidades.length = 0
+    this.necesidades.clear();
+    this.potencialidades.clear();
+    this.gustos.clear();
+    this.disgustos.clear();
+    this.deseos.clear();
+    this.suenos.clear();
   }
 
 // Guardar datos de Plan de Vida
@@ -356,6 +434,7 @@ export class PlanVidaComponent implements OnInit {
     } )
 
     this.forma.setValue({
+      periodo_lectivo: this.plan_vida.periodo_lectivo,
       docente: this.plan_vida.docente,
       estudiante: this.plan_vida.estudiante,
       aula: this.plan_vida.aula,
@@ -364,7 +443,7 @@ export class PlanVidaComponent implements OnInit {
       objetivo_general: this.plan_vida.objetivo_general,
       metas_especificas: this.plan_vida.metas_especificas,
       vision: this.plan_vida.vision,
-      area: this.plan_vida.areas,
+      ambito: this.plan_vida.ambitos,
       dominio: this.plan_vida.dominio,
       necesidades: this.plan_vida.necesidades,
       potencialidades: this.plan_vida.potencialidades,
@@ -378,6 +457,17 @@ export class PlanVidaComponent implements OnInit {
 
     // this.editarUniversidad(this.pasante_editar.institucion);
   }
+
+  filtrarContenido(event: any){
+    console.log(event.value.nombre);
+    
+    this.table.filterGlobal(event.value.nombre, 'contains')
+  }
+
+  // periodoSeleccionado(e: any){
+  //   console.log(e.value);
+    
+  // }
 
   filtrarDocente(e: any) {
     let query = e.query;
@@ -455,6 +545,20 @@ export class PlanVidaComponent implements OnInit {
 
       if (aula.nombre.toLowerCase().indexOf(query.toLowerCase()) == 0) {
         this.aulas_filtradas.push(aula);
+      }
+    }
+  }
+
+  filtrarPeriodo(event) {
+    let query = event.query;
+    let periodos: Periodo_Lectivo[] = this.periodos_lectivos;
+
+    this.periodos_filrados = [];
+    for (let i = 0; i < periodos.length; i++) {
+      let periodo = periodos[i];
+
+      if (periodo.nombre.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+        this.periodos_filrados.push(periodo);
       }
     }
   }

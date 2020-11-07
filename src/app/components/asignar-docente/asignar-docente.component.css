@@ -17,3 +17,7 @@
 /* :host ::ng-deep p-autoComplete .ui-autocomplete-items {
   background-color: #32302f !important;
 } */
+
+/* :host ::ng-deep .p-calendar > .ui-calendar {
+  size: 54px !important;
+} */

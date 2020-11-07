@@ -1,6 +1,11 @@
 [
   {
     "_id": "_021561efew1fwe54ewfef45",
+    "periodo_lectivo": {
+      "id": "_jfierwn4390tievjdf930tvnfd5kn",
+      "nombre": "2019-2020",
+      "observaciones": "Ninguna observación"
+    },
     "docente": {
       "_id": "_ui3490ng3jsnf930nerg",
       "persona": {
@@ -50,7 +55,7 @@
       "Reaccionar cuando escuche su nombre"
     ],
     "vision": "",
-    "areas": [
+    "ambitos": [
       {
         "nombre": "Vinculación Emocional y Social",
         "asignacion": ""
@@ -161,6 +166,11 @@
   },
   {
     "_id": "_021561efngej64818fef4555dnogd",
+    "periodo_lectivo": {
+      "id": "_dfew4398sdfb89wfbi3ubsdiufd",
+      "nombre": "2020-2021",
+      "observaciones": "Ninguna observación"
+    },
     "docente": {
       "_id": "_nsduifwt4390fjjgh390gn",
       "persona": {
@@ -211,7 +221,7 @@
       "Reaccionar cuando escuche su nombre"
     ],
     "vision": "",
-    "areas": [
+    "ambitos": [
       {
         "nombre": "Vinculación Emocional y Social",
         "asignacion": ""
@@ -307,7 +317,7 @@
     ],
     "deseos": [
       {
-        "nombre": "Acitividades",
+        "nombre": "Actividades",
         "descripcion": ["Pronunciar correctamente", "Caminar por su cuenta"]
       }
     ],

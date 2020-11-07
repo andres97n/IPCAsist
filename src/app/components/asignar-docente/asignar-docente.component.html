@@ -119,6 +119,89 @@
     <div class="container">
       <h2 class="title">Asigne a un Docente!!</h2>
       <form [formGroup]="forma" (ngSubmit)="asignarDocente()">
+        <!-- Card Período Lectivo -->
+
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <p-card
+              header="Período Lectivo"
+              subheader="Seleccione el Período Lectivo al que corresponde la siguiente asignación."
+              styleClass="ui-card-shadow"
+            >
+              <p-header>
+                <div style="background-color: #cfcfcf">
+                  <i class="fas fa-calendar-alt fa-4x fa-fw icono"></i>
+                </div>
+              </p-header>
+              <br />
+              <div class="ui-inputgroup row justify-content-center">
+                <span class="ui-inputgroup-addon">
+                <i class="far fa-calendar-check fa-lg" style="line-height: 1"></i></span>
+                <p-dropdown [options]="periodos_lectivos" 
+                          filter="true" 
+                          optionLabel="nombre"
+                          placeholder="Período Lectivo"
+                          formControlName="periodo_lectivo">
+                <ng-template let-item pTemplate="selectedItem">
+                    <span style="vertical-align:middle;">{{item.label}}</span>
+                </ng-template>
+                <ng-template let-periodo pTemplate="item">
+                    <div class="ui-helper-clearfix" style="height: 25px;">
+                        <div style="font-size:14px; text-align:middle">{{periodo.label}}</div>
+                    </div>
+                </ng-template>
+              </p-dropdown>
+                <!-- <p-autoComplete
+                  [suggestions]="docentes_filtrados"
+                  (completeMethod)="filtrarDocente($event)"
+                  [size]="30"
+                  [minLength]="1"
+                  placeholder="Docente"
+                  [dropdown]="true"
+                  formControlName="identificacion"
+                  field="persona.identificacion"
+                >
+                  <ng-template let-brand pTemplate="item">
+                    <div class="ui-helper-clearfix">
+                      <div
+                        style="
+                          font-size: 10px;
+                          display: inline-block;
+                          margin: 10px 10px 0 0;
+                        "
+                      >
+                        {{ brand.persona.identificacion }}
+                      </div>
+                      <div
+                        style="
+                          font-size: 12px;
+                          float: right;
+                          margin: 10px 10px 0 0;
+                        "
+                      >
+                        {{ brand.persona.primer_nombre }}
+                        {{ brand.persona.primer_apellido }}
+                      </div>
+                    </div>
+                  </ng-template>
+                </p-autoComplete> -->
+              </div>
+              <br />
+              <div class="row justify-content-center">
+                <p-message
+                  severity="error"
+                  text=" Se requiere el Período"
+                  *ngIf="invalidos('periodo_lectivo')"
+                ></p-message>
+              </div>
+              <p-footer>
+                <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
+              </p-footer>
+            </p-card>
+          </div>
+        </div>
+        <br>
+
         <!-- Card Identificación -->
         <div class="row justify-content-center">
           <div class="col-md-6">
@@ -210,96 +293,32 @@
                 <!-- Horario de Entrada-->
                 <div class="col-md-4">
                   <label>Horario de Entrada</label>
-                  <ngb-timepicker
+                  <!-- <ngb-timepicker
                     [meridian]="meridian"
                     formControlName="horario_entrada"
-                  ></ngb-timepicker>
-                  <!-- <p-calendar
+                  ></ngb-timepicker> -->
+                  <p-calendar
                       formControlName="horario_entrada"
                       [timeOnly]="true"
-                    ></p-calendar> -->
+                    ></p-calendar>
                   <p-message
                     severity="error"
                     text=" Se requiere el Horario de Entrada del Docente"
                     *ngIf="noEntrada"
                   ></p-message>
-                  <!-- <div class="card card-profile card-plain">
-            <div class="card-avatar">
-              <a href="#avatar"
-                ><img src="./assets/img/faces/joe-gardner-2.jpg" alt="..."
-              /></a>
-            </div>
-            <div class="card-block">
-              <a href="#paper-kit">
-                <div class="author">
-                  <h4 class="card-title">Sophie West</h4>
-                  <h6 class="card-category">Designer</h6>
-                </div>
-              </a>
-              <p class="card-description text-center">
-                A group becomes a team when each member is sure enough of
-                himself and his contribution to praise the skill of the others.
-                No one can whistle a symphony. It takes an orchestra to play it.
-              </p>
-            </div>
-            <div class="card-footer text-center">
-              <a href="#pablo" class="btn btn-link btn-just-icon btn-neutral"
-                ><i class="fa fa-twitter"></i
-              ></a>
-              <a href="#pablo" class="btn btn-link btn-just-icon btn-neutral"
-                ><i class="fa fa-google-plus"></i
-              ></a>
-              <a href="#pablo" class="btn btn-link btn-just-icon btn-neutral"
-                ><i class="fa fa-linkedin"></i
-              ></a>
-            </div>
-          </div> -->
-
-                  <!-- <div class="col-md-4">
-          <div class="card card-profile card-plain">
-            <div class="card-avatar">
-              <a href="#avatar"
-                ><img src="./assets/img/faces/erik-lucatero-2.jpg" alt="..."
-              /></a>
-            </div>
-            <div class="card-block">
-              <a href="#paper-kit">
-                <div class="author">
-                  <h4 class="card-title">Robert Orben</h4>
-                  <h6 class="card-category">Developer</h6>
-                </div>
-              </a>
-              <p class="card-description text-center">
-                The strength of the team is each individual member. The strength
-                of each member is the team. If you can laugh together, you can
-                work together, silence isn’t golden, it’s deadly.
-              </p>
-            </div>
-            <div class="card-footer text-center">
-              <a href="#pablo" class="btn btn-link btn-just-icon btn-neutral"
-                ><i class="fa fa-twitter"></i
-              ></a>
-              <a href="#pablo" class="btn btn-link btn-just-icon btn-neutral"
-                ><i class="fa fa-google-plus"></i
-              ></a>
-              <a href="#pablo" class="btn btn-link btn-just-icon btn-neutral"
-                ><i class="fa fa-linkedin"></i
-              ></a>
-            </div>
-          </div>
-        </div> -->
+                  
                 </div>
                 <!-- Horario de Salida -->
                 <div class="col-md-4">
                   <label>Horario de Salida</label>
-                  <ngb-timepicker
+                  <!-- <ngb-timepicker
                     [meridian]="meridian"
                     formControlName="horario_salida"
-                  ></ngb-timepicker>
-                  <!-- <p-calendar
+                  ></ngb-timepicker> -->
+                  <p-calendar
                     formControlName="horario_salida"
                     [timeOnly]="true"
-                  ></p-calendar> -->
+                  ></p-calendar>
                   <p-message
                     severity="error"
                     text=" Se requiere el Horario de Entrada del Docente"
@@ -739,3 +758,69 @@
     </div>
   </div>
 </div>
+
+<!-- <div class="card card-profile card-plain">
+            <div class="card-avatar">
+              <a href="#avatar"
+                ><img src="./assets/img/faces/joe-gardner-2.jpg" alt="..."
+              /></a>
+            </div>
+            <div class="card-block">
+              <a href="#paper-kit">
+                <div class="author">
+                  <h4 class="card-title">Sophie West</h4>
+                  <h6 class="card-category">Designer</h6>
+                </div>
+              </a>
+              <p class="card-description text-center">
+                A group becomes a team when each member is sure enough of
+                himself and his contribution to praise the skill of the others.
+                No one can whistle a symphony. It takes an orchestra to play it.
+              </p>
+            </div>
+            <div class="card-footer text-center">
+              <a href="#pablo" class="btn btn-link btn-just-icon btn-neutral"
+                ><i class="fa fa-twitter"></i
+              ></a>
+              <a href="#pablo" class="btn btn-link btn-just-icon btn-neutral"
+                ><i class="fa fa-google-plus"></i
+              ></a>
+              <a href="#pablo" class="btn btn-link btn-just-icon btn-neutral"
+                ><i class="fa fa-linkedin"></i
+              ></a>
+            </div>
+          </div> -->
+
+                  <!-- <div class="col-md-4">
+          <div class="card card-profile card-plain">
+            <div class="card-avatar">
+              <a href="#avatar"
+                ><img src="./assets/img/faces/erik-lucatero-2.jpg" alt="..."
+              /></a>
+            </div>
+            <div class="card-block">
+              <a href="#paper-kit">
+                <div class="author">
+                  <h4 class="card-title">Robert Orben</h4>
+                  <h6 class="card-category">Developer</h6>
+                </div>
+              </a>
+              <p class="card-description text-center">
+                The strength of the team is each individual member. The strength
+                of each member is the team. If you can laugh together, you can
+                work together, silence isn’t golden, it’s deadly.
+              </p>
+            </div>
+            <div class="card-footer text-center">
+              <a href="#pablo" class="btn btn-link btn-just-icon btn-neutral"
+                ><i class="fa fa-twitter"></i
+              ></a>
+              <a href="#pablo" class="btn btn-link btn-just-icon btn-neutral"
+                ><i class="fa fa-google-plus"></i
+              ></a>
+              <a href="#pablo" class="btn btn-link btn-just-icon btn-neutral"
+                ><i class="fa fa-linkedin"></i
+              ></a>
+            </div>
+          </div>
+        </div> -->

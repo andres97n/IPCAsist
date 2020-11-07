@@ -29,8 +29,19 @@
   margin: 0.5em;
 }
 
+/* ::ng-deep .btn-just-icon {
+  height: 15px !important;
+  width: 10px !important;
+  font-size: 12px !important;
+} */
+
+/* .agregar_materias {
+  height: 35px;
+  width: 20px;
+} */
+
 .espacio_dinformativos {
-  margin-bottom: 2.4em;
+  margin-bottom: 1.8em;
 }
 
 .espacio_planificacion {

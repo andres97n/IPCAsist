@@ -53,3 +53,8 @@ Google Maps with Angular (Todavía no)
 npm install @angular/google-maps --save
 
 -------------------------------------------------
+
+Libreria de PdfMake
+npm install --save pdfmake
+
+-------------------------------------------------

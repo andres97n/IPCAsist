@@ -4,6 +4,9 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { EjemplosService } from "app/services/ejemplos.service";
 import { Visita_Empresa } from "app/clases/visita-empresa";
 import { VisitasService } from "app/services/visitas.service";
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import {
   animate,
   state,
@@ -282,4 +285,10 @@ export class VisitaEmpresaComponent implements OnInit {
 
     // this.docentesFiltrados = this.filtrarDocentes(query, this.docentes);
   }
+
+  openPdf(){
+    const documentDefinition = { content: 'This is an sample PDF printed with pdfMake' };
+    pdfMake.createPdf(documentDefinition).open();
+  }
+  
 }

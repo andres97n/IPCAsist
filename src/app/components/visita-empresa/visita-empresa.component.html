@@ -696,6 +696,20 @@
 
                       <div class="col-md-6">
                         <div class="p-grid">
+                          <div class="p-col-12 ">
+                            <!-- <button (click)="openPdf()">Generar PDF</button> -->
+
+                            <button (click)="openPdf()" 
+                            class="btn btn-secondary justify-content-center mb-1"
+                              >
+                              <!-- class="btn btn-secondary d-flex align-items-center justify-content-center mb-1" -->
+                              <i class="material-icons">
+                                picture_as_pdf
+                              </i> <span>&nbsp;</span>
+                            </button>
+
+                          </div>
+                          <br>
                           <div class="p-col-12">
                             <b>Motivo de Visita:</b>
                             {{ rowData.motivo_visita }}

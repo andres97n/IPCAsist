@@ -1,22 +1,210 @@
 [
     {
-        "id": "_dfusdi392u90dfnwefsdfm49r3j44",
+        "_id": "_djfbui4893r9ewfnwt3u90fdsnjt90jngjkdf",
         "nombre": "2017-2018",
-        "observaciones": "Ninguna Observación"
+        "descripcion": "S/N",
+        "fechaInicio": "02-08-2017",
+        "fechaFin": "",
+        "fechaFinClases": "",
+        "estado": "CERRADO",
+        "responsables": [
+            {
+                "_id": "_whfnew8r3ndkf349r43095nwjeknew",
+                "persona": {
+                  "_id": "_fwhebf47348njkefw48yndds",
+                  "identificacion": "0105876213",
+                  "primerNombre": "Fernando",
+                  "segundoNombre": "Fabián",
+                  "primerApellido": "Guzman",
+                  "segundoApellido": "Carrión",
+                  "celular": "0956423187",
+                  "correo": "ferchofabian25@gmail.com", 
+                  "genero": "Masculino",
+                  "direccion": {
+                    "callePrincipal": "Av. de las Américas",
+                    "calleSecundaria": "",
+                    "numeroCasa": "",
+                    "lugarReferencia": "S/N" 
+                  },
+                  "tipoSangre": "A+",
+                  "tieneDiscapacidad": "NO",
+                  "infoDiscapacidad": {},
+                  "ocupacion": "Docente",
+                  "nivelFormacion": "3er Nivel",
+                  "fechaNacimiento": "15/10/88"
+                },
+                "funcion": {
+                  "nombre": "DOCENTE",
+                  "descripcion": "El docente se encarga de guiar al Alumno en el proceso de mejorar sus dificultades."
+                },
+                "info": {
+                  "titulo": "FísicoTerapeuta",
+                  "tipoTitulo": "3er Nivel",
+                  "areaDeTrabajo": "Rehabilitación de Extremidades"
+                },
+                "historico": [
+                  {
+                    "fechaRegistro": "12/05/2016"
+                  }
+                ],
+                "descripcion": "S/N"
+            }
+        ]
     },
     {
         "id": "_dhfuidsjfjsk2399n40fwje90frnif2n3",
         "nombre": "2018-2019",
-        "observaciones": "Ninguna Observación"
+        "descripcion": "S/N",
+        "fechaInicio": "02-08-2018",
+        "fechaFin": "",
+        "fechaFinClases": "",
+        "estado": "CERRADO",
+        "responsables": [
+            {
+                "_id": "_fjnfenjr8894njrnfe4939nfk",
+                "persona": {
+                "_id": "_fwjnf889nr398ufn34nrnk43r3",
+                "identificacion": "0147684258",
+                "primerNombre": "María",
+                "segundoNombre": "Belén",
+                "primerApellido": "García",
+                "segundoApellido": "Morales",
+                "celular": "0956423187",
+                "correo": "mabelen92@gmail.com", 
+                "genero": "Femenino",
+                "direccion": {
+                    "callePrincipal": "Av. Solano",
+                    "calleSecundaria": "",
+                    "numeroCasa": "",
+                    "lugarReferencia": "S/N" 
+                },
+                "tipoSangre": "A-",
+                "tieneDiscapacidad": "NO",
+                "infoDiscapacidad": {},
+                "ocupacion": "Docente",
+                "nivelFormacion": "4to Nivel",
+                "fechaNacimiento": "05/11/92"
+                },
+                "funcion": {
+                "nombre": "DOCENTE",
+                "descripcion": "El docente se encarga de guiar al Alumno en el proceso de mejorar sus dificultades."
+                },
+                "info": {
+                "titulo": "Comunicación Temprana",
+                "tipoTitulo": "4to Nivel",
+                "areaDeTrabajo": "Rehabilitación Verbal"
+                },
+                "historico": [
+                {
+                    "fechaRegistro": "12/05/2016"
+                }
+                ],
+                "descripcion": "S/N"
+            }
+        ]
     },
     {
         "id": "_jfierwn4390tievjdf930tvnfd5kn",
         "nombre": "2019-2020",
-        "observaciones": "Ninguna Observación"
+        "descripcion": "S/N",
+        "fechaInicio": "02-08-2019",
+        "fechaFin": "",
+        "fechaFinClases": "",
+        "estado": "CERRADO",
+        "responsables": [
+            {
+                "_id": "_hfurfuei3849nfjwj4383ndkfe",
+                "persona": {
+                    "_id": "_jfnrwiu839i3nfjke340994dsnksnddf",
+                    "identificacion": "1248753216",
+                    "primerNombre": "Daniela",
+                    "segundoNombre": "Augusta",
+                    "primerApellido": "Damián",
+                    "segundoApellido": "Gonzales",
+                    "celular": "0956423187",
+                    "correo": "danydamina88@gmail.com", 
+                    "genero": "Femenino",
+                    "direccion": {
+                        "callePrincipal": "Av. Solano",
+                        "calleSecundaria": "",
+                        "numeroCasa": "",
+                        "lugarReferencia": "S/N" 
+                    },
+                    "tipoSangre": "O+",
+                    "tieneDiscapacidad": "NO",
+                    "infoDiscapacidad": {},
+                    "ocupacion": "Docente",
+                    "nivelFormacion": "4to Nivel",
+                    "fechaNacimiento": "05/11/88"
+                },
+                "funcion": {
+                    "nombre": "DOCENTE",
+                    "descripcion": "El docente se encarga de guiar al Alumno en el proceso de mejorar sus dificultades."
+                },
+                "info": {
+                    "titulo": "FísicoTerapeuta",
+                    "tipoTitulo": "4to Nivel",
+                    "areaDeTrabajo": "Rehabilitación Física"
+                },
+                "historico": [
+                    {
+                        "fechaRegistro": "12/05/2016"
+                    }
+                ],
+                "descripcion": "S/N"
+            }
+        ]
     },
     {
         "id": "_dfew4398sdfb89wfbi3ubsdiufd",
         "nombre": "2020-2021",
-        "observaciones": "Ninguna Observación" 
+        "descripcion": "S/N",
+        "fechaInicio": "02-08-2019",
+        "fechaFin": "",
+        "fechaFinClases": "",
+        "estado": "CERRADO",
+        "responsables": [
+            {
+                "_id": "_hfurfuei3849nfjwj4383ndkfe",
+                "persona": {
+                    "_id": "_jfnrwiu839i3nfjke340994dsnksnddf",
+                    "identificacion": "1248753216",
+                    "primerNombre": "Daniela",
+                    "segundoNombre": "Augusta",
+                    "primerApellido": "Damián",
+                    "segundoApellido": "Gonzales",
+                    "celular": "0956423187",
+                    "correo": "danydamina88@gmail.com", 
+                    "genero": "Femenino",
+                    "direccion": {
+                        "callePrincipal": "Av. Solano",
+                        "calleSecundaria": "",
+                        "numeroCasa": "",
+                        "lugarReferencia": "S/N" 
+                    },
+                    "tipoSangre": "O+",
+                    "tieneDiscapacidad": "NO",
+                    "infoDiscapacidad": {},
+                    "ocupacion": "Docente",
+                    "nivelFormacion": "4to Nivel",
+                    "fechaNacimiento": "05/11/88"
+                },
+                "funcion": {
+                    "nombre": "DOCENTE",
+                    "descripcion": "El docente se encarga de guiar al Alumno en el proceso de mejorar sus dificultades."
+                },
+                "info": {
+                    "titulo": "FísicoTerapeuta",
+                    "tipoTitulo": "4to Nivel",
+                    "areaDeTrabajo": "Rehabilitación Física"
+                },
+                "historico": [
+                    {
+                        "fechaRegistro": "12/05/2016"
+                    }
+                ],
+                "descripcion": "S/N"
+            }
+        ]
     }
 ]

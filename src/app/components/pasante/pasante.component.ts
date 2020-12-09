@@ -44,8 +44,8 @@ export class PasanteComponent implements OnInit {
   cols: any[];
   displayDialog: boolean;
 
-  sexo: Array<any>;
-  selectedSex: any;
+  genero: Array<any>;
+  selectedGen: any;
 
   edad: number;
   celular: number;
@@ -85,6 +85,8 @@ export class PasanteComponent implements OnInit {
   ) {
     this.crearFormulario();
 
+    this.pasante = new Pasante();
+
     this.universidades = this._ejemplosSrv.getUniversidades();
   }
 
@@ -113,7 +115,7 @@ export class PasanteComponent implements OnInit {
       { field: "docente.primer_nombre", header: "TUTOR" },
     ];
 
-    this.sexo = [
+    this.genero = [
       { name: "Masculino", value: "M" },
       { name: "Femenino", value: "F" },
       { name: "Otro", value: "O" },
@@ -206,7 +208,7 @@ export class PasanteComponent implements OnInit {
         nombres: ["", Validators.required],
         apellidos: ["", Validators.required],
       }),
-      sexo: ["", Validators.required],
+      genero: ["", Validators.required],
       edad: ["", Validators.required],
       correo: [
         "",
@@ -248,7 +250,7 @@ export class PasanteComponent implements OnInit {
     return this.forma.get("num_horas").value;
   }
 
-  sexoSeleccionado(event) {
+  generoSeleccionado(event) {
     console.log(event.value);
   }
 
@@ -287,21 +289,21 @@ export class PasanteComponent implements OnInit {
     this.nuevo_pasante = false;
     this.pasante_editar = this.clonePasante(event.data);
     this.displayDialog = true;
-    switch (this.pasante_editar.persona.sexo) {
+    switch (this.pasante_editar.persona.genero) {
       case "F":
-        this.selectedSex = {
+        this.selectedGen = {
           name: "Femenino",
           value: "F",
         };
         break;
       case "M":
-        this.selectedSex = {
+        this.selectedGen = {
           name: "Masculino",
           value: "M",
         };
         break;
       case "O":
-        this.selectedSex = {
+        this.selectedGen = {
           name: "Otro",
           value: "O",
         };
@@ -350,7 +352,7 @@ export class PasanteComponent implements OnInit {
       let docente = docentes[i];
 
       if (
-        docente.persona.primer_apellido
+        docente.persona.primerApellido
           .toLowerCase()
           .indexOf(query.toLowerCase()) == 0
       ) {

@@ -11,4 +11,8 @@ export class VisitasService {
   getVisitas() {
     return this.http.get("/assets/json/Visitas.json");
   }
+
+  getEmpresas(){
+    return this.http.get("/assets/json/Empresa.json");
+  }
 }

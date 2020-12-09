@@ -16,6 +16,7 @@ import {
 } from "@angular/animations";
 import { Docente } from "app/clases/docente";
 import { DocenteService } from "app/services/docente.service";
+import { Empresa } from "app/clases/empresa";
 
 @Component({
   selector: "app-visita-empresa",
@@ -53,11 +54,14 @@ export class VisitaEmpresaComponent implements OnInit {
 
   visitas: Visita_Empresa[];
   visita: Visita_Empresa;
+  visita_seleccionada: Visita_Empresa;
   nueva_visita: boolean;
   visita_editar: Visita_Empresa;
 
   docentes: Docente[];
   docentes_filtrados: Docente[];
+
+  empresas: Empresa[];
 
   constructor(
     private fb: FormBuilder,
@@ -65,6 +69,8 @@ export class VisitaEmpresaComponent implements OnInit {
     private _visitasSrv: VisitasService,
     private _docenteSrv: DocenteService
   ) {
+
+    this.visita = new Visita_Empresa();
     this.crearFormulario();
   }
 
@@ -84,6 +90,12 @@ export class VisitaEmpresaComponent implements OnInit {
       console.log(docentes);
       this.docentes = docentes;
     });
+
+    this._visitasSrv.getEmpresas().subscribe((empresa: Empresa[])=> {
+      this.empresas = empresa;
+      console.log(this.empresas);
+      
+    } )
 
     this.cols = [
       { field: "empresa.nombre", header: "NOMBRE DE EMPRESA" },
@@ -161,6 +173,10 @@ export class VisitaEmpresaComponent implements OnInit {
           Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$"),
         ],
       ],
+      direccion: this.fb.group({
+        calle_principal: ["", Validators.required],
+        calles_secundaria: ["", Validators.required]
+      }),
       guia: ["", Validators.required],
       fecha_visita: ["", Validators.required],
       horario_visita: this.fb.group({
@@ -230,6 +246,8 @@ export class VisitaEmpresaComponent implements OnInit {
     // this.editarUniversidad(this.pasante_editar.institucion);
   }
 
+
+
   clonePasante(c: Visita_Empresa): Visita_Empresa {
     let visita = {};
     for (let prop in c) {
@@ -247,7 +265,7 @@ export class VisitaEmpresaComponent implements OnInit {
       let docente = docentes[i];
 
       if (
-        docente.persona.primer_apellido
+        docente.persona.primerApellido
           .toLowerCase()
           .indexOf(query.toLowerCase()) == 0
       ) {
@@ -271,7 +289,7 @@ export class VisitaEmpresaComponent implements OnInit {
       let docente = docentes[i];
 
       if (
-        docente.persona.primer_apellido
+        docente.persona.primerApellido
           .toLowerCase()
           .indexOf(query.toLowerCase()) == 0
       ) {
@@ -287,7 +305,66 @@ export class VisitaEmpresaComponent implements OnInit {
   }
 
   openPdf(){
-    const documentDefinition = { content: 'This is an sample PDF printed with pdfMake' };
+
+    const fonts = {
+      Courier: {
+        normal: 'Courier',
+        bold: 'Courier-Bold',
+        italics: 'Courier-Oblique',
+        bolditalics: 'Courier-BoldOblique'
+      },
+      Helvetica: {
+        normal: 'Helvetica',
+        bold: 'Helvetica-Bold',
+        italics: 'Helvetica-Oblique',
+        bolditalics: 'Helvetica-BoldOblique'
+      },
+      Times: {
+        normal: 'Times-Roman',
+        bold: 'Times-Bold',
+        italics: 'Times-Italic',
+        bolditalics: 'Times-BoldItalic'
+      },
+      Symbol: {
+        normal: 'Symbol'
+      },
+      ZapfDingbats: {
+        normal: 'ZapfDingbats'
+      }
+    };
+
+    let pagesize;
+    // let PdfPrinter = require('pdfmake');
+    // let printer = new PdfPrinter(fonts);
+    // let fs = require('fs');
+
+    const documentDefinition = { 
+
+      
+      header: [
+        {
+          svg: '<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><pattern id="pattern_9rgHkX" patternUnits="userSpaceOnUse" width="9.5" height="9.5" patternTransform="rotate(45)"><line x1="0" y="0" x2="0" y2="9.5" stroke="#DFC500" stroke-width="1"/></pattern></defs> <rect width="100%" height="100%" fill="url(#pattern_9rgHkX)" opacity="1"/></svg>',
+          fit: [20,10],
+          width: 20
+        }
+      ],
+
+      background: function(currentPage, pageSize) {
+        return `page ${currentPage} with size ${pageSize.width} x ${pageSize.height}`
+      },
+      info: {
+        title: 'awesome Document',
+        author: 'john doe',
+        subject: 'subject of document',
+        keywords: 'keywords for document',
+        },
+      content: 'This is an sample PDF printed with pdfMake', 
+     }
+
+      // let pdfDoc = printer.createPdfKitDocument(documentDefinition);
+      // pdfDoc.pipe(fs.createWriteStream('document.pdf'));
+      // pdfDoc.end();
+        
     pdfMake.createPdf(documentDefinition).open();
   }
   

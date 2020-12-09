@@ -4,363 +4,457 @@
     "persona": {
       "_id": "_7488y434b3483brjjbfdbf34hbrh3",
       "identificacion": "0103698745",
-      "primer_nombre": "Julián",
-      "segundo_nombre": "Andrés",
-      "primer_apellido": "Montenegro",
-      "segundo_apellido": "García",
-      "edad": 12,
+      "primerNombre": "Julián",
+      "segundoNombre": "Andrés",
+      "primerApellido": "Montenegro",
+      "segundoApellido": "García",
+      "telefono": "2400621",
+      "celular": "0952361872",
       "genero": "M",
-      "tipo_sangre": "O-",
-      "carnet_conadis": "458982",
-      "discapacidad": "Física",
-      "nivel_discapacidad": "40%"
+      "direccion": {
+        "callePrincipal": "Av. de las Américas",
+        "calleSecundaria": "",
+        "numeroCasa": "",
+        "lugarReferencia": ""
+      },
+      "fechaNacimiento": "25/09/2005", 
+      "tipoSangre": "O-",
+      "tieneDiscapacidad": "SI",
+      "infoDiscapacidad": {
+        "discapacidades": [
+          {
+            "nombre": "Física",
+            "descripcion": "S/N"
+          }
+        ],
+        "carnetConadis": "458982",
+        "porcentajeDiscapacidad": "40%"
+      },
+      "ocupacion": "Estudiante",
+      "nivelFormacion": "Básica"
     },
     "padre": {
-      "_id": "_ndwjfwje47384b3434bf4hb3h23",
-      "persona": {
-        "_id": "_83894fjrfjn4939dnnfjn43dfnj",
-        "identificacion": "1027896312",
-        "primer_nombre": "Carlos",
-        "segundo_nombre": "Alberto",
-        "primer_apellido": "Montenegro",
-        "segundo_apellido": "Carpio",
-        "calle_principal": "Av. de las Américas",
-        "calle_secundaria": "Av. Don Bosco",
-        "celular": "0987536487",
-        "correo": "calbertom80@gmail.com",
-        "ocupacion": "Ing. Sistemas"
-      }
+      "_id": "_83894fjrfjn4939dnnfjn43dfnj",
+      "identificacion": "1027896312",
+      "primerNombre": "Carlos",
+      "segundoNombre": "Alberto",
+      "primerApellido": "Montenegro",
+      "segundoApellido": "Carpio",
+      "callePrincipal": "Av. de las Américas",
+      "calleSecundaria": "Av. Don Bosco",
+      "celular": "0987536487",
+      "correo": "calbertom80@gmail.com",
+      "ocupacion": "Ing. Sistemas"
     },
     "madre": {
-      "_id": "_hufweirnfuiefdnfjsd4584fsdfs3r",
-      "persona": {
-        "_id": "_438b4bff48dasjbd3rh2jbewufw",
-        "identificacion": "0108965231",
-        "primer_nombre": "María",
-        "segundo_nombre": "Augusta",
-        "primer_apellido": "García",
-        "segundo_apellido": "Abril",
-        "calle_principal": "Av. de las Américas",
-        "calle_secundaria": "Av. Don Bosco",
-        "celular": "0987523140",
-        "correo": "magarcia82@gmail.com",
-        "ocupacion": "Ama de Casa"
-      }
+      "_id": "_438b4bff48dasjbd3rh2jbewufw",
+      "identificacion": "0108965231",
+      "primerNombre": "María",
+      "segundoNombre": "Augusta",
+      "primerApellido": "García",
+      "segundoApellido": "Abril",
+      "callePrincipal": "Av. de las Américas",
+      "calleSecundaria": "Av. Don Bosco",
+      "celular": "0987523140",
+      "correo": "magarcia82@gmail.com",
+      "ocupacion": "Ama de Casa"
     },
     "representante": {
-      "_id": "_47fbb378wfb2dklfh23ffiw",
-      "persona": {
-        "_id": "_83894fjrfjn4939dnnfjn43dfnj",
-        "identificacion": "1027896312",
-        "primer_nombre": "Carlos",
-        "segundo_nombre": "Alberto",
-        "primer_apellido": "Montenegro",
-        "segundo_apellido": "Carpio"
-      }
+      "_id": "_83894fjrfjn4939dnnfjn43dfnj",
+      "identificacion": "1027896312",
+      "primerNombre": "Carlos",
+      "segundoNombre": "Alberto",
+      "primerApellido": "Montenegro",
+      "segundoApellido": "Carpio"
     },
-    "relacion_representante": "Padre"
+    "contactoEmergencia": {
+      "identificacion": "1027896312",
+      "primerNombre": "Carlos",
+      "segundoNombre": "Alberto",
+      "primerApellido": "Montenegro",
+      "segundoApellido": "Carpio"
+      
+    },
+    "observaciones": "S/N"
   },
   {
     "_id": "_743bfb4f83f4bf48f43udjkfnwidnfd",
     "persona": {
       "_id": "_7488y434b3483brjjbfdbf34hbrh3bd",
       "identificacion": "0103698745",
-      "primer_nombre": "Martina",
-      "segundo_nombre": "Esperanza",
-      "primer_apellido": "Aguirre",
-      "segundo_apellido": "Ochoa",
-      "edad": 10,
+      "primerNombre": "Martina",
+      "segundoNombre": "Esperanza",
+      "primerApellido": "Aguirre",
+      "segundoApellido": "Ochoa",
+      "telefono": "2400621",
+      "celular": "0985632170",
+      "correo": "eantonieta80@hotmail.com",
+      "foto": "",
       "genero": "F",
+      "direccion": {
+        "callePrincipal": "Av. de las Américas",
+        "calleSecundaria": "",
+        "numeroCasa": "",
+        "lugarReferencia": ""
+      },
+      "fechaNacimiento": "02/09/2008",
       "tipo_sangre": "A+",
-      "carnet_conadis": "23897",
-      "discapacidad": "Mental",
-      "nivel_discapacidad": "50%"
+      "tieneDiscapacidad": "SI",
+      "infoDiscapacidad": {
+        "discapacidades": [
+          {
+            "nombre": "Mental",
+            "descripcion": "" 
+          }
+        ],
+        "carnetConadis": "23897",
+        "porcentajeDiscapacidad": "50%"
+      },
+      "ocupacion": "Estudiante",
+      "nivelFormacion": "Básica"
     },
     "padre": {
-      "_id": "_fwbbfhwjurjbr473583bdsfsdf",
-      "persona": {
-        "_id": "_fjfbw74838ry30wjfsbf23hfsf",
-        "identificacion": "1238765203",
-        "primer_nombre": "Juan",
-        "segundo_nombre": "Antonio",
-        "primer_apellido": "Aguirre",
-        "segundo_apellido": "Gonzales",
-        "calle_principal": "Av. España",
-        "calle_secundaria": "S/N",
-        "celular": "0956231720",
-        "correo": "juang78@hotmail.com",
-        "ocupacion": "Eléctrico"
-      }
+      "identificacion": "1238765203",
+      "primerNombre": "Juan",
+      "segundoNombre": "Antonio",
+      "primerApellido": "Aguirre",
+      "segundoApellido": "Gonzales",
+      "callePrincipal": "Av. España",
+      "calleSecundaria": "S/N",
+      "celular": "0956231720",
+      "correo": "juang78@hotmail.com",
+      "ocupacion": "Eléctrico"
     },
     "madre": {
-      "_id": "_fwbf8ru348fb4398fvb428cwfsfds",
-      "persona": {
-        "_id": "_beb384r8bejfk348924r438hbfhrfr",
-        "identificacion": "0102358964",
-        "primer_nombre": "Estafania",
-        "segundo_nombre": "Antonieta",
-        "primer_apellido": "Ochoa",
-        "segundo_apellido": "Riera",
-        "calle_principal": "Av. España",
-        "calle_secundaria": "S/N",
-        "celular": "0987532104",
-        "correo": "eantonieta80@hotmail.com",
-        "ocupacion": "Dueña de Tienda Comercial"
-      }
+      "identificacion": "0102358964",
+      "primerNombre": "Estafania",
+      "segundoNombre": "Antonieta",
+      "primerApellido": "Ochoa",
+      "segundoApellido": "Riera",
+      "callePrincipal": "Av. España",
+      "calleSecundaria": "S/N",
+      "celular": "0987532104",
+      "correo": "eantonieta80@hotmail.com",
+      "ocupacion": "Dueña de Tienda Comercial"
     },
     "representante": {
-      "_id": "_7374rgfbhjbfwe43fhndfejwe89r",
-      "persona": {
-        "_id": "_fjfbw74838ry30wjfsbf23hfsf",
-        "identificacion": "1238765203",
-        "primer_nombre": "Juan",
-        "segundo_nombre": "Antonio",
-        "primer_apellido": "Aguirre",
-        "segundo_apellido": "Gonzales"
-      }
+      "identificacion": "1238765203",
+      "primer_nombre": "Juan",
+      "segundo_nombre": "Antonio",
+      "primer_apellido": "Aguirre",
+      "segundo_apellido": "Gonzales"
     },
-    "relacion_representante": "Padre"
+    "contactoEmergencia": {
+      "identificacion": "1238765203",
+      "primer_nombre": "Juan",
+      "segundo_nombre": "Antonio",
+      "primer_apellido": "Aguirre",
+      "segundo_apellido": "Gonzales"
+    },
+    "observaciones": "S/N"
   },
   {
     "_id": "_dfbdfwue48349fij29h3jffsdfnfewf2",
     "persona": {
       "_id": "_djfjf48993udsksndfndnf493fdfnjfkf",
       "identificacion": "0105689120",
-      "primer_nombre": "Gabriela",
-      "segundo_nombre": "Mercedes",
-      "primer_apellido": "Conte",
-      "segundo_apellido": "Martinez",
-      "edad": 11,
+      "primerNombre": "Gabriela",
+      "segundoNombre": "Mercedes",
+      "primerApellido": "Conte",
+      "segundoApellido": "Martinez",
+      "telefono": "2400621",
+      "celular": "0987523140",
+      "correo": "jorgesdelgado75@gmail.com",
+      "foto": "",
       "genero": "F",
+      "direccion": {
+        "callePrincipal": "Av. España",
+        "calleSecundaria": "",
+        "numeroCasa": "",
+        "lugarReferencia": ""
+      },
+      "fechaNacimiento": "22/10/2006",
       "tipo_sangre": "A-",
-      "carnet_conadis": "56987",
-      "discapacidad": "Mental",
-      "nivel_discapacidad": "40%"
+      "tieneDiscapacidad": "SI",
+      "infoDiscapacidad": {
+        "discapacidades": [
+          {
+            "nombre": "Mental",
+            "descripcion": ""
+          }
+        ],
+        "carnetConadis": "56987",
+        "porcentajeDiscapacidad": "40%"
+      },
+      "ocupacion":"Estudiante",
+      "nivelFormacion": "Básica"
     },
     "padre": {
-      "_id": "_fjfjew4i9ndjfn29dnksdf",
-      "persona": {
-        "_id": "_jfif43090df2rkdmsfpo2",
         "identificacion": "01065987451",
-        "primer_nombre": "Patricio",
-        "segundo_nombre": "Eustacio",
-        "primer_apellido": "Conte",
-        "segundo_apellido": "Andrade",
-        "calle_principal": "Av. Loja",
-        "calle_secundaria": "Av. Don Bosco",
+        "primerNombre": "Patricio",
+        "segundoNombre": "Eustacio",
+        "primerApellido": "Conte",
+        "segundoApellido": "Andrade",
+        "callePrincipal": "Av. Loja",
+        "calleSecundaria": "Av. Don Bosco",
         "celular": "0985472361",
         "correo": "pesutacio@hotmail.com",
         "ocupacion": "Arquitecto"
-      }
     },
     "madre": {
-      "_id": "_fnndf439ur9fdnfejwfndf40",
-      "persona": {
-        "_id": "_ndjf8493dnf490fn2nfwienf2o",
         "identificacion": "0106598453",
-        "primer_nombre": "Paola",
-        "segundo_nombre": "Estafania",
-        "primer_apellido": "Martinez",
-        "segundo_apellido": "Piedra",
-        "calle_principal": "Av. Ricardo Durán",
-        "calle_secundaria": "S/N",
+        "primerNombre": "Paola",
+        "segundoNombre": "Estafania",
+        "primerApellido": "Martinez",
+        "segundoApellido": "Piedra",
+        "callePrincipal": "Av. Ricardo Durán",
+        "calleSecundaria": "S/N",
         "celular": "0987654120",
         "correo": "emartinez81@hotmail.com",
         "ocupacion": "Ama de Casa"
-      }
     },
     "representante": {
-      "_id": "_4893ndjffhwf0923fnsdjfwdfs",
-      "persona": {
-        "_id": "_ndjf8493dnf490fn2nfwienf2o",
         "identificacion": "0106598453",
-        "primer_nombre": "Paola",
-        "segundo_nombre": "Estafania",
-        "primer_apellido": "Martinez",
-        "segundo_apellido": "Piedra"
-      }
+        "primerNombre": "Paola",
+        "segundoNombre": "Estafania",
+        "primerApellido": "Martinez",
+        "segundoApellido": "Piedra"
     },
-    "relacion_representante": "Madre"
+    "contactoEmergencia": {
+      "identificacion": "0106598453",
+      "primerNombre": "Paola",
+      "segundoNombre": "Estafania",
+      "primerApellido": "Martinez",
+      "segundoApellido": "Piedra"
+    },
+    "observaciones": "S/N"
   },
   {
     "_id": "_u4934udnf40infjknsdnf0r3nds",
     "persona": {
       "_id": "_dfnif3490fdnfnwe0nd3020",
       "identificacion": "0105698412",
-      "primer_nombre": "Marco",
-      "segundo_nombre": "Adrián",
-      "primer_apellido": "Torres",
-      "segundo_apellido": "Polo",
-      "edad": 15,
+      "primerNombre": "Marco",
+      "segundoNombre": "Adrián",
+      "primerApellido": "Torres",
+      "segundoApellido": "Polo",
+      "telefono": "2400621",
+      "celular":"0952361872",
+      "correo": "magarcia82@gmail.com",
+      "foto": "",
       "genero": "M",
+      "direccion": {
+        "callePrincipal": "Av. de las Américas",
+        "calleSecundaria": "",
+        "numeroCasa": "",
+        "lugarReferencia": ""
+      },
+      "fechaNacimiento": "12/04/2010",
       "tipo_sangre": "O+",
-      "carnet_conadis": "98765",
-      "discapacidad": "Física y Mental",
-      "nivel_discapacidad": "50%"
+      "tieneDiscapacidad":"SI",
+      "infoDiscapacidad": {
+        "discapacidades": [
+          {
+            "nombre": "Física y Mental",
+            "descripcion": ""
+          }
+        ],
+        "carnetConadis": "98765",
+        "porcentajeDiscapacidad": "50%"
+      },
+      "ocupacion": "Estudiante",
+      "nivelFormacion": "Básica"
     },
     "padre": {
-      "_id": "_df39unfoneff9043ndsfns403",
-      "persona": {
-        "_id": "_djfnsd9r92nr3r2ndfs0difddms",
-        "identificacion": "0106985230",
-        "primer_nombre": "Lautaro",
-        "segundo_nombre": "Adrián",
-        "primer_apellido": "Torres",
-        "segundo_apellido": "Cobos",
-        "celular": "0954823105",
-        "correo": "lautaroatorres79@gmail.com",
-        "ocupacion": "Técnico de Cámaras"
-      }
+      "identificacion": "0106985230",
+      "primerNombre": "Lautaro",
+      "segundoNombre": "Adrián",
+      "primerApellido": "Torres",
+      "segundoApellido": "Cobos",
+      "celular": "0954823105",
+      "correo": "lautaroatorres79@gmail.com",
+      "ocupacion": "Técnico de Cámaras"
     },
     "madre": {
-      "_id": "_845u3nefwndf0ridnf04ffdfd",
-      "persona": {
-        "_id": "_dfij930dfosk340infwdnfs3454",
-        "identificacion": "0109856234",
-        "primer_nombre": "Elsa",
-        "segundo_nombre": "Martina",
-        "primer_apellido": "Polo",
-        "segundo_apellido": "Morocho",
-        "celular": "0936521784",
-        "correo": "martinapolo84@gmail.com",
-        "ocupacion": "Secretaría"
-      }
+      "identificacion": "0109856234",
+      "primerNombre": "Elsa",
+      "segundoNombre": "Martina",
+      "primerApellido": "Polo",
+      "segundoApellido": "Morocho",
+      "celular": "0936521784",
+      "correo": "martinapolo84@gmail.com",
+      "ocupacion": "Secretaría"
     },
     "representante": {
-      "_id": "_r8udnddnf90rfwnf230fndsjfn23j",
-      "persona": {
-        "_id": "_fifnw9fjf904fdsnfw02jndf02jrn",
-        "identificacion": "0105896321",
-        "primer_nombre": "Erica",
-        "segundo_nombre": "Gabriela",
-        "primer_apellido": "Piedra",
-        "segundo_apellido": "Ortega",
-        "calle_principal": "Av. Solano",
-        "calle_secundaria": "S/N"
-      }
+      "identificacion": "0105896321",
+      "primer_nombre": "Erica",
+      "segundo_nombre": "Gabriela",
+      "primer_apellido": "Piedra",
+      "segundo_apellido": "Ortega",
+      "calle_principal": "Av. Solano",
+      "calle_secundaria": "S/N"
     },
-    "relacion_representante": "Abuela"
+    "contactoEmergencia": {
+      "identificacion": "0105896321",
+      "primer_nombre": "Erica",
+      "segundo_nombre": "Gabriela",
+      "primer_apellido": "Piedra",
+      "segundo_apellido": "Ortega",
+      "calle_principal": "Av. Solano",
+      "calle_secundaria": "S/N"
+    },
+    "observaciones": "S/N"
   },
   {
     "_id": "_duen39njsfn290fjdsn4093d",
     "persona": {
       "_id": "_ndjdfnw940fnf4309dkfnsofs",
       "identificacion": "0105896413",
-      "primer_nombre": "Fernando",
-      "segundo_nombre": "Antonio",
-      "primer_apellido": "Delgado",
-      "segundo_apellido": "Avilés",
-      "edad": 14,
+      "primerNombre": "Fernando",
+      "segundoNombre": "Antonio",
+      "primerapellido": "Delgado",
+      "segundoApellido": "Avilés",
+      "telefono": "2400621",
+      "celular": "0987532104",
+      "correo": "pesutacio@hotmail.com",
+      "foto": "",
       "genero": "M",
+      "direccion": {
+        "callePrincipal":"Av. Loja",
+        "calleSecundaria": "S/N",
+        "numeroCasa": "",
+        "lugarReferencia": ""
+      },
+      "fechaNacimiento": "05/02/2011",
       "tipo_sangre": "B+",
-      "carnet_conadis": "98653",
-      "discapacidad": "Mental",
-      "nivel_discapacidad": "20%"
+      "tieneDiscapacidad": "SI",
+      "infoDiscapacidad": {
+        "discapacidades": [
+          {
+            "nombre": "Mental",
+            "observaciones": ""
+          }
+        ],
+        "carnetConadis": "98653",
+        "porcentajeDiscapacidad": "20%"
+      },
+      "ocupacion": "Estudiante",
+      "nivelFormacion": "Básica"
     },
     "padre": {
-      "_id": "_ndfn04fnf340jsdfof3ndifs",
-      "persona": {
-        "_id": "_fnf4093ndksnf0dsnff04i043jnds",
-        "identificacion": "01085463214",
-        "primer_nombre": "Jorge",
-        "segundo_nombre": "Sebastián",
-        "primer_apellido": "Delgado",
-        "segundo_apellido": "Gutierrez",
-        "calle_principal": "Av. Solano",
-        "calle_secundaria": "S/N",
-        "celular": "0985632170",
-        "correo": "jorgesdelgado75@gmail.com",
-        "ocupacion": "Analista de Sistemas"
-      }
+      "identificacion": "01085463214",
+      "primerNombre": "Jorge",
+      "segundoNombre": "Sebastián",
+      "primerApellido": "Delgado",
+      "segundoApellido": "Gutierrez",
+      "callePrincipal": "Av. Solano",
+      "calleSecundaria": "S/N",
+      "celular": "0985632170",
+      "correo": "jorgesdelgado75@gmail.com",
+      "ocupacion": "Analista de Sistemas"
     },
     "madre": {
-      "_id": "_djfb493jdfnnfs403snsf204ih",
-      "persona": {
-        "_id": "_ncdsnf43909jdksnf043ifsdnff4'",
-        "identificacion": "0105896321",
-        "primer_nombre": "Silvia",
-        "segundo_nombre": "Lorena",
-        "primer_apellido": "Avilés",
-        "segundo_apellido": "Proaño",
-        "calle_principal": "Av. Solano",
-        "calle_secundaria": "S/N",
-        "celular": "0952361872",
-        "correo": "silviaaproaño@hotmail.com",
-        "ocupacion": "Analista de Sistemas"
-      }
+      "identificacion": "0105896321",
+      "primerNombre": "Silvia",
+      "segundoNombre": "Lorena",
+      "primerApellido": "Avilés",
+      "segundoApellido": "Proaño",
+      "callPrincipal": "Av. Solano",
+      "calleSecundaria": "S/N",
+      "celular": "0952361872",
+      "correo": "silviaaproaño@hotmail.com",
+      "ocupacion": "Analista de Sistemas"
     },
     "representante": {
-      "_id": "_4387543ndkfnkfs209rndksn",
-      "persona": {
-        "_id": "_ncdsnf43909jdksnf043ifsdnff4'",
-        "identificacion": "0105896321",
-        "primer_nombre": "Silvia",
-        "segundo_nombre": "Lorena",
-        "primer_apellido": "Avilés",
-        "segundo_apellido": "Proaño"
-      }
+      "identificacion": "0105896321",
+      "primer_nombre": "Silvia",
+      "segundo_nombre": "Lorena",
+      "primer_apellido": "Avilés",
+      "segundo_apellido": "Proaño"
     },
-    "relacion_representante": "Madre"
+    "contactoEmergencia": {
+      "identificacion": "0105896321",
+      "primer_nombre": "Silvia",
+      "segundo_nombre": "Lorena",
+      "primer_apellido": "Avilés",
+      "segundo_apellido": "Proaño"
+    },
+    "observaciones": "S/N"
   },
   {
     "_id": "_745839dnjfjfsnioj490f",
     "persona": {
       "_id": "_fdf39jjfn349ufjdfn40kerg",
       "identificacion": "0108965723",
-      "primer_nombre": "Karina",
-      "segundo_nombre": "Lucía",
-      "primer_apellido": "Arteaga",
-      "segundo_apellido": "Córdova",
-      "edad": 10,
+      "primerNombre": "Karina",
+      "segundoNombre": "Lucía",
+      "primerApellido": "Arteaga",
+      "segundoApellido": "Córdova",
+      "telefono": "2400621",
+      "celular":"0987532104",
+      "correo": "martinapolo84@gmail.com",
+      "foto": "",
       "genero": "F",
+      "direccion": {
+        "callePrincipal": "Av. Solano",
+        "calleSecundaria": "S/N",
+        "numeroCasa": "",
+        "lugarReferencia": ""
+      },
+      "fechaNacimiento": "01/01/2011",
       "tipo_sangre": "0+",
-      "carnet_conadis": "56312",
-      "discapacidad": "Física y Mental",
-      "nivel_discapacidad": "35%"
+      "tieneDiscapacidad":"SI",
+      "infoDiscapacidad":{
+        "discapacidades": [
+          {
+            "nombre": "Física y Mental",
+            "descripcion": ""
+          }
+        ],
+        "carnetConadis": "56312",
+        "porcentajeDiscapacidad": "35%"
+      },
+      "ocupacion": "Estudiante",
+      "nivelFormacion": "Básica"
     },
     "padre": {
-      "_id": "_nefnwf40nsfn43jfkfn43ns",
-      "persona": {
-        "_id": "_jfjdnfe0fu4indskfn3f409fn'",
-        "identificacion": "0110585632",
-        "primer_nombre": "Fabricio",
-        "segundo_nombre": "Hernán",
-        "primer_apellido": "Arteaga",
-        "segundo_apellido": "Zeas",
-        "calle_principal": "Av. de las Américas",
-        "calle_secundaria": "S/N",
-        "celular": "0986325410",
-        "correo": "fhernanzeas84@hotmail.com",
-        "ocupacion": "Abogado"
-      }
+      "identificacion": "0110585632",
+      "primerNombre": "Fabricio",
+      "segundoNombre": "Hernán",
+      "primerApellido": "Arteaga",
+      "segundoApellido": "Zeas",
+      "callePrincipal": "Av. de las Américas",
+      "calleSecundaria": "S/N",
+      "celular": "0986325410",
+      "correo": "fhernanzeas84@hotmail.com",
+      "ocupacion": "Abogado"
     },
     "madre": {
-      "_id": "_nwf493fsdjfndnf9fnsdfjwne",
-      "persona": {
-        "_id": "_fheuf439djfn409jfnf49fijfn'",
-        "identificacion": "0106321985",
-        "primer_nombre": "Ana",
-        "segundo_nombre": "Verónica",
-        "primer_apellido": "Córdova",
-        "segundo_apellido": "Clavijo",
-        "calle_principal": "Av. de las Américas",
-        "calle_secundaria": "S/N",
-        "celular": "0923564720",
-        "correo": "anaveronicacc80@gmail.com",
-        "ocupacion": "Ama de Casa"
-      }
+      "identificacion": "0106321985",
+      "primerNombre": "Ana",
+      "segundoNombre": "Verónica",
+      "primerApellido": "Córdova",
+      "segundoApellido": "Clavijo",
+      "callePrincipal": "Av. de las Américas",
+      "calleSecundaria": "S/N",
+      "celular": "0923564720",
+      "correo": "anaveronicacc80@gmail.com",
+      "ocupacion": "Ama de Casa"
     },
     "representante": {
-      "id": "_nfnwf9i39onsdf349nsdfdf",
-      "persona": {
-        "_id": "_jfjdnfe0fu4indskfn3f409fn'",
-        "identificacion": "0110585632",
-        "primer_nombre": "Fabricio",
-        "segundo_nombre": "Hernán",
-        "primer_apellido": "Arteaga",
-        "segundo_apellido": "Zeas"
-      }
+      "identificacion": "0110585632",
+      "primerNombre": "Fabricio",
+      "segundoNombre": "Hernán",
+      "primerApellido": "Arteaga",
+      "segundoApellido": "Zeas"
     },
-    "relacion_representante": "Padre"
+    "contactoEmergencia": {
+      "identificacion": "0110585632",
+      "primerNombre": "Fabricio",
+      "segundoNombre": "Hernán",
+      "primerApellido": "Arteaga",
+      "segundoApellido": "Zeas"
+    },
+    "observaciones": "S/N"
   }
 ]

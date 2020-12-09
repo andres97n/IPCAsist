@@ -3,8 +3,15 @@ import { Persona } from "./persona";
 export class Docente {
   _id?: string;
   persona?: Persona;
-  tipo_titulo?: string;
-  nivel_formacion?: string;
-  titulo?: string;
-  fecha_creacion?: Date;
+  funcion?: {
+    nombre?: "DOCENTE"
+    descripcion?: string
+  };
+  info?: {
+    titulo?: string
+    tipoTitulo?: string
+    areDeTrabajo?: string
+  };
+  historico?: {};
+  descripcion?: string;
 }

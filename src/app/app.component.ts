@@ -44,7 +44,8 @@ export class AppComponent implements OnInit {
       });
     this.renderer.listen("window", "scroll", (event) => {
       const number = window.scrollY;
-      if (number > 150 || window.pageYOffset > 150) {
+      // number > 150 ||
+      if ( window.pageYOffset > 150) {
         // add logic
         navbar.classList.remove("navbar-transparent");
       } else {
@@ -79,7 +80,7 @@ export class AppComponent implements OnInit {
   removeFooter() {
     var titlee = this.location.prepareExternalUrl(this.location.path());
     titlee = titlee.slice(1);
-    if (titlee === "signup" || titlee === "nucleoicons") {
+    if (titlee === "/sesion" || titlee === "nucleoicons") {
       return false;
     } else {
       return true;

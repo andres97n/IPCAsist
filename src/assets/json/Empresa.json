@@ -1,0 +1,77 @@
+[
+    {
+        "_id": "_dnj384jgb3tnjgb34tr657tfgtrhf",
+        "nombre": "Coca-Cola",
+        "representante": {
+            "cedula": "0105874328",
+            "primerNombre": "Andrés",
+            "primerApellido": "Córdova",
+            "celular": "0987458794",
+            "correo": "cuenca@cocacola.com"
+        },
+        "direccion": {
+            "callePrincipal": "Av. de las Américas",
+            "calleSecundaria": ""
+        }
+    },
+    {
+        "_id": "_4893jh3b4htj3f8943tb3hb340966gmhj",
+        "nombre": "KFC",
+        "representante": {
+            "cedula": "0102358731",
+            "primerNombre": "Carlos",
+            "primerApellido": "Andrade",
+            "contacto": "0952134565",
+            "celular": "cuenca@kfc.com"
+        },
+        "direccion": {
+            "callePrincipal": "Mall del Río",
+            "calleSecundaria": ""
+        }
+    },
+    {
+        "_id": "_47354b3384934hb387r34bh",
+        "nombre": "Tutto Freddo",
+        "representante": {
+            "cedula": "1458962158",
+            "primerNombre": "Mauricio",
+            "primerApellido": "Encalada",
+            "contacto": "098523164",
+            "correo": "mauricioe@tuttofredo.com"
+        },
+        "direccion": {
+            "callePrincipal": "Av. de las Américas",
+            "calleSecundaria": ""
+        }
+    },
+    {
+        "_id": "_47354b3384934hb387r34bh",
+        "nombre": "Monte Bianco",
+        "representante": {
+            "cedula": "0106598452",
+            "primerNombre": "Juan",
+            "primerApellido": "Piedra",
+            "contacto": "0968523178",
+            "correo": "juanp98@montebianco.com"
+        },
+        "direccion": {
+            "callePrincipal": "Av. Remigio Crespo",
+            "calleSecundaria": ""
+        }
+    },
+    {
+        "_id": "_fhfb438b4h34rb43u5sdfd3",
+      "nombre": "Tranvía",
+      "representante": {
+        "cedula": "0108965237",
+        "primerNombre": "Carlos",
+        "primerApellido": "Crespo",
+        "contacto": "0965821320",
+        "correo": "ccrespo@tranviacuenca.com"
+      },
+      "direccion": {
+        "callePrincipal": "Av. México",
+        "calleSecundaria": "Calle Honduras"
+      }
+    }
+]

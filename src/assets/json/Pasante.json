@@ -3,10 +3,10 @@
     "_id": "_5565fwe5f4ew65f65efwe",
     "persona": {
       "identificacion": "0107894531",
-      "primer_nombre": "Karla",
-      "segundo_nombre": "Estefania",
-      "primer_apellido": "Quito",
-      "segundo_apellido": "Alvarez",
+      "primerNombre": "Karla",
+      "segundoNombre": "Estefania",
+      "primerApellido": "Quito",
+      "segundoApellido": "Alvarez",
       "edad": 22,
       "sexo": "F",
       "correo": "karla@gmail.com",
@@ -16,24 +16,26 @@
     "tutor": {
       "persona": {
         "identificacion": "01023245894",
-        "primer_nombre": "Paúl",
-        "segundo_nombre": "Gabriel",
-        "primer_apellido": "Torres",
-        "segundo_apellido": "Gonzales"
+        "primerNombre": "Paúl",
+        "segundoNombre": "Gabriel",
+        "primerApellido": "Torres",
+        "segundoApellido": "Gonzales"
       }
     },
     "especialidad": "Dentista",
-    "num_horas": 3,
-    "fecha_inicio": "12/05/2020"
+    "numHoras": 3,
+    "historico": {
+      "fechaInicio": "12/05/2020"
+    }
   },
   {
     "_id": "_wfw566516efw1w1e2wefw32e",
     "persona": {
       "identificacion": "1874562135",
-      "primer_nombre": "Daniela",
-      "segundo_nombre": "Mercedes",
-      "primer_apellido": "Alvarado",
-      "segundo_apellido": "Ortiz",
+      "primerNombre": "Daniela",
+      "segundoNombre": "Mercedes",
+      "primerApellido": "Alvarado",
+      "segundoApellido": "Ortiz",
       "edad": 23,
       "sexo": "F",
       "correo": "danielam@hotmail.com",
@@ -43,24 +45,26 @@
     "tutor": {
       "persona": {
         "identificacion": "0104472014",
-        "primer_nombre": "Adriana",
-        "segundo_nombre": "Natalia",
-        "primer_apellido": "Prado",
-        "segundo_apellido": "Gimenez"
+        "primerNombre": "Adriana",
+        "segundoNombre": "Natalia",
+        "primerApellido": "Prado",
+        "segundoApellido": "Gimenez"
       }
     },
     "especialidad": "Terapeuta",
-    "num_horas": 3,
-    "fecha_inicio": "13/05/2020"
+    "numHoras": 3,
+    "historico": {
+      "fechaInicio": "13/05/2020"
+    }
   },
   {
     "_id": "_4688fwefw5410266ew64fwef48",
     "persona": {
       "identificacion": "0104875621",
-      "primer_nombre": "Yolanda",
-      "segundo_nombre": "Germania",
-      "primer_apellido": "Calderón",
-      "segundo_apellido": "Barros",
+      "primerNombre": "Yolanda",
+      "segundoNombre": "Germania",
+      "primerApellido": "Calderón",
+      "segundoApellido": "Barros",
       "edad": 21,
       "sexo": "F",
       "correo": "yoligermania@gmail.com",
@@ -70,24 +74,26 @@
     "tutor": {
       "persona": {
         "identificacion": "0104472014",
-        "primer_nombre": "Adriana",
-        "segundo_nombre": "Natalia",
-        "primer_apellido": "Prado",
-        "segundo_apellido": "Gimenez"
+        "primerNombre": "Adriana",
+        "segundoNombre": "Natalia",
+        "primerApellido": "Prado",
+        "segundoApellido": "Gimenez"
       }
     },
     "especialidad": "Terapeuta",
-    "num_horas": 3,
-    "fecha_inicio": "13/05/2020"
+    "numHoras": 3,
+    "historico": {
+      "fechaInicio": "13/05/2020"
+    }
   },
   {
     "_id": "_fwbebfe823bj43fjbfj4334",
     "persona": {
       "identificacion": "0104875621",
-      "primer_nombre": "Daniela",
-      "segundo_nombre": "Estafania",
-      "primer_apellido": "Uyauri",
-      "segundo_apellido": "Gonzales",
+      "primerNombre": "Daniela",
+      "segundoNmbre": "Estafania",
+      "primerApellido": "Uyauri",
+      "segundoApellido": "Gonzales",
       "edad": 23,
       "sexo": "F",
       "correo": "danyest@gmail.com",
@@ -97,24 +103,26 @@
     "tutor": {
       "persona": {
         "identificacion": "0104472014",
-        "primer_nombre": "Adriana",
-        "segundo_nombre": "Natalia",
-        "primer_apellido": "Prado",
-        "segundo_apellido": "Gimenez"
+        "primerNombre": "Adriana",
+        "segundoNombre": "Natalia",
+        "primerApellido": "Prado",
+        "segundoApellido": "Gimenez"
       }
     },
     "especialidad": "Terapeuta",
-    "num_horas": 4,
-    "fecha_inicio": "15/05/2020"
+    "numHoras": 4,
+    "historico": {
+      "fechaInicio": "15/05/2020"
+    }
   },
   {
     "_id": "_nfwjenew7437854n343409nrj34",
     "persona": {
       "identificacion": "0107548324",
-      "primer_nombre": "Carlos",
-      "segundo_nombre": "Fabricio",
-      "primer_apellido": "Saquicela",
-      "segundo_apellido": "Ortiz",
+      "primerNombre": "Carlos",
+      "segundoNombre": "Fabricio",
+      "primerApellido": "Saquicela",
+      "segundoApellido": "Ortiz",
       "edad": 22,
       "sexo": "M",
       "correo": "fabricarlos@gmail.com",
@@ -124,14 +132,16 @@
     "tutor": {
       "persona": {
         "identificacion": "0147684258",
-        "primer_nombre": "María",
-        "segundo_nombre": "Belén",
-        "primer_apellido": "García",
-        "segundo_apellido": "Morales"
+        "primerNombre": "María",
+        "segundoNombre": "Belén",
+        "primerApellido": "García",
+        "segundoApellido": "Morales"
       }
     },
     "especialidad": "Terapeuta",
-    "num_horas": 3,
-    "fecha_inicio": "16/05/2020"
+    "numHoras": 3,
+    "historico": {
+      "fecha_inicio": "16/05/2020"
+    }
   }
 ]

@@ -78,3 +78,8 @@
   background-color: #32302f;
   color: #ffffff;
 }
+/* 
+:host ::ng-deep .p-table > .ui-table {
+  background-color: #32302f;
+  color: #ffffff;
+} */

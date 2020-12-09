@@ -6,8 +6,10 @@ export class Empresa {
   nombre?: string;
   representante?: Persona;
   direccion?: {
-    calle_principal: string;
-    calle_secundaria: string;
+    callePrincipal: string;
+    calleSecundaria: string;
   };
-  fecha_creacion?: Date;
+  historico?: {
+    fechaRegistro
+  }
 }

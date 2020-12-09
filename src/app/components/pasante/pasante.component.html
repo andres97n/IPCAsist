@@ -119,12 +119,12 @@
             </div>
             <!-- <br /> -->
 
-            <!-- Card Sexo -->
+            <!-- Card Genero -->
             <div class="row espacio">
               <div class="col-md-12">
                 <p-card
-                  header="Sexo"
-                  subheader="Ingrese el sexo del Pasante"
+                  header="Género"
+                  subheader="Ingrese el género del Pasante"
                   styleClass="ui-card-shadow"
                 >
                   <p-header>
@@ -141,11 +141,11 @@
                         ></i
                       ></span>
                       <p-dropdown
-                        [options]="sexo"
+                        [options]="genero"
                         optionLabel="name"
-                        (ngModelChange)="sexoSeleccionado($event)"
-                        placeholder="Seleccione un sexo"
-                        formControlName="sexo"
+                        (ngModelChange)="generoSeleccionado($event)"
+                        placeholder="Seleccione un género"
+                        formControlName="genero"
                       ></p-dropdown>
                     </div>
                     <div
@@ -155,8 +155,8 @@
                       <div class="col-md-12">
                         <p-message
                           severity="error"
-                          text=" Debe seleccionar el Sexo del Pasante"
-                          *ngIf="invalidos('sexo')"
+                          text=" Debe seleccionar el Género del Pasante"
+                          *ngIf="invalidos('genero')"
                         ></p-message>
                       </div>
                     </div>
@@ -790,19 +790,19 @@
                   {{ rowData.persona.identificacion }}
                 </td>
                 <td>
-                  {{ rowData.persona.primer_nombre }}
-                  {{ rowData.persona.segundo_nombre }}
+                  {{ rowData.persona.primerNombre }}
+                  {{ rowData.persona.segundoNombre }}
                 </td>
                 <td>
-                  {{ rowData.persona.primer_apellido }}
-                  {{ rowData.persona.segundo_apellido }}
+                  {{ rowData.persona.primerApellido }}
+                  {{ rowData.persona.segundoApellido }}
                 </td>
                 <td>
                   {{ rowData.institucion }}
                 </td>
                 <td>
-                  {{ rowData.tutor.persona.primer_nombre }}
-                  {{ rowData.tutor.persona.primer_apellido }}
+                  {{ rowData.tutor.persona.primerNombre }}
+                  {{ rowData.tutor.persona.primerApellido }}
                 </td>
 
                 <!-- <td
@@ -834,13 +834,13 @@
                           </div>
                           <div class="p-col-12">
                             <b>Nombres:</b>
-                            {{ rowData.persona.primer_nombre }}
-                            {{ rowData.persona.segundo_nombre }}
+                            {{ rowData.persona.primerNombre }}
+                            {{ rowData.persona.segundoNombre }}
                           </div>
                           <div class="p-col-12">
                             <b>Apellidos:</b>
-                            {{ rowData.persona.primer_apellido }}
-                            {{ rowData.persona.segundo_apellido }}
+                            {{ rowData.persona.primerApellido }}
+                            {{ rowData.persona.segundoApellido }}
                           </div>
                           <div class="p-col-12">
                             <b>Correo:</b>
@@ -860,8 +860,8 @@
                           </div>
                           <div class="p-col-12">
                             <b>Instructor:</b>
-                            {{ rowData.tutor.persona.primer_nombre }}
-                            {{ rowData.tutor.persona.primer_apellido }}
+                            {{ rowData.tutor.persona.primerNombre }}
+                            {{ rowData.tutor.persona.primerApellido }}
                           </div>
                           <div class="p-col-12">
                             <b>Especialidad:</b>
@@ -906,28 +906,28 @@
                       placeholder="Primer Nombre"
                       pInputText
                       size="20"
-                      [(ngModel)]="pasante_editar.persona.primer_nombre"
+                      [(ngModel)]="pasante_editar.persona.primerNombre"
                     />
                     <input
                       type="text"
                       placeholder="Segundo Nombre"
                       pInputText
                       size="20"
-                      [(ngModel)]="pasante_editar.persona.segundo_nombre"
+                      [(ngModel)]="pasante_editar.persona.segundoNombre"
                     />
                     <input
                       type="text"
                       placeholder="Primer Apellido"
                       pInputText
                       size="20"
-                      [(ngModel)]="pasante_editar.persona.primer_apellido"
+                      [(ngModel)]="pasante_editar.persona.primerApellido"
                     />
                     <input
                       type="text"
                       placeholder="Segundo Apellido"
                       pInputText
                       size="20"
-                      [(ngModel)]="pasante_editar.persona.segundo_apellido"
+                      [(ngModel)]="pasante_editar.persona.segundoApellido"
                     />
                   </div>
                 </div>
@@ -952,7 +952,7 @@
                       [locale]="es"
                       dateFormat="dd/mm/yy"
                       placeholder="Fecha de Visita"
-                      [(ngModel)]="pasante_editar.fecha_inicio"
+                      [(ngModel)]="pasante_editar.fechaInicio"
                       (onSelect)="mostrarFecha($event)"
                       [showWeek]="true"
                     ></p-calendar>
@@ -976,11 +976,11 @@
                   <div class="col-md-12">
                     <label class="fuente">GÉNERO</label>
                     <p-dropdown
-                      [options]="sexo"
+                      [options]="genero"
                       optionLabel="name"
-                      (ngModelChange)="sexoSeleccionado($event)"
-                      placeholder="Seleccione un sexo"
-                      [(ngModel)]="selectedSex"
+                      (ngModelChange)="generoSeleccionado($event)"
+                      placeholder="Seleccione un genero"
+                      [(ngModel)]="selectedGen"
                       [style]="{ minWidth: '170px', width: '170px' }"
                     ></p-dropdown>
                   </div>
@@ -1055,8 +1055,8 @@
                               margin: 8px 3px 0 0;
                             "
                           >
-                            {{ brand.persona.primer_nombre }}
-                            {{ brand.persona.primer_apellido }}
+                            {{ brand.persona.primerNombre }}
+                            {{ brand.persona.primerApellido }}
                           </div>
                         </div>
                       </ng-template>
@@ -1078,7 +1078,7 @@
                 <div class="row edicion">
                   <div class="col-md-12">
                     <label class="fuente">HORAS AL DÍA</label>
-                    <h6>#Horas: {{ pasante_editar.num_horas }}</h6>
+                    <h6>#Horas: {{ pasante_editar.numHoras }}</h6>
                     <p-slider
                       [style]="{ width: '10em' }"
                       [step]="1"

@@ -14,10 +14,21 @@ import { FooterComponent } from "./shared/footer/footer.component";
 
 import { ComponentsModule } from "./components/components.module";
 import { ExamplesModule } from "./examples/examples.module";
+import { InputNumberModule } from "primeng/inputnumber";
+import { InputTextModule } from "primeng/inputtext";
+import { InputMaskModule } from "primeng/inputmask";
+import { CommonModule } from "@angular/common";
+import { NouisliderModule } from "ng2-nouislider";
+import { JwBootstrapSwitchNg2Module } from "jw-bootstrap-switch-ng2";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent, FooterComponent],
   imports: [
+    CommonModule,
+    NouisliderModule,
+    JwBootstrapSwitchNg2Module,
+    BrowserAnimationsModule,
     BrowserModule,
     NgbModule,
     FormsModule,
@@ -27,9 +38,13 @@ import { ExamplesModule } from "./examples/examples.module";
     ComponentsModule,
     ExamplesModule,
     ReactiveFormsModule,
+    InputNumberModule,
+    InputTextModule,
+    InputMaskModule,
     // GoogleMapsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
+  // exports: [AppModule]
 })
 export class AppModule {}

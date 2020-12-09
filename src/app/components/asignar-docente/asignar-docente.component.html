@@ -28,24 +28,24 @@
         <div class="col-md-8 mr-auto ml-auto">
           <h2 class="title">Breve Descripción</h2>
           <h5 class="description">
-            En está página se permitará asignar los docentes a las distintias
-            aulas que existen en la institución IPCA.
+            En está página se ofrece la visualización de los datos de todos los 
+            docentes asignados a un aula.
             <br />
             <span
-              >A continuación se presenta un breve formulario, en el cual se le
-              dará la postestad de ingresar información. Recuerde guardar la
-              misma cuando esté seguro que ingresó correctamente los datos.
-              <br />
-              Aquí una breve explicación.
+              >A continuación se presenta una tabla, en la cual se permite visualiazar
+              detalladamente toda la información de las aulas, así como del personal
+              que está invloucrado en las mismas.
+              <!-- <br />
+              Aquí una breve explicación. -->
             </span>
           </h5>
-          <br />
+          <!-- <br />
           <a
             [routerLink]="['/ayuda-componentes']"
             class="btn btn-outline-default btn-round"
             target="_blank"
             ><i class="fas fa-question fa-lg fa-fw"></i>Ayuda de Componentes</a
-          >
+          > -->
         </div>
       </div>
       <br /><br />
@@ -248,8 +248,8 @@
                           margin: 10px 10px 0 0;
                         "
                       >
-                        {{ brand.persona.primer_nombre }}
-                        {{ brand.persona.primer_apellido }}
+                        {{ brand.persona.primerNombre }}
+                        {{ brand.persona.primerApellido }}
                       </div>
                     </div>
                   </ng-template>
@@ -409,22 +409,52 @@
     <div class="container">
       <div class="row">
         <div class="col-md-10 mr-auto ml-auto">
-          <h2 class="text-center">Asignaciones Registradas</h2>
+          <h2 class="text-center">INFORMACIÓN DE AULAS</h2>
 
           <br />
 
+          <!-- (onRowSelect)="onRowSelect($event)"   Atributo para editar -->
           <p-table
             [columns]="cols"
-            [value]="asignaciones"
+            [value]="aulas"
             dataKey="_id"
             [resizableColumns]="true"
             [scrollable]="true"
             scrollHeight="500px"
             styleClass="ui-table-summary"
             selectionMode="single"
-            [(selection)]="asignacion_seleccionada"
-            (onRowSelect)="onRowSelect($event)"
+            [(selection)]="aula"
           >
+          <ng-template pTemplate="caption">
+            <div class="row">
+              <div class= "col-md-6" style="text-align: left">
+                <button 
+                  type="button" 
+                  class="btn btn-outline-default btn-round btn-sm" 
+                  [disabled]="!periodo_lectivo" 
+                  (click)="generarPlanes()">
+                  <i class="fas fa-file-pdf fa-lg fa-fw"></i> GENERAR PDF
+                </button>
+              </div>
+              <div class= "col-md-6" style="text-align: right">   
+                <p-dropdown [options]="periodos_lectivos" 
+                            [(ngModel)]="periodo_lectivo" 
+                            filter="true" 
+                            optionLabel="nombre"
+                            placeholder="Período Lectivo"
+                            (onChange)="filtrarContenido($event)">
+                  <ng-template let-item pTemplate="selectedItem">
+                      <span style="vertical-align:middle;">{{item.label}}</span>
+                  </ng-template>
+                  <ng-template let-periodo pTemplate="item">
+                      <div class="ui-helper-clearfix" style="height: 25px;">
+                          <div style="font-size:14px; text-align:middle">{{periodo.label}}</div>
+                      </div>
+                  </ng-template>
+                </p-dropdown>
+              </div>
+            </div>
+        </ng-template>
             <ng-template pTemplate="colgroup" let-columns>
               <colgroup>
                 <col />
@@ -456,26 +486,25 @@
                   </a>
                 </td>
                 <td>
-                  {{ rowData.docente.persona.identificacion }}
+                  {{ rowData.nombre }}
                 </td>
                 <td>
-                  {{ rowData.docente.persona.primer_nombre }}
-                  {{ rowData.docente.persona.segundo_nombre }}
+                  <div *ngFor="let docente of rowData.docentes">
+                    <p> {{ docente.persona.primerNombre }} {{ docente.persona.primerApellido }}</p>
+                  </div>
                 </td>
                 <td>
-                  {{ rowData.docente.persona.primer_apellido }}
-                  {{ rowData.docente.persona.segundo_apellido }}
+                  <div *ngFor="let pasante of rowData.pasantes">
+                    {{ pasante.persona.primerNombre }} {{ pasante.persona.primerApellido }}
+                  </div>
                 </td>
                 <td>
-                  {{ rowData.horario_entrada.hora }}
-                  {{ rowData.horario_entrada.periodo }}
+                  {{ rowData.periodoLectivo.nombre }}
                 </td>
                 <td>
-                  {{ rowData.horario_salida.hora }}
-                  {{ rowData.horario_salida.periodo }}
-                </td>
-                <td>
-                  {{ rowData.aula.nombre }}
+                  <div *ngFor="let especialidad of rowData.especialidades">
+                    {{ especialidad.nombre }}
+                  </div>
                 </td>
 
                 <!-- <td
@@ -502,37 +531,70 @@
                       <div class="col-md-6">
                         <div class="p-grid">
                           <div class="p-col-12">
-                            <b>Cédula:</b>
-                            {{ rowData.docente.persona.identificacion }}
+                            <b>Nombre:</b>
+                            <p>
+                              {{ rowData.nombre }}
+                            </p>
                           </div>
                           <div class="p-col-12">
-                            <b>Nombres:</b>
-                            {{ rowData.docente.persona.primer_nombre }}
-                            {{ rowData.docente.persona.segundo_nombre }}
+                            <b>Docentes:</b>
+                            <div *ngFor="let docente of rowData.docentes">
+                              <p> {{ docente.persona.primerNombre }} {{ docente.persona.primerApellido }}</p>
+                              <p>
+                                {{ docente.persona.correo }}
+                              </p>
+                              <p>
+                                {{ docente.persona.celular }}
+
+                              </p>
+                            </div>
                           </div>
-                          <div class="p-col-12">
-                            <b>Apellidos:</b>
-                            {{ rowData.docente.persona.primer_apellido }}
-                            {{ rowData.docente.persona.segundo_apellido }}
-                          </div>
-                          <div class="p-col-12">
-                            <b>Nivel de Formación:</b>
-                            {{ rowData.docente.nivel_formacion }}
-                          </div>
-                          <div class="p-col-12">
+                          
+                          <!-- <div class="p-col-12">
                             <b>Título:</b> {{ rowData.docente.titulo }}
-                          </div>
+                          </div> -->
                         </div>
                       </div>
 
                       <div class="col-md-6">
-                        <div class="p-grid" style="margin-top: 1em">
+                        <div class="p-grid">
                           <div class="p-col-12">
-                            <b>Horario de Entrada:</b>
-                            {{ rowData.horario_entrada.hora }}
-                            {{ rowData.horario_entrada.periodo }}
+                            <b>Pasantes:</b>
+                            <div *ngFor="let pasante of rowData.pasantes">
+                              <p> {{ pasante.persona.primerNombre }} {{ pasante.persona.primerApellido }}</p>
+                              <p>
+                                {{ pasante.persona.correo }}
+                              </p>
+                              <p>
+                                {{ pasante.persona.contacto }}
+
+                              </p>
+                            </div>
                           </div>
                           <div class="p-col-12">
+                            <b>Especialidades:</b>
+                            <div *ngFor="let especialidad of rowData.especialidades">
+                              <p>
+                                {{ especialidad.nombre }}
+                              </p>
+                              <p>
+                                {{ especialidad.descripcion }}
+                              </p>
+                            </div>
+                          </div>
+                          <div class="p-col-12">
+                            <b>Período Lectivo:</b>
+                            <p>
+                              {{ rowData.periodoLectivo.nombre }}
+                            </p>
+                            <p>
+                              {{ rowData.periodoLectivo.descripcion }}
+                            </p>
+                            <p>
+                              {{ rowData.periodoLectivo.estado }}
+                            </p>
+                          </div>
+                          <!-- <div class="p-col-12">
                             <b>Horario de Salida:</b>
                             {{ rowData.horario_salida.hora }}
                             {{ rowData.horario_salida.periodo }}
@@ -540,7 +602,7 @@
                           <div class="p-col-12">
                             <b>Nombre de Aula:</b>
                             {{ rowData.aula.nombre }}
-                          </div>
+                          </div> -->
                         </div>
                       </div>
                     </div>
@@ -556,7 +618,7 @@
             [focusOnShow]="false"
             showEffect="fade"
             [modal]="true"
-            [style]="{ width: '300px' }"
+            [style]="{ width: '320px' }"
           >
             <form [formGroup]="forma_editar" (ngSubmit)="editarDocente()">
               <div class="p-grid ui-fluid" *ngIf="asignacion_editar">
@@ -662,6 +724,18 @@
                     <i class="fas fa-save fa-lg fa-fw"></i> Guardar
                   </button>
                 </div>
+                <div
+                  class="ui-dialog-buttonpane ui-helper-clearfix row justify-content-center"
+                  style="margin-top: 0.5em;"
+                > 
+                <button
+                  type="button"
+                  class="btn btn-outline-info btn-round btn-sm justify-content-center "
+                  (click)="openPdf()"
+                >
+                <i class="fas fa-file-pdf fa-lg fa-fw"></i> Generar PDF
+                </button>
+              </div>
               </p-footer>
             </form>
           </p-dialog>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-signup",
@@ -13,20 +14,24 @@ export class SignupComponent implements OnInit {
 
   forma: FormGroup;
 
-  constructor(private _fb: FormBuilder) {
+  constructor(private _fb: FormBuilder, private router:Router) {
+    
     this.crearFormulario();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    
+  }
 
   crearFormulario() {
     this.forma = this._fb.group({
-      identificacion: ["", Validators.required],
+      nombre_usuario: ["", Validators.required],
       contrasena: ["", Validators.required],
     });
   }
 
   iniciarSesion() {
     console.log(this.forma);
+    this.router.navigate(["home"]);
   }
 }

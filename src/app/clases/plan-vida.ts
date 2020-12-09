@@ -7,14 +7,14 @@ import { Periodo_Lectivo } from "./periodo_lectivo";
 
 export class Plan_Vida {
   _id?: string;
-  periodo_lectivo?: Periodo_Lectivo;
+  periodoLectivo?: Periodo_Lectivo;
   docente?: Docente;
-  estudiante?: Estudiante;
+  alumno?: Estudiante;
   asignaturas?: Materia[];
   aula?: Aula;
   descripcion?: string;
-  objetivo_general?: string;
-  metas_especificas?: string[];
+  objetivoGeneral?: string;
+  metasEspecificas?: string[];
   vision?: string;
   ambitos?: Materia[];
   dominio?: Materia[];
@@ -26,5 +26,6 @@ export class Plan_Vida {
   suenos?: Detalle[];
   logros?: string[];
   observaciones?: string;
-  fecha_creacion?: Date;
+  estado?: string;
+  historico?: []
 }

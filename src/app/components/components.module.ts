@@ -40,6 +40,9 @@ import { PasanteComponent } from "./pasante/pasante.component";
 import { VisitaEmpresaComponent } from "./visita-empresa/visita-empresa.component";
 import { AsignarDocenteComponent } from "./asignar-docente/asignar-docente.component";
 import { AyudaComponentesComponent } from './ayuda-componentes/ayuda-componentes.component';
+import {TooltipModule} from 'primeng/tooltip';
+import { SignupComponent } from "app/examples/signup/signup.component";
+// import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
 // import { GoogleMapsModule } from "@angular/google-maps";
 
@@ -70,6 +73,8 @@ import { AyudaComponentesComponent } from './ayuda-componentes/ayuda-componentes
     MessageModule,
     ListboxModule,
     ChipsModule,
+    TooltipModule,
+    // ConfirmDialogModule
 
     // GoogleMapsModule,
   ],
@@ -88,6 +93,7 @@ import { AyudaComponentesComponent } from './ayuda-componentes/ayuda-componentes
     VisitaEmpresaComponent,
     AsignarDocenteComponent,
     AyudaComponentesComponent,
+    SignupComponent,
   ],
   entryComponents: [NgbdModalContent],
   exports: [ComponentsComponent],

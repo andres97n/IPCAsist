@@ -79,7 +79,7 @@
                           filter="true" 
                           optionLabel="nombre"
                           placeholder="Período Lectivo"
-                          formControlName="periodo_lectivo">
+                          formControlName="periodoLectivo">
                 <ng-template let-item pTemplate="selectedItem">
                     <span style="vertical-align:middle;">{{item.label}}</span>
                 </ng-template>
@@ -95,12 +95,9 @@
                 <p-message
                   severity="error"
                   text=" Se requiere el Período"
-                  *ngIf="invalidos('periodo_lectivo')"
+                  *ngIf="invalidos('periodoLectivo')"
                 ></p-message>
               </div>
-              <p-footer>
-                <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-              </p-footer>
             </p-card>
                 </div>
             </div>
@@ -158,8 +155,8 @@
                               margin: 10px 10px 0 0;
                             "
                           >
-                            {{ brand.persona.primer_nombre }}
-                            {{ brand.persona.primer_apellido }}
+                            {{ brand.persona.primerNombre }}
+                            {{ brand.persona.primerApellido }}
                           </div>
                         </div>
                       </ng-template>
@@ -177,12 +174,12 @@
             </div>
             <!-- <br /> -->
 
-            <!-- Card Estudiante -->
+            <!-- Card Alumno -->
             <div class="row espacio_dinformativos">
               <div class="col-md-12">
                 <p-card
-                  header="Estudiante"
-                  subheader="Ingrese el nombre del estudiante correspondiente."
+                  header="Alumno"
+                  subheader="Ingrese el nombre del alumno correspondiente."
                   styleClass="ui-card-shadow"
                 >
                   <p-header>
@@ -204,9 +201,9 @@
                       (completeMethod)="filtrarEstudiante($event)"
                       [size]="30"
                       [minLength]="1"
-                      placeholder="Estudiante"
+                      placeholder="Alumno"
                       [dropdown]="true"
-                      formControlName="estudiante"
+                      formControlName="alumno"
                       field="persona.identificacion"
                     >
                       <ng-template let-brand pTemplate="item">
@@ -227,8 +224,8 @@
                               margin: 10px 10px 0 0;
                             "
                           >
-                            {{ brand.persona.primer_nombre }}
-                            {{ brand.persona.primer_apellido }}
+                            {{ brand.persona.primerNombre }}
+                            {{ brand.persona.primerApellido }}
                           </div>
                         </div>
                       </ng-template>
@@ -236,8 +233,8 @@
 
                     <p-message
                       severity="error"
-                      text=" Se requiere al Estudiante"
-                      *ngIf="invalidos('estudiante')"
+                      text=" Se requiere al Alumno"
+                      *ngIf="invalidos('alumno')"
                       class="error"
                     ></p-message>
                   </div>
@@ -467,12 +464,12 @@
                       cols="50"
                       pInputTextarea
                       placeholder="Objetivo"
-                      formControlName="objetivo_general"
+                      formControlName="objetivoGeneral"
                     ></textarea>
                     <p-message
                       severity="error"
                       text=" Se necesita un Objetivo General"
-                      *ngIf="invalidos('objetivo_general')"
+                      *ngIf="invalidos('objetivoGeneral')"
                       class="error"
                     ></p-message>
                   </div>
@@ -913,12 +910,12 @@
                   <p-chips
                     styleClass="p-chips"
                     placeholder="Metas Específicas"
-                    formControlName="metas_especificas"
+                    formControlName="metasEspecificas"
                   ></p-chips>
                   <p-message
                     severity="error"
                     text=" Se debe ingresar por lo menos dos Metas Específicas"
-                    *ngIf="invalidos('metas_especificas')"
+                    *ngIf="invalidos('metasEspecificas')"
                     class="error"
                   ></p-message>
 
@@ -1427,45 +1424,40 @@
             scrollHeight="400px"
             styleClass="ui-table-summary"
             selectionMode="single"
-            [(selection)]="plan_vida"
+            [(selection)]="plan_seleccionado"
             (onRowSelect)="onRowSelect($event)"
             #dt
           >
           <ng-template pTemplate="caption">
-            <div style="text-align: right">   
-              <p-dropdown [options]="periodos_lectivos" 
-                          [(ngModel)]="periodo_lectivo" 
-                          filter="true" 
-                          optionLabel="nombre"
-                          placeholder="Período Lectivo"
-                          (onChange)="filtrarContenido($event)">
-                <ng-template let-item pTemplate="selectedItem">
-                    <span style="vertical-align:middle;">{{item.label}}</span>
-                </ng-template>
-                <ng-template let-periodo pTemplate="item">
-                    <div class="ui-helper-clearfix" style="height: 25px;">
-                        <div style="font-size:14px; text-align:middle">{{periodo.label}}</div>
-                    </div>
-                </ng-template>
-              </p-dropdown>
-              <!-- <p-autoComplete
-                      [suggestions]="periodos_filrados"
-                      (completeMethod)="filtrarPeriodo($event)"
-                      [size]="15"
-                      [minLength]="1"
-                      placeholder="Periodo Lectivo"
-                      [dropdown]="true"
-                      field="nombre"
-                      (input)="dt.filterGlobal($event.target.value, cols.field, 'contains')"
-                    >
-                      <ng-template let-brand pTemplate="item">
-                        <div class="ui-helper-clearfix">
-                          <div style="font-size: 15px; margin: 0.5em">
-                            {{ brand.nombre }}
-                          </div>
-                        </div>
-                      </ng-template>
-                </p-autoComplete>      -->
+            <div class="row">
+              <div class= "col-md-6" style="text-align: left">
+                <button 
+                  type="button" 
+                  class="btn btn-outline-default btn-round btn-sm" 
+                  [disabled]="!periodo_lectivo" 
+                  (click)="generarPlanes()"
+                  >
+                  <i class="fas fa-file-pdf fa-lg fa-fw"></i> GENERAR PDF
+                </button>
+              </div>
+              <div class= "col-md-6" style="text-align: right">   
+                <p-dropdown [options]="periodos_lectivos" 
+                            [(ngModel)]="periodo_lectivo" 
+                            filter="true" 
+                            optionLabel="nombre"
+                            placeholder="Período Lectivo"
+                            (onChange)="filtrarContenido($event)"
+                            pTooltip="Seleccione para Filtrar o Generar PDF">
+                  <ng-template let-item pTemplate="selectedItem">
+                      <span style="vertical-align:middle;">{{item.label}}</span>
+                  </ng-template>
+                  <ng-template let-periodo pTemplate="item">
+                      <div class="ui-helper-clearfix" style="height: 25px;">
+                          <div style="font-size:14px; text-align:middle">{{periodo.label}}</div>
+                      </div>
+                  </ng-template>
+                </p-dropdown>
+              </div>
             </div>
         </ng-template>
             <ng-template pTemplate="colgroup" let-columns>
@@ -1489,7 +1481,7 @@
               let-columns="columns"
             >
               <tr [pSelectableRow]="rowData" >
-                <td style="width: 3em">
+                <td style="width: 3em" (click)="plan_seleccionado = rowData">
                   <a href="#" [pRowToggler]="rowData">
                     <i
                       [ngClass]="
@@ -1499,18 +1491,18 @@
                   </a>
                 </td>
                 <td >
-                  {{ rowData.docente.persona.primer_nombre }}
-                  {{ rowData.docente.persona.primer_apellido }}
+                  {{ rowData.docente.persona.primerNombre }}
+                  {{ rowData.docente.persona.primerApellido }}
                 </td>
                 <td>
-                  {{ rowData.estudiante.persona.primer_nombre}}
-                  {{ rowData.estudiante.persona.primer_apellido }}
+                  {{ rowData.alumno.persona.primerNombre}}
+                  {{ rowData.alumno.persona.primerApellido }}
                 </td>
                 <td >
                   {{ rowData.aula.nombre }}
                 </td>
                 <td>
-                  {{ rowData.periodo_lectivo.nombre}}
+                  {{ rowData.periodoLectivo.nombre}}
                 </td>
                 <td>
                   {{ rowData.observaciones }}
@@ -1534,13 +1526,13 @@
                         <div class="p-grid">
                           <div class="p-col-12">
                             <b>Docente:</b>
-                            {{ rowData.docente.persona.primer_nombre }}
-                            {{ rowData.docente.persona.primer_apellido }}
+                            {{ rowData.docente.persona.primerNombre }}
+                            {{ rowData.docente.persona.primerApellido }}
                           </div>
                           <div class="p-col-12">
                             <b>Estudiante:</b>
-                            {{ rowData.estudiante.persona.primer_nombre}}
-                            {{ rowData.estudiante.persona.primer_apellido }}
+                            {{ rowData.alumno.persona.primerNombre}}
+                            {{ rowData.alumno.persona.primerApellido }}
                           </div>
                           <div class="p-col-12">
                             <b>Aula:</b>
@@ -1548,13 +1540,13 @@
                           </div>
                           <div class="p-col-12">
                             <b>Necesidades:</b>
-                            {{ rowData.necesidades[0].titulo }}
+                            {{ rowData.necesidades[0].nombre }}
                             ->
                             {{ rowData.necesidades[0].descripcion }}
                           </div>
                           <div class="p-col-12">
                             <b>Deseos:</b>
-                            {{ rowData.deseos[0].titulo }}
+                            {{ rowData.deseos[0].nombre }}
                             ->
                             {{
                               rowData.deseos[0].descripcion
@@ -1562,11 +1554,15 @@
                           </div>
                           <div class="p-col-12">
                             <b>Sueños:</b>
-                            {{ rowData.deseos[0].titulo }}
+                            {{ rowData.deseos[0].nombre }}
                             ->
                             {{
                               rowData.deseos[0].descripcion
                             }}
+                          </div>
+                          <div class="p-col-12">
+                            <b>Estado:</b>
+                            {{ rowData.estado }}
                           </div>
                         </div>
                       </div>
@@ -1575,13 +1571,13 @@
                         <div class="p-grid">
                           <div class="p-col-12">
                             <b>Potencialidades:</b>
-                            {{ rowData.potencialidades[0].titulo }}
+                            {{ rowData.potencialidades[0].nombre }}
                             ->
                             {{ rowData.potencialidades[0].descripcion }}
                           </div>
                           <div class="p-col-12">
                             <b>Gustos:</b>
-                            {{ rowData.gustos[0].titulo }}
+                            {{ rowData.gustos[0].nombre }}
                             ->
                             {{
                               rowData.gustos[0].descripcion
@@ -1597,7 +1593,7 @@
                           </div> -->
                           <div class="p-col-12">
                             <b>Disgustos:</b>
-                            {{ rowData.disgustos[0].titulo }}
+                            {{ rowData.disgustos[0].nombre }}
                             ->
                             {{
                               rowData.disgustos[0].descripcion
@@ -1612,11 +1608,54 @@
                         </div>
                         <div class="p-col-12" style="margin-top: 0.5em">
                           <b>Objetivo General:</b>
-                            {{ rowData.objetivo_general }}
+                            {{ rowData.objetivoGeneral }}
                         </div>
                         <div class="p-col-12" style="margin-top: 0.5em">
                           <b>Observaciones:</b>
                           {{ rowData.observaciones }}
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="p-col-12" style="margin-top: 1em">
+                          <!-- <p-confirmDialog [style]="{width: '50vw'}" [visible]="false" #confirmDialog>
+                            <p-footer>
+                              <button type="button" pButton icon="fa-close" label="No deseo hacerlo" (click)="confirmDialog.reject()"></button>
+                              <button type="button" pButton icon="fa-check" label="Sí, eliminar Plan" (click)="confirmDialog.accept && confirmDialog.hide()"></button>
+                            </p-footer>
+                          </p-confirmDialog> -->
+                          <button 
+                            type="button" 
+                            class="btn btn-outline-danger btn-round btn-sm" 
+                            (click)="eliminarPlan()">
+                            <i class="fas fa-trash-alt fa-lg fa-fw"></i> BORRAR PLAN DE VIDA
+                          </button>
+
+                          <ng-template #contenido let-modal>
+                            <div class="modal-header">
+                                <h4 class="modal-title">Titulo Modal</h4>
+                                <button class="close" aria-label="close" type="button" (click)="modalService.dismissAll()">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Este es el contenido de este modal.
+                                Este es el contenido de este modal.
+                                Este es el contenido de este modal.
+                                Este es el contenido de este modal.
+                                Este es el contenido de este modal.
+                                Este es el contenido de este modal.
+                                Este es el contenido de este modal.
+                                Este es el contenido de este modal.
+                                Este es el contenido de este modal.
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success" (click)="modalService.close()">Ok!</button>
+                            </div>
+                        </ng-template>
+                        
+                        <button type="button" class="btn btn-outline-danger" (click)="modalService.open(contenido)">lanzar modal SM</button>
+                        
+
                         </div>
                       </div>
                     </div>

@@ -50,56 +50,72 @@
               </a>
             </div> -->
 
-            <form
-              class="register-form"
-              (ngSubmit)="iniciarSesion()"
-              style="margin-top: 1em"
-            >
-              <label style="color: #515455">Identificación</label>
-              <div
-                class="input-group form-group-no-border"
-                [ngClass]="{ 'input-group-focus': focus === true }"
+            <!-- <div class="container"> -->
+
+              <form
+                [formGroup]="forma"
+                (ngSubmit)="iniciarSesion()"
+                style="margin-top: 1em"
               >
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    <i class="far fa-user"></i>
-                  </span>
+              
+              <div class="row justify-content-center">
+              
+              <label style="color: #515455">Nombre de Usuario</label> 
+              
+              <div class="ui-inputgroup">
+                <span class="ui-inputgroup-addon">
+                  <i class="far fa-user fa-lg" style="line-height: 1"></i></span>
+                    <input
+                    type="text"
+                    placeholder="Nombre de Usuario"
+                    pInputText
+                    size="25"
+                    formControlName="nombre_usuario"
+                  />
+                </div>
+  
+                <label style="color: #515455">Contraseña</label>
+                <!-- <div
+                  class="input-group form-group-no-border"
+                  [ngClass]="{ 'input-group-focus': focus1 === true }"
+                >
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="fas fa-unlock-alt"></i>
+                    </span>
+                  </div>
+                  <input
+                    type="password"
+                    class="form-control"
+                    placeholder="Contraseña"
+                    (focus)="focus1 = true"
+                    (blur)="focus1 = false"
+                    formControlName="contrasena"
+                  />
+                </div> -->
+                <div class="ui-inputgroup">
+                  <span class="ui-inputgroup-addon">
+                    <i class="fas fa-unlock fa-lg" style="line-height: 1"></i></span>
+                  <input
+                    type="password"
+                    placeholder="Contraseña"
+                    pInputText
+                    size="25"
+                    formControlName="contrasena"
+                  />
                 </div>
 
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Cédula"
-                  (focus)="focus = true"
-                  (blur)="focus = false"
-                />
+                <button
+                  type="submit"
+                  class="btn btn-outline-default btn-block btn-round"
+                  [disabled]="!forma.valid"
+                >
+                  Iniciar Sesión
+                </button>
               </div>
-
-              <label style="color: #515455">Contraseña</label>
-              <div
-                class="input-group form-group-no-border"
-                [ngClass]="{ 'input-group-focus': focus1 === true }"
-              >
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    <i class="fas fa-unlock-alt"></i>
-                  </span>
-                </div>
-                <input
-                  type="password"
-                  class="form-control"
-                  placeholder="Contraseña"
-                  (focus)="focus1 = true"
-                  (blur)="focus1 = false"
-                />
-              </div>
-              <button
-                type="submit"
-                class="btn btn-outline-default btn-block btn-round"
-              >
-                Iniciar Sesión
-              </button>
-            </form>
+              </form>
+            <!-- </div> -->
+            
             <div class="forgot">
               <a href="#" class="btn btn-link btn-default"
                 >Olvidó su Contraseña?</a
@@ -109,7 +125,7 @@
           </div>
         </div>
       </div>
-      <div class="footer register-footer text-center">
+      <div class="footer register-footer text-center" style="margin-top: 1em;">
         <h6>
           &copy;{{ test | date: "yyyy" }}, Diseñado por: Lina Orellana | Andrés
           Novillo

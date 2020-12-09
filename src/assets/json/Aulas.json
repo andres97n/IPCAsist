@@ -1,38 +1,1082 @@
 [
   {
     "_id": "_73njfnj439nrnke90345dsfds",
+    "grado": "1",
+    "paralelo": "A",
     "nombre": "Inicial I",
-    "capacidad": 15,
-    "ubicación": "Final Pasillo Derecho"
+    "docentes": [
+      {
+        "_id": "_nfnwejnjwefweinfweefew",
+        "persona": {
+          "_id": "_jewjfio483njwefio38r4njf",
+          "identificacion": "0104785962",
+          "primerNombre": "Juan",
+          "segundoNombre": "Felipe",
+          "primerApellido": "Calle",
+          "segundoApellido": "Borbón",
+          "celular": "0956423187",
+          "correo": "Juanpi34@gmail.com", 
+          "genero": "Masculino",
+          "direccion": {
+            "callePrincipal": "Av. de las Américas",
+            "calleSecundaria": "",
+            "numeroCasa": "",
+            "lugarReferencia": "S/N" 
+          },
+          "fechaNacimiento": "24/08/84",
+          "tipoSangre": "A+",
+          "tieneDiscapacidad": "NO",
+          "infoDiscapacidad": {},
+          "ocupacion": "Docente",
+          "nivelFormacion": "3er Nivel"
+        },
+        "funcion": {
+          "nombre": "DOCENTE",
+          "descripcion": "El docente se encarga de guiar al Alumno en el proceso de mejorar sus dificultades."
+        },
+        "info": {
+          "titulo": "Psicólogo",
+          "tipoTitulo": "3er Nivel",
+          "areaDeTrabajo": "Docencia"
+        },
+        "historico": [
+          {
+            "fechaRegistro": "12/05/2016"
+          }
+        ],
+        "descripcion": "S/N"
+      },
+      {
+        "_id": "_whfnew8r3ndkf349r43095nwjeknew",
+        "persona": {
+          "_id": "_fwhebf47348njkefw48yndds",
+          "identificacion": "0105876213",
+          "primerNombre": "Fernando",
+          "segundoNombre": "Fabián",
+          "primerApellido": "Guzman",
+          "segundoApellido": "Carrión",
+          "celular": "0956423187",
+          "correo": "ferchofabian25@gmail.com", 
+          "genero": "Masculino",
+          "direccion": {
+            "callePrincipal": "Av. de las Américas",
+            "calleSecundaria": "",
+            "numeroCasa": "",
+            "lugarReferencia": "S/N" 
+          },
+          "tipoSangre": "A+",
+          "tieneDiscapacidad": "NO",
+          "infoDiscapacidad": {},
+          "ocupacion": "Docente",
+          "nivelFormacion": "3er Nivel",
+          "fechaNacimiento": "15/10/88"
+        },
+        "funcion": {
+          "nombre": "DOCENTE",
+          "descripcion": "El docente se encarga de guiar al Alumno en el proceso de mejorar sus dificultades."
+        },
+        "info": {
+          "titulo": "FísicoTerapeuta",
+          "tipoTitulo": "3er Nivel",
+          "areaDeTrabajo": "Rehabilitación de Extremidades"
+        },
+        "historico": [
+          {
+            "fechaRegistro": "12/05/2016"
+          }
+        ],
+        "descripcion": "S/N"
+      }
+    ],
+    "pasantes": [
+      {
+        "_id": "_5565fwe5f4ew65f65efwe",
+        "persona": {
+          "identificacion": "0107894531",
+          "primerNombre": "Karla",
+          "segundoNombre": "Estefania",
+          "primerApellido": "Quito",
+          "segundoApellido": "Alvarez",
+          "edad": 22,
+          "sexo": "F",
+          "correo": "karla@gmail.com",
+          "contacto": "0985461238"
+        },
+        "institucion": "Universidad del Azuay",
+        "tutor": {
+          "persona": {
+            "identificacion": "01023245894",
+            "primerNombre": "Paúl",
+            "segundoNombre": "Gabriel",
+            "primerApellido": "Torres",
+            "segundoApellido": "Gonzales"
+          }
+        },
+        "especialidad": "Dentista",
+        "numHoras": 3,
+        "historico": {
+          "fechaInicio": "12/05/2020"
+        }
+      }
+    ],
+    "especialidades": [
+      {
+        "nombre": "Rehabilitación Física",
+        "descripcion": "S/N"
+      }
+    ],
+    "periodoLectivo": {
+      "id": "_jfierwn4390tievjdf930tvnfd5kn",
+        "nombre": "2019-2020",
+        "descripcion": "S/N",
+        "fechaInicio": "02-08-2019",
+        "fechaFin": "",
+        "fechaFinClases": "",
+        "estado": "CERRADO",
+        "responsables": [
+            {
+                "_id": "_hfurfuei3849nfjwj4383ndkfe",
+                "persona": {
+                    "_id": "_jfnrwiu839i3nfjke340994dsnksnddf",
+                    "identificacion": "1248753216",
+                    "primerNombre": "Daniela",
+                    "segundoNombre": "Augusta",
+                    "primerApellido": "Damián",
+                    "segundoApellido": "Gonzales",
+                    "celular": "0956423187",
+                    "correo": "danydamina88@gmail.com", 
+                    "genero": "Femenino",
+                    "direccion": {
+                        "callePrincipal": "Av. Solano",
+                        "calleSecundaria": "",
+                        "numeroCasa": "",
+                        "lugarReferencia": "S/N" 
+                    },
+                    "tipoSangre": "O+",
+                    "tieneDiscapacidad": "NO",
+                    "infoDiscapacidad": {},
+                    "ocupacion": "Docente",
+                    "nivelFormacion": "4to Nivel",
+                    "fechaNacimiento": "05/11/88"
+                },
+                "funcion": {
+                    "nombre": "DOCENTE",
+                    "descripcion": "El docente se encarga de guiar al Alumno en el proceso de mejorar sus dificultades."
+                },
+                "info": {
+                    "titulo": "FísicoTerapeuta",
+                    "tipoTitulo": "4to Nivel",
+                    "areaDeTrabajo": "Rehabilitación Física"
+                },
+                "historico": [
+                    {
+                        "fechaRegistro": "12/05/2016"
+                    }
+                ],
+                "descripcion": "S/N"
+            }
+        ]
+    },
+    "jornada": "MATUTINA"
   },
   {
     "_id": "_hwuefb8934jbt34nfk4f3n",
+    "grado": "1",
+    "paralelo": "B",
     "nombre": "Inicial II",
-    "capacidad": 17,
-    "ubicación": "Final Pasillo Derecho"
+    "docentes": [
+      {
+        "_id": "_fjnfenjr8894njrnfe4939nfk",
+        "persona": {
+          "_id": "_fwjnf889nr398ufn34nrnk43r3",
+          "identificacion": "0147684258",
+          "primerNombre": "María",
+          "segundoNombre": "Belén",
+          "primerApellido": "García",
+          "segundoApellido": "Morales",
+          "celular": "0956423187",
+          "correo": "mabelen92@gmail.com", 
+          "genero": "Femenino",
+          "direccion": {
+            "callePrincipal": "Av. Solano",
+            "calleSecundaria": "",
+            "numeroCasa": "",
+            "lugarReferencia": "S/N" 
+          },
+          "tipoSangre": "A-",
+          "tieneDiscapacidad": "NO",
+          "infoDiscapacidad": {},
+          "ocupacion": "Docente",
+          "nivelFormacion": "4to Nivel",
+          "fechaNacimiento": "05/11/92"
+        },
+        "funcion": {
+          "nombre": "DOCENTE",
+          "descripcion": "El docente se encarga de guiar al Alumno en el proceso de mejorar sus dificultades."
+        },
+        "info": {
+          "titulo": "Comunicación Temprana",
+          "tipoTitulo": "4to Nivel",
+          "areaDeTrabajo": "Rehabilitación Verbal"
+        },
+        "historico": [
+          {
+            "fechaRegistro": "12/05/2016"
+          }
+        ],
+        "descripcion": "S/N"
+      },
+      {
+        "_id": "_732jewfnjwef242nwece",
+        "persona": {
+          "_id": "_uwefuwn324234kefkw84893nejw",
+          "identificacion": "0102687954",
+          "primerNombre": "Julián",
+          "segundoNombre": "ALberto",
+          "primerApellido": "García",
+          "segundoApellido": "Malo",
+          "celular": "0956423187",
+          "correo": "jgracia90@gmail.com", 
+          "genero": "Masculino",
+          "direccion": {
+            "callePrincipal": "Av. Solano",
+            "calleSecundaria": "",
+            "numeroCasa": "",
+            "lugarReferencia": "S/N" 
+          },
+          "tipoSangre": "A+",
+          "tieneDiscapacidad": "NO",
+          "infoDiscapacidad": {},
+          "ocupacion": "Docente",
+          "nivelFormacion": "3er Nivel",
+          "fechaNacimiento": "05/11/90"
+        },
+        "funcion": {
+          "nombre": "DOCENTE",
+          "descripcion": "El docente se encarga de guiar al Alumno en el proceso de mejorar sus dificultades."
+        },
+        "info": {
+          "titulo": "Terapeuta",
+          "tipoTitulo": "3er Nivel",
+          "areaDeTrabajo": "Mejoría de Razonamiento"
+        },
+        "historico": [
+          {
+            "fechaRegistro": "12/05/2016"
+          }
+        ],
+        "descripcion": "S/N"
+      }
+    ],
+    "pasantes": [
+      {
+        "_id": "_wfw566516efw1w1e2wefw32e",
+        "persona": {
+          "identificacion": "1874562135",
+          "primerNombre": "Daniela",
+          "segundoNombre": "Mercedes",
+          "primerApellido": "Alvarado",
+          "segundoApellido": "Ortiz",
+          "edad": 23,
+          "sexo": "F",
+          "correo": "danielam@hotmail.com",
+          "contacto": "0978456217"
+        },
+        "institucion": "Universidad de Cuenca",
+        "tutor": {
+          "persona": {
+            "identificacion": "0104472014",
+            "primerNombre": "Adriana",
+            "segundoNombre": "Natalia",
+            "primerApellido": "Prado",
+            "segundoApellido": "Gimenez"
+          }
+        },
+        "especialidad": "Terapeuta",
+        "numHoras": 3,
+        "historico": {
+          "fechaInicio": "13/05/2020"
+        }
+      }
+    ],
+    "especialidades": [
+      {
+        "nombre": "Rehabilitación Auditiva",
+        "descripcion": "S/N"
+      }
+    ],
+    "periodoLectivo": {
+      "id": "_dhfuidsjfjsk2399n40fwje90frnif2n3",
+      "nombre": "2018-2019",
+      "descripcion": "S/N",
+      "fechaInicio": "02-08-2018",
+      "fechaFin": "",
+      "fechaFinClases": "",
+      "estado": "CERRADO",
+      "responsables": [
+        {
+          "_id": "_fjnfenjr8894njrnfe4939nfk",
+          "persona": {
+            "_id": "_fwjnf889nr398ufn34nrnk43r3",
+            "identificacion": "0147684258",
+            "primerNombre": "María",
+            "segundoNombre": "Belén",
+            "primerApellido": "García",
+            "segundoApellido": "Morales",
+            "celular": "0956423187",
+            "correo": "mabelen92@gmail.com", 
+            "genero": "Femenino",
+            "direccion": {
+              "callePrincipal": "Av. Solano",
+              "calleSecundaria": "",
+              "numeroCasa": "",
+              "lugarReferencia": "S/N" 
+            },
+            "tipoSangre": "A-",
+            "tieneDiscapacidad": "NO",
+            "infoDiscapacidad": {},
+            "ocupacion": "Docente",
+            "nivelFormacion": "4to Nivel",
+            "fechaNacimiento": "05/11/92"
+          },
+          "funcion": {
+            "nombre": "DOCENTE",
+            "descripcion": "El docente se encarga de guiar al Alumno en el proceso de mejorar sus dificultades."
+          },
+          "info": {
+            "titulo": "Comunicación Temprana",
+            "tipoTitulo": "4to Nivel",
+            "areaDeTrabajo": "Rehabilitación Verbal"
+          },
+          "historico": [
+            {
+              "fechaRegistro": "12/05/2016"
+            }
+          ],
+          "descripcion": "S/N"
+        }
+      ]
+    },
+    "jornada":"MATUTINA"
   },
   {
     "_id": "_73njfnj439nrnke90345dsfds",
+    "grado": "2",
+    "paralelo": "A",
     "nombre": "Segundo A",
-    "capacidad": 14,
-    "ubicación": "Pasillo Central"
+    "docentes": [
+      {
+        "_id": "_hfew7438nfjw39495weffs4353",
+        "persona": {
+          "_id": "_643jfwj89nwjkf43nwf493",
+          "identificacion": "0105876482",
+          "primerNombre": "Carlos",
+          "segundoNombre": "Marcelo",
+          "primerApellido": "Crespo",
+          "segundoApellido": "Galián",
+          "celular": "0956423187",
+          "correo": "carloma@gmail.com", 
+          "genero": "Masculino",
+          "direccion": {
+            "callePrincipal": "Av. Solano",
+            "calleSecundaria": "",
+            "numeroCasa": "",
+            "lugarReferencia": "S/N" 
+          },
+          "tipoSangre": "B+",
+          "tieneDiscapacidad": "NO",
+          "infoDiscapacidad": {},
+          "ocupacion": "Docente",
+          "nivelFormacion": "4to Nivel",
+          "fechaNacimiento": "05/11/92"
+        },
+        "funcion": {
+          "nombre": "DOCENTE",
+          "descripcion": "El docente se encarga de guiar al Alumno en el proceso de mejorar sus dificultades."
+        },
+        "info": {
+          "titulo": "FísicoTerapeuta",
+          "tipoTitulo": "4to Nivel",
+          "areaDeTrabajo": "Rehabilitación Física"
+        },
+        "historico": [
+          {
+            "fechaRegistro": "12/05/2016"
+          }
+        ],
+        "descripcion": "S/N"
+      },
+      {
+        "_id": "_nfnwejnjwefweinfweefew",
+        "persona": {
+          "_id": "_jewjfio483njwefio38r4njf",
+          "identificacion": "0104785962",
+          "primerNombre": "Juan",
+          "segundoNombre": "Felipe",
+          "primerApellido": "Calle",
+          "segundoApellido": "Borbón",
+          "celular": "0956423187",
+          "correo": "Juanpi34@gmail.com", 
+          "genero": "Masculino",
+          "direccion": {
+            "callePrincipal": "Av. de las Américas",
+            "calleSecundaria": "",
+            "numeroCasa": "",
+            "lugarReferencia": "S/N" 
+          },
+          "fechaNacimiento": "24/08/84",
+          "tipoSangre": "A+",
+          "tieneDiscapacidad": "NO",
+          "infoDiscapacidad": {},
+          "ocupacion": "Docente",
+          "nivelFormacion": "3er Nivel"
+        },
+        "funcion": {
+          "nombre": "DOCENTE",
+          "descripcion": "El docente se encarga de guiar al Alumno en el proceso de mejorar sus dificultades."
+        },
+        "info": {
+          "titulo": "Psicólogo",
+          "tipoTitulo": "3er Nivel",
+          "areaDeTrabajo": "Docencia"
+        },
+        "historico": [
+          {
+            "fechaRegistro": "12/05/2016"
+          }
+        ],
+        "descripcion": "S/N"
+      }
+    ],
+    "pasantes": [
+      {
+        "_id": "_fwbebfe823bj43fjbfj4334",
+        "persona": {
+          "identificacion": "0104875621",
+          "primerNombre": "Daniela",
+          "segundoNmbre": "Estafania",
+          "primerApellido": "Uyauri",
+          "segundoApellido": "Gonzales",
+          "edad": 23,
+          "sexo": "F",
+          "correo": "danyest@gmail.com",
+          "contacto": "0954762354"
+        },
+        "institucion": "Universidad del Azuay",
+        "tutor": {
+          "persona": {
+            "identificacion": "0104472014",
+            "primerNombre": "Adriana",
+            "segundoNombre": "Natalia",
+            "primerApellido": "Prado",
+            "segundoApellido": "Gimenez"
+          }
+        },
+        "especialidad": "Terapeuta",
+        "numHoras": 4,
+        "historico": {
+          "fechaInicio": "15/05/2020"
+        }
+      }
+    ],
+    "especialidades": [
+      {
+        "nombre": "Rehabilitación Auditiva",
+        "descripcion": "S/N"
+      }
+    ],
+    "periodoLectivo": {
+      "id": "_jfierwn4390tievjdf930tvnfd5kn",
+        "nombre": "2019-2020",
+        "descripcion": "S/N",
+        "fechaInicio": "02-08-2019",
+        "fechaFin": "",
+        "fechaFinClases": "",
+        "estado": "CERRADO",
+        "responsables": [
+            {
+              "_id": "_hfurfuei3849nfjwj4383ndkfe",
+              "persona": {
+                "_id": "_jfnrwiu839i3nfjke340994dsnksnddf",
+                "identificacion": "1248753216",
+                "primerNombre": "Daniela",
+                "segundoNombre": "Augusta",
+                "primerApellido": "Damián",
+                "segundoApellido": "Gonzales",
+                "celular": "0956423187",
+                "correo": "danydamina88@gmail.com", 
+                "genero": "Femenino",
+                "direccion": {
+                  "callePrincipal": "Av. Solano",
+                  "calleSecundaria": "",
+                  "numeroCasa": "",
+                  "lugarReferencia": "S/N" 
+                },
+                "tipoSangre": "O+",
+                "tieneDiscapacidad": "NO",
+                "infoDiscapacidad": {},
+                "ocupacion": "Docente",
+                "nivelFormacion": "4to Nivel",
+                "fechaNacimiento": "05/11/88"
+                },
+                "funcion": {
+                    "nombre": "DOCENTE",
+                    "descripcion": "El docente se encarga de guiar al Alumno en el proceso de mejorar sus dificultades."
+                },
+                "info": {
+                    "titulo": "FísicoTerapeuta",
+                    "tipoTitulo": "4to Nivel",
+                    "areaDeTrabajo": "Rehabilitación Física"
+                },
+                "historico": [
+                    {
+                        "fechaRegistro": "12/05/2016"
+                    }
+                ],
+                "descripcion": "S/N"
+            }
+        ]
+    },
+    "jornada": "MATUTINA"
   },
   {
     "_id": "_73njfnj439nrnke90345dsfds",
+    "grado": "2",
+    "paralelo": "B",
     "nombre": "Segundo B",
-    "capacidad": 20,
-    "ubicación": "Pasillo Central"
+    "docentes": [
+      {
+        "_id": "_whfnew8r3ndkf349r43095nwjeknew",
+        "persona": {
+          "_id": "_fwhebf47348njkefw48yndds",
+          "identificacion": "0105876213",
+          "primerNombre": "Fernando",
+          "segundoNombre": "Fabián",
+          "primerApellido": "Guzman",
+          "segundoApellido": "Carrión",
+          "celular": "0956423187",
+          "correo": "ferchofabian25@gmail.com", 
+          "genero": "Masculino",
+          "direccion": {
+            "callePrincipal": "Av. de las Américas",
+            "calleSecundaria": "",
+            "numeroCasa": "",
+            "lugarReferencia": "S/N" 
+          },
+          "tipoSangre": "A+",
+          "tieneDiscapacidad": "NO",
+          "infoDiscapacidad": {},
+          "ocupacion": "Docente",
+          "nivelFormacion": "3er Nivel",
+          "fechaNacimiento": "15/10/88"
+        },
+        "funcion": {
+          "nombre": "DOCENTE",
+          "descripcion": "El docente se encarga de guiar al Alumno en el proceso de mejorar sus dificultades."
+        },
+        "info": {
+          "titulo": "FísicoTerapeuta",
+          "tipoTitulo": "3er Nivel",
+          "areaDeTrabajo": "Rehabilitación de Extremidades"
+        },
+        "historico": [
+          {
+            "fechaRegistro": "12/05/2016"
+          }
+        ],
+        "descripcion": "S/N"
+      },
+      {
+        "_id": "_732jewfnjwef242nwece",
+        "persona": {
+          "_id": "_uwefuwn324234kefkw84893nejw",
+          "identificacion": "0102687954",
+          "primerNombre": "Julián",
+          "segundoNombre": "ALberto",
+          "primerApellido": "García",
+          "segundoApellido": "Malo",
+          "celular": "0956423187",
+          "correo": "jgracia90@gmail.com", 
+          "genero": "Masculino",
+          "direccion": {
+            "callePrincipal": "Av. Solano",
+            "calleSecundaria": "",
+            "numeroCasa": "",
+            "lugarReferencia": "S/N" 
+          },
+          "tipoSangre": "A+",
+          "tieneDiscapacidad": "NO",
+          "infoDiscapacidad": {},
+          "ocupacion": "Docente",
+          "nivelFormacion": "3er Nivel",
+          "fechaNacimiento": "05/11/90"
+        },
+        "funcion": {
+          "nombre": "DOCENTE",
+          "descripcion": "El docente se encarga de guiar al Alumno en el proceso de mejorar sus dificultades."
+        },
+        "info": {
+          "titulo": "Terapeuta",
+          "tipoTitulo": "3er Nivel",
+          "areaDeTrabajo": "Mejoría de Razonamiento"
+        },
+        "historico": [
+          {
+            "fechaRegistro": "12/05/2016"
+          }
+        ],
+        "descripcion": "S/N"
+      }
+    ],
+    "pasantes": [
+      {
+        "_id": "_nfwjenew7437854n343409nrj34",
+        "persona": {
+          "identificacion": "0107548324",
+          "primerNombre": "Carlos",
+          "segundoNombre": "Fabricio",
+          "primerApellido": "Saquicela",
+          "segundoApellido": "Ortiz",
+          "edad": 22,
+          "sexo": "M",
+          "correo": "fabricarlos@gmail.com",
+          "contacto": "0954721430"
+        },
+        "institucion": "Universidad Politécnica Salesiana",
+        "tutor": {
+          "persona": {
+            "identificacion": "0147684258",
+            "primerNombre": "María",
+            "segundoNombre": "Belén",
+            "primerApellido": "García",
+            "segundoApellido": "Morales"
+          }
+        },
+        "especialidad": "Terapeuta",
+        "numHoras": 3,
+        "historico": {
+          "fecha_inicio": "16/05/2020"
+        }
+      }
+    ],
+    "especialidades": [
+      {
+        "nombre": "Estimulación Temprana",
+        "descripcion": "S/N"
+      }
+    ],
+    "periodoLectivo": {
+      "id": "_dhfuidsjfjsk2399n40fwje90frnif2n3",
+        "nombre": "2018-2019",
+        "descripcion": "S/N",
+        "fechaInicio": "02-08-2018",
+        "fechaFin": "",
+        "fechaFinClases": "",
+        "estado": "CERRADO",
+        "responsables": [
+            {
+                "_id": "_fjnfenjr8894njrnfe4939nfk",
+                "persona": {
+                "_id": "_fwjnf889nr398ufn34nrnk43r3",
+                "identificacion": "0147684258",
+                "primerNombre": "María",
+                "segundoNombre": "Belén",
+                "primerApellido": "García",
+                "segundoApellido": "Morales",
+                "celular": "0956423187",
+                "correo": "mabelen92@gmail.com", 
+                "genero": "Femenino",
+                "direccion": {
+                    "callePrincipal": "Av. Solano",
+                    "calleSecundaria": "",
+                    "numeroCasa": "",
+                    "lugarReferencia": "S/N" 
+                },
+                "tipoSangre": "A-",
+                "tieneDiscapacidad": "NO",
+                "infoDiscapacidad": {},
+                "ocupacion": "Docente",
+                "nivelFormacion": "4to Nivel",
+                "fechaNacimiento": "05/11/92"
+                },
+                "funcion": {
+                "nombre": "DOCENTE",
+                "descripcion": "El docente se encarga de guiar al Alumno en el proceso de mejorar sus dificultades."
+                },
+                "info": {
+                "titulo": "Comunicación Temprana",
+                "tipoTitulo": "4to Nivel",
+                "areaDeTrabajo": "Rehabilitación Verbal"
+                },
+                "historico": [
+                {
+                    "fechaRegistro": "12/05/2016"
+                }
+                ],
+                "descripcion": "S/N"
+            }
+        ]
+    },
+    "jornada":"MATUTINA"
   },
   {
     "_id": "_73njfnj439nrnke90345dsfds",
+    "grado": "3",
+    "paralelo": "A",
     "nombre": "Tercero A",
-    "capacidad": 15,
-    "ubicación": "Final Pasillo Izquierdo"
+    "docentes": [
+      {
+        "_id": "_hfew7438nfjw39495weffs4353",
+        "persona": {
+          "_id": "_643jfwj89nwjkf43nwf493",
+          "identificacion": "0105876482",
+          "primerNombre": "Carlos",
+          "segundoNombre": "Marcelo",
+          "primerApellido": "Crespo",
+          "segundoApellido": "Galián",
+          "celular": "0956423187",
+          "correo": "carloma@gmail.com", 
+          "genero": "Masculino",
+          "direccion": {
+            "callePrincipal": "Av. Solano",
+            "calleSecundaria": "",
+            "numeroCasa": "",
+            "lugarReferencia": "S/N" 
+          },
+          "tipoSangre": "B+",
+          "tieneDiscapacidad": "NO",
+          "infoDiscapacidad": {},
+          "ocupacion": "Docente",
+          "nivelFormacion": "4to Nivel",
+          "fechaNacimiento": "05/11/92"
+        },
+        "funcion": {
+          "nombre": "DOCENTE",
+          "descripcion": "El docente se encarga de guiar al Alumno en el proceso de mejorar sus dificultades."
+        },
+        "info": {
+          "titulo": "FísicoTerapeuta",
+          "tipoTitulo": "4to Nivel",
+          "areaDeTrabajo": "Rehabilitación Física"
+        },
+        "historico": [
+          {
+            "fechaRegistro": "12/05/2016"
+          }
+        ],
+        "descripcion": "S/N"
+      },
+      {
+        "_id": "_hfurfuei3849nfjwj4383ndkfe",
+        "persona": {
+          "_id": "_jfnrwiu839i3nfjke340994dsnksnddf",
+          "identificacion": "1248753216",
+          "primerNombre": "Daniela",
+          "segundoNombre": "Augusta",
+          "primerApellido": "Damián",
+          "segundoApellido": "Gonzales",
+          "celular": "0956423187",
+          "correo": "danydamina88@gmail.com", 
+          "genero": "Femenino",
+          "direccion": {
+            "callePrincipal": "Av. Solano",
+            "calleSecundaria": "",
+            "numeroCasa": "",
+            "lugarReferencia": "S/N" 
+          },
+          "tipoSangre": "O+",
+          "tieneDiscapacidad": "NO",
+          "infoDiscapacidad": {},
+          "ocupacion": "Docente",
+          "nivelFormacion": "4to Nivel",
+          "fechaNacimiento": "05/11/88"
+        },
+        "funcion": {
+          "nombre": "DOCENTE",
+          "descripcion": "El docente se encarga de guiar al Alumno en el proceso de mejorar sus dificultades."
+        },
+        "info": {
+          "titulo": "FísicoTerapeuta",
+          "tipoTitulo": "4to Nivel",
+          "areaDeTrabajo": "Rehabilitación Física"
+        },
+        "historico": [
+          {
+            "fechaRegistro": "12/05/2016"
+          }
+        ],
+        "descripcion": "S/N"
+      }
+    ],
+    "pasantes": [
+      {
+        "_id": "_fwbebfe823bj43fjbfj4334",
+        "persona": {
+          "identificacion": "0104875621",
+          "primerNombre": "Daniela",
+          "segundoNmbre": "Estafania",
+          "primerApellido": "Uyauri",
+          "segundoApellido": "Gonzales",
+          "edad": 23,
+          "sexo": "F",
+          "correo": "danyest@gmail.com",
+          "contacto": "0954762354"
+        },
+        "institucion": "Universidad del Azuay",
+        "tutor": {
+          "persona": {
+            "identificacion": "0104472014",
+            "primerNombre": "Adriana",
+            "segundoNombre": "Natalia",
+            "primerApellido": "Prado",
+            "segundoApellido": "Gimenez"
+          }
+        },
+        "especialidad": "Terapeuta",
+        "numHoras": 4,
+        "historico": {
+          "fechaInicio": "15/05/2020"
+        }
+      }
+    ],
+    "especialidades": [
+      {
+        "nombre": "Captación de Conocimientos",
+        "descripcion": "S/N"
+      }
+    ],
+    "periodoLectivo": {
+      "id": "_jfierwn4390tievjdf930tvnfd5kn",
+        "nombre": "2019-2020",
+        "descripcion": "S/N",
+        "fechaInicio": "02-08-2019",
+        "fechaFin": "",
+        "fechaFinClases": "",
+        "estado": "CERRADO",
+        "responsables": [
+            {
+                "_id": "_hfurfuei3849nfjwj4383ndkfe",
+                "persona": {
+                    "_id": "_jfnrwiu839i3nfjke340994dsnksnddf",
+                    "identificacion": "1248753216",
+                    "primerNombre": "Daniela",
+                    "segundoNombre": "Augusta",
+                    "primerApellido": "Damián",
+                    "segundoApellido": "Gonzales",
+                    "celular": "0956423187",
+                    "correo": "danydamina88@gmail.com", 
+                    "genero": "Femenino",
+                    "direccion": {
+                        "callePrincipal": "Av. Solano",
+                        "calleSecundaria": "",
+                        "numeroCasa": "",
+                        "lugarReferencia": "S/N" 
+                    },
+                    "tipoSangre": "O+",
+                    "tieneDiscapacidad": "NO",
+                    "infoDiscapacidad": {},
+                    "ocupacion": "Docente",
+                    "nivelFormacion": "4to Nivel",
+                    "fechaNacimiento": "05/11/88"
+                },
+                "funcion": {
+                    "nombre": "DOCENTE",
+                    "descripcion": "El docente se encarga de guiar al Alumno en el proceso de mejorar sus dificultades."
+                },
+                "info": {
+                    "titulo": "FísicoTerapeuta",
+                    "tipoTitulo": "4to Nivel",
+                    "areaDeTrabajo": "Rehabilitación Física"
+                },
+                "historico": [
+                    {
+                        "fechaRegistro": "12/05/2016"
+                    }
+                ],
+                "descripcion": "S/N"
+            }
+        ]
+    },
+    "jornada":"MATUTINA"
   },
   {
     "_id": "_73njfnj439nrnke90345dsfds",
+    "grado": "3",
+    "paralelo": "B",
     "nombre": "Tercero B",
-    "capacidad": 15,
-    "ubicación": "Final Pasillo Izquierdo"
+    "docentes": [
+      {
+        "_id": "_hfew7438nfjw39495weffs4353",
+        "persona": {
+          "_id": "_643jfwj89nwjkf43nwf493",
+          "identificacion": "0105876482",
+          "primerNombre": "Carlos",
+          "segundoNombre": "Marcelo",
+          "primerApellido": "Crespo",
+          "segundoApellido": "Galián",
+          "celular": "0956423187",
+          "correo": "carloma@gmail.com", 
+          "genero": "Masculino",
+          "direccion": {
+            "callePrincipal": "Av. Solano",
+            "calleSecundaria": "",
+            "numeroCasa": "",
+            "lugarReferencia": "S/N" 
+          },
+          "tipoSangre": "B+",
+          "tieneDiscapacidad": "NO",
+          "infoDiscapacidad": {},
+          "ocupacion": "Docente",
+          "nivelFormacion": "4to Nivel",
+          "fechaNacimiento": "05/11/92"
+        },
+        "funcion": {
+          "nombre": "DOCENTE",
+          "descripcion": "El docente se encarga de guiar al Alumno en el proceso de mejorar sus dificultades."
+        },
+        "info": {
+          "titulo": "FísicoTerapeuta",
+          "tipoTitulo": "4to Nivel",
+          "areaDeTrabajo": "Rehabilitación Física"
+        },
+        "historico": [
+          {
+            "fechaRegistro": "12/05/2016"
+          }
+        ],
+        "descripcion": "S/N"
+      },
+      {
+        "_id": "_nfnwejnjwefweinfweefew",
+        "persona": {
+          "_id": "_jewjfio483njwefio38r4njf",
+          "identificacion": "0104785962",
+          "primerNombre": "Juan",
+          "segundoNombre": "Felipe",
+          "primerApellido": "Calle",
+          "segundoApellido": "Borbón",
+          "celular": "0956423187",
+          "correo": "Juanpi34@gmail.com", 
+          "genero": "Masculino",
+          "direccion": {
+            "callePrincipal": "Av. de las Américas",
+            "calleSecundaria": "",
+            "numeroCasa": "",
+            "lugarReferencia": "S/N" 
+          },
+          "fechaNacimiento": "24/08/84",
+          "tipoSangre": "A+",
+          "tieneDiscapacidad": "NO",
+          "infoDiscapacidad": {},
+          "ocupacion": "Docente",
+          "nivelFormacion": "3er Nivel"
+        },
+        "funcion": {
+          "nombre": "DOCENTE",
+          "descripcion": "El docente se encarga de guiar al Alumno en el proceso de mejorar sus dificultades."
+        },
+        "info": {
+          "titulo": "Psicólogo",
+          "tipoTitulo": "3er Nivel",
+          "areaDeTrabajo": "Docencia"
+        },
+        "historico": [
+          {
+            "fechaRegistro": "12/05/2016"
+          }
+        ],
+        "descripcion": "S/N"
+      }
+    ],
+    "pasantes": [
+      {
+        "_id": "_nfwjenew7437854n343409nrj34",
+        "persona": {
+          "identificacion": "0107548324",
+          "primerNombre": "Carlos",
+          "segundoNombre": "Fabricio",
+          "primerApellido": "Saquicela",
+          "segundoApellido": "Ortiz",
+          "edad": 22,
+          "sexo": "M",
+          "correo": "fabricarlos@gmail.com",
+          "contacto": "0954721430"
+        },
+        "institucion": "Universidad Politécnica Salesiana",
+        "tutor": {
+          "persona": {
+            "identificacion": "0147684258",
+            "primerNombre": "María",
+            "segundoNombre": "Belén",
+            "primerApellido": "García",
+            "segundoApellido": "Morales"
+          }
+        },
+        "especialidad": "Terapeuta",
+        "numHoras": 3,
+        "historico": {
+          "fecha_inicio": "16/05/2020"
+        }
+      }
+    ],
+    "especialidades": [
+      {
+        "nombre": "Captación de Conocimientos",
+        "descripcion": "S/N"
+      }
+    ],
+    "periodoLectivo": {
+      "id": "_dfew4398sdfb89wfbi3ubsdiufd",
+        "nombre": "2020-2021",
+        "descripcion": "S/N",
+        "fechaInicio": "02-08-2019",
+        "fechaFin": "",
+        "fechaFinClases": "",
+        "estado": "CERRADO",
+        "responsables": [
+            {
+                "_id": "_hfurfuei3849nfjwj4383ndkfe",
+                "persona": {
+                    "_id": "_jfnrwiu839i3nfjke340994dsnksnddf",
+                    "identificacion": "1248753216",
+                    "primerNombre": "Daniela",
+                    "segundoNombre": "Augusta",
+                    "primerApellido": "Damián",
+                    "segundoApellido": "Gonzales",
+                    "celular": "0956423187",
+                    "correo": "danydamina88@gmail.com", 
+                    "genero": "Femenino",
+                    "direccion": {
+                        "callePrincipal": "Av. Solano",
+                        "calleSecundaria": "",
+                        "numeroCasa": "",
+                        "lugarReferencia": "S/N" 
+                    },
+                    "tipoSangre": "O+",
+                    "tieneDiscapacidad": "NO",
+                    "infoDiscapacidad": {},
+                    "ocupacion": "Docente",
+                    "nivelFormacion": "4to Nivel",
+                    "fechaNacimiento": "05/11/88"
+                },
+                "funcion": {
+                    "nombre": "DOCENTE",
+                    "descripcion": "El docente se encarga de guiar al Alumno en el proceso de mejorar sus dificultades."
+                },
+                "info": {
+                    "titulo": "FísicoTerapeuta",
+                    "tipoTitulo": "4to Nivel",
+                    "areaDeTrabajo": "Rehabilitación Física"
+                },
+                "historico": [
+                    {
+                        "fechaRegistro": "12/05/2016"
+                    }
+                ],
+                "descripcion": "S/N"
+            }
+        ]
+    },
+    "jornada":"MATUTINA"
   }
 ]

@@ -1,21 +1,240 @@
-[
+[ 
+  {
+    "_id": "tjrfdiort09540dfsskmf40te0rtgmergpr",
+    "grado": "1",
+    "paralelo": "A",
+    "nombre": "Primero A",
+    "docentes": [
+      {
+        "_id": "_84353fwnrf943rwn4328fnuisadopfi",
+        "persona": {
+          "_id": "_fiofjionjkdofjefw4583r982fnf",
+          "identificacion": "0105897463",
+          "primeNombre": "Fabricio",
+          "segundoNombre": "Adrián",
+          "primerApellido": "Velasco",
+          "segundoApellido": "Cusco",
+          "correo": "fadrian98@gmail.com",
+          "fechaNacimiento": "06/09/1985",
+          "nivelFormacion": "3er Nivel"
+        },
+        "funcion": {
+          "nombre": "DOCENTE",
+          "descripcion": "El docente se encarga de guiar al Alumno en el proceso de mejorar sus dificultades."
+        },
+        "info": {
+          "titulo": "Psicólogo",
+          "tipoTitulo": "Medicina",
+          "areaDeTrabajo": "Aulas Iniciales" 
+        },
+        "historico": {
+          "fechaRegistro": "02/08/2020"
+        },
+        "descripcion": "S/N"
+      }
+    ],
+    "pasantes": [
+      {
+        "_id": "_wfw566516efw1w1e2wefw32e",
+        "identificacion": "1874562135",
+        "primerNombre": "Daniela",
+        "segundoNombre": "Mercedes",
+        "primerApellido": "Alvarado",
+        "segundoApellido": "Ortiz",
+        "edad": 23,
+        "sexo": "F",
+        "correo": "danielam@hotmail.com",
+        "contacto": "0978456217",
+        "institucion": "Universidad de Cuenca",
+        "tutor": {
+          "persona": {
+            "identificacion": "0104472014",
+            "primerNombre": "Adriana",
+            "segundoNombre": "Natalia",
+            "primerApellido": "Prado",
+            "segundoApellido": "Gimenez"
+          }
+        },
+        "especialidad": "Terapeuta",
+        "num_horas": 3,
+        "fecha_inicio": "13/05/2020",
+        "estado": "ACTIVO"
+      }
+    ],
+    "especialidades": [
+      {
+        "nombre": "Estimulación Física",
+        "descripcion": "S/N"
+      },
+      {
+        "nombre": "Terapia de Lenguaje",
+        "descripcion": "S/N"
+      }
+    ], 
+    "periodoLectivo": {
+      "_id": "_djfbui4893r9ewfnwt3u90fdsnjt90jngjkdf",
+      "nombre": "2017-2018",
+      "descripcion": "S/N",
+      "fechaInicio": "02-08-2017",
+      "fechaFin": "",
+      "fechaFinClases": "",
+      "estado": "CERRADO",
+      "responsables": [
+        {
+          "persona": {
+            "_id": "_jewjfio483njwefio38r4njf",
+          "identificacion": "0104785962",
+          "primer_nombre": "Juan",
+          "segundo_nombre": "Felipe",
+          "primer_apellido": "Calle",
+          "segundo_apellido": "Borbón"
+          },
+          "funcion": {
+            "nombre": "DOCENTE",
+            "descripcion": "El docente se encarga de guiar al Alumno en el proceso de mejorar sus dificultades."
+          }
+        }
+      ]
+    },
+    "jornada": "MATUTINA",
+    "observaciones": "S/N"  
+  },
+
   {
     "_id": "_efnwefn8349u3kferkj3453fferge",
-    "docente": {
-      "_id": "_nfnwejnjwefweinfweefew",
-      "persona": {
-        "_id": "_jewjfio483njwefio38r4njf",
-        "identificacion": "0104785962",
-        "primer_nombre": "Juan",
-        "segundo_nombre": "Felipe",
-        "primer_apellido": "Calle",
-        "segundo_apellido": "Borbón",
-        "edad": 31,
-        "genero": "Masculino",
-        "fecha_nacimiento": "24/08/84"
+    "grado": "2",
+    "paralelo": "B",
+    "nombre": "Segundo B",
+    "docentes": [
+      {
+        "_id": "_84353fwnrf943rwn4328fnuisadopfi",
+        "persona": {
+          "_id": "_fiofjionjkdofjefw4583r982fnf",
+          "identificacion": "0105897463",
+          "primeNombre": "Fabricio",
+          "segundoNombre": "Adrián",
+          "primerApellido": "Velasco",
+          "segundoApellido": "Cusco",
+          "correo": "fadrian98@gmail.com",
+          "genero": "Masculino",
+          "fechaNacimiento": "06/09/1985",
+          "nivelFormacion": "3er Nivel"
+        },
+        "funcion": {
+          "nombre": "DOCENTE",
+          "descripcion": "El docente se encarga de guiar al Alumno en el proceso de mejorar sus dificultades."
+        },
+        "info": {
+          "titulo": "Psicólogo",
+          "tipoTitulo": "Medicina",
+          "areaDeTrabajo": "Aulas Iniciales" 
+        },
+        "historico": {
+          "fechaRegistro": "02/08/2020"
+        },
+        "descripcion": "S/N"
       },
-      "nivel_formacion": "3er Nivel",
-      "titulo": "Psicólogo"
+      {
+        "_id": "_nfnwejnjwefweinfweefew",
+        "persona": {
+          "_id": "_jewjfio483njwefio38r4njf",
+          "identificacion": "0104785962",
+          "primerNombre": "Juan",
+          "segundoNombre": "Felipe",
+          "primerApellido": "Calle",
+          "segundoApellido": "Borbón",
+          "correo": "JuanFe56@gmail.com",
+          "genero": "Masculino",
+          "fechaNacimiento": "24/08/84",
+          "nivelFormacion": "3er Nivel"
+        },
+        "funcion": {
+          "nombre": "DOCENTE",
+          "descripcion": "El docente se encarga de guiar al Alumno en el proceso de mejorar sus dificultades."
+        },
+        "info": {
+          "titulo": "Psicólogo",
+          "tipoTitulo": "Medicina",
+          "areaDeTrabajo": "Aulas Iniciales" 
+        },
+        "historico": {
+          "fechaRegistro": "02/10/2018"
+        },
+        "descripcion": "S/N"
+      }
+    ],
+    "pasantes": [
+      {
+        "_id": "_wfw566516efw1w1e2wefw32e",
+        "identificacion": "1874562135",
+        "primerNombre": "Daniela",
+        "segundoNombre": "Mercedes",
+        "primerApellido": "Alvarado",
+        "segundoApellido": "Ortiz",
+        "edad": 23,
+        "sexo": "F",
+        "correo": "danielam@hotmail.com",
+        "contacto": "0978456217",
+        "institucion": "Universidad de Cuenca",
+        "tutor": {
+          "persona": {
+            "identificacion": "0104472014",
+            "primerNombre": "Adriana",
+            "segundoNombre": "Natalia",
+            "primerApellido": "Prado",
+            "segundoApellido": "Gimenez"
+          }
+        },
+        "especialidad": "Terapeuta",
+        "num_horas": 3,
+        "fecha_inicio": "13/05/2020",
+        "estado": "ACTIVO"
+      },
+      {
+        "_id": "_4688fwefw5410266ew64fwef48",
+        "persona": {
+          "identificacion": "0104875621",
+          "primer_nombre": "Yolanda",
+          "segundo_nombre": "Germania",
+          "primer_apellido": "Calderón",
+          "segundo_apellido": "Barros",
+          "edad": 21,
+          "sexo": "F",
+          "correo": "yoligermania@gmail.com",
+          "contacto": "0965324517"
+        },
+        "institucion": "Universidad de Cuenca",
+        "tutor": {
+          "persona": {
+            "identificacion": "0104472014",
+            "primer_nombre": "Adriana",
+            "segundo_nombre": "Natalia",
+            "primer_apellido": "Prado",
+            "segundo_apellido": "Gimenez"
+          }
+        },
+        "especialidad": "Terapeuta",
+        "num_horas": 3,
+        "fecha_inicio": "13/05/2020",
+        "estado": "ACTIVO"
+      }
+    ],
+    "especialidades": [
+      {
+        "nombre": "Comunicación Verbal",
+        "descripcion": "S/N"
+      },
+      {
+        "nombre": "Movilidad de Extremidades",
+        "descripcion": "S/N"
+      }
+    ],
+
+
+    "periodo_lectivo": {
+      "id": "_dfusdi392u90dfnwefsdfm49r3j44",
+        "nombre": "2017-2018",
+        "observaciones": "Ninguna Observación"
     },
     "horario_entrada": {
       "periodo": "AM",
@@ -34,6 +253,11 @@
   },
   {
     "_id": "_whfnew8r3ndkf349r43095nwjeknew",
+    "periodo_lectivo": {
+      "id": "_jfierwn4390tievjdf930tvnfd5kn",
+      "nombre": "2019-2020",
+      "observaciones": "Ninguna Observación"
+  },
     "docente": {
       "_id": "_enwefwe6465ew654618w",
       "persona": {
@@ -67,6 +291,11 @@
   },
   {
     "_id": "_eujkd843873nf394909ujfkenk",
+    "periodo_lectivo": {
+      "id": "_dfew4398sdfb89wfbi3ubsdiufd",
+      "nombre": "2020-2021",
+      "observaciones": "Ninguna Observación" 
+    },
     "docente": {
       "_id": "_732jewfnjwef242nwece",
       "persona": {
@@ -100,6 +329,11 @@
   },
   {
     "_id": "_83548hjfnfne948runfnefw43i3",
+    "periodo_lectivo": {
+      "id": "_dfew4398sdfb89wfbi3ubsdiufd",
+      "nombre": "2020-2021",
+      "observaciones": "Ninguna Observación" 
+    },
     "docente": {
       "_id": "_hfew7438nfjw39495weffs4353",
       "persona": {
@@ -133,6 +367,11 @@
   },
   {
     "_id": "_532fbhjbf4783yrnfkfmkwe834u438fwf",
+    "periodo_lectivo": {
+      "id": "_dhfuidsjfjsk2399n40fwje90frnif2n3",
+      "nombre": "2018-2019",
+      "observaciones": "Ninguna Observación"
+    },
     "docente": {
       "_id": "_hfurfuei3849nfjwj4383ndkfe",
       "persona": {

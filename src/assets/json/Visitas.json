@@ -2,72 +2,76 @@
   {
     "_id": "_475347bdhjfbsd43hjbvw89r3fbg",
     "empresa": {
-      "_id": "_dnj384jgb3tnjgb34tr",
+      "_id": "_dnj384jgb3tnjgb34tr657tfgtrhf",
       "nombre": "Coca-Cola",
       "representante": {
-        "persona": {
-          "cedula": "0105874328",
-          "primer_nombre": "Andrés",
-          "primer_apellido": "Córdova",
-          "contacto": "0987458794",
-          "correo": "cuenca@cocacola.com"
-        }
+        "cedula": "0105874328",
+        "primerNombre": "Andrés",
+        "primerApellido": "Córdova",
+        "celular": "0987458794",
+        "correo": "cuenca@cocacola.com"
       },
       "direccion": {
-        "calle_principal": "Av. Cornelio Vintimilla",
-        "calle_secundaria": "Av. Octavio Chacón"
+        "callePrincipal": "Av. de las Américas",
+        "calleSecundaria": ""
       }
     },
-    "motivo_visita": "Paseo a la ciudad de Cuenca",
-    "encargado_visita": {
+    "motivoVisita": "Paseo a la ciudad de Cuenca",
+    "encargadoVisita": {
       "persona": {
         "identificacion": "0104472014",
-        "primer_nombre": "Adriana",
-        "segundo_nombre": "Natalia",
-        "primer_apellido": "Prado",
-        "segundo_apellido": "Gimenez"
+        "primerNombre": "Adriana",
+        "segundoNombre": "Natalia",
+        "primerApellido": "Prado",
+        "segundoApellido": "Gimenez"
+      },
+      "funcion": {
+        "nombre": "DOCENTE",
+        "descripcion": "El docente se encarga de guiar al Alumno en el proceso de mejorar sus dificultades."
       }
     },
-    "fecha_visita": "21/06/2020",
-    "hora_visita": {
-      "formato_hora": "AM",
-      "hora": "10:00"
+    "fechaVisita": "21/06/2020",
+    "horarioVisita": {
+      "horaEntrada": "09:00",
+      "horaSalida": "11:00"
     },
     "observaciones": "Ninguna novedad"
   },
   {
     "_id": "_473489bhjdnf3478y3rb3784bfhr3b4t",
     "empresa": {
-      "_id": "_4893jh3b4htj3f8943tb3hb34j",
+      "_id": "_4893jh3b4htj3f8943tb3hb340966gmhj",
       "nombre": "KFC",
       "representante": {
-        "persona": {
-          "cedula": "0102358731",
-          "primer_nombre": "Carlos",
-          "primer_apellido": "Andrade",
-          "contacto": "0952134565",
-          "correo": "cuenca@kfc.com"
-        }
+        "cedula": "0102358731",
+        "primerNombre": "Carlos",
+        "primerApellido": "Andrade",
+        "contacto": "0952134565",
+        "celular": "cuenca@kfc.com"
       },
       "direccion": {
-        "calle_principal": "Mall del Río",
-        "calle_secundaria": ""
+        "callePrincipal": "Mall del Río",
+        "calleSecundaria": ""
       }
     },
-    "motivo_visita": "Invitar a comer a los niños en KFC",
-    "encargado_visita": {
+    "motivoVisita": "Invitar a comer a los niños en KFC",
+    "encargadoVisita": {
       "persona": {
         "identificacion": "01023245894",
-        "primer_nombre": "Paúl",
-        "segundo_nombre": "Gabriel",
-        "primer_apellido": "Torres",
-        "segundo_apellido": "Gonzales"
+        "primerNombre": "Paúl",
+        "segundoNombre": "Gabriel",
+        "primerApellido": "Torres",
+        "segundoApellido": "Gonzales"
+      },
+      "funcion": {
+        "nombre": "DOCENTE",
+        "descripcion": "El docente se encarga de guiar al Alumno en el proceso de mejorar sus dificultades."
       }
     },
-    "fecha_visita": "23/08/2020",
-    "hora_visita": {
-      "formato_hora": "AM",
-      "hora": "10:00"
+    "fechaVisita": "23/08/2020",
+    "horarioVisita": {
+      "horaEntrada": "10:00",
+      "horaSalida": "12:00"
     },
     "observaciones": "Ninguna novedad"
   },
@@ -75,35 +79,37 @@
     "_id": "_48753yb3yu483rb34u289b",
     "empresa": {
       "_id": "_47354b3384934hb387r34bh",
-      "nombre": "Tutto Fredo",
+      "nombre": "Tutto Freddo",
       "representante": {
-        "persona": {
-          "cedula": "1458962158",
-          "primer_nombre": "Mauricio",
-          "primer_apellido": "Encalada",
-          "contacto": "098523164",
-          "correo": "mauricioe@tuttofredo.com"
-        }
+        "cedula": "1458962158",
+        "primerNombre": "Mauricio",
+        "primerApellido": "Encalada",
+        "contacto": "098523164",
+        "correo": "mauricioe@tuttofredo.com"
       },
       "direccion": {
-        "calle_principal": "Av. de las Américas",
-        "calle_secundaria": ""
+        "callePrincipal": "Av. de las Américas",
+        "calleSecundaria": ""
       }
     },
-    "motivo_visita": "Invitar a comer helados de la franquicia.",
-    "encargado_visita": {
+    "motivoVisita": "Invitar a comer helados de la franquicia.",
+    "encargadoVisita": {
       "persona": {
         "identificacion": "01023245894",
-        "primer_nombre": "Paúl",
-        "segundo_nombre": "Gabriel",
-        "primer_apellido": "Torres",
-        "segundo_apellido": "Gonzales"
+        "primerNombre": "Paúl",
+        "segundoNombre": "Gabriel",
+        "primerApellido": "Torres",
+        "segundoApellido": "Gonzales"
+      },
+      "funcion": {
+        "nombre": "DOCENTE",
+        "descripcion": "El docente se encarga de guiar al Alumno en el proceso de mejorar sus dificultades."
       }
     },
-    "fecha_visita": "15/05/2020",
-    "hora_visita": {
-      "formato_hora": "AM",
-      "hora": "10:30"
+    "fechaVisita": "15/05/2020",
+    "horarioVisita": {
+      "horaEntrada": "10:30",
+      "horaSalida": "11:30"
     },
     "observaciones": "Ninguna novedad"
   },
@@ -113,105 +119,111 @@
       "_id": "_47354b3384934hb387r34bh",
       "nombre": "Monte Bianco",
       "representante": {
-        "persona": {
-          "cedula": "0106598452",
-          "primer_nombre": "Juan",
-          "primer_apellido": "Piedra",
-          "contacto": "0968523178",
-          "correo": "juanp98@montebianco.com"
-        }
+        "cedula": "0106598452",
+        "primerNombre": "Juan",
+        "primerApellido": "Piedra",
+        "contacto": "0968523178",
+        "correo": "juanp98@montebianco.com"
       },
       "direccion": {
-        "calle_principal": "Av. Remigio Crespo",
-        "calle_secundaria": ""
+        "callePrincipal": "Av. Remigio Crespo",
+        "calleSecundaria": ""
       }
     },
-    "motivo_visita": "Invitar a comer postres de la franquicia.",
-    "encargado_visita": {
+    "motivoVisita": "Invitar a comer postres de la franquicia.",
+    "encargadoVisita": {
       "persona": {
         "identificacion": "1248753216",
-        "primer_nombre": "Daniela",
-        "segundo_nombre": "Augusta",
-        "primer_apellido": "Damián",
-        "segundo_apellido": "Gonzales"
+        "primerNombre": "Daniela",
+        "segundoNombre": "Augusta",
+        "primerApellido": "Damián",
+        "segundoApellido": "Gonzales"
+      },
+      "funcion": {
+        "nombre": "DOCENTE",
+        "descripcion": "El docente se encarga de guiar al Alumno en el proceso de mejorar sus dificultades."
       }
     },
-    "fecha_visita": "20/06/2020",
-    "hora_visita": {
-      "formato_hora": "AM",
-      "hora": "10:00"
+    "fechaVisita": "20/06/2020",
+    "horarioVisita": {
+      "horaEntrada": "09:30",
+      "horaSalida": "11:00"
     },
     "observaciones": "Ninguna novedad"
   },
   {
     "_id": "_745b3h34y3485b34hb34sdf",
     "empresa": {
-      "_id": "_fhfb438b4h34rb43u53",
+      "_id": "_fhfb438b4h34rb43u5sdfd3",
       "nombre": "Tranvía",
       "representante": {
-        "persona": {
-          "cedula": "0108965237",
-          "primer_nombre": "Carlos",
-          "primer_apellido": "Crespo",
-          "contacto": "0965821320",
-          "correo": "ccrespo@tranviacuenca.com"
-        }
+        "cedula": "0108965237",
+        "primerNombre": "Carlos",
+        "primerApellido": "Crespo",
+        "contacto": "0965821320",
+        "correo": "ccrespo@tranviacuenca.com"
       },
       "direccion": {
-        "calle_principal": "Av. México",
-        "calle_secundaria": "Calle Honduras"
+        "callePrincipal": "Av. México",
+        "calleSecundaria": "Calle Honduras"
       }
     },
-    "motivo_visita": "Pasear en tranvía por la ciudad.",
-    "encargado_visita": {
+    "motivoVisita": "Pasear en tranvía por la ciudad.",
+    "encargadoVisita": {
       "persona": {
         "identificacion": "0105876482",
-        "primer_nombre": "Carlos",
-        "segundo_nombre": "Marcelo",
-        "primer_apellido": "Crespo",
-        "segundo_apellido": "Galián"
+        "primerNombre": "Carlos",
+        "segundoNombre": "Marcelo",
+        "primerApellido": "Crespo",
+        "segundoApellido": "Galián"
+      },
+      "funcion": {
+        "nombre": "DOCENTE",
+        "descripcion": "El docente se encarga de guiar al Alumno en el proceso de mejorar sus dificultades."
       }
     },
-    "fecha_visita": "10/02/2020",
-    "hora_visita": {
-      "formato_hora": "AM",
-      "hora": "09:30"
+    "fechaVisita": "10/02/2020",
+    "horarioVisita": {
+      "horaEntrada": "09:30",
+      "horaSalida": "11:30"
     },
     "observaciones": "Ninguna novedad"
   },
   {
-    "_id": "_rfbe48berhb348tbgb334tfg",
+    "_id": "_rfbe48berhb348tbgb334tfgew",
     "empresa": {
-      "_id": "_bdfgerb83rg5h3t3bb3tubs",
+      "_id": "_bdfgerb83rg5h3t3bb3tubssd",
       "nombre": "Multicines",
       "representante": {
-        "persona": {
-          "cedula": "1458936540",
-          "primer_nombre": "Daniela",
-          "primer_apellido": "Romo",
-          "contacto": "0985642150",
-          "correo": "danyromo@multicines.com"
-        }
+        "cedula": "1458936540",
+        "primerNombre": "Daniela",
+        "primerApellido": "Romo",
+        "contacto": "0985642150",
+        "correo": "danyromo@multicines.com"
       },
       "direccion": {
-        "calle_principal": "Av. Jose Ortega",
-        "calle_secundaria": "Calle Felipe Segundo"
+        "callePrincipal": "Av. Jose Ortega",
+        "calleSecundaria": "Calle Felipe Segundo"
       }
     },
-    "motivo_visita": "Visualizar películas con los chicos",
-    "encargado_visita": {
+    "motivoVisita": "Visualizar películas con los chicos",
+    "encargadoVisita": {
       "persona": {
         "identificacion": "0105876482",
-        "primer_nombre": "Carlos",
-        "segundo_nombre": "Marcelo",
-        "primer_apellido": "Crespo",
-        "segundo_apellido": "Galián"
+        "primerNombre": "Carlos",
+        "segundoNombre": "Marcelo",
+        "primerApellido": "Crespo",
+        "segundoApellido": "Galián"
+      },
+      "funcion": {
+        "nombre": "DOCENTE",
+        "descripcion": "El docente se encarga de guiar al Alumno en el proceso de mejorar sus dificultades."
       }
     },
-    "fecha_visita": "10/02/2020",
-    "hora_visita": {
-      "formato_hora": "AM",
-      "hora": "09:30"
+    "fechaVisita": "10/02/2020",
+    "horarioVisita": {
+      "horaEntrada": "09:30",
+      "horaSalida": "11:00"
     },
     "observaciones": "Ninguna novedad"
   }

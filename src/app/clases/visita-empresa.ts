@@ -5,12 +5,15 @@ import { Persona } from "./persona";
 export class Visita_Empresa {
   _id?: string;
   empresa?: Empresa;
-  motivo_visita?: string;
-  encargado_visita?: Docente;
-  fecha_visita?: Date;
-  hora_visita?: {
-    formato_hora?: string;
-    hora?: string;
+  motivoVisita?: string;
+  encargadoVisita?: Docente[];
+  fechaVisita?: Date;
+  horarioVisita?: {
+    horaEntrada?: string;
+    horaSalida?: string;
   };
-  fecha_creacion?: Date;
+  observaciones?: string;
+  historico?: {
+    fechaRegistro?: Date  
+  };
 }

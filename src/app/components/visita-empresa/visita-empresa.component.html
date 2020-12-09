@@ -462,7 +462,7 @@
                       <p-autoComplete
                         [suggestions]="docentes_filtrados"
                         (completeMethod)="filtrarDocente($event)"
-                        [size]="15"
+                        [size]="20"
                         [minLength]="1"
                         placeholder="Guía"
                         [dropdown]="true"
@@ -487,8 +487,8 @@
                                 margin: 8px 3px 0 0;
                               "
                             >
-                              {{ brand.persona.primer_nombre }}
-                              {{ brand.persona.primer_apellido }}
+                              {{ brand.persona.primerNombre }}
+                              {{ brand.persona.primerApellido }}
                             </div>
                           </div>
                         </ng-template>
@@ -594,7 +594,7 @@
             scrollHeight="400px"
             styleClass="ui-table-summary"
             selectionMode="single"
-            [(selection)]="visita"
+            [(selection)]="visita_seleccionada"
             (onRowSelect)="onRowSelect($event)"
           >
             <ng-template pTemplate="colgroup" let-columns>
@@ -618,7 +618,7 @@
               let-columns="columns"
             >
               <tr [pSelectableRow]="rowData">
-                <td style="width: 3em">
+                <td style="width: 3em" >
                   <a href="#" [pRowToggler]="rowData">
                     <i
                       [ngClass]="
@@ -631,19 +631,19 @@
                   {{ rowData.empresa.nombre }}
                 </td>
                 <td>
-                  {{ rowData.empresa.representante.persona.primer_nombre }}
-                  {{ rowData.empresa.representante.persona.primer_apellido }}
+                  {{ rowData.empresa.representante.primerNombre }}
+                  {{ rowData.empresa.representante.primerApellido }}
                 </td>
                 <td>
-                  {{ rowData.encargado_visita.persona.primer_nombre }}
-                  {{ rowData.encargado_visita.persona.primer_apellido }}
+                  {{ rowData.encargadoVisita.persona.primerNombre }}
+                  {{ rowData.encargadoVisita.persona.primerApellido }}
                 </td>
                 <td>
-                  {{ rowData.fecha_visita }}
+                  {{ rowData.fechaVisita }}
                 </td>
                 <td>
-                  {{ rowData.hora_visita.hora }}
-                  {{ rowData.hora_visita.formato_hora }}
+                  {{ rowData.horarioVisita.horaEntrada }}
+                  <!-- {{ rowData.hora_visita.formato_hora }} -->
                 </td>
               </tr>
             </ng-template>
@@ -651,6 +651,7 @@
               pTemplate="rowexpansion"
               let-rowData
               let-columns="columns"
+              
             >
               <tr>
                 <td [attr.colspan]="columns.length + 1">
@@ -668,28 +669,26 @@
                           </div>
                           <div class="p-col-12">
                             <b>Dirección:</b>
-                            {{ rowData.empresa.direccion.calle_principal }}
+                            {{ rowData.empresa.direccion.callePrincipal }}
                             Y
-                            {{ rowData.empresa.direccion.calle_secundaria }}
+                            {{ rowData.empresa.direccion.calleSecundaria }}
                           </div>
                           <div class="p-col-12">
                             <b>Representante:</b>
                             {{
-                              rowData.empresa.representante.persona
-                                .primer_nombre
+                              rowData.empresa.representante.primerNombre
                             }}
                             {{
-                              rowData.empresa.representante.persona
-                                .primer_apellido
+                              rowData.empresa.representante.primerApellido
                             }}
                           </div>
                           <div class="p-col-12">
                             <b>Correo:</b>
-                            {{ rowData.empresa.representante.persona.correo }}
+                            {{ rowData.empresa.representante.correo }}
                           </div>
                           <div class="p-col-12">
                             <b>Contacto:</b>
-                            {{ rowData.empresa.representante.persona.contacto }}
+                            {{ rowData.empresa.representante.contacto }}
                           </div>
                         </div>
                       </div>
@@ -716,9 +715,9 @@
                           </div>
                           <div class="p-col-12">
                             <b>Encargado de Visita:</b>
-                            {{ rowData.encargado_visita.persona.primer_nombre }}
+                            {{ rowData.encargadoVisita.persona.primerNombre }}
                             {{
-                              rowData.encargado_visita.persona.primer_apellido
+                              rowData.encargadoVisita.persona.primerApellido
                             }}
                           </div>
                           <div class="p-col-12">
@@ -727,8 +726,8 @@
                           </div>
                           <div class="p-col-12">
                             <b>Hora de Visita:</b>
-                            {{ rowData.hora_visita.hora }}
-                            {{ rowData.hora_visita.formato_hora }}
+                            {{ rowData.horarioVisita.horaEntrada }}
+                            <!-- {{ rowData.hora_visita.formato_hora }} -->
                           </div>
                         </div>
                       </div>
@@ -776,8 +775,7 @@
                       pInputText
                       size="20"
                       [(ngModel)]="
-                        visita_editar.empresa.representante.persona
-                          .primer_nombre
+                        visita_editar.empresa.representante.primerNombre
                       "
                     />
                     <input
@@ -786,8 +784,7 @@
                       pInputText
                       size="20"
                       [(ngModel)]="
-                        visita_editar.empresa.representante.persona
-                          .primer_apellido
+                        visita_editar.empresa.representante.primerApellido
                       "
                     />
                   </div>
@@ -801,7 +798,7 @@
                       pInputText
                       size="20"
                       [(ngModel)]="
-                        visita_editar.empresa.representante.persona.correo
+                        visita_editar.empresa.representante.correo
                       "
                     />
                   </div>
@@ -813,7 +810,7 @@
                       mask="0999999999"
                       placeholder="Celular"
                       [(ngModel)]="
-                        visita_editar.empresa.representante.persona.contacto
+                        visita_editar.empresa.representante.contacto
                       "
                     ></p-inputMask>
                   </div>
@@ -830,7 +827,7 @@
                       [minLength]="1"
                       placeholder="Guía"
                       [dropdown]="true"
-                      [(ngModel)]="visita_editar.encargado_visita"
+                      [(ngModel)]="visita_editar.encargadoVisita"
                       field="persona.identificacion"
                     >
                       <ng-template let-brand pTemplate="item">
@@ -851,8 +848,8 @@
                               margin: 8px 3px 0 0;
                             "
                           >
-                            {{ brand.persona.primer_nombre }}
-                            {{ brand.persona.primer_apellido }}
+                            {{ brand.persona.primerNombre }}
+                            {{ brand.persona.primerApellido }}
                           </div>
                         </div>
                       </ng-template>
@@ -866,7 +863,7 @@
                       [locale]="es"
                       dateFormat="dd/mm/yy"
                       placeholder="Fecha de Visita"
-                      [(ngModel)]="visita_editar.fecha_visita"
+                      [(ngModel)]="visita_editar.fechaVisita"
                       (onSelect)="mostrarFecha($event)"
                       [showWeek]="true"
                     ></p-calendar>
@@ -893,7 +890,7 @@
                       cols="23"
                       placeholder="Motivo de Visita"
                       pInputTextarea
-                      [(ngModel)]="visita_editar.motivo_visita"
+                      [(ngModel)]="visita_editar.motivoVisita"
                     ></textarea>
                   </div>
                 </div>
@@ -929,6 +926,13 @@
                 >
                   <i class="fas fa-save fa-lg fa-fw"></i> Guardar
                 </button>
+                <button
+                  type="button"
+                  class="btn btn-outline-info btn-round btn-sm justify-content-center "
+                  (click)="openPdf()"
+                >
+                <i class="fas fa-file-pdf fa-lg fa-fw"></i> Generar PDF
+                </button>
               </div>
             </p-footer>
           </p-dialog>
@@ -936,6 +940,8 @@
       </div>
     </div>
   </div>
+
+ 
 
   <!-- <div class="section"> -->
   <div class="container" style="margin-bottom: 10%">

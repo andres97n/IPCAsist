@@ -5,6 +5,7 @@ import { transition } from "@angular/animations";
 import { trigger } from "@angular/animations";
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormGroup, FormBuilder, FormArray, Validators } from "@angular/forms";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { Aula } from "app/clases/aula";
 import { Docente } from "app/clases/docente";
 import { Estudiante } from "app/clases/estudiante";
@@ -14,6 +15,7 @@ import { Plan_Vida } from "app/clases/plan-vida";
 import { DocenteService } from "app/services/docente.service";
 import { PlanVidaService } from "app/services/plan-vida.service";
 import { Table } from "primeng/table";
+// import {ConfirmationService} from 'primeng/api';
 
 @Component({
   selector: "app-plan-vida",
@@ -40,9 +42,14 @@ import { Table } from "primeng/table";
   ],
 })
 
+
 export class PlanVidaComponent implements OnInit {
   cities: any[];
   selectedCities: any[];
+
+  
+
+  // msgs: Message[] = [];
 
   materias: Materia[];
 
@@ -50,7 +57,8 @@ export class PlanVidaComponent implements OnInit {
 
   forma: FormGroup;
 
-  displayDialog: boolean;
+  // displayDialog: boolean;
+  editar: boolean;
   cols: any[];
 
   mostrar_nuevo_ambito: boolean;
@@ -71,6 +79,7 @@ export class PlanVidaComponent implements OnInit {
 
   planes_vida: Plan_Vida[];
   plan_vida: Plan_Vida;
+  plan_seleccionado: Plan_Vida;
   nuevo_plan: boolean;
   plan_editar: Plan_Vida;
 
@@ -88,38 +97,50 @@ export class PlanVidaComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private _docenteSrv: DocenteService,
-    private _planSrv: PlanVidaService
+    private _planSrv: PlanVidaService,
+    private modalService: NgbModal
+    // private confirmationService: ConfirmationService
   ) {
 
+    // this.plan_vida = new Plan_Vida();
+
+    this.crearFormulario();
+
+  }
+
+  ngOnInit(): void {
+
+    this.editar = false;
+
     this.plan_vida = {
-      periodo_lectivo: {
+      periodoLectivo: {
         nombre: ""
       },
       docente: {
-        persona : {
-          identificacion : "",
-          primer_nombre: "",
-          segundo_nombre: "",
-          primer_apellido : "",
-          segundo_apellido: ""
-        }
-      },
-      aula: {
-        nombre: ""
-      },
-      estudiante: {
         persona: {
           identificacion: "",
-          primer_nombre: "",
-          segundo_apellido: "",
-          primer_apellido: "",
-          segundo_nombre: ""
+          primerNombre: "",
+          segundoNombre: "",
+          primerApellido: "",
+          segundoApellido: "",
+        }
+      },
+      alumno: {
+        persona: {
+          identificacion: "",
+          primerNombre: "",
+          segundoNombre: "",
+          primerApellido: "",
+          segundoApellido: "",
         }
       },
       asignaturas: [],
+      aula: {
+        nombre: ""
+      },
       descripcion: "",
-      objetivo_general: "",
-      metas_especificas: [],
+      objetivoGeneral: "",
+      metasEspecificas: [],
       vision: "",
       ambitos: [],
       dominio: [],
@@ -128,16 +149,11 @@ export class PlanVidaComponent implements OnInit {
       gustos: [],
       disgustos: [],
       deseos: [],
-      suenos: [ ],
+      suenos: [],
       logros: [],
-      observaciones: ""
-    }
-
-    this.crearFormulario();
-
-  }
-
-  ngOnInit(): void {
+      observaciones: "",
+      estado: "ACTIVO",
+    };
 
     // this.cities = [
     //   { name: "Vinculación Emocional y Social", code: "NY" },
@@ -148,11 +164,17 @@ export class PlanVidaComponent implements OnInit {
     // ];
 
     this.materias = [
-      { nombre: "Vinculación Emocional y Social" , asignacion: "VES" },
-      { nombre: "Descubrimiento del Método Natural y Cultural" , asignacion: "DMNC" },
-      { nombre: "Manifestación del Lenguaje Verbal y No Verbal" , asignacion: "MLVNV" },
-      { nombre: "Exploración del Cuerpo y Motricidad" , asignacion: "ECM" },
-      { nombre: "Lengua y Comunicación" , asignacion: "LC" }
+      { nombre: "Vinculación Emocional y Social" , descripcion: ""},
+      { nombre: "Descubrimiento del Método Natural y Cultural" , descripcion: "" },
+      { nombre: "Manifestación del Lenguaje Verbal y No Verbal" , descripcion: "" },
+      { nombre: "Exploración del Cuerpo y Motricidad" , descripcion: "" },
+      { nombre: "Lengua y Comunicación" , descripcion: "" },
+      {
+        nombre: "Alimentación", descripcion: ""
+      },
+      {
+        nombre: "Cuidado Personal", descripcion: ""
+      }
     ]
 
     this._planSrv.getPeriodoLectivo().subscribe( (periodos_lectivos: Periodo_Lectivo[]) =>{
@@ -193,17 +215,17 @@ export class PlanVidaComponent implements OnInit {
 
   crearFormulario() {
     this.forma = this.fb.group({
-      periodo_lectivo: this.fb.control(this.plan_vida.periodo_lectivo, Validators.required),
-      docente: this.fb.control(this.plan_vida.docente.persona.identificacion, Validators.required),
-      estudiante: this.fb.control(this.plan_vida.estudiante.persona.identificacion, Validators.required),
-      aula: this.fb.control(this.plan_vida.aula.nombre, Validators.required),
-      asignatura: this.fb.control(this.plan_vida.asignaturas, Validators.required),
-      descripcion: this.fb.control(this.plan_vida.descripcion, Validators.required),
-      objetivo_general: this.fb.control(this.plan_vida.objetivo_general, Validators.required),
-      metas_especificas: this.fb.control(this.plan_vida.metas_especificas, Validators.required),
-      vision: this.fb.control(this.plan_vida.vision, Validators.required),
-      ambito: this.fb.control(this.plan_vida.ambitos, Validators.required),
-      dominio: this.fb.control(this.plan_vida.dominio, Validators.required),
+      periodoLectivo: this.fb.control("", Validators.required),
+      docente: this.fb.control("", Validators.required),
+      alumno: this.fb.control("", Validators.required),
+      aula: this.fb.control("", Validators.required),
+      asignatura: this.fb.control("", Validators.required),
+      descripcion: this.fb.control("", Validators.required),
+      objetivoGeneral: this.fb.control("", Validators.required),
+      metasEspecificas: this.fb.control("", Validators.required),
+      vision: this.fb.control("", Validators.required),
+      ambito: this.fb.control("", Validators.required),
+      dominio: this.fb.control("", Validators.required),
       necesidades: this.fb.array([
         // this.fb.group({})
       ]),
@@ -212,10 +234,14 @@ export class PlanVidaComponent implements OnInit {
       disgustos: this.fb.array([]),
       deseos: this.fb.array([]),
       suenos: this.fb.array([]),
-      logros: this.fb.control(this.plan_vida.logros, Validators.required),
-      observaciones: this.fb.control(this.plan_vida.observaciones, Validators.required),
+      logros: this.fb.control("", Validators.required),
+      observaciones: this.fb.control("", Validators.required),
     });
   }
+
+  // showModal() {
+  //   this.modalService.open(Modal);
+  // }
 
   invalidos(form: string) {
     return this.forma.get(form).invalid && this.forma.get(form).touched;
@@ -375,6 +401,21 @@ export class PlanVidaComponent implements OnInit {
     this.suenos.removeAt(i);
   }
 
+  // mostrarConfirmacion(){
+  //   this.confirmationService.confirm({
+  //     message: 'Do you want to delete this record?',
+  //     header: 'Delete Confirmation',
+  //     icon: 'pi pi-info-circle',
+  //     accept: () => {
+  //       this.eliminarPlan();
+  //         // this.msgs = [{severity:'info', summary:'Confirmed', detail:'Record deleted'}];
+  //     },
+  //     reject: () => {
+  //         // this.msgs = [{severity:'info', summary:'Rejected', detail:'You have rejected'}];
+  //     }
+  // });
+  // }
+
   limpiarArrays(){
     this.necesidades.clear();
     this.potencialidades.clear();
@@ -391,6 +432,23 @@ export class PlanVidaComponent implements OnInit {
     
   }
 
+  eliminarPlan(){
+    console.log(this.plan_seleccionado);
+    
+  //   this.confirmationService.confirm({
+  //     message: 'Do you want to delete this record?',
+  //     header: 'Delete Confirmation',
+  //     icon: 'pi pi-info-circle',
+  //     accept: () => {
+  //         this.msgs = [{severity:'info', summary:'Confirmed', detail:'Record deleted'}];
+  //     },
+  //     reject: () => {
+  //         this.msgs = [{severity:'info', summary:'Rejected', detail:'You have rejected'}];
+  //     }
+  // });
+
+  }
+
   clonePlan(c: Plan_Vida): Plan_Vida {
     let plan = {};
     for (let prop in c) {
@@ -402,58 +460,89 @@ export class PlanVidaComponent implements OnInit {
   onRowSelect(event) {
     this.nuevo_plan = false;
     this.plan_editar = this.clonePlan(event.data);
-    this.displayDialog = true;
-    console.log(this.plan_vida);
+    this.editar = true;
+    console.log(this.plan_seleccionado);
+
+    // let plan_select = event.data;
 
     // this.necesidades.setValue(this.plan_vida.necesidades);
 
     this.limpiarArrays();
 
-    this.plan_vida.necesidades.forEach( necesidad =>{
+    // plan_select.necesidades.forEach( necesidad => {
+    //   this.agregarNecesidad() 
+    // });
+
+    this.plan_seleccionado.necesidades.forEach( necesidad =>{
       this.agregarNecesidad() 
     } )
 
-    this.plan_vida.potencialidades.forEach(potencialidad => {
+    // plan_select.potencialidades.forEach( potencialidad => {
+    //   this.agregarPotencialidad();
+    // } );
+
+    this.plan_seleccionado.potencialidades.forEach(potencialidad => {
       this.agregarPotencialidad();
     } )
 
-    this.plan_vida.disgustos.forEach( disgusto => {
+    // plan_select.disgustos.forEach( disgusto =>{
+    //   this.agregarDisgusto();
+    // } );
+
+    this.plan_seleccionado.disgustos.forEach( disgusto => {
       this.agregarDisgusto();
     } )
 
-    this.plan_vida.suenos.forEach( sueno => {
+    // plan_select.suenos.forEach( sueno=> {
+    //   this.agregarSueno();
+    // } );
+
+    this.plan_seleccionado.suenos.forEach( sueno => {
       this.agregarSueno();
     } )
 
-    this.plan_vida.gustos.forEach( seguro => {
+    // plan_select.gustos.forEach( gusto=> {
+    //   this.agregarGusto();
+    // } );
+
+    this.plan_seleccionado.gustos.forEach( seguro => {
       this.agregarGusto();
     } )
 
-    this.plan_vida.deseos.forEach( deseo => {
+    // plan_select.deseos.forEach( deseo=> {
+    //   this.agregarDeseo();
+    // } );
+
+    this.plan_seleccionado.deseos.forEach( deseo => {
       this.agregarDeseo();
     } )
+    
+    // console.log(plan_select.alumno);
 
     this.forma.setValue({
-      periodo_lectivo: this.plan_vida.periodo_lectivo,
-      docente: this.plan_vida.docente,
-      estudiante: this.plan_vida.estudiante,
-      aula: this.plan_vida.aula,
-      asignatura: this.plan_vida.asignaturas,
-      descripcion: this.plan_vida.descripcion,
-      objetivo_general: this.plan_vida.objetivo_general,
-      metas_especificas: this.plan_vida.metas_especificas,
-      vision: this.plan_vida.vision,
-      ambito: this.plan_vida.ambitos,
-      dominio: this.plan_vida.dominio,
-      necesidades: this.plan_vida.necesidades,
-      potencialidades: this.plan_vida.potencialidades,
-      gustos: this.plan_vida.gustos,
-      disgustos: this.plan_vida.disgustos,
-      deseos: this.plan_vida.deseos,
-      suenos: this.plan_vida.suenos,
-      logros: this.plan_vida.logros,
-      observaciones: this.plan_vida.observaciones
+      periodoLectivo: this.plan_seleccionado.periodoLectivo,
+      docente: this.plan_seleccionado.docente,
+      alumno: this.plan_seleccionado.alumno,
+      aula: this.plan_seleccionado.aula,
+      asignatura: this.plan_seleccionado.asignaturas,
+      descripcion: this.plan_seleccionado.descripcion,
+      objetivoGeneral: this.plan_seleccionado.objetivoGeneral,
+      metasEspecificas: this.plan_seleccionado.metasEspecificas,
+      vision: this.plan_seleccionado.vision,
+      ambito: this.plan_seleccionado.ambitos,
+      dominio: this.plan_seleccionado.dominio,
+      necesidades: this.plan_seleccionado.necesidades,
+      potencialidades: this.plan_seleccionado.potencialidades,
+      gustos: this.plan_seleccionado.gustos,
+      disgustos: this.plan_seleccionado.disgustos,
+      deseos: this.plan_seleccionado.deseos,
+      suenos: this.plan_seleccionado.suenos,
+      logros: this.plan_seleccionado.logros,
+      observaciones: this.plan_seleccionado.observaciones
+
     });
+
+    this.forma.get("periodoLectivo").setValue(this.periodos_lectivos.find( periodo_lectivo => periodo_lectivo.nombre === this.plan_seleccionado.periodoLectivo.nombre ));
 
     // this.editarUniversidad(this.pasante_editar.institucion);
   }
@@ -478,7 +567,7 @@ export class PlanVidaComponent implements OnInit {
       let docente = docentes[i];
 
       if (
-        docente.persona.primer_apellido
+        docente.persona.primerApellido
           .toLowerCase()
           .indexOf(query.toLowerCase()) == 0
       ) {
@@ -520,9 +609,10 @@ export class PlanVidaComponent implements OnInit {
     this.estudiantes_filtrados = [];
     for (let i = 0; i < estudiantes.length; i++) {
       let estudiante = estudiantes[i];
-
+      console.log(estudiante);
+      
       if (
-        estudiante.persona.primer_apellido
+        estudiante.persona.primerApellido
           .toLowerCase()
           .indexOf(query.toLowerCase()) == 0
       ) {
@@ -561,6 +651,11 @@ export class PlanVidaComponent implements OnInit {
         this.periodos_filrados.push(periodo);
       }
     }
+  }
+
+  generarPlanes(){
+    console.log("CLICK EN GENERAR");
+    
   }
 
   // filtrarAulaEditada(event) {

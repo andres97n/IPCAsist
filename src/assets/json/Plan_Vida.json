@@ -1,7 +1,7 @@
 [
   {
     "_id": "_021561efew1fwe54ewfef45",
-    "periodo_lectivo": {
+    "periodoLectivo": {
       "id": "_jfierwn4390tievjdf930tvnfd5kn",
       "nombre": "2019-2020",
       "observaciones": "Ninguna observación"
@@ -10,45 +10,44 @@
       "_id": "_ui3490ng3jsnf930nerg",
       "persona": {
         "identificacion": "0104472014",
-        "primer_nombre": "Adriana",
-        "segundo_nombre": "Natalia",
-        "primer_apellido": "Prado",
-        "segundo_apellido": "Gimenez"
+        "primerNombre": "Adriana",
+        "segundoNombre": "Natalia",
+        "primerApellido": "Prado",
+        "segundoApellido": "Gimenez"
       }
     },
-    "estudiante": {
+    "alumno": {
       "_id": "_fdfun43t9g3590tn3509tn",
       "persona": {
         "identificacion": "0104578213",
-        "primer_nombre": "Evangeline",
-        "segundo_nombre": "Veronica",
-        "primer_apellido": "Murdoch",
-        "segundo_apellido": "Washington",
-        "carnet_conadis": "12.6488"
+        "primerNombre": "Evangeline",
+        "segundoNombre": "Veronica",
+        "primerApellido": "Murdoch",
+        "segundoApellido": "Washington"
       }
       
     },
     "asignaturas": [
       {
         "nombre": "Vinculación Emocional y Social",
-        "asignacion": ""
+        "descripcion": ""
       },
       {
-        "nombre": "Descubrimiento del Medio Natural",
-        "asignacion": ""
+        "nombre": "Descubrimiento del Método Natural y Cultural",
+        "descripcion": ""
       },
       {
-        "nombre": "Manifestación del Lenguaje",
-        "asignacion": ""
+        "nombre": "Manifestación del Lenguaje Verbal y No Verbal",
+        "descripcion": ""
       }
     ],
     "aula": {
-      "nombre": "Inicial",
+      "nombre": "Inicial I",
       "ubicación": ""
     },
     "descripcion": "Con el estudiante el trabajo estará enfocado en el desarrollo de habilidades de alimentación, identidad, cambios de posición y exploración del medio usando sus miembros superiores mediante actividades significativas, cotidianas y lúdicas que se llevará a cabo en diferentes ámbitos y espacios.",
-    "objetivo_general": "Lograr el mayor grado de independecia en el ámbito de la vida diaria e interacción social mediante rutinas establecidas y adaptación de recursos para realizar las diferentes actividades.",
-    "metas_especificas": [
+    "objetivoGeneral": "Lograr el mayor grado de independecia en el ámbito de la vida diaria e interacción social mediante rutinas establecidas y adaptación de recursos para realizar las diferentes actividades.",
+    "metasEspecificas": [
       "Masticar sólidos",
       "Girar de boca arriba a boca abajo",
       "Agarrar objetos con sus manos por períodos largos de tiempo",
@@ -58,29 +57,29 @@
     "ambitos": [
       {
         "nombre": "Vinculación Emocional y Social",
-        "asignacion": ""
+        "descripcion": ""
       },
       {
-        "nombre": "Descubrimiento del Medio Natural",
-        "asignacion": ""
+        "nombre": "Descubrimiento del Método Natural y Cultural",
+        "descripcion": ""
       },
       {
         "nombre": "Manifestación del Lenguaje Verbal y No Verbal",
-        "asignacion": ""
+        "descripcion": ""
       }
     ],
     "dominio": [
       {
-        "nombre": "Estimulación Sensorial",
-        "asignacion": ""
+        "nombre": "Exploración del Cuerpo y Motricidad",
+        "descripcion": ""
       },
       {
         "nombre": "Alimentación",
-        "asignacion": ""
+        "descripcion": ""
       },
       {
-        "nombre": "Cuidado personal",
-        "asignacion": ""
+        "nombre": "Cuidado Personal",
+        "descripcion": ""
       }
     ],
     "necesidades": [
@@ -162,11 +161,17 @@
       }
     ],
     "logros": ["Motrocidad completa", "Se cambia de ropa solo"],
-    "observaciones": "Ninguna observación"
+    "observaciones": "Ninguna observación",
+    "estado": "ACTIVO",
+    "historico": [
+      {
+        "fechaRegistro": "12/09/2019"
+      }
+    ]
   },
   {
     "_id": "_021561efngej64818fef4555dnogd",
-    "periodo_lectivo": {
+    "periodoLectivo": {
       "id": "_dfew4398sdfb89wfbi3ubsdiufd",
       "nombre": "2020-2021",
       "observaciones": "Ninguna observación"
@@ -175,37 +180,36 @@
       "_id": "_nsduifwt4390fjjgh390gn",
       "persona": {
         "identificacion": "01023245894",
-        "primer_nombre": "Paúl",
-        "segundo_nombre": "Gabriel",
-        "primer_apellido": "Torres",
-        "segundo_apellido": "Gonzales"
+        "primerNombre": "Paúl",
+        "segundoNombre": "Gabriel",
+        "primerApellido": "Torres",
+        "segundoApellido": "Gonzales"
       }
       
     },
-    "estudiante": {
+    "alumno": {
       "_id": "_fbu3t390fng39e0ng534ui30fdsgfs",
       "persona": {
         "identificacion": "0104578213",
-        "primer_nombre": "Antonio",
-        "segundo_nombre": "Miguel",
-        "primer_apellido": "Velesaca",
-        "segundo_apellido": "Correa",
-        "carnet_conadis": "11.6978"
+        "primerNombre": "Antonio",
+        "segundoNombre": "Miguel",
+        "primerApellido": "Velesaca",
+        "segundoApellido": "Correa"
       }
       
     },
     "asignaturas": [
       {
         "nombre": "Vinculación Emocional y Social",
-        "asignacion": ""
+        "descripcion": ""
       },
       {
-        "nombre": "Descubrimiento del Medio Natural",
-        "asignacion": ""
+        "nombre": "Descubrimiento del Método Natural y Cultural",
+        "descripcion": ""
       },
       {
-        "nombre": "Manifestación del Lenguaje",
-        "asignacion": ""
+        "nombre": "Manifestación del Lenguaje Verbal y No Verbal",
+        "descripcion": ""
       }
     ],
     "aula": {
@@ -213,8 +217,8 @@
       "ubicación": ""
     },
     "descripcion": "Con el estudiante el trabajo estará enfocado en el desarrollo de habilidades de alimentación, identidad, cambios de posición y exploración del medio usando sus miembros superiores mediante actividades significativas, cotidianas y lúdicas que se llevará a cabo en diferentes ámbitos y espacios.",
-    "objetivo_general": "Lograr el mayor grado de independecia en el ámbito de la vida diaria e interacción social mediante rutinas establecidas y adaptación de recursos para realizar las diferentes actividades.",
-    "metas_especificas": [
+    "objetivoGeneral": "Lograr el mayor grado de independecia en el ámbito de la vida diaria e interacción social mediante rutinas establecidas y adaptación de recursos para realizar las diferentes actividades.",
+    "metasEspecificas": [
       "Masticar sólidos",
       "Girar de boca arriba a boca abajo",
       "Agarrar objetos con sus manos por períodos largos de tiempo",
@@ -224,29 +228,29 @@
     "ambitos": [
       {
         "nombre": "Vinculación Emocional y Social",
-        "asignacion": ""
+        "descripcion": ""
       },
       {
-        "nombre": "Descubrimiento del Medio Natural",
-        "asignacion": ""
+        "nombre": "Descubrimiento del Método Natural y Cultural",
+        "descripcion": ""
       },
       {
         "nombre": "Manifestación del Lenguaje Verbal y No Verbal",
-        "asignacion": ""
+        "descripcion": ""
       }
     ],
     "dominio": [
       {
-        "nombre": "Estimulación Sensorial",
-        "asignacion": ""
+        "nombre": "Lengua y Comunicación",
+        "descripcion": ""
       },
       {
         "nombre": "Alimentación",
-        "asignacion": ""
+        "descripcion": ""
       },
       {
-        "nombre": "Cuidado personal",
-        "asignacion": ""
+        "nombre": "Cuidado Personal",
+        "descripcion": ""
       }
     ],
     "necesidades": [
@@ -255,7 +259,7 @@
         "descripcion": ["Claves objetos y movimiento coactivo"]
       },
       {
-        "titulo": "Estado de Salud",
+        "nombre": "Estado de Salud",
         "descripcion": [
           "terapia física",
           "estimulación temprana",
@@ -328,6 +332,12 @@
       }
     ],
     "logros": ["Motrocidad completa", "Se cambia de ropa solo"],
-    "observaciones": "Ninguna observación"
+    "observaciones": "Ninguna observación",
+    "estado": "ACTIVO",
+    "historico": [
+      {
+        "fechaRegistro": "12/09/2020"
+      }
+    ]
   }
 ]

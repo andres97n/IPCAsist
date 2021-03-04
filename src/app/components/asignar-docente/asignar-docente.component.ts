@@ -1,6 +1,5 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { DocenteService } from "app/services/docente.service";
-import { Persons } from "app/clases/persons";
 import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
 import {
   trigger,
@@ -13,11 +12,15 @@ import { AsignarDocente } from "app/clases/asignar-docente";
 import { Docente } from "app/clases/docente";
 import { Aula } from "app/clases/aula";
 import { Periodo_Lectivo } from "app/clases/periodo_lectivo";
-import { PlanVidaService } from "app/services/plan-vida.service";
-
-import pdfMake from 'pdfmake/build/pdfmake';
-import { Util } from "app/utils/util";
 import { Table } from "primeng/table";
+import { jsPDF } from "jspdf";
+import autoTable from 'jspdf-autotable'
+import { AulasService } from "app/services/aulas.service";
+import { Alumno } from "app/clases/alumno";
+import { Personal } from "app/clases/personal";
+import { Persona } from "app/clases/persona";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+
 // import pdfFonts from 'pdfmake/build/vfs_fonts';
 @Component({
   selector: "app-asignar-docente",
@@ -50,11 +53,9 @@ export class AsignarDocenteComponent implements OnInit {
 
   @ViewChild('dt') table: Table;
 
-  persons: Persons[];
   cols: any[];
   displayDialog: boolean;
-  person: Persons = {};
-  selectedPerson: Persons;
+  mostrarAdmin: boolean;
 
   forma: FormGroup;
   forma_editar: FormGroup;
@@ -96,28 +97,98 @@ export class AsignarDocenteComponent implements OnInit {
       aula
     }
 
+    administracion: {
+      elaborado_por?:string,
+      revisado_por?: string,
+      aprobado_por?: string
+    } = {};
+
+    @ViewChild('tabla_aulas', {static: false}) tabla_aulas: ElementRef;
+
+
+
   constructor(
     private fb: FormBuilder,
     // private _ejemSrv: EjemplosService,
     private _docenteSrv: DocenteService,
-    private _planSrv: PlanVidaService
+    // private _planSrv: PlanVidaService,
+    private _aulaSrv: AulasService,
+    private modalService: NgbModal
   ) {
     this.crearFormulario();
   }
 
   ngOnInit(): void {
 
-    // Util.getImageDataUrlFromLocalPath1('assets/img/logo-editado.png').then(
-    //   result => this.logoDataUrl = result
-    // )
-    // console.log(this.logoDataUrl);
-    
+    this.mostrarAdmin = false;
+  
     this.asignacion = new AsignarDocente();
 
-    this._planSrv.getPeriodoLectivo().subscribe( (periodos_lectivos: Periodo_Lectivo[]) =>{
+    this._aulaSrv.getLista("aulas").subscribe( (aulas: Aula[]) => {
+      
+      this.aulas = aulas;
+
+      this.aulas.forEach( (aula:Aula) => {
+
+        if (aula.alumnos.length != 0) {
+          aula.alumnos.forEach( (alumno: Alumno) => {
+            this._aulaSrv.getDetalle(alumno, "alumno").subscribe( (student:Alumno) => {
+              alumno = student;
+              
+              this._aulaSrv.getDetalle(alumno.id, "persona").subscribe( (person:Persona) =>{
+                alumno.persona = person;
+              } )
+              aula.alumnos.push(alumno)
+            })
+          } )
+        }
+
+        if(aula.docentes.length != 0){
+          aula.docentes.forEach( (docente: Personal) => {
+            this._aulaSrv.getDetalle(docente, "personal").subscribe( (teacher:Personal) => {
+              docente = teacher
+              this._aulaSrv.getDetalle(docente.id, "persona").subscribe( (person:Persona) =>{
+                docente.persona = person;
+              } )
+              aula.docentes.push(docente);
+            })
+          } )
+        }
+        
+        this._aulaSrv.getDetalle(aula.id, "periodo_lectivo").subscribe( (periodo:Periodo_Lectivo) => {
+          aula.periodo = periodo;
+        } )
+
+      } )
+
+      this.aulas.forEach( (aula:Aula) => {
+      
+        let num_docente = aula.docentes.length;
+        let num_alumno = aula.alumnos.length;
+        
+        for (let index = 0; index < num_docente; index++) {
+          // console.log(aula.a);
+          
+         this.removeItemFromArr(aula.docentes,index);
+          
+        }
+
+        for (let index = 0; index < num_alumno; index++) {
+          // console.log(aula.a);
+          
+         this.removeItemFromArr(aula.docentes,index);
+          
+        }
+      } )
+
+      console.log(this.aulas, "AULAS CON OBJETOS");
+    });
+
+    this._aulaSrv.getLista("periodos_lectivos").subscribe( (periodos_lectivos: Periodo_Lectivo[]) =>{
       
       this.periodos_lectivos = periodos_lectivos;
-      console.log(this.periodos_lectivos);
+      
+      console.log(this.periodos_lectivos, "PERIODOS LECTIVOS");
     } )
 
     this._docenteSrv
@@ -132,22 +203,22 @@ export class AsignarDocenteComponent implements OnInit {
       this.docentes = docentes;
     });
 
-    this._docenteSrv.getAulas().subscribe((aulas: Aula[]) => {
-      this.aulas = aulas;
-
-      console.log(this.aulas);
-    });
 
     this.cols = [
       { field: "nombre", header: "AULA" },
-      { field: "docentes.persona.primerNombre", header: "DOCENTES" },
-      { field: "pasantes.persona.primer_apellido", header: "PASANTES" },
+      { field: "docente.persona", header: "DOCENTES" },
+      { field: "capacidad", header: "CAPACIDAD" },
       { field: "periodo_lectivo.nombre", header: "PERÍODO LECTIVO" },
       // { field: "horario_entrada.hora", header: "HORARIO DE ENTRADA" },
       // { field: "horario_salida.hora", header: "HORARIO DE SALIDA" },
-      { field: "especialidades.nombre", header: "ESPECIALIDADES" },
+      { field: "jornada", header: "JORNADA" },
     ];
   }
+
+  removeItemFromArr ( arr, item ) {
+    var i = arr.indexOf( item );
+    arr.splice( i, 1 );
+}
 
   crearFormulario() {
     this.forma = this.fb.group({
@@ -206,23 +277,6 @@ export class AsignarDocenteComponent implements OnInit {
     );
   }
 
-  save() {
-    let persons = [...this.persons];
-    if (this.nueva_asignacion) persons.push(this.person);
-    else persons[this.persons.indexOf(this.selectedPerson)] = this.person;
-
-    this.persons = persons;
-    this.person = null;
-    this.displayDialog = false;
-  }
-
-  delete() {
-    let index = this.persons.indexOf(this.selectedPerson);
-    this.persons = this.persons.filter((val, i) => i != index);
-    this.person = null;
-    this.displayDialog = false;
-  }
-
   cloneAsignacion(c: AsignarDocente): AsignarDocente {
     let asignacion = {};
     for (let prop in c) {
@@ -259,9 +313,14 @@ export class AsignarDocenteComponent implements OnInit {
 
   //PENDIENTE
   filtrarContenido(event: any){
-    console.log(event.value.nombre);
-    
-    this.table.filterGlobal(event.value, 'contains')
+    console.log(event.value);
+    this.mostrarAdmin = true;
+    // this.table.filterGlobal(event.value, 'contains')
+  }
+  
+  abrirPDF(){
+    this.mostrarAdmin = false;
+    this.generarAulasPorPeriodo();
   }
 
   getBase64ImageFromURL(url) {
@@ -284,102 +343,11 @@ export class AsignarDocenteComponent implements OnInit {
     });
   }
 
-  asignacion_periodo(){
+  // asignacion_periodo(){
 
-  }
+  // }
 
-  async openPdf(){
-    const fonts = {
-      Courier: {
-        normal: 'Courier',
-        bold: 'Courier-Bold',
-        italics: 'Courier-Oblique',
-        bolditalics: 'Courier-BoldOblique'
-      },
-      Helvetica: {
-        normal: 'Helvetica',
-        bold: 'Helvetica-Bold',
-        italics: 'Helvetica-Oblique',
-        bolditalics: 'Helvetica-BoldOblique'
-      },
-      Times: {
-        normal: 'Times-Roman',
-        bold: 'Times-Bold',
-        italics: 'Times-Italic',
-        bolditalics: 'Times-BoldItalic'
-      },
-      Symbol: {
-        normal: 'Symbol'
-      },
-      ZapfDingbats: {
-        normal: 'ZapfDingbats'
-      }
-    };
-
-    // console.log(this.asignacion, "PDF");
-
-    // this.asignaciones.forEach( (asignacion)=> {
-
-      const documentDefinition = { 
-        
-        header: [
-          {
-            svg: '<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><pattern id="pattern_9rgHkX" patternUnits="userSpaceOnUse" width="9.5" height="9.5" patternTransform="rotate(45)"><line x1="0" y="0" x2="0" y2="9.5" stroke="#DFC500" stroke-width="1"/></pattern></defs> <rect width="100%" height="100%" fill="url(#pattern_9rgHkX)" opacity="1"/></svg>',
-            fit: [20,10],
-            width: 20
-          }
-        ],
-  
-        background: function(currentPage, pageSize) {
-          return `page ${currentPage} with size ${pageSize.width} x ${pageSize.height}`
-        },
-  
-        content: [
-          {
-            image: await this.getBase64ImageFromURL('assets/img/logo-editado.png'),
-            width: 80,
-            height: 50
-          },
-          {
-            text: [
-              'This paragraph is defined as an array of elements to make it possible to ',
-              { text: 'restyle part of it and make it bigger ', fontSize: 40 },
-              'than the rest.'
-            ]
-          },
-          {
-            table: {
-              headerRows: 1,
-              widths: ['*', 'auto', 'auto', 100, '*'],
-              
-              body: [
-                [
-                  { text: 'PERÍODO LECTIVO', bold: true },
-                  { text: 'DOCENTE', bold: true },
-                  { text: 'HORA DE ENTRADA', bold: true },
-                  { text: 'HORA DE SALIDA', bold: true },
-                  { text: 'AULA ASIGNADA', bold: true },
-                ],
-                [ this.asignacion.periodo_lectivo.nombre, 
-                  `${this.asignacion.docente.persona.primerNombre} ${this.asignacion.docente.persona.primerApellido}`, 
-                  this.asignacion.horario_entrada.hora, 
-                  this.asignacion.horario_salida.hora,
-                  this.asignacion.aula.nombre
-                ],
-                ['Value 1', 'Value 2', 'Value 3', 'Value 4', 'Value 5'],
-                [{ text: 'Bold value', bold: true }, 'Val 2', 'Val 3', 'Val 4', 'Val 5']
-              ]
-            }
-          },
-          {
-  
-          }
-        ], 
-       }
-      
-      pdfMake.createPdf(documentDefinition).open();
-
-  }
+ 
 
   asignarDocente() {
     console.log(this.forma);
@@ -400,7 +368,7 @@ export class AsignarDocenteComponent implements OnInit {
       let docente = docentes[i];
 
       if (
-        docente.persona.primerApellido
+        docente.persona.primer_apellido
           .toLowerCase()
           .indexOf(query.toLowerCase()) == 0
       ) {
@@ -452,7 +420,7 @@ export class AsignarDocenteComponent implements OnInit {
       let docente = docentes[i];
 
       if (
-        docente.persona.primerApellido
+        docente.persona.primer_apellido
           .toLowerCase()
           .indexOf(query.toLowerCase()) == 0
       ) {
@@ -469,7 +437,7 @@ export class AsignarDocenteComponent implements OnInit {
 
     this.data.periodo_lectivo = asignacion.periodo_lectivo.nombre
       this.data.docente_cedula = asignacion.docente.persona.identificacion
-      this.data.docente_nombre =  `${asignacion.docente.persona.primerNombre} ${asignacion.docente.persona.primerApellido}`
+      this.data.docente_nombre =  `${asignacion.docente.persona.primer_nombre} ${asignacion.docente.persona.primer_apellido}`
       this.data.horario_entrada = asignacion.horario_entrada.hora
       this.data.horario_salida = asignacion.horario_salida.hora
       this.data.aula = asignacion.aula.nombre
@@ -477,119 +445,89 @@ export class AsignarDocenteComponent implements OnInit {
       return this.data
 
   }
-
-  async generarPlanes(){
-    console.log("CLICK EN GENERAR");
-    let asignacion_pdf: any[];
-
-    this.asignaciones.forEach( (asignacion: AsignarDocente)=> {
-      
-      // let data: {
-      //   periodo_lectivo,
-      //   docente_cedula,
-      //   docente_nombre,
-      //   horario_entrada,
-      //   horario_salida,
-      //   aula
-      // }
-
-      // this.data.periodo_lectivo = asignacion.periodo_lectivo.nombre
-      // this.data.docente_cedula = asignacion.docente.persona.identificacion
-      // this.data.docente_nombre =  `${asignacion.docente.persona.primer_nombre} ${asignacion.docente.persona.primer_apellido}`
-      // this.data.horario_entrada = asignacion.horario_entrada.hora
-      // this.data.horario_salida = asignacion.horario_salida.hora
-      // this.data.aula = asignacion.aula.nombre
-
-      // asignacion_pdf.push(this.nuevaData(asignacion));
-
-      console.log(asignacion);
-      
-    } );
-
-    function buildTableBody(data, columns) {
-      var body = [];
   
-      body.push(columns);
-  
-      data.forEach(function(row) {
-          var dataRow = [];
-  
-          columns.forEach(function(column) {
-              dataRow.push(row[column].toString());
-          })
-  
-          body.push(dataRow);
-      });
-  
-      return body;
-  }
-  
-  function table(data, columns) {
-      return {
-          table: {
-              headerRows: 1,
-              body: buildTableBody(data, columns)
-          }
-      };
-  }
-  
-  // var dd = {
-  //     content: [
-  //         { text: 'Dynamic parts', style: 'header' },
-  //         table(externalDataRetrievedFromServer, ['name', 'age'])
-  //     ]
-  // }
 
-    const documentDefinition = { 
+  generarAulasPorPeriodo(){
 
-      background: function(currentPage, pageSize) {
-        return `page ${currentPage} with size ${pageSize.width} x ${pageSize.height}`
+    let fecha = `${new Date().getDate()}/${new Date().getMonth()}/${new Date().getFullYear()}`
+    let aulas_filtradas=[];
+    let cols: string[] = [];
+    let valor = [];
+    let valores = [];
+
+    let admin_colums = ['', "Elaborado Por", "Revisado Por", "Aprobado Por"];
+    let admin_fields = [["DETALLE", this.administracion.elaborado_por, this.administracion.revisado_por, this.administracion.aprobado_por],
+                        ["FIRMA", '', '', ''],
+                        ["FECHA", fecha, fecha, fecha] ]
+
+    this.aulas.forEach( (aula:Aula) => {
+      if(aula.periodo.id == this.periodo_lectivo.id){
+        aulas_filtradas.push(aula);
+      }
+    } )
+
+    this.cols.forEach( col => {
+      cols.push(col.header);
+    } )
+
+    aulas_filtradas.forEach( (aula:Aula) => {
+      let aux = [];
+      valor.push(aula.nombre);
+      aula.docentes.forEach( (docente:Personal) => {
+        aux.push(`${docente.persona.primer_nombre} ${docente.persona.primer_apellido}`)
+      } )
+      valor.push(aux);
+      valor.push(aula.capacidad);
+      valor.push(aula.periodo.nombre);
+      valor.push(aula.jornada);
+      valores.push(valor);
+    })
+
+    const head = [cols]
+    const data = valores
+    const head_2 = [admin_colums]
+    const data_2 = admin_fields
+    const doc = new jsPDF("p","mm","a4");
+    const pdfWidht=210;  // width of A4 in mm
+    const pdfHeight=297;  // height of A4 in mm
+
+    let logo_ipca= new Image();
+    logo_ipca.src = 'assets/img/logo-editado.png';
+
+    doc.addImage(logo_ipca, 'PNG', pdfWidht/3, pdfHeight/5, 75, 65, 'logo_IPCA', 'NONE', 0);
+    doc.setFontSize(20);
+    doc.text(`Aulas por Período Lectivo ${this.periodo_lectivo.nombre}`, pdfWidht/2,pdfHeight/2, {align:"center"});
+
+    doc.addPage('a4')
+    // doc.setFontSize(20);
+    // doc.text(`Listado de Períodos Lectivo en ${this.periodo_lectivo.nombre}`, pdfWidht/2,pdfHeight/15, {align:"center"});
+    // doc.table(pdfWidht/15,pdfHeight/4, aulas_filtradas, cols)
+    autoTable(doc, {
+      head: head,
+      body: data,
+      theme: "striped",
+      didDrawCell: (data) => {
+        console.log(data.column.index)
       },
+    })
+    doc.addPage('a4');
 
-      content: [
-        {
-          image: await this.getBase64ImageFromURL('assets/img/logo-editado.png'),
-          width: 80,
-          height: 50
-        },
-        {
-          text: [
-            'This paragraph is defined as an array of elements to make it possible to ',
-            { text: 'restyle part of it and make it bigger ', fontSize: 40 },
-            'than the rest.'
-          ]
-        },
-        {
-          table: {
-            headerRows: 1,
-            widths: ['*', 'auto', 'auto', 100, '*'],
-            
-            body: [
-              [
-                { text: 'PERÍODO LECTIVO', bold: true },
-                { text: 'DOCENTE', bold: true },
-                { text: 'HORA DE ENTRADA', bold: true },
-                { text: 'HORA DE SALIDA', bold: true },
-                { text: 'AULA ASIGNADA', bold: true },
-              ],
-              [ this.asignacion.periodo_lectivo.nombre, 
-                `${this.asignacion.docente.persona.primerNombre} ${this.asignacion.docente.persona.primerApellido}`, 
-                this.asignacion.horario_entrada.hora, 
-                this.asignacion.horario_salida.hora,
-                this.asignacion.aula.nombre
-              ],
-              ['Value 1', 'Value 2', 'Value 3', 'Value 4', 'Value 5'],
-              [{ text: 'Bold value', bold: true }, 'Val 2', 'Val 3', 'Val 4', 'Val 5']
-            ]
-          }
-        },
-        // table(this.asignaciones, ['PERÍODO LECTIVO', 'CÉDULA DE DOCENTE', 'NOMBRE DE DOCENTE', 'HORA DE ENTRADA', 'HORA DE SALIDA', 'AULA ASIGNADA'])
-      ], 
-     }
-    // } );
-    
-    pdfMake.createPdf(documentDefinition).open();
+    autoTable(doc, {
+      head: head_2,
+      body: data_2,
+      theme: "grid",
+      didDrawCell: (data) => {
+        console.log(data.column.index)
+      },
+    })
+
+    doc.setFontSize(8);
+    doc.text('Documento generado por IPCAsist', pdfWidht/2, pdfHeight/1.03, {align:"center"});
+
+    doc.save(`Aulas_${this.periodo_lectivo.nombre}.pdf`);
+    this.periodo_lectivo = {};
 
   }
+
 
 }

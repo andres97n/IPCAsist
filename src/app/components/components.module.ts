@@ -25,6 +25,7 @@ import { MessagesModule } from "primeng/messages";
 import { MessageModule } from "primeng/message";
 import { ListboxModule } from "primeng/listbox";
 import { ChipsModule } from "primeng/chips";
+import {MultiSelectModule} from 'primeng/multiselect';
 
 import { BasicelementsComponent } from "./basicelements/basicelements.component";
 import { NavigationComponent } from "./navigation/navigation.component";
@@ -42,6 +43,8 @@ import { AsignarDocenteComponent } from "./asignar-docente/asignar-docente.compo
 import { AyudaComponentesComponent } from './ayuda-componentes/ayuda-componentes.component';
 import {TooltipModule} from 'primeng/tooltip';
 import { SignupComponent } from "app/examples/signup/signup.component";
+
+
 // import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
 // import { GoogleMapsModule } from "@angular/google-maps";
@@ -74,6 +77,8 @@ import { SignupComponent } from "app/examples/signup/signup.component";
     ListboxModule,
     ChipsModule,
     TooltipModule,
+    MultiSelectModule,
+    
     // ConfirmDialogModule
 
     // GoogleMapsModule,

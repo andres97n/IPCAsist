@@ -29,6 +29,9 @@
   margin: 0.5em;
 }
 
+.espacio {
+  margin-top: 2em;
+}
 /* ::ng-deep .btn-just-icon {
   height: 15px !important;
   width: 10px !important;
@@ -78,8 +81,18 @@
   background-color: #32302f;
   color: #ffffff;
 }
+
+:host ::ng-deep .p-dropdown > .ui-dropdown {
+  width: 10rem !important;
+}
+
 /* 
 :host ::ng-deep .p-table > .ui-table {
   background-color: #32302f;
   color: #ffffff;
 } */
+
+#periodos_flitro {
+  position: absolute;
+  z-index: 3;
+}

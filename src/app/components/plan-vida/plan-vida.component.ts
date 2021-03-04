@@ -8,13 +8,17 @@ import { FormGroup, FormBuilder, FormArray, Validators } from "@angular/forms";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { Aula } from "app/clases/aula";
 import { Docente } from "app/clases/docente";
-import { Estudiante } from "app/clases/estudiante";
+import { Drop } from "app/clases/drop";
+import { Alumno } from "app/clases/alumno";
 import { Materia } from "app/clases/materia";
 import { Periodo_Lectivo } from "app/clases/periodo_lectivo";
 import { Plan_Vida } from "app/clases/plan-vida";
-import { DocenteService } from "app/services/docente.service";
 import { PlanVidaService } from "app/services/plan-vida.service";
+import { jsPDF } from "jspdf";
+import autoTable from 'jspdf-autotable'
 import { Table } from "primeng/table";
+import { Persona } from "app/clases/persona";
+import { Personal } from "app/clases/personal";
 // import {ConfirmationService} from 'primeng/api';
 
 @Component({
@@ -44,10 +48,6 @@ import { Table } from "primeng/table";
 
 
 export class PlanVidaComponent implements OnInit {
-  cities: any[];
-  selectedCities: any[];
-
-  
 
   // msgs: Message[] = [];
 
@@ -57,6 +57,25 @@ export class PlanVidaComponent implements OnInit {
 
   forma: FormGroup;
 
+  mostrarAdmin: boolean;
+  mostrar_pdf: boolean;
+
+  administracion: {
+      elaborado_por?:string,
+      revisado_por?: string,
+      aprobado_por?: string
+    } = {};
+
+    plan_admin: {
+      elaborado_por?:string,
+      revisado_por?: string,
+      aprobado_por?: string
+    } = {};
+
+    plan_pdf:Plan_Vida;
+
+  periodo_pdf: Periodo_Lectivo;
+
   // displayDialog: boolean;
   editar: boolean;
   cols: any[];
@@ -65,7 +84,7 @@ export class PlanVidaComponent implements OnInit {
   mostrar_nueva_asignatura: boolean;
   mostrar_nuevo_dominio: boolean;
 
-  docentes: Docente[];
+  docentes: Personal[];
   docentes_filtrados: Docente[];
   // docentes_editados: Docente[];
 
@@ -73,8 +92,8 @@ export class PlanVidaComponent implements OnInit {
   aulas_filtradas: Aula[];
   // aulas_editadas: Aula[];
 
-  estudiantes: Estudiante[];
-  estudiantes_filtrados: Estudiante[];
+  alumnos: Alumno[];
+  alumnos_filtrados: Alumno[];
   // estudiantes_editados: Estudiante[];
 
   planes_vida: Plan_Vida[];
@@ -89,14 +108,19 @@ export class PlanVidaComponent implements OnInit {
 
   periodo_lectivo: Periodo_Lectivo;
   periodos_lectivos: Periodo_Lectivo[];
+  periodos_activos: Periodo_Lectivo[];
   periodos_filrados: Periodo_Lectivo[];
+  
+  periodos_drop: Drop[];
+
+  first = 0;
+  rows = 5;
 
   @ViewChild('dt') table: Table;
   
 
   constructor(
     private fb: FormBuilder,
-    private _docenteSrv: DocenteService,
     private _planSrv: PlanVidaService,
     private modalService: NgbModal
     // private confirmationService: ConfirmationService
@@ -105,7 +129,11 @@ export class PlanVidaComponent implements OnInit {
     // this.plan_vida = new Plan_Vida();
 
     this.crearFormulario();
+    this.periodos_lectivos = [];
+    this.periodos_drop = [];
 
+    this.mostrarAdmin = false;
+    this.mostrar_pdf = false;
   }
 
   ngOnInit(): void {
@@ -113,118 +141,180 @@ export class PlanVidaComponent implements OnInit {
     this.editar = false;
 
     this.plan_vida = {
-      periodoLectivo: {
+      periodo_lectivo: {
         nombre: ""
       },
       docente: {
         persona: {
           identificacion: "",
-          primerNombre: "",
-          segundoNombre: "",
-          primerApellido: "",
-          segundoApellido: "",
+          primer_nombre: "",
+          segundo_nombre: "",
+          primer_apellido: "",
+          segundo_apellido: "",
         }
       },
       alumno: {
         persona: {
           identificacion: "",
-          primerNombre: "",
-          segundoNombre: "",
-          primerApellido: "",
-          segundoApellido: "",
+          primer_nombre: "",
+          segundo_nombre: "",
+          primer_apellido: "",
+          segundo_apellido: "",
         }
       },
-      asignaturas: [],
+      asignaturas: [{}],
       aula: {
         nombre: ""
       },
       descripcion: "",
-      objetivoGeneral: "",
-      metasEspecificas: [],
+      objetivo_general: "",
+      metas_especificas: [],
       vision: "",
-      ambitos: [],
-      dominio: [],
-      necesidades: [],
-      potencialidades: [],
-      gustos: [],
-      disgustos: [],
-      deseos: [],
-      suenos: [],
+      ambitos: [{}],
+      dominio: [{}],
+      necesidades: [{}],
+      potencialidades: [{}],
+      gustos: [{}],
+      disgustos: [{}],
+      deseos: [{}],
+      suenos: [{}],
       logros: [],
       observaciones: "",
-      estado: "ACTIVO",
+      estado: 1,
     };
 
-    // this.cities = [
-    //   { name: "Vinculación Emocional y Social", code: "NY" },
-    //   { name: "Descubrimiento del Método Natural y Cultural", code: "RM" },
-    //   { name: "Manifestación del Lenguaje Verbal y No Verbal", code: "LDN" },
-    //   { name: "Exploración del Cuerpo y Motricidad", code: "IST" },
-    //   { name: "Paris", code: "PRS" },
-    // ];
 
-    this.materias = [
-      { nombre: "Vinculación Emocional y Social" , descripcion: ""},
-      { nombre: "Descubrimiento del Método Natural y Cultural" , descripcion: "" },
-      { nombre: "Manifestación del Lenguaje Verbal y No Verbal" , descripcion: "" },
-      { nombre: "Exploración del Cuerpo y Motricidad" , descripcion: "" },
-      { nombre: "Lengua y Comunicación" , descripcion: "" },
-      {
-        nombre: "Alimentación", descripcion: ""
-      },
-      {
-        nombre: "Cuidado Personal", descripcion: ""
-      }
-    ]
-
-    this._planSrv.getPeriodoLectivo().subscribe( (periodos_lectivos: Periodo_Lectivo[]) =>{
-      
+    this._planSrv.getLista("periodos_activos").subscribe( (periodos_lectivos: Periodo_Lectivo[]) =>{
       this.periodos_lectivos = periodos_lectivos;
-      console.log(this.periodos_lectivos);
+      console.log(this.periodos_lectivos, "Periodos Lectivos");
     } )
 
-    this._docenteSrv.getDocentes().subscribe((docentes: Docente[]) => {
-      console.log(docentes);
-      this.docentes = docentes;
+    this._planSrv.getLista("personal").subscribe((personal: Personal[]) => {
+      this.docentes = personal;
+      console.log(this.docentes, "Docentes");
+      this.docentes.forEach( (docente)=> {
+        this._planSrv.getDetallePersona(docente.persona).subscribe( (persona: Persona) => {
+          docente.persona = persona;
+        } )
+      })
     });
 
-    this._docenteSrv.getAulas().subscribe((aulas: Aula[]) => {
-      console.log(aulas);
+    this._planSrv.getLista("aulas").subscribe((aulas: Aula[]) => {
       this.aulas = aulas;
+      console.log(this.aulas, "Aulas");
     });
 
-    this._planSrv.getEstudiantes().subscribe((estudiantes: Estudiante[]) => {
-      console.log(estudiantes);
-      this.estudiantes = estudiantes;
+    this._planSrv.getLista("alumnos").subscribe((alumnos: Alumno[]) => {
+      this.alumnos = alumnos;
+      this.alumnos.forEach( (alumno) => {
+        this._planSrv.getDetallePersona(alumno.persona).subscribe( (persona: Persona) => {
+          alumno.persona = persona;
+        } )
+      })
+      console.log(this.alumnos, "Alumnos");
     });
 
-    this._planSrv.getPlanesVida().subscribe( (planes_vida: Plan_Vida[]) =>{
-      console.log(planes_vida);
+    this._planSrv.getLista("materias").subscribe( (materias:Materia[]) => {
+      this.materias = materias;
+      console.log(this.materias, "Materias");
+      
+    } )
+
+    this._planSrv.getLista("periodos_lectivos").subscribe( (periodos_lectivos:Periodo_Lectivo[]) => {
+      this.periodos_lectivos = periodos_lectivos;
+      // let periodo:Periodo_Lectivo = new Periodo_Lectivo();
+      // periodo.nombre = "Todos"
+      // this.periodos_lectivos.push(periodo);
+      console.log(this.periodos_lectivos, "Periodos Lectivos");
+    })
+    
+    this._planSrv.getLista("periodos_activos").subscribe( (periodos_lectivos:Periodo_Lectivo[]) => {
+      this.periodos_activos = periodos_lectivos;
+      // let periodo:Periodo_Lectivo = new Periodo_Lectivo();
+      // periodo.nombre = "Todos"
+      // this.periodos_activos.push(periodo);
+      console.log(this.periodos_activos, "Periodos Lectivos");
+    })
+    
+    this._planSrv.getLista("planes_vida").subscribe((planes_vida: Plan_Vida[]) =>{
       this.planes_vida = planes_vida;
       
+      this.planes_vida.forEach( (plan) => {
+        
+        this.periodos_lectivos.forEach( (periodo) => {
+          if(periodo.id == plan.periodo_lectivo){
+            plan.periodo_lectivo = periodo;
+          }
+        });
+
+        this.alumnos.forEach( (alumno) => {
+          if(alumno.id == plan.alumno){
+            plan.alumno = alumno;
+          }
+        });
+        
+        this.docentes.forEach( (docente) => {
+          if (docente.id == plan.docente) {
+            plan.docente = docente;
+          }
+        });
+        
+        this.aulas.forEach( (aula) => {
+          if (aula.id == plan.aula) {
+            plan.aula = aula;
+          }
+        })
+        
+      })
+
+      console.log(this.planes_vida, "Planes de Vida");
+      
     } )
+    // this._planSrv.getLista("planes_vida").subscribe( (planes_vida: Plan_Vida[]) =>{
+    //   this.planes_vida = planes_vida;
+    //   console.log(this.planes_vida, "Planes de Vida");
+      
+    // } )
 
     this.cols = [
-      { field: "docente", header: "DOCENTE" },
-      { field: "estudiante", header: "ESTUDIANTE" },
-      { field: "aula", header: "AULA" },
-      { field: "periodo_lectivo", header: "PERÍODO LECTIVO" },
-      { field: "observaciones", header: "OBSERVACIONES" },
+      { field: "docente.persona.primer_apellido", header: "DOCENTE" },
+      { field: "alumno.persona.primer_apellido", header: "ALUMNO" },
+      { field: "aula.nombre", header: "AULA" },
+      { field: "periodo_lectivo.nombre", header: "PERÍODO LECTIVO" },
+      { field: "objetivo_general", header: "OBJETIVO GENERAL" },
     ];
+
+   
+    this.periodos_drop.push( {label: "Todos los Períodos", value: null} );
+    let drop : Drop;
+    
+    this.periodos_lectivos.forEach( (periodo) =>{
+      drop.label = periodo.nombre;
+      drop.value = periodo.nombre;
+      console.log(drop);
+      
+      this.periodos_drop.push( drop );
+    })
+   
+
+    console.log(this.periodos_drop, "Periodos Drop");
+
+    
+
   }
 
   crearFormulario() {
     this.forma = this.fb.group({
-      periodoLectivo: this.fb.control("", Validators.required),
+      periodo_lectivo: this.fb.control("", Validators.required),
       docente: this.fb.control("", Validators.required),
       alumno: this.fb.control("", Validators.required),
       aula: this.fb.control("", Validators.required),
-      asignatura: this.fb.control("", Validators.required),
+      asignaturas: this.fb.control("", Validators.required),
       descripcion: this.fb.control("", Validators.required),
-      objetivoGeneral: this.fb.control("", Validators.required),
-      metasEspecificas: this.fb.control("", Validators.required),
+      objetivo_general: this.fb.control("", Validators.required),
+      metas_especificas: this.fb.control("", Validators.required),
       vision: this.fb.control("", Validators.required),
-      ambito: this.fb.control("", Validators.required),
+      ambitos: this.fb.control("", Validators.required),
       dominio: this.fb.control("", Validators.required),
       necesidades: this.fb.array([
         // this.fb.group({})
@@ -342,7 +432,7 @@ export class PlanVidaComponent implements OnInit {
     if(this.forma.get("ambito").value){
       this.materias.push({
         nombre: this.forma.get("ambito").value,
-        asignacion: "NO"
+        // asignacion: "NO"
       })
     }
     console.log(this.materias);
@@ -353,12 +443,37 @@ export class PlanVidaComponent implements OnInit {
     this.mostrar_nueva_asignatura = true;
   }
 
-  nuevaAsignatura(){
-    if(this.forma.get("asignatura").value){
-      this.materias.push({
-        nombre: this.forma.get("asignatura").value,
-        asignacion: "NO"
-      })
+  nuevaMateria(tipo:number, nombre:string){
+
+    console.log(this.forma.get(nombre).value);
+    
+
+    if(this.forma.get(nombre).value){
+
+      let materia: Materia = new Materia();
+      materia.nombre = this.forma.get(nombre).value
+      materia.tipo_materia = tipo;
+      console.log(materia);
+      
+
+      this._planSrv.setMateria(materia).subscribe( (data) => {
+        console.log(data, "setmateria");
+        
+      } )
+
+      if(nombre == "ambitos"){
+        this.mostrar_nuevo_ambito = false;
+      } else if(nombre == "asignaturas"){
+        this.mostrar_nueva_asignatura = false;
+      } else{
+        this.mostrar_nuevo_dominio = false;
+      }
+
+      this.forma.get(nombre).setValue('');
+      // this.materias.push({
+      //   nombre: this.forma.get("asignatura").value,
+      //   // asignacion: "NO"
+      // })
     }
   }
 
@@ -370,7 +485,7 @@ export class PlanVidaComponent implements OnInit {
     if(this.forma.get("dominio").value){
       this.materias.push({
         nombre: this.forma.get("dominio").value,
-        asignacion: "NO"
+        // asignacion: "NO"
       })
     }
   }
@@ -401,21 +516,6 @@ export class PlanVidaComponent implements OnInit {
     this.suenos.removeAt(i);
   }
 
-  // mostrarConfirmacion(){
-  //   this.confirmationService.confirm({
-  //     message: 'Do you want to delete this record?',
-  //     header: 'Delete Confirmation',
-  //     icon: 'pi pi-info-circle',
-  //     accept: () => {
-  //       this.eliminarPlan();
-  //         // this.msgs = [{severity:'info', summary:'Confirmed', detail:'Record deleted'}];
-  //     },
-  //     reject: () => {
-  //         // this.msgs = [{severity:'info', summary:'Rejected', detail:'You have rejected'}];
-  //     }
-  // });
-  // }
-
   limpiarArrays(){
     this.necesidades.clear();
     this.potencialidades.clear();
@@ -428,24 +528,92 @@ export class PlanVidaComponent implements OnInit {
 // Guardar datos de Plan de Vida
   guardarPlan() {
     console.log(this.forma);
-    console.log(this.plan_vida);
+    this.plan_vida = this.forma.value;
+    
+    
+    let plan = {
+      id: null,
+      periodo_lectivo: this.plan_vida.periodo_lectivo.id,
+      docente: this.plan_vida.docente.id,
+      alumno: this.plan_vida.alumno.id,
+      asignaturas: this.plan_vida.asignaturas,
+      aula: this.plan_vida.aula.id,
+      descripcion: this.plan_vida.descripcion,
+      objetivo_general: this.plan_vida.objetivo_general,
+      metas_especificas: this.plan_vida.metas_especificas,
+      vision: this.plan_vida.vision,
+      ambitos: this.plan_vida.ambitos,
+      dominio: this.plan_vida.dominio,
+      necesidades: this.plan_vida.necesidades,
+      potencialidades: this.plan_vida.potencialidades,
+      gustos: this.plan_vida.gustos,
+      disgustos: this.plan_vida.disgustos,
+      deseos: this.plan_vida.deseos,
+      suenos: this.plan_vida.suenos,
+      logros: this.plan_vida.logros,
+      observaciones: this.plan_vida.observaciones,
+      estado: 1
+    }
+
+    console.log(plan, "JSON");
+
+    if(!this.editar){
+
+    this._planSrv.setPlanVida(plan).subscribe( (data) => {
+      console.log(data, "Guardado Exitoso");
+
+      
+    })} else{
+
+      plan.id = this.plan_seleccionado.id;
+      this._planSrv.editarPlanVida(plan).subscribe( (data) => {
+        console.log(data, "EDITADO CORRECTAMENE");
+        
+      })
+
+    }
+    
+    this.forma.reset();
+    this.limpiarArrays();
+    // this._planSrv.setPlanVida(this.plan_vida).subscribe((data) =>{
+    //   console.log(data);
+    // })
     
   }
 
   eliminarPlan(){
-    console.log(this.plan_seleccionado);
     
-  //   this.confirmationService.confirm({
-  //     message: 'Do you want to delete this record?',
-  //     header: 'Delete Confirmation',
-  //     icon: 'pi pi-info-circle',
-  //     accept: () => {
-  //         this.msgs = [{severity:'info', summary:'Confirmed', detail:'Record deleted'}];
-  //     },
-  //     reject: () => {
-  //         this.msgs = [{severity:'info', summary:'Rejected', detail:'You have rejected'}];
-  //     }
-  // });
+
+    let plan = {
+      id: this.plan_seleccionado.id,
+      periodo_lectivo: this.plan_seleccionado.periodo_lectivo.id,
+      docente: this.plan_seleccionado.docente.id,
+      alumno: this.plan_seleccionado.alumno.id,
+      asignaturas: this.plan_seleccionado.asignaturas,
+      aula: this.plan_seleccionado.aula.id,
+      descripcion: this.plan_seleccionado.descripcion,
+      objetivo_general: this.plan_seleccionado.objetivo_general,
+      metas_especificas: this.plan_seleccionado.metas_especificas,
+      vision: this.plan_seleccionado.vision,
+      ambitos: this.plan_seleccionado.ambitos,
+      dominio: this.plan_seleccionado.dominio,
+      necesidades: this.plan_seleccionado.necesidades,
+      potencialidades: this.plan_seleccionado.potencialidades,
+      gustos: this.plan_seleccionado.gustos,
+      disgustos: this.plan_seleccionado.disgustos,
+      deseos: this.plan_seleccionado.deseos,
+      suenos: this.plan_seleccionado.suenos,
+      logros: this.plan_seleccionado.logros,
+      observaciones: this.plan_seleccionado.observaciones,
+      estado: 1,
+    }
+
+    console.log(plan, "Plan Eliminar");
+
+    this._planSrv.editarPlanVida(plan).subscribe( data => {
+      console.log(data, "PLAN ELIMINADO");
+      
+    })
 
   }
 
@@ -458,10 +626,11 @@ export class PlanVidaComponent implements OnInit {
   }
 
   onRowSelect(event) {
+    
     this.nuevo_plan = false;
     this.plan_editar = this.clonePlan(event.data);
     this.editar = true;
-    console.log(this.plan_seleccionado);
+    console.log(this.plan_seleccionado, "PLAN SELECCIONADO");
 
     // let plan_select = event.data;
 
@@ -520,16 +689,16 @@ export class PlanVidaComponent implements OnInit {
     // console.log(plan_select.alumno);
 
     this.forma.setValue({
-      periodoLectivo: this.plan_seleccionado.periodoLectivo,
+      periodo_lectivo: this.plan_seleccionado.periodo_lectivo,
       docente: this.plan_seleccionado.docente,
       alumno: this.plan_seleccionado.alumno,
       aula: this.plan_seleccionado.aula,
-      asignatura: this.plan_seleccionado.asignaturas,
+      asignaturas: this.plan_seleccionado.asignaturas,
       descripcion: this.plan_seleccionado.descripcion,
-      objetivoGeneral: this.plan_seleccionado.objetivoGeneral,
-      metasEspecificas: this.plan_seleccionado.metasEspecificas,
+      objetivo_general: this.plan_seleccionado.objetivo_general,
+      metas_especificas: this.plan_seleccionado.metas_especificas,
       vision: this.plan_seleccionado.vision,
-      ambito: this.plan_seleccionado.ambitos,
+      ambitos: this.plan_seleccionado.ambitos,
       dominio: this.plan_seleccionado.dominio,
       necesidades: this.plan_seleccionado.necesidades,
       potencialidades: this.plan_seleccionado.potencialidades,
@@ -542,42 +711,34 @@ export class PlanVidaComponent implements OnInit {
 
     });
 
-    this.forma.get("periodoLectivo").setValue(this.periodos_lectivos.find( periodo_lectivo => periodo_lectivo.nombre === this.plan_seleccionado.periodoLectivo.nombre ));
+    // this.forma.get("periodoLectivo").setValue(this.periodos_lectivos.find( periodo_lectivo => periodo_lectivo.nombre === this.plan_seleccionado.periodo_lectivo.nombre ));
 
     // this.editarUniversidad(this.pasante_editar.institucion);
   }
 
-  filtrarContenido(event: any){
-    console.log(event.value.nombre);
-    
-    this.table.filterGlobal(event.value.nombre, 'contains')
-  }
 
-  // periodoSeleccionado(e: any){
-  //   console.log(e.value);
-    
-  // }
 
   filtrarDocente(e: any) {
     let query = e.query;
     let docentes: Docente[] = this.docentes;
 
     this.docentes_filtrados = [];
-    for (let i = 0; i < docentes.length; i++) {
-      let docente = docentes[i];
 
+    docentes.forEach( (docente) => {
+      
       if (
-        docente.persona.primerApellido
+        docente.persona.primer_apellido
           .toLowerCase()
           .indexOf(query.toLowerCase()) == 0
-      ) {
-        this.docentes_filtrados.push(docente);
-      } else {
-        if (docente.persona.identificacion.indexOf(query) == 0) {
-          this.docentes_filtrados.push(docente);
+        ) {
+            this.docentes_filtrados.push(docente);
+        } else {
+          if (docente.persona.identificacion.indexOf(query) == 0) {
+            this.docentes_filtrados.push(docente);
+          }
         }
-      }
-    }
+      
+    })
   }
 
   // filtrarDocenteEditado(e: any) {
@@ -602,27 +763,28 @@ export class PlanVidaComponent implements OnInit {
   //   }
   // }
 
-  filtrarEstudiante(e: any) {
-    let query = e.query;
-    let estudiantes: Estudiante[] = this.estudiantes;
+  filtrarAlumno(e: any) {
+    let query:string = e.query;
+    let alumnos: Alumno[] = this.alumnos;
 
-    this.estudiantes_filtrados = [];
-    for (let i = 0; i < estudiantes.length; i++) {
-      let estudiante = estudiantes[i];
-      console.log(estudiante);
+    this.alumnos_filtrados = [];
+
+    alumnos.forEach( (alumno) => {
+
+      console.log(query);
       
       if (
-        estudiante.persona.primerApellido
+        alumno.persona.primer_apellido
           .toLowerCase()
           .indexOf(query.toLowerCase()) == 0
       ) {
-        this.estudiantes_filtrados.push(estudiante);
+        this.alumnos_filtrados.push(alumno);
       } else {
-        if (estudiante.persona.identificacion.indexOf(query) == 0) {
-          this.estudiantes_filtrados.push(estudiante);
+        if (alumno.persona.identificacion.indexOf(query) == 0) {
+          this.alumnos_filtrados.push(alumno);
         }
       }
-    }
+    } )
   }
 
   filtrarAula(event) {
@@ -630,13 +792,19 @@ export class PlanVidaComponent implements OnInit {
     let aulas: Aula[] = this.aulas;
 
     this.aulas_filtradas = [];
-    for (let i = 0; i < aulas.length; i++) {
-      let aula = aulas[i];
+
+    aulas.forEach( (aula) => {
 
       if (aula.nombre.toLowerCase().indexOf(query.toLowerCase()) == 0) {
         this.aulas_filtradas.push(aula);
       }
-    }
+
+    } )
+
+    // for (let i = 0; i < aulas.length; i++) {
+    //   let aula = aulas[i];
+
+    // }
   }
 
   filtrarPeriodo(event) {
@@ -657,6 +825,338 @@ export class PlanVidaComponent implements OnInit {
     console.log("CLICK EN GENERAR");
     
   }
+
+  filtrarContenido(e) {
+    console.log(e.value);
+    this.mostrarAdmin = true;
+  }
+
+  abrirPDF(){
+    this.mostrarAdmin = false;
+    this.generarPlanesporPeriodo();
+  }
+
+  generarPlanesporPeriodo(){
+
+    let fecha = `${new Date().getDate()}/${new Date().getMonth()}/${new Date().getFullYear()}`
+    let planes_filtrados=[];
+    let cols: string[] = [];
+    let valor = [];
+    let valores = [];
+
+    let admin_colums = ['', "Elaborado Por", "Revisado Por", "Aprobado Por"];
+    let admin_fields = [["DETALLE", this.administracion.elaborado_por, this.administracion.revisado_por, this.administracion.aprobado_por],
+                        ["FIRMA", '', '', ''],
+                        ["FECHA", fecha, fecha, fecha] ]
+
+    this.planes_vida.forEach( (plan:Plan_Vida) => {
+      if(plan.periodo_lectivo.id == this.periodo_pdf.id){
+        planes_filtrados.push(plan);
+      }
+    } )
+
+    this.cols.forEach( col => {
+      cols.push(col.header);
+    } )
+    cols.push("VISIÓN")
+    cols.push("DESCRIPCIÓN")
+
+    // console.log(planes_filtrados);
+
+    planes_filtrados.forEach( (plan:Plan_Vida) => {
+      console.log(planes_filtrados);
+      
+      // let aux = [];
+      valor.push(`${plan.docente.persona.primer_nombre} ${plan.docente.persona.primer_apellido}`);
+      valor.push(`${plan.alumno.persona.primer_nombre} ${plan.alumno.persona.primer_apellido}`);
+      valor.push(plan.aula.nombre);
+      valor.push(plan.periodo_lectivo.nombre);
+      valor.push(plan.objetivo_general);
+      valor.push(plan.vision);
+      valor.push(plan.descripcion);
+      // visita.acompanantes.forEach( (persona:any) => {
+      //   aux.push(`${persona.nombre} ${persona.contacto}`)
+      // } )
+      // valor.push(aux);
+      valores.push(valor);
+    })
+
+    const head = [cols]
+    const data = valores
+    const head_2 = [admin_colums]
+    const data_2 = admin_fields
+    const doc = new jsPDF("p","mm","a4");
+    const pdfWidht=210;  // width of A4 in mm
+    const pdfHeight=297;  // height of A4 in mm
+
+    let logo_ipca= new Image();
+    logo_ipca.src = 'assets/img/logo-editado.png';
+
+    doc.addImage(logo_ipca, 'PNG', pdfWidht/3.2, pdfHeight/5, 85, 65, 'logo_IPCA', 'NONE', 0);
+    doc.setFontSize(20);
+    doc.text(`Planes de Vida por ${this.periodo_pdf.nombre}`, pdfWidht/2,pdfHeight/2, {align:"center"});
+
+    doc.addPage('a4', "landscape")
+    // doc.setFontSize(20);
+    // doc.text(`Listado de Períodos Lectivo en ${this.periodo_lectivo.nombre}`, pdfWidht/2,pdfHeight/15, {align:"center"});
+    // doc.table(pdfWidht/15,pdfHeight/4, aulas_filtradas, cols)
+    autoTable(doc, {
+      head: head,
+      body: data,
+      theme: "striped",
+      didDrawCell: (data) => {
+        console.log(data.column.index)
+      },
+    })
+    doc.addPage('a4',"l");
+
+    autoTable(doc, {
+      head: head_2,
+      body: data_2,
+      theme: "grid",
+      didDrawCell: (data) => {
+        console.log(data.column.index)
+      },
+    })
+
+    doc.setFontSize(8);
+    doc.text('Documento generado por IPCAsist', pdfWidht/2, pdfHeight/1.03, {align:"center"});
+
+    doc.save(`Planes_Vida_${this.periodo_pdf.nombre}.pdf`);
+    this.periodo_pdf = {};
+
+  }
+
+  generarPlan(){
+    const doc = new jsPDF("p","mm","a4");
+    const pdfWidht=210;  // width of A4 in mm
+    const pdfHeight=297;  // height of A4 in mm
+
+    let fecha = `${new Date().getDate()}/${new Date().getMonth()}/${new Date().getFullYear()}`
+    // let planes_filtrados
+    let cols = [];
+    let valor = [];
+    let valores = [];
+    let admin_colums = ['', "Elaborado Por", "Revisado Por", "Aprobado Por"];
+    let admin_fields = [["DETALLE", this.plan_admin.elaborado_por, this.plan_admin.revisado_por, this.plan_admin.aprobado_por],
+                        ["FIRMA", '', '', ''],
+                        ["FECHA", fecha, fecha, fecha] ]
+
+    let logo_ipca= new Image();
+    logo_ipca.src = 'assets/img/logo-editado.png';
+  
+    doc.addImage(logo_ipca, 'PNG', pdfWidht/3.2, pdfHeight/5, 85, 65, 'logo_IPCA', 'NONE', 0);
+    doc.setFontSize(18);
+    doc.text(`Institución de Parálisis Cerebral del Azuay`, pdfWidht/2,pdfHeight/2, {align:"center"});
+
+    // doc.addImage(logo_ipca, 'PNG', pdfWidht/3, pdfHeight/10, 35, 25, 'logo_IPCA', 'NONE', 0);
+    // doc.setFontSize(16);
+
+    doc.setFontSize(14);
+    doc.text(`Periodo Lectivo ${this.plan_pdf.periodo_lectivo.nombre}`, pdfWidht/2,pdfHeight/1.90, {align:"center"});
+    doc.addPage('a4', "landscape")
+    // doc.setFontSize(12);
+    cols = [
+      ["DATOS INFORMATIVOS",null, null, null, null],
+      ['DOCENTE', 'ASIGNATURAS', 'ALUMNO', 'GRADO/CURSO', 'DESCRIPCIÓN GENERAL']
+    ]
+    let aux = [];
+    valor.push(`${this.plan_pdf.docente.persona.primer_nombre} ${this.plan_pdf.docente.persona.segundo_nombre}
+    ${this.plan_pdf.docente.persona.primer_apellido} ${this.plan_pdf.docente.persona.segundo_apellido}`)
+    // valor.push(this.plan_pdf.asignaturas)
+    this.plan_pdf.asignaturas.forEach( (a:any) => {
+        aux.push(a.nombre)
+      } )
+    valor.push(aux);
+    valor.push(`${this.plan_pdf.alumno.persona.primer_nombre} ${this.plan_pdf.alumno.persona.segundo_nombre} 
+    ${this.plan_pdf.alumno.persona.primer_apellido} ${this.plan_pdf.alumno.persona.segundo_apellido}`)
+    valor.push(this.plan_pdf.aula.nombre)
+    valor.push(this.plan_pdf.descripcion)
+    valores.push(valor);
+
+    const head_info = cols
+    const data_info = valores
+    const head_2 = [admin_colums]
+    const data_2 = admin_fields
+    valor = []
+    cols = []
+    valores = []
+    aux = []
+
+    autoTable(doc, {
+      head: head_info,
+      body: data_info,
+      theme: "striped",
+      // startY: pdfHeight/2,
+      didDrawCell: (data) => {
+        console.log(data.column.index)
+      },
+    })
+
+    cols = [
+      ["PLANIFICACIÓN",null, null, null, null, null],
+      ['OBJETIVO GENERAL', 'METAS ESPECÍFICAS', 'NECESIDADES', 'POTENCIALIDADES', 'GUSTOS', 'DISGUSTOS']
+    ]
+    valor.push(this.plan_pdf.objetivo_general)
+    // valor.push(this.plan_pdf.asignaturas)
+    this.plan_pdf.metas_especificas.forEach( (a:any) => {
+        aux.push(a)
+      } )
+    valor.push(aux);
+    aux = []
+    this.plan_pdf.necesidades.forEach( (a:any) => {
+      aux.push(`\n${a.nombre}: ${a.descripcion}`)
+    } )
+    valor.push(aux)
+    aux = []
+    this.plan_pdf.potencialidades.forEach( (a:any) => {
+      aux.push(`\n${a.nombre}: ${a.descripcion}`)
+    } )
+    valor.push(aux)
+    aux = []
+    this.plan_pdf.gustos.forEach( (a:any) => {
+      aux.push(`\n${a.nombre}: ${a.descripcion}`)
+
+    } )
+    valor.push(aux)
+    aux = []
+    this.plan_pdf.disgustos.forEach( (a:any) => {
+      aux.push(`\n${a.nombre}: ${a.descripcion}`)
+
+    } )
+    valor.push(aux)
+    // valor.push(this.plan_pdf.aula.nombre)
+    // valor.push(this.plan_pdf.descripcion)
+    valores.push(valor);
+
+    const head_plani_1 = cols
+    const data_plani_1 = valores
+
+    valor = []
+    cols = []
+    valores = []
+    aux = []
+
+    autoTable(doc, {
+      head: head_plani_1,
+      body: data_plani_1,
+      theme: "striped",
+      startY: pdfHeight/6,
+      didDrawCell: (data) => {
+        console.log(data.column.index)
+      },
+    })
+
+    cols = [
+      ["PLANIFICACIÓN",null, null, null, ],
+      ['DESEOS', 'SUEÑOS', 'ÁMBITOS', 'DOMINIOS']
+    ]
+    // valor.push(this.plan_pdf.objetivo_general)
+    // valor.push(this.plan_pdf.asignaturas)
+    this.plan_pdf.deseos.forEach( (a:any) => {
+      aux.push(`\n${a.nombre}: ${a.descripcion}`)
+      } )
+    valor.push(aux);
+    aux = []
+    this.plan_pdf.suenos.forEach( (a:any) => {
+      aux.push(`\n${a.nombre}: ${a.descripcion}`)
+    } )
+    valor.push(aux)
+    aux = []
+    this.plan_pdf.ambitos.forEach( (a:any) => {
+      aux.push(a.nombre)
+    } )
+    valor.push(aux)
+    aux = []
+    this.plan_pdf.dominio.forEach( (a:any) => {
+      aux.push(a.nombre)
+
+    } )
+    valor.push(aux)
+    // aux = []
+    // this.plan_pdf.disgustos.forEach( (a:any) => {
+    //   aux.push(a.nombre)
+
+    // } )
+    // valor.push(aux)
+    // valor.push(this.plan_pdf.aula.nombre)
+    // valor.push(this.plan_pdf.descripcion)
+    valores.push(valor);
+
+    const head_plani_2 = cols
+    const data_plani_2 = valores
+
+    valor = []
+    cols = []
+    valores = []
+    aux = []
+
+    autoTable(doc, {
+      head: head_plani_2,
+      body: data_plani_2,
+      theme: "striped",
+      startY: pdfHeight/2.5,
+      didDrawCell: (data) => {
+        console.log(data.column.index)
+      },
+    })
+
+    cols = [
+      ["DETALLE",null ],
+      ['LOGROS', 'OBSERVACIONES']
+    ]
+    // valor.push(this.plan_pdf.objetivo_general)
+    // valor.push(this.plan_pdf.asignaturas)
+    this.plan_pdf.logros.forEach( (a:any) => {
+      aux.push(a)
+      } )
+    valor.push(aux);
+    valor.push(this.plan_pdf.observaciones);
+    valores.push(valor)
+
+    const head_detalle = cols
+    const data_detalle = valores
+
+    
+    doc.addPage('a4',"landscape");
+    autoTable(doc, {
+      head: head_detalle,
+      body: data_detalle,
+      theme: "striped",
+      // startY: pdfHeight/1.8,
+      didDrawCell: (data) => {
+        console.log(data.column.index)
+      },
+    })
+    
+    autoTable(doc, {
+      head: head_2,
+      body: data_2,
+      theme: "grid",
+      startY: pdfHeight/5,
+      didDrawCell: (data) => {
+        console.log(data.column.index)
+      },
+    })
+
+    doc.setFontSize(8);
+    doc.text('Documento generado por IPCAsist', pdfHeight/2, pdfWidht/1.03, {align:"center"});
+
+
+    doc.save(`Planes_Vida_${this.plan_pdf.alumno.persona.primer_nombre}_${this.plan_pdf.alumno.persona.primer_apellido}_${this.plan_pdf.periodo_lectivo.nombre}.pdf`);
+    this.plan_pdf = {};
+    
+    // doc.text(`Plan de Vida - ${this.plan_pdf.alumno.persona.primer_nombre} ${this.plan_pdf.alumno.persona.primer_apellido} - ${this.plan_pdf.periodo_lectivo.nombre}`, pdfWidht/2,pdfHeight/6, {align:"center"});
+    
+
+  }
+
+  copiarPlan(event){
+    console.log(event, "Event");
+    this.mostrar_pdf = true;
+    this.plan_pdf = event;
+  }
+
 
   // filtrarAulaEditada(event) {
   //   let query = event.query;

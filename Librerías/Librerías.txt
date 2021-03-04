@@ -58,3 +58,11 @@ Libreria de PdfMake
 npm install --save pdfmake
 
 -------------------------------------------------
+
+Generar Pdf's - JSPDF
+
+npm install jspdf --save
+npm install @types/jspdf --save
+npm install jspdf jspdf-autotable
+
+-------------------------------------------------

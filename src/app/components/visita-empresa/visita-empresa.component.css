@@ -24,6 +24,10 @@
   margin-left: auto;
 }
 
+.boton {
+  margin: 0.5em;
+}
+
 .fecha {
   margin-left: 1em;
 }
@@ -48,4 +52,8 @@
 
 .edicion {
   margin-top: 0.5em;
+}
+
+.text {
+  margin-top: 2em;
 }

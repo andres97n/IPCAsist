@@ -1,15 +1,19 @@
+import { Alumno } from "./alumno";
+import { AlumnoAula } from "./alumno_aula";
 import { Docente } from "./docente";
-import { Pasante } from "./pasante";
 import { Periodo_Lectivo } from "./periodo_lectivo";
+import { Personal } from "./personal";
 
 export class Aula {
-  _id?: string;
-  grado?: string;
-  paralelo?: string;
-  nombre?: string;
-  docentes?: Docente[];
-  pasantes?: Pasante[];
-  especialidades?: [];
-  periodoLectivo?: Periodo_Lectivo;
-  jornada?: string;
+
+  id?: number;
+  nombre?:string;
+  capacidad?:number;
+  grado?:number;
+  alumnos?:Alumno[];
+  docentes?:Personal[];
+  periodo?:Periodo_Lectivo;
+  observaciones?:string;
+  jornada?:string;
+
 }

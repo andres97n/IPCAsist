@@ -1,14 +1,22 @@
 import { Persona } from "./persona";
-import { Docente } from "./docente";
+import { Aula } from "./aula";
 
 export class Pasante {
-  _id?: string;
-  persona?: Persona;
-  institucion?: string;
-  tutor?: Docente;
+
+  id?: number;
+  persona?: {
+    identificacion
+    nombres
+    apellidos
+    edad
+    genero
+    correo
+    contacto
+  };
+  institucion?;
+  tutor?;
+  aula?: Aula[];
   especialidad?: string;
   numHoras?: number;
-  historico?: {
-    fechaCreacion?: Date;
-  }
+
 }

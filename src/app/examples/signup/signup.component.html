@@ -70,7 +70,7 @@
                     placeholder="Nombre de Usuario"
                     pInputText
                     size="25"
-                    formControlName="nombre_usuario"
+                    formControlName="usuario"
                   />
                 </div>
   
@@ -114,13 +114,20 @@
                 </button>
               </div>
               </form>
-            <!-- </div> -->
-            
-            <div class="forgot">
-              <a href="#" class="btn btn-link btn-default"
+              <!-- </div> -->
+              
+              <div  *ngIf="error" style="margin-top: 1em;">
+                <!-- <p *ngFor="let alert of alerts" >
+                  <ngb-alert [type]="alert.type" (closed)="close(alert)">{{ alert.message }}</ngb-alert>
+                </p> -->
+                <!-- <p-toast position="top-left"></p-toast> -->
+                <p-message severity="error" text=" Advertencia, datos erróneos; consulte con el personal autorizado del IPCA para Iniciar Sesión" ></p-message>
+                <!-- <p>
+                  <button type="button" class="btn btn-primary" (click)="reset()">Reset</button>
+                </p> -->
+              <!-- <a href="#" class="btn btn-link btn-default"
                 >Olvidó su Contraseña?</a
-              >
-              <!-- btn btn-outline-neutral btn-round btn-lg -->
+              > -->
             </div>
           </div>
         </div>

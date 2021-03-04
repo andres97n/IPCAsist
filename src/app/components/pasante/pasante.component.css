@@ -67,3 +67,11 @@
 :host ::ng-deep p-dialog .ui-dialog-title {
   margin-left: 36% !important;
 }
+
+.espacio {
+  margin-top: 2em;
+}
+
+/* .espacio {
+  margin-top: 2em;
+} */

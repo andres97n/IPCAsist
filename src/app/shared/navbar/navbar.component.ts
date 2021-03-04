@@ -4,6 +4,7 @@ import {
   LocationStrategy,
   PathLocationStrategy,
 } from "@angular/common";
+import { EjemplosService } from "app/services/ejemplos.service";
 
 @Component({
   selector: "app-navbar",
@@ -14,7 +15,7 @@ export class NavbarComponent implements OnInit {
   private toggleButton: any;
   private sidebarVisible: boolean;
 
-  constructor(public location: Location, private element: ElementRef) {
+  constructor(public location: Location, private element: ElementRef, private _authService: EjemplosService) {
     this.sidebarVisible = false;
   }
 

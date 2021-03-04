@@ -1,13 +1,13 @@
 [
   {
-    "_id": "_021561efew1fwe54ewfef45",
+    "id": "_021561efew1fwe54ewfef45",
     "periodoLectivo": {
       "id": "_jfierwn4390tievjdf930tvnfd5kn",
       "nombre": "2019-2020",
       "observaciones": "Ninguna observación"
     },
     "docente": {
-      "_id": "_ui3490ng3jsnf930nerg",
+      "id": "_ui3490ng3jsnf930nerg",
       "persona": {
         "identificacion": "0104472014",
         "primerNombre": "Adriana",
@@ -17,7 +17,7 @@
       }
     },
     "alumno": {
-      "_id": "_fdfun43t9g3590tn3509tn",
+      "id": "_fdfun43t9g3590tn3509tn",
       "persona": {
         "identificacion": "0104578213",
         "primerNombre": "Evangeline",
@@ -170,14 +170,14 @@
     ]
   },
   {
-    "_id": "_021561efngej64818fef4555dnogd",
+    "id": "_021561efngej64818fef4555dnogd",
     "periodoLectivo": {
       "id": "_dfew4398sdfb89wfbi3ubsdiufd",
       "nombre": "2020-2021",
       "observaciones": "Ninguna observación"
     },
     "docente": {
-      "_id": "_nsduifwt4390fjjgh390gn",
+      "id": "_nsduifwt4390fjjgh390gn",
       "persona": {
         "identificacion": "01023245894",
         "primerNombre": "Paúl",
@@ -188,7 +188,7 @@
       
     },
     "alumno": {
-      "_id": "_fbu3t390fng39e0ng534ui30fdsgfs",
+      "id": "_fbu3t390fng39e0ng534ui30fdsgfs",
       "persona": {
         "identificacion": "0104578213",
         "primerNombre": "Antonio",

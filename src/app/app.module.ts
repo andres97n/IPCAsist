@@ -21,6 +21,7 @@ import { CommonModule } from "@angular/common";
 import { NouisliderModule } from "ng2-nouislider";
 import { JwBootstrapSwitchNg2Module } from "jw-bootstrap-switch-ng2";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { AuthGuard } from "./guards/auth.guard";
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent, FooterComponent],
@@ -43,7 +44,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     InputMaskModule,
     // GoogleMapsModule,
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent],
   // exports: [AppModule]
 })

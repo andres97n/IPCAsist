@@ -450,7 +450,7 @@
                         </div>
                       </ng-template>
                       <p-footer>
-                        Ha seleccionado: {{ universidad || "Ninguno" }}
+                        Ha seleccionado: {{ institucion || "Ninguno" }}
                       </p-footer>
                     </p-listbox>
 
@@ -535,14 +535,14 @@
                         formControlName="especialidad"
                       />
                     </div>
-                    <div class="row justify-content-center">
-                      <p-message
-                        severity="error"
-                        text=" Debe ingresar una especialidad"
-                        *ngIf="invalidos('especialidad')"
-                        style="margin-top: 1em"
-                      ></p-message>
-                    </div>
+                  </div>
+                  <div class="row justify-content-center">
+                    <p-message
+                      severity="error"
+                      text=" Debe ingresar una especialidad"
+                      *ngIf="invalidos('especialidad')"
+                      style="margin-top: 3em"
+                    ></p-message>
                   </div>
                 </p-card>
               </div>
@@ -572,6 +572,40 @@
                         ></i
                       ></span>
                       <p-autoComplete
+                      [suggestions]="docentes_filtrados"
+                      (completeMethod)="filtrarDocente($event)"
+                      [size]="30"
+                      [minLength]="1"
+                      placeholder="Docente"
+                      [dropdown]="true"
+                      formControlName="tutor"
+                      field="persona.identificacion"
+                    >
+                      <ng-template let-teacher pTemplate="item">
+                        <div class="ui-helper-clearfix">
+                          <div
+                            style="
+                              font-size: 10px;
+                              display: inline-block;
+                              margin: 10px 10px 0 0;
+                            "
+                          >
+                            {{ teacher.persona.identificacion }}
+                          </div>
+                          <div
+                            style="
+                              font-size: 12px;
+                              float: right;
+                              margin: 10px 10px 0 0;
+                            "
+                          >
+                            {{ teacher.persona.primer_nombre }}
+                            {{ teacher.persona.primer_apellido }}
+                          </div>
+                        </div>
+                      </ng-template>
+                    </p-autoComplete>
+                      <!-- <p-autoComplete
                         [suggestions]="filteredCountriesSingle"
                         (completeMethod)="filterCountrySingle($event)"
                         field="name"
@@ -579,7 +613,7 @@
                         placeholder="Nombre o Identificación"
                         [minLength]="1"
                         formControlName="tutor"
-                      ></p-autoComplete>
+                      ></p-autoComplete> -->
                     </div>
                     <div class="row justify-content-center">
                       <p-message
@@ -595,12 +629,12 @@
             </div>
             <!-- <br /> -->
 
-            <!-- Card Fecha de Inicio -->
+            <!-- Card Aulas -->
             <div class="row espacio_info">
               <div class="col-md-12">
                 <p-card
-                  header="Fecha de Inicio"
-                  subheader="Ingrese la Fecha de Inicio de las actividades del Pasante."
+                  header="Aulas"
+                  subheader="Seleccione todas las Aulas que considere trabjará el Pasante"
                   styleClass="ui-card-shadow"
                 >
                   <p-header>
@@ -617,22 +651,29 @@
                           style="line-height: 1"
                         ></i
                       ></span>
-                      <p-calendar
+                      <p-multiSelect 
+                      [options]="lista_aulas" 
+                      formControlName="aulas" 
+                      defaultLabel="Seleccione un Aula" 
+                      optionLabel="nombre"
+                      class="multiselect-custom">
+                      </p-multiSelect>
+                      <!-- <p-calendar
                         [locale]="es"
                         dateFormat="dd/mm/yy"
                         placeholder="Fecha de Visita"
                         formControlName="fecha_inicio"
                         (onSelect)="mostrarFecha($event)"
                         [showWeek]="true"
-                      ></p-calendar>
+                      ></p-calendar> -->
                     </div>
                     <div class="row justify-content-center">
                       <div class="col-md-12">
-                        <br />
                         <p-message
                           severity="error"
-                          text=" Debe seleccionar el Día de Ingreso"
-                          *ngIf="invalidos('fecha_inicio')"
+                          text=" Debe seleccionar al menos un Aula"
+                          *ngIf="invalidos('aulas')"
+                          style="margin-top: 1em"
                         ></p-message>
                       </div>
                     </div>
@@ -745,17 +786,133 @@
           <br />
 
           <p-table
+            #dt
             [columns]="cols"
             [value]="pasantes"
-            dataKey="_id"
+            dataKey="id"
             [resizableColumns]="true"
             [scrollable]="true"
-            scrollHeight="400px"
+            scrollHeight="500px"
             styleClass="ui-table-summary"
             selectionMode="single"
             [(selection)]="pasante_seleccionado"
             (onRowSelect)="onRowSelect($event)"
+            [globalFilterFields]="['persona.identificacion','persona.apellidos',
+                                   'institucion', 'tutor.persona.primer_apellido']"
+            [paginator]="true" 
+            [rows]="5" 
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
           >
+
+          <ng-template pTemplate="caption">
+            <div class="row ">
+              <div class= "col-md-6" style="text-align: left"> 
+                
+                <ng-template #contenido let-modal>
+                  <div class="modal-header">
+                      <h4 class="modal-title">Generar PDF por Aula</h4>
+                      <button class="close" aria-label="close" type="button" (click)="modalService.dismissAll()">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row ">
+                      <div class="col-md-12" style="text-align: center">
+                        <p>Seleccione un Aula para generar el documento</p>
+                      </div>
+                      <div class= "col-md-12" style="text-align: center"> 
+                        <!-- <p-multiSelect 
+                      [options]="lista_aulas" 
+                      [(ngModel)]="aulas_pdf"
+                      defaultLabel="Seleccione un Aula" 
+                      optionLabel="nombre"
+                      (onChange)="filtrarContenido($event)"
+                      class="multiselect-custom">
+                      </p-multiSelect>   -->
+                      
+                        <p-dropdown [options]="lista_aulas" 
+                                    [(ngModel)]="aulas_pdf" 
+                                    filter="true" 
+                                    optionLabel="nombre"
+                                    placeholder="Aulas"
+                                    (onChange)="filtrarContenido($event)"
+                                    pTooltip="Seleccione Generar PDF">
+                          <ng-template let-item pTemplate="selectedItem">
+                              <span style="vertical-align:middle;">{{item.label}}</span>
+                          </ng-template>
+                          <ng-template let-periodo pTemplate="item">
+                              <div class="ui-helper-clearfix" style="height: 45px;">
+                                  <div style="font-size:14px; text-align:middle">{{periodo.label}}</div>
+                              </div>
+                          </ng-template>
+                        </p-dropdown>
+
+                      </div>
+                      <br/>
+                      <!-- <div class="col-md-6" style="text-align: center">
+                          <button 
+                            type="button" 
+                            class="btn btn-outline-default btn-round btn-sm" 
+                            [disabled]="!institucion" 
+                            (click)="generarPlanes()"
+                            
+                            >
+                            <i class="fas fa-file-pdf fa-lg fa-fw"></i> GENERAR PDF
+                          </button>
+                    </div> -->
+                    <p-dialog header="Detalle de Documento" [(visible)]="mostrarAdmin" [style]="{width: '20vw'}">
+                      <div class="row justify-content-center">
+                        <div class="col-md-12">
+                          <span class="ui-float-label" style="margin-top: 2em;">
+                            <input id="float-input" type="text" size="30" pInputText [(ngModel)]="administracion.elaborado_por"> 
+                            <label for="float-input">Elaborado Por</label>
+                        </span>
+                        </div>
+                        <div class="col-md-12">
+                          <span class="ui-float-label espacio">
+                            <input id="float-input" type="text" size="30" pInputText [(ngModel)]="administracion.revisado_por"> 
+                            <label for="float-input">Revisado Por</label>
+                        </span>
+                        </div>
+                        <div class="col-md-12">
+                          <span class="ui-float-label espacio">
+                            <input id="float-input" type="text" size="30" pInputText [(ngModel)]="administracion.aprobado_por"> 
+                            <label for="float-input">Aprobado Por</label>
+                        </span>
+                        </div>
+                        <div class="col-md-12 espacio" style="text-align: center">
+                          <button 
+                            type="button" 
+                            class="btn btn-outline-default btn-round btn-sm" 
+                            (click)="abrirPDF()"
+                            
+                            >
+                            <i class="fas fa-file-pdf fa-lg fa-fw"></i> GUARDAR
+                          </button>
+                        </div>
+                      </div>
+                  </p-dialog>
+                  </div>
+                  <br/>
+                  <div class="modal-footer">
+                    </div>
+                      <!-- <button type="button" class="btn btn-success" (click)="modalService.close()">Ok!</button> -->
+                  </div>
+              </ng-template>
+                <button type="button" class="btn btn-outline-info" (click)="modalService.open(contenido)">GENERAR PDF</button>
+              </div>
+              <div class= "col-md-6" style="text-align: right">   
+                <div class="p-d-flex">
+                  <span class="ui-inputgroup-addon"><i class="fas fa-search fa-lg"></i></span>
+                            
+                            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Buscar en contenido" />
+                        
+                </div>
+              </div>
+            </div>
+        </ng-template>
+
             <ng-template pTemplate="colgroup" let-columns>
               <colgroup>
                 <col />
@@ -790,19 +947,20 @@
                   {{ rowData.persona.identificacion }}
                 </td>
                 <td>
-                  {{ rowData.persona.primerNombre }}
-                  {{ rowData.persona.segundoNombre }}
+                  {{ rowData.persona.nombres }}
+                  {{ rowData.persona.apellidos }}
                 </td>
                 <td>
-                  {{ rowData.persona.primerApellido }}
-                  {{ rowData.persona.segundoApellido }}
+                  <div *ngFor="let aula of rowData.aula">
+                   <p>{{ aula.nombre }}</p> 
+                  </div>
                 </td>
                 <td>
                   {{ rowData.institucion }}
                 </td>
                 <td>
-                  {{ rowData.tutor.persona.primerNombre }}
-                  {{ rowData.tutor.persona.primerApellido }}
+                  {{ rowData.tutor.persona.primer_nombre }}
+                  {{ rowData.tutor.persona.primer_apellido }}
                 </td>
 
                 <!-- <td
@@ -834,13 +992,11 @@
                           </div>
                           <div class="p-col-12">
                             <b>Nombres:</b>
-                            {{ rowData.persona.primerNombre }}
-                            {{ rowData.persona.segundoNombre }}
+                            {{ rowData.persona.nombres }}
                           </div>
                           <div class="p-col-12">
                             <b>Apellidos:</b>
-                            {{ rowData.persona.primerApellido }}
-                            {{ rowData.persona.segundoApellido }}
+                            {{ rowData.persona.apellidos }}
                           </div>
                           <div class="p-col-12">
                             <b>Correo:</b>
@@ -859,9 +1015,9 @@
                             {{ rowData.institucion }}
                           </div>
                           <div class="p-col-12">
-                            <b>Instructor:</b>
-                            {{ rowData.tutor.persona.primerNombre }}
-                            {{ rowData.tutor.persona.primerApellido }}
+                            <b>Tutor:</b>
+                            {{ rowData.tutor.persona.primer_nombre }}
+                            {{ rowData.tutor.persona.primer_apellido }}
                           </div>
                           <div class="p-col-12">
                             <b>Especialidad:</b>
@@ -903,31 +1059,17 @@
                     <label class="fuente">NOMBRES Y APELLIDOS</label>
                     <input
                       type="text"
-                      placeholder="Primer Nombre"
+                      placeholder="Nombres"
                       pInputText
                       size="20"
-                      [(ngModel)]="pasante_editar.persona.primerNombre"
+                      [(ngModel)]="pasante_editar.persona.nombres"
                     />
                     <input
                       type="text"
-                      placeholder="Segundo Nombre"
+                      placeholder="Apellidos"
                       pInputText
                       size="20"
-                      [(ngModel)]="pasante_editar.persona.segundoNombre"
-                    />
-                    <input
-                      type="text"
-                      placeholder="Primer Apellido"
-                      pInputText
-                      size="20"
-                      [(ngModel)]="pasante_editar.persona.primerApellido"
-                    />
-                    <input
-                      type="text"
-                      placeholder="Segundo Apellido"
-                      pInputText
-                      size="20"
-                      [(ngModel)]="pasante_editar.persona.segundoApellido"
+                      [(ngModel)]="pasante_editar.persona.apellidos"
                     />
                   </div>
                 </div>
@@ -945,19 +1087,6 @@
                 </div>
               </div>
               <div class="col-md-4">
-                <div class="row edicion">
-                  <div class="col-md-12">
-                    <label for="tutor" class="fuente">FECHA DE INICIO</label>
-                    <p-calendar
-                      [locale]="es"
-                      dateFormat="dd/mm/yy"
-                      placeholder="Fecha de Visita"
-                      [(ngModel)]="pasante_editar.fechaInicio"
-                      (onSelect)="mostrarFecha($event)"
-                      [showWeek]="true"
-                    ></p-calendar>
-                  </div>
-                </div>
                 <div class="row edicion">
                   <div class="col-md-12">
                     <label for="email" class="fuente">EDAD</label>
@@ -980,7 +1109,7 @@
                       optionLabel="name"
                       (ngModelChange)="generoSeleccionado($event)"
                       placeholder="Seleccione un genero"
-                      [(ngModel)]="selectedGen"
+                      [(ngModel)]="pasante_editar.persona.genero"
                       [style]="{ minWidth: '170px', width: '170px' }"
                     ></p-dropdown>
                   </div>
@@ -993,6 +1122,19 @@
                       placeholder="Celular"
                       [(ngModel)]="pasante_editar.persona.contacto"
                     ></p-inputMask>
+                  </div>
+                </div>
+                <div class="row edicion">
+                  <div class="col-md-12">
+                    <label class="fuente">AULAS</label>
+                    <br>
+                    <p-multiSelect 
+                      [options]="lista_aulas" 
+                      [(ngModel)]="pasante_editar.aula"
+                      defaultLabel="Seleccione un Aula" 
+                      optionLabel="nombre"
+                      class="multiselect-custom">
+                      </p-multiSelect>
                   </div>
                 </div>
               </div>
@@ -1008,7 +1150,7 @@
                       [minLength]="1"
                       placeholder="Institución"
                       [dropdown]="true"
-                      [(ngModel)]="auto_universidad"
+                      [(ngModel)]="pasante_editar.institucion"
                       field="name"
                     >
                       <ng-template let-brand pTemplate="item">
@@ -1055,8 +1197,8 @@
                               margin: 8px 3px 0 0;
                             "
                           >
-                            {{ brand.persona.primerNombre }}
-                            {{ brand.persona.primerApellido }}
+                            {{ brand.persona.primer_nombre }}
+                            {{ brand.persona.primer_apellido }}
                           </div>
                         </div>
                       </ng-template>
@@ -1065,7 +1207,7 @@
                 </div>
                 <div class="row edicion">
                   <div class="col-md-12">
-                    <label for="tutor" class="fuente">ESPECIALIDAD</label>
+                    <label class="fuente">ESPECIALIDAD</label>
                     <input
                       type="text"
                       placeholder="Especialidad"
@@ -1083,7 +1225,7 @@
                       [style]="{ width: '10em' }"
                       [step]="1"
                       max="9"
-                      [(ngModel)]="pasante_editar.num_horas"
+                      [(ngModel)]="pasante_editar.numHoras"
                     ></p-slider>
                   </div>
                 </div>
@@ -1103,7 +1245,7 @@
                 <button
                   type="button"
                   class="btn btn-outline-success btn-round btn-sm"
-                  (click)="save()"
+                  (click)="editarPasante()"
                 >
                   <i class="fas fa-save fa-lg fa-fw"></i> Guardar
                 </button>

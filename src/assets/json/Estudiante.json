@@ -4,7 +4,7 @@
     "persona": {
       "_id": "_7488y434b3483brjjbfdbf34hbrh3",
       "identificacion": "0103698745",
-      "primerNombre": "Julián",
+      "primer_nombre": "Julián",
       "segundoNombre": "Andrés",
       "primerApellido": "Montenegro",
       "segundoApellido": "García",
@@ -36,7 +36,7 @@
     "padre": {
       "_id": "_83894fjrfjn4939dnnfjn43dfnj",
       "identificacion": "1027896312",
-      "primerNombre": "Carlos",
+      "primer_nombre": "Carlos",
       "segundoNombre": "Alberto",
       "primerApellido": "Montenegro",
       "segundoApellido": "Carpio",
@@ -82,7 +82,7 @@
     "persona": {
       "_id": "_7488y434b3483brjjbfdbf34hbrh3bd",
       "identificacion": "0103698745",
-      "primerNombre": "Martina",
+      "primer_nombre": "Martina",
       "segundoNombre": "Esperanza",
       "primerApellido": "Aguirre",
       "segundoApellido": "Ochoa",
@@ -158,7 +158,7 @@
     "persona": {
       "_id": "_djfjf48993udsksndfndnf493fdfnjfkf",
       "identificacion": "0105689120",
-      "primerNombre": "Gabriela",
+      "primer_nombre": "Gabriela",
       "segundoNombre": "Mercedes",
       "primerApellido": "Conte",
       "segundoApellido": "Martinez",

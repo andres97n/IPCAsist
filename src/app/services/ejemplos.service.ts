@@ -1,5 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { Router } from "@angular/router";
+import { Sesion } from "app/clases/sesion";
 
 @Injectable({
   providedIn: "root",
@@ -7,7 +9,7 @@ import { HttpClient } from "@angular/common/http";
 export class EjemplosService {
   universidades: Array<any>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private _router:Router) {
     this.llenarUniversidades();
   }
 
@@ -32,47 +34,47 @@ export class EjemplosService {
     this.universidades = [
       {
         name: "Universidad de Cuenca",
-        value: "UCUENCA",
+        value: "Universidad de Cuenca",
       },
       {
         name: "Universidad Católica de Cuenca",
-        value: "CATOCUENCA",
+        value: "Universidad Católica de Cuenca",
       },
       {
         name: "Universidad del Azuay",
-        value: "UDA",
+        value: "Universidad del Azuay",
       },
       {
         name: "Universidad Politécnica Salesiana",
-        value: "UPS",
+        value: "Universidad Politécnica Salesiana",
       },
       {
         name: "Universidad Nacional de Educación",
-        value: "UNAE",
+        value: "Universidad Nacional de Educación",
       },
       {
         name: "Universidad Técnica Particular de Loja",
-        value: "UTPL",
+        value: "Universidad Técnica Particular de Loja",
       },
       {
-        name: "Instituo Superior Tecnológico del Azuay",
-        value: "ISTA",
+        name: "Instituto Superior Tecnológico del Azuay",
+        value: "Instituto Superior Tecnológico del Azuay",
       },
       {
         name: "Instituto Tecnológico Sudamericano",
-        value: "SUDA",
+        value: "Instituto Tecnológico Sudamericano",
       },
       {
         name: "Instituto Tecnológico Superior San Gabriel",
-        value: "SAN GABRIEL",
+        value: "Instituto Tecnológico Superior San Gabriel",
       },
       {
         name: "Instituto Tecnológico Superior American Collage",
-        value: "AMERICAN COLLAGE",
+        value: "Instituto Tecnológico Superior American Collage",
       },
       {
         name: "Instituto Superior San Isidro",
-        value: "SAN ISIDRO",
+        value: "Instituto Superior San Isidro",
       },
       {
         name: "Otro",
@@ -89,4 +91,25 @@ export class EjemplosService {
       return JSON.parse(collages);
     }
   }
+
+  getUsuarios(){
+    return this.http.get("/assets/json/Sesion.json");
+  }
+
+  loginUser(user:Sesion) {
+    localStorage.setItem('inicio', user.usuario);
+    console.log(localStorage.getItem('inicio'));
+    
+  }
+
+  logoutUser() {
+    localStorage.removeItem('inicio')
+    this._router.navigate(['sesion'])
+  }
+
+
+  loggedIn() {
+    return !!localStorage.getItem('inicio')    
+  }
+
 }

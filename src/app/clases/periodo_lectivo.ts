@@ -1,12 +1,15 @@
 import { Docente } from "./docente";
 
 export class Periodo_Lectivo{
-    id?: string;
+
+    id?: number;
     nombre?: string;
-    descripcion?: string;
-    fechaInicio?: Date;
-    fechaFin?: Date;
-    fechaFinClases?: Date;
-    estado?: string;
-    responsables?: Docente[];
+    fecha_inicio?:Date;
+    fecha_fin?:Date;
+    estado?:number;
+    fecha_fin_clases?:Date;
+    observaciones?:string;
+    coordinador?:{};
+    sub_coordinador?:{};
+    
 }

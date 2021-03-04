@@ -1,5 +1,4 @@
-import { Component, OnInit } from "@angular/core";
-import { Persons } from "app/clases/persons";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { EjemplosService } from "app/services/ejemplos.service";
 import { PasantesService } from "app/services/pasantes.service";
@@ -13,11 +12,19 @@ import {
 } from "@angular/animations";
 import { DocenteService } from "app/services/docente.service";
 import { Docente } from "app/clases/docente";
+import { Aula } from "app/clases/aula";
+import { Table } from "primeng/table";
+import { Persona } from "app/clases/persona";
+import { Personal } from "app/clases/personal";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { jsPDF } from "jspdf";
+import autoTable from 'jspdf-autotable'
+// import { Table } from "primeng";
 
 @Component({
   selector: "app-pasante",
   templateUrl: "./pasante.component.html",
-  styleUrls: ["./pasante.component.css"],
+  styleUrls: ["./pasante.component.css", "./pasante.component.scss"],
   animations: [
     trigger("rowExpansionTrigger", [
       state(
@@ -39,10 +46,10 @@ import { Docente } from "app/clases/docente";
   ],
 })
 export class PasanteComponent implements OnInit {
-  persons: Persons[] = [];
 
   cols: any[];
   displayDialog: boolean;
+  mostrarAdmin: boolean;
 
   genero: Array<any>;
   selectedGen: any;
@@ -66,22 +73,34 @@ export class PasanteComponent implements OnInit {
 
   forma: FormGroup;
 
+  lista_aulas: Aula[];
+
   pasantes: Pasante[];
   pasante: Pasante;
   pasante_seleccionado: Pasante;
   pasante_editar: Pasante;
   nuevo_pasante: boolean;
 
-  docentes: Docente[];
-  docentes_filtrados: Docente[];
+  docentes: Personal[];
+  docentes_filtrados: Personal[];
 
-  hora_visita: Date;
+  administracion: {
+    elaborado_por?:string,
+    revisado_por?: string,
+    aprobado_por?: string
+  } = {};
+
+  aulas_pdf:Aula;
+
+  // hora_visita: Date;
+
+  @ViewChild('dt') table: Table;
 
   constructor(
     private fb: FormBuilder,
     private _ejemplosSrv: EjemplosService,
     private _pasanteSrv: PasantesService,
-    private _docenteSrv: DocenteService
+    private modalService: NgbModal
   ) {
     this.crearFormulario();
 
@@ -91,26 +110,79 @@ export class PasanteComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._ejemplosSrv.getPersons().subscribe((persons: Persons[]) => {
-      console.log(persons);
 
-      this.persons = persons;
-    });
+    this.mostrarAdmin = false;
 
-    this._pasanteSrv.getPasantes().subscribe((pasantes: Pasante[]) => {
-      console.log(pasantes);
+    this._pasanteSrv.getLista("pasantes").subscribe((pasantes: Pasante[]) => {
       this.pasantes = pasantes;
+      // this.instituciones = [];
+      // this.institucion = {};
+
+      this.pasantes.forEach( (pasante:Pasante) => {
+
+        if(pasante.aula.length != 0){
+          pasante.aula.forEach( (aula: Aula) => {
+            this._pasanteSrv.getDetalle(aula, "aula").subscribe( (aula:Aula) => {
+              // if(pasante.aula.length == 1){
+
+              //   pasante.aula = []
+              // }
+              pasante.aula.push(aula);
+              // this._aulaSrv.getDetalle(teacher.id, "persona").subscribe( (person:Persona) =>{
+              //   teacher.persona = person;
+              // } )
+            })
+          } )
+        }
+        // this.institucion.nombre = pasante.institucion
+        // this.instituciones.push(this.institucion);
+        // this.pasante.aula.reverse();
+      } )
+
+      this.pasantes.forEach( (pasante:Pasante) => {
+      
+        let num_aula = pasante.aula.length;
+        // let num_alumno = aula.alumnos.length;
+        
+        for (let index = 0; index < num_aula; index++) {
+          // console.log(aula.a);
+          
+         this.removeItemFromArr(pasante.aula,index);
+          
+        }
+
+        // for (let index = 0; index < num_alumno; index++) {
+        //   // console.log(aula.a);
+          
+        //  this.removeItemFromArr(aula.docentes,index);
+          
+        // }
+      } )
+
+      console.log(this.pasantes, "PASANTES");
+      // this.institucion = {}
+      // this.instituciones
     });
 
-    this._docenteSrv.getDocentes().subscribe((docentes: Docente[]) => {
-      console.log(docentes);
+    this._pasanteSrv.getLista("aulas").subscribe( (aulas: Aula[] ) => {
+      this.lista_aulas = aulas;
+      console.log(this.lista_aulas, "Aulas");
+    });
+
+    this._pasanteSrv.getLista("personal").subscribe((docentes: Personal[]) => {
       this.docentes = docentes;
+      this.docentes.forEach( (docente)=> {
+        this._pasanteSrv.getDetalle(docente.persona, "persona").subscribe( (persona: Persona) => {
+          docente.persona = persona;
+        } )
+      })
+      console.log(this.docentes, "DOCENTES");
     });
 
     this.cols = [
       { field: "persona.identificacion", header: "CÉDULA" },
-      { field: "persona.primer_nombre", header: "NOMBRES" },
-      { field: "persona.primer_apellido", header: "APELLIDOS" },
+      { field: "persona", header: "NOMBRE" },
+      { field: "aula", header: "AULAS" },
       { field: "institución", header: "INSTITUCIÓN" },
       { field: "docente.primer_nombre", header: "TUTOR" },
     ];
@@ -121,84 +193,38 @@ export class PasanteComponent implements OnInit {
       { name: "Otro", value: "O" },
     ];
 
-    this.tipo_sangre = [
-      {
-        name: "O negativo",
-        value: "O-",
-      },
-      { name: "O positivo", value: "O+" },
-      {
-        name: "A negativo",
-        value: "A-",
-      },
-      {
-        name: "A positivo",
-        value: "O+",
-      },
-      {
-        name: "B negativo",
-        value: "B-",
-      },
-      {
-        name: "B positivo",
-        value: "B+",
-      },
-      {
-        name: "AB negativo",
-        value: "AB-",
-      },
-      {
-        name: "AB positivo",
-        value: "AB+",
-      },
-    ];
+    // this.tipo_sangre = [
+    //   {
+    //     name: "O negativo",
+    //     value: "O-",
+    //   },
+    //   { name: "O positivo", value: "O+" },
+    //   {
+    //     name: "A negativo",
+    //     value: "A-",
+    //   },
+    //   {
+    //     name: "A positivo",
+    //     value: "O+",
+    //   },
+    //   {
+    //     name: "B negativo",
+    //     value: "B-",
+    //   },
+    //   {
+    //     name: "B positivo",
+    //     value: "B+",
+    //   },
+    //   {
+    //     name: "AB negativo",
+    //     value: "AB-",
+    //   },
+    //   {
+    //     name: "AB positivo",
+    //     value: "AB+",
+    //   },
+    // ];
 
-    this.es = {
-      firstDayOfWeek: 0,
-      dayNames: [
-        "Domingo",
-        "Lunes",
-        "Martes",
-        "Miércoles",
-        "Jueves",
-        "Viernes",
-        "Sábado",
-      ],
-      dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
-      dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
-      monthNames: [
-        "Enero",
-        "Febrero",
-        "Marzo",
-        "Abril",
-        "Mayo",
-        "Junio",
-        "Julio",
-        "Agosto",
-        "Septiembre",
-        "Octubre",
-        "Noviembre",
-        "Diciembre",
-      ],
-      monthNamesShort: [
-        "Ene",
-        "Feb",
-        "Mar",
-        "Abr",
-        "May",
-        "Jun",
-        "Jul",
-        "Ago",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dic",
-      ],
-      today: "Hoy",
-      clear: "Borrar",
-      dateFormat: "mm/dd/aa",
-      weekHeader: "Sm",
-    };
   }
 
   crearFormulario() {
@@ -219,12 +245,11 @@ export class PasanteComponent implements OnInit {
       ],
       contacto: ["", Validators.required],
       // tipo_sangre: ["", Validators.required],
-      institucion: [this.universidad, Validators.required],
+      institucion: ["", Validators.required],
       tutor: ["", Validators.required],
       especialidad: ["", Validators.required],
-      asignacion_aula: ["", Validators.required],
       num_horas: ["", Validators.required],
-      fecha_inicio: ["", Validators.required],
+      aulas: ["", Validators.required],
     });
   }
 
@@ -282,34 +307,112 @@ export class PasanteComponent implements OnInit {
   }
 
   guardarPasante() {
-    console.log(this.forma);
+    // console.log(this.forma.value);
+    let tutor: Personal =  this.forma.value.tutor;
+    let aulas = [];
+    this.forma.value.aulas.forEach(aula => {
+      aulas.push(aula.id)
+    });
+
+    let datos = {
+      persona: {
+        identificacion: this.forma.value.identificacion,
+        nombres: this.forma.value.identidad.nombres,
+        apellidos: this.forma.value.identidad.apellidos,
+        edad: this.forma.value.edad,
+        genero: this.forma.value.genero.value,
+        correo: this.forma.value.correo,
+        contacto: this.forma.value.contacto
+      },
+      institucion: this.forma.value.institucion,
+      tutor: tutor,
+      aula: aulas,
+      especialidad: this.forma.value.especialidad,
+      numHoras: this.forma.value.num_horas
+      }
+
+      console.log(datos, "PASANTE");
+      
+      this._pasanteSrv.setPasante(datos).subscribe( data => {
+        console.log(data, "Se guardó con éxito");
+        
+      } )
+
+      this.forma.reset();
+  }
+
+  editarPasante(){
+
+    // console.log(this.pasante_seleccionado);
+    let aulas = []
+
+    this.pasante_editar.aula.forEach( data => {
+      if(data.id){
+        aulas.push(data.id)
+      }
+    } )
+    
+
+    let datos = {
+      id: this.pasante_editar.id,
+      persona: {
+        identificacion: this.pasante_editar.persona.identificacion,
+        nombres: this.pasante_editar.persona.nombres,
+        apellidos: this.pasante_editar.persona.apellidos,
+        edad: this.pasante_editar.persona.edad,
+        genero: this.pasante_editar.persona.genero.value,
+        correo: this.pasante_editar.persona.correo,
+        contacto: this.pasante_editar.persona.contacto
+      },
+      institucion: this.pasante_editar.institucion.name,
+      tutor: this.pasante_editar.tutor,
+      aula: aulas,
+      especialidad: this.pasante_editar.especialidad,
+      numHoras: this.pasante_editar.numHoras
+      }
+      
+
+      console.log(datos, "DATOS FINALES");
+
+      this._pasanteSrv.editarPasante(datos).subscribe( data => {
+
+        console.log(data, "PASANTE EDITADO");
+        this.displayDialog = false;
+
+      } )
+      
+
   }
 
   onRowSelect(event) {
     this.nuevo_pasante = false;
     this.pasante_editar = this.clonePasante(event.data);
     this.displayDialog = true;
-    switch (this.pasante_editar.persona.genero) {
-      case "F":
-        this.selectedGen = {
-          name: "Femenino",
-          value: "F",
-        };
-        break;
-      case "M":
-        this.selectedGen = {
-          name: "Masculino",
-          value: "M",
-        };
-        break;
-      case "O":
-        this.selectedGen = {
-          name: "Otro",
-          value: "O",
-        };
-        break;
-    }
+    // console.log(this.pasante_seleccionado);
+    
+    // switch (this.pasante_editar.persona) {
+    //   case "F":
+    //     this.selectedGen = {
+    //       name: "Femenino",
+    //       value: "F",
+    //     };
+    //     break;
+    //   case "M":
+    //     this.selectedGen = {
+    //       name: "Masculino",
+    //       value: "M",
+    //     };
+    //     break;
+    //   case "O":
+    //     this.selectedGen = {
+    //       name: "Otro",
+    //       value: "O",
+    //     };
+    //     break;
+    // }
     this.editarUniversidad(this.pasante_editar.institucion);
+    this.editarGenero(this.pasante_editar.persona.genero)
+    // this.pasante_seleccionado.institucion = this.auto_universidad;
   }
 
   clonePasante(c: Pasante): Pasante {
@@ -323,11 +426,26 @@ export class PasanteComponent implements OnInit {
   editarUniversidad(u: string) {
     this.universidades.forEach((institucion) => {
       if (institucion.name === u) {
-        this.auto_universidad = institucion;
+        this.pasante_editar.institucion = institucion;
       }
     });
-    console.log(this.auto_universidad);
   }
+
+  editarGenero(u: string) {
+    this.genero.forEach((g) => {
+      // console.log(u);
+      
+      if (g.value === u) {
+        this.pasante_editar.persona.genero = g;
+      }
+    });
+  }
+
+  removeItemFromArr ( arr, item ) {
+    var i = arr.indexOf( item );
+    arr.splice( i, 1 );
+}
+
 
   filtrarUniversidad(event) {
     let query = event.query;
@@ -343,6 +461,108 @@ export class PasanteComponent implements OnInit {
     }
   }
 
+  filtrarContenido(e) {
+    console.log(e.value);
+    this.mostrarAdmin = true;
+  }
+
+  abrirPDF(){
+    this.mostrarAdmin = false;
+    this.generarPasantesPorAula();
+  }
+
+  generarPasantesPorAula(){
+
+    let pasantes_pdf:Pasante[] = this.pasantes
+    console.log(pasantes_pdf, "PDF");
+    
+    pasantes_pdf.forEach( (pasante:Pasante) => {
+      // console.log(pasante.aula.length);
+      // 
+      // if(pasante.aula.length != 0){
+        this.pasante.aula.forEach( (aula:Aula) => {
+          if(aula.id == this.aulas_pdf.id){
+            pasantes_filtrados.push(pasante);
+          }
+        } )
+      // }
+    } )
+
+    let fecha = `${new Date().getDate()}/${new Date().getMonth()}/${new Date().getFullYear()}`
+    let pasantes_filtrados=[];
+    let cols: string[] = [];
+    let valor = [];
+    let valores = [];
+
+    let admin_colums = ['', "Elaborado Por", "Revisado Por", "Aprobado Por"];
+    let admin_fields = [["DETALLE", this.administracion.elaborado_por, this.administracion.revisado_por, this.administracion.aprobado_por],
+                        ["FIRMA", '', '', ''],
+                        ["FECHA", fecha, fecha, fecha] ]
+
+
+    this.cols.forEach( col => {
+      cols.push(col.header);
+    } )
+
+    pasantes_filtrados.forEach( (pasante:Pasante) => {
+      let aux = [];
+      valor.push(pasante.persona.identificacion);
+      valor.push(`${pasante.persona.nombres} ${pasante.persona.apellidos}`);
+      pasante.aula.forEach( (aula:Aula) => {
+        aux.push(aula.nombre);
+      } )
+      valor.push(aux);
+      valor.push(pasante.institucion);
+      valor.push(`${pasante.tutor.persona.primer_nombre} ${pasante.tutor.persona.primer_apellido}`);
+      valores.push(valor);
+    })
+
+    const head = [cols]
+    const data = valores
+    const head_2 = [admin_colums]
+    const data_2 = admin_fields
+    const doc = new jsPDF("p","mm","a4");
+    const pdfWidht=210;  // width of A4 in mm
+    const pdfHeight=297;  // height of A4 in mm
+
+    let logo_ipca= new Image();
+    logo_ipca.src = 'assets/img/logo-editado.png';
+
+    doc.addImage(logo_ipca, 'PNG', pdfWidht/3, pdfHeight/5, 75, 65, 'logo_IPCA', 'NONE', 0);
+    doc.setFontSize(20);
+    doc.text(`Pasantes por ${this.aulas_pdf.nombre}`, pdfWidht/2,pdfHeight/2, {align:"center"});
+
+    doc.addPage('a4')
+    // doc.setFontSize(20);
+    // doc.text(`Listado de Períodos Lectivo en ${this.periodo_lectivo.nombre}`, pdfWidht/2,pdfHeight/15, {align:"center"});
+    // doc.table(pdfWidht/15,pdfHeight/4, aulas_filtradas, cols)
+    autoTable(doc, {
+      head: head,
+      body: data,
+      theme: "striped",
+      didDrawCell: (data) => {
+        console.log(data.column.index)
+      },
+    })
+    doc.addPage('a4');
+
+    autoTable(doc, {
+      head: head_2,
+      body: data_2,
+      theme: "grid",
+      didDrawCell: (data) => {
+        console.log(data.column.index)
+      },
+    })
+
+    doc.setFontSize(8);
+    doc.text('Documento generado por IPCAsist', pdfWidht/2, pdfHeight/1.03, {align:"center"});
+
+    doc.save(`Pasantes_${this.aulas_pdf}.pdf`);
+    this.aulas_pdf = {};
+
+  }
+
   filtrarDocente(event) {
     let query = event.query;
     let docentes: Docente[] = this.docentes;
@@ -352,7 +572,7 @@ export class PasanteComponent implements OnInit {
       let docente = docentes[i];
 
       if (
-        docente.persona.primerApellido
+        docente.persona.primer_apellido
           .toLowerCase()
           .indexOf(query.toLowerCase()) == 0
       ) {

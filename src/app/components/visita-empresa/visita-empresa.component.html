@@ -79,13 +79,107 @@
                           style="line-height: 1"
                         ></i
                       ></span>
-                      <input
+                      <!-- <input
                         type="text"
                         placeholder="Nombre"
                         pInputText
                         size="30"
                         formControlName="empresa"
-                      />
+                      /> -->
+
+                      <!-- <p-autoComplete
+                      [suggestions]="empresa_filtrada"
+                      (completeMethod)="filtrarEmpresa($event)"
+                      (onSelect)="extraerEmpresa($event)"
+                      [size]="20"
+                      [minLength]="1"
+                      placeholder="Empresa"
+                      [dropdown]="true"
+                      formControlName="empresa"
+                      field="nombre"
+                    > -->
+                    <p-autoComplete
+                      [suggestions]="empresa_filtrada"
+                      (completeMethod)="filtrarEmpresa($event)"
+                      [size]="30"
+                      [minLength]="1"
+                      placeholder="Empresa"
+                      [dropdown]="true"
+                      formControlName="empresa"
+                      field="nombre"
+                    >
+                    <ng-template let-brand pTemplate="item">
+                      <div class="ui-helper-clearfix">
+                        <div style="font-size: 15px; margin: 0.5em">
+                          {{ brand.nombre }}
+                        </div>
+                      </div>
+                    </ng-template>
+  
+                    </p-autoComplete>
+                    <div class="col-md-2">
+                      <button
+                        type="button"
+                        class="btn btn-outline-default btn-round btn-sm"
+                        (click)="empresaSeleccionada()"
+                      >
+                        <i class="fas fa-plus fa-lg"></i>
+                      </button>
+
+                    </div>
+                    <!-- <p-dialog
+                      header="Nueva Empresa"
+                      [(visible)]="mostrar_nueva_empresa"
+                      [focusOnShow]="false"
+                      showEffect="fade"
+                      [modal]="true"
+                      [style]="{ width: '300px' }"
+                    >
+                      <div class="p-grid ui-fluid">
+                        <form [formGroup]="forma_empresa" (ngSubmit)="guardarEmpresa()">
+                        <div class="p-col-8">
+                          <input
+                            pInputText
+                            formControlName="nombre"
+                            placeholder="Ingrese un nombre"
+                          />
+                          <input
+                            pInputText
+                            formControlName="representante"
+                            placeholder="Ingrese un representante"
+                          />
+                          <input
+                            pInputText
+                            formControlName="contacto"
+                            placeholder="Ingrese un contacto (Opcional)"
+                          />
+                          <input
+                            pInputText
+                            formControlName="correo"
+                            placeholder="Ingrese un correo (Opcional)"
+                          />
+                          <input
+                            pInputText
+                            formControlName="direccion"
+                            placeholder="Ingrese una dirección"
+                          />
+                        </div>
+                      </form>
+                      </div>
+                      <p-footer>
+                        <div
+                          class="ui-dialog-buttonpane ui-helper-clearfix row justify-content-center"
+                        >
+                          <button
+                            type="submit"
+                            class="btn btn-outline-success btn-round btn-sm"
+                            [disabled]="!forma_empresa.valid" 
+                          >
+                            <i class="fas fa-save fa-lg fa-fw"></i> Guardar
+                          </button>
+                        </div>
+                      </p-footer>
+                    </p-dialog> -->
                     </div>
 
                     <div class="row justify-content-center">
@@ -101,117 +195,111 @@
               </div>
             </div>
 
-            <!-- Representante -->
-            <div class="row espacio">
+            <!-- Acompanantes -->
+            <div class="row margen">
               <div class="col-md-12">
                 <p-card
-                  header="Representante"
-                  subheader="Ingrese los nombres y los apellidos del Representante de la Empresa o Institución."
+                  header="Acompañantes"
+                  subheader="Ingrese a todos los Acompañantes que llegaron para realizar la visita"
                   styleClass="ui-card-shadow"
                 >
                   <p-header>
-                    <div class="head">
+                    <div class="head encabezado">
                       <i class="fas fa-user fa-4x fa-fw icono"></i>
                     </div>
                   </p-header>
-                  <div
-                    class="row justify-content-center componente"
-                    formGroupName="representante"
-                  >
-                    <div class="ui-inputgroup">
-                      <span class="ui-inputgroup-addon">
-                        <i
-                          class="fas fa-user-tie fa-lg"
-                          style="line-height: 1"
-                        ></i
-                      ></span>
-                      <input
-                        type="text"
-                        placeholder="Nombres"
-                        pInputText
-                        size="35"
-                        formControlName="nombres"
-                      />
-                    </div>
-                    <div class="row justify-content-center">
-                      <p-message
-                        severity="error"
-                        text=" Se requiere el Nombre del Representante"
-                        *ngIf="sinNombres"
-                        style="margin-top: 1em; margin-bottom: 1em"
-                      ></p-message>
-                    </div>
-                    <div class="ui-inputgroup">
-                      <span class="ui-inputgroup-addon">
-                        <i
-                          class="fas fa-user-tie fa-lg"
-                          style="line-height: 1"
-                        ></i
-                      ></span>
-                      <input
-                        type="text"
-                        placeholder="Apellidos"
-                        size="35"
-                        pInputText
-                        formControlName="apellidos"
-                      />
-                    </div>
-                    <div class="row justify-content-center">
-                      <p-message
-                        severity="error"
-                        text=" Se requiere el Apellido del Representante"
-                        *ngIf="sinApellidos"
-                        style="margin-top: 1em"
-                      ></p-message>
+
+                  <div class="row justify-content-center">
+                    <div class="col-md-12">
+                      <table class="table">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">Acompañantes</th>
+                          </tr>
+                        </thead>
+                        <tbody formArrayName="acompanantes">
+                          <tr
+                            *ngFor="
+                              let form of acompanantes.controls;
+                              let i = index
+                            "
+                          >
+                            <td>
+                              <div class="row justify-content-center" [formGroupName]="i">
+                                <!-- Componente Nombre -->
+                                <div class="col-md-10">
+                                  <div
+                                    class="ui-inputgroup"
+                                    
+                                  >
+                                    <span class="ui-inputgroup-addon">
+                                      <i
+                                        class="fas fa-pen-square fa-lg"
+                                        style="line-height: 1"
+                                      ></i
+                                    ></span>
+                                    <input
+                                      type="text"
+                                      size="30"
+                                      pInputText
+                                      formControlName="nombre"
+                                      placeholder="Nombres"
+                                    />
+                                  </div>
+                                </div>
+
+                                <!-- Componente Contacto -->
+                                <div class="col-md-10" style="margin-top: 1em">
+                                  <div
+                                    class="ui-inputgroup "
+                                  >
+                                  <span class="ui-inputgroup-addon">
+                                    <i
+                                      class="fas fa-pen-square fa-lg"
+                                      style="line-height: 1"
+                                    ></i
+                                  ></span>
+                                  <input
+                                  type="text"
+                                  size="30"
+                                  pInputText
+                                  formControlName="contacto"
+                                  placeholder="Contacto Teléfonico (Opcional)"
+                                />
+                                  </div>
+                                </div>
+
+                                <div class="row justify-content-center boton">
+                                  <button 
+                                  type="button" 
+                                  class="btn btn-outline-danger btn-round btn-sm" 
+                                  (click)="borrarAcompanante(i)">
+                                  <i class="fas fa-trash-alt fa-lg fa-fw"></i>
+                                  BORRAR
+                                  
+                                </button>
+                              </div>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <button
+                        type="button"
+                        class="btn btn-neutral btn-round btn-lg"
+                        (click)="agregarAcompanante()"
+                      >
+                        <i class="fas fa-plus fa-lg fa-fw"></i> Agregar
+                        Acompañante
+                      </button>
                     </div>
                   </div>
                 </p-card>
               </div>
             </div>
-
-            <!-- Card Correo -->
-            <div class="row espacio">
-              <div class="col-md-12">
-                <p-card
-                  header="Correo"
-                  subheader="Ingrese el correo de la Empresa o Institución, para mantenerse en contacto."
-                  styleClass="ui-card-shadow"
-                >
-                  <p-header>
-                    <div style="background-color: #cfcfcf">
-                      <i class="far fa-envelope fa-4x fa-fw icono"></i>
-                    </div>
-                  </p-header>
-                  <div class="row justify-content-center componente">
-                    <div class="ui-inputgroup">
-                      <span class="ui-inputgroup-addon">
-                        <i class="fas fa-at fa-lg" style="line-height: 1"></i
-                      ></span>
-                      <input
-                        type="email"
-                        placeholder="Correo"
-                        pInputText
-                        size="35"
-                        formControlName="correo"
-                      />
-                    </div>
-                    <div class="row justify-content-center">
-                      <p-message
-                        severity="error"
-                        text=" Se requiere el Correo de la Empresa"
-                        *ngIf="invalidos('correo')"
-                        style="margin-top: 1em"
-                      ></p-message>
-                    </div>
-                  </div>
-                </p-card>
-              </div>
-            </div>
-
-            
 
             <!-- Card Observación -->
-            <div class="row espacio">
+            <div class="row margen">
               <div class="col-md-12">
                 <p-card
                   header="Observaciones"
@@ -247,75 +335,6 @@
 
           <!-- Columna 2 -->
           <div class="col-md-5">
-            <!-- Dirección -->
-            <!-- <div class="row margen">
-              <div class="col-md-12">
-                <p-card
-                  header="Dirección"
-                  subheader="Ingrese la dirección de la Empresa o Institución visitante."
-                  styleClass="ui-card-shadow"
-                >
-                  <p-header>
-                    <div class="head">
-                      <i class="fas fa-map-marker-alt fa-3x fa-fw icono"></i>
-                    </div>
-                  </p-header>
-
-                  <div
-                    class="row justify-content-center componente"
-                    formGroupName="direccion"
-                  >
-                    <div class="ui-inputgroup">
-                      <span class="ui-inputgroup-addon">
-                        <i
-                          class="fas fa-map-marked-alt fa-lg"
-                          style="line-height: 1"
-                        ></i
-                      ></span>
-                      <input
-                        type="text"
-                        placeholder="Calle Principal"
-                        pInputText
-                        size="35"
-                        formControlName="calle_principal"
-                      />
-                    </div>
-
-                    <div class="row justify-content-center">
-                      <p-message
-                        severity="error"
-                        text=" Se debe ingresar una Calle Principal"
-                        *ngIf="sinPrincipal"
-                        style="margin-top: 1em; margin-bottom: 1em"
-                      ></p-message>
-                    </div>
-                    <div class="ui-inputgroup">
-                      <span class="ui-inputgroup-addon">
-                        <i
-                          class="fas fa-map-marked-alt fa-lg"
-                          style="line-height: 1"
-                        ></i
-                      ></span>
-                      <input
-                        type="text"
-                        placeholder="Calle Secundaria"
-                        size="35"
-                        pInputText
-                        formControlName="calle_secundaria"
-                      />
-                    </div>
-                    <div class="row justify-content-center">
-                      <p-message
-                        severity="error"
-                        text=" Se debe ingresar una Calle Secundaria"
-                        *ngIf="sinSecundaria"
-                        style="margin-top: 1em"
-                      ></p-message>
-                    </div>
-                  </div>
-                </p-card>
-              </div>
-            </div> -->
 
             <!-- Card Motivo -->
             <div class="row margen">
@@ -374,10 +393,12 @@
                         ></i
                       ></span>
                       <p-calendar
+                        #myCalendar
                         [locale]="es"
-                        dateFormat="dd/mm/yy"
+                        dateFormat="yy-mm-dd"
                         placeholder="Fecha de Visita"
                         formControlName="fecha_visita"
+                        (onSelect)=getFormato(myCalendar)
                       ></p-calendar>
                     </div>
                     <div class="row justify-content-center">
@@ -395,48 +416,6 @@
               </div>
             </div>
 
-            <!-- Card Contacto -->
-            <div class="row margen">
-              <div class="col-md-12">
-                <p-card
-                  header="Contacto"
-                  subheader="Ingrese el número celular del Representante, para cualquier aviso."
-                  styleClass="ui-card-shadow"
-                >
-                  <p-header>
-                    <div style="background-color: #cfcfcf">
-                      <i class="fas fa-phone fa-3x fa-fw icono"></i>
-                    </div>
-                  </p-header>
-                  <div class="row justify-content-center componente">
-                    <div class="ui-inputgroup">
-                      <span class="ui-inputgroup-addon">
-                        <i
-                          class="fas fa-phone-square-alt fa-lg"
-                          style="line-height: 1"
-                        ></i
-                      ></span>
-                      <p-inputMask
-                        mask="0999999999"
-                        placeholder="Celular"
-                        formControlName="contacto"
-                      ></p-inputMask>
-                      <br>
-                      <div class="row justify-content-center">
-                        <div class="col-md-12">
-                          <p-message
-                            severity="error"
-                            text=" Se debe ingresar un Contacto"
-                            *ngIf="invalidos('contacto')"
-                            style="margin-top: 2em"
-                          ></p-message>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </p-card>
-              </div>
-            </div>
 
             <!-- Card Guia -->
             <div class="row margen">
@@ -487,8 +466,8 @@
                                 margin: 8px 3px 0 0;
                               "
                             >
-                              {{ brand.persona.primerNombre }}
-                              {{ brand.persona.primerApellido }}
+                              {{ brand.persona.primer_nombre }}
+                              {{ brand.persona.primer_apellido }}
                             </div>
                           </div>
                         </ng-template>
@@ -512,7 +491,7 @@
               <div class="col-md-12">
                 <p-card
                   header="Horario de la Visita"
-                  subheader="Ingrese el horario en que se realizará la visita."
+                  subheader="Ingrese el horario de la visita."
                   styleClass="ui-card-shadow"
                 >
                   <p-header>
@@ -522,41 +501,22 @@
                   </p-header>
                   <div
                     class="row justify-content-center"
-                    formGroupName="horario_visita"
                   >
-                    <!-- Horario de Entrada-->
-                    <div class="col-md-4">
+                    <!-- <div class="col-md-12"> -->
                       <div class="form-group">
-                        <label>Hora de Entrada</label>
+                        <label>Hora de Visita</label>
                         <ngb-timepicker
                           [meridian]="meridian"
-                          formControlName="horario_entrada"
+                          formControlName="horario_visita"
                         ></ngb-timepicker>
 
                         <p-message
                           severity="error"
                           text=" Se debe ingresar la Hora de Entrada"
-                          *ngIf="noHoraEntrada"
+                          *ngIf="invalidos('horario_visita')"
                           style="margin-top: 1em"
                         ></p-message>
                       </div>
-                    </div>
-                    <!-- Horario de Salida -->
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <label>Hora de Salida</label>
-                        <ngb-timepicker
-                          [meridian]="meridian"
-                          formControlName="horario_salida"
-                        ></ngb-timepicker>
-                        <p-message
-                          severity="error"
-                          text=" Se debe ingresar la Hora de Salida"
-                          *ngIf="noHoraSalida"
-                          style="margin-top: 1em"
-                        ></p-message>
-                      </div>
-                    </div>
                   </div>
                 </p-card>
               </div>
@@ -586,17 +546,122 @@
           <br />
 
           <p-table
+            #dt
             [columns]="cols"
             [value]="visitas"
-            dataKey="_id"
+            dataKey="id"
             [resizableColumns]="true"
             [scrollable]="true"
-            scrollHeight="400px"
+            scrollHeight="500px"
             styleClass="ui-table-summary"
             selectionMode="single"
             [(selection)]="visita_seleccionada"
             (onRowSelect)="onRowSelect($event)"
+            [globalFilterFields]="['empresa.nombre','motivo_visita',
+                                   'fecha_visita','hora_visita']"
+            [paginator]="true" 
+            [rows]="5" 
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
           >
+          <ng-template pTemplate="caption">
+            <div class="row ">
+              <div class= "col-md-6" style="text-align: left"> 
+                
+                <ng-template #contenido let-modal>
+                  <div class="modal-header">
+                      <h4 class="modal-title">Generar PDF por Empresa</h4>
+                      <button class="close" aria-label="close" type="button" (click)="modalService.dismissAll()">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row ">
+                      <div class="col-md-12" style="text-align: center">
+                        <p>Seleccione una Empresa para generar el documento</p>
+                       </div>
+                      <div class= "col-md-12" style="text-align: center">   
+                        <p-dropdown [options]="empresas" 
+                                    [(ngModel)]="empresa_pdf" 
+                                    filter="true" 
+                                    optionLabel="nombre"
+                                    placeholder="Empresa"
+                                    (onChange)="filtrarContenido($event)"
+                                    pTooltip="Seleccione para Filtrar o Generar PDF">
+                          <ng-template let-item pTemplate="selectedItem">
+                              <span style="vertical-align:middle;">{{item.label}}</span>
+                          </ng-template>
+                          <ng-template let-empresa pTemplate="item">
+                              <div class="ui-helper-clearfix" style="height: 50px;">
+                                  <div style="font-size:14px; text-align:middle">{{empresa.label}}</div>
+                              </div>
+                          </ng-template>
+                        </p-dropdown>
+
+                      </div>
+                      <br/>
+                      <!-- <div class="col-md-6" style="text-align: center">
+                          <button 
+                            type="button" 
+                            class="btn btn-outline-default btn-round btn-sm" 
+                            [disabled]="!empresa" 
+                            (click)="generarPlanes()"
+                            
+                            >
+                            <i class="fas fa-file-pdf fa-lg fa-fw"></i> GENERAR PDF
+                          </button>
+                    </div> -->
+                    <p-dialog header="Detalle de Documento" [(visible)]="mostrarAdmin" [style]="{width: '20vw'}">
+                      <div class="row justify-content-center">
+                        <div class="col-md-12">
+                          <span class="ui-float-label" style="margin-top: 2em;">
+                            <input id="float-input" type="text" size="30" pInputText [(ngModel)]="administracion.elaborado_por"> 
+                            <label for="float-input">Elaborado Por</label>
+                        </span>
+                        </div>
+                        <div class="col-md-12">
+                          <span class="ui-float-label text">
+                            <input id="float-input" type="text" size="30" pInputText [(ngModel)]="administracion.revisado_por"> 
+                            <label for="float-input">Revisado Por</label>
+                        </span>
+                        </div>
+                        <div class="col-md-12">
+                          <span class="ui-float-label text">
+                            <input id="float-input" type="text" size="30" pInputText [(ngModel)]="administracion.aprobado_por"> 
+                            <label for="float-input">Aprobado Por</label>
+                        </span>
+                        </div>
+                        <div class="col-md-12 text" style="text-align: center">
+                          <button 
+                            type="button" 
+                            class="btn btn-outline-default btn-round btn-sm" 
+                            (click)="abrirPDF()"
+                            
+                            >
+                            <i class="fas fa-file-pdf fa-lg fa-fw"></i> GUARDAR
+                          </button>
+                        </div>
+                      </div>
+                  </p-dialog>
+                  </div>
+                  <br/>
+                  <div class="modal-footer">
+                    </div>
+                      <!-- <button type="button" class="btn btn-success" (click)="modalService.close()">Ok!</button> -->
+                  </div>
+              </ng-template>
+                <button type="button" class="btn btn-outline-info" (click)="modalService.open(contenido)">GENERAR PDF</button>
+              </div>
+              <div class= "col-md-6" style="text-align: right">   
+                <div class="p-d-flex">
+                  <span class="ui-inputgroup-addon"><i class="fas fa-search fa-lg"></i></span>
+                            
+                            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Buscar en contenido" />
+                        
+                </div>
+              </div>
+            </div>
+        </ng-template>
             <ng-template pTemplate="colgroup" let-columns>
               <colgroup>
                 <col />
@@ -631,19 +696,17 @@
                   {{ rowData.empresa.nombre }}
                 </td>
                 <td>
-                  {{ rowData.empresa.representante.primerNombre }}
-                  {{ rowData.empresa.representante.primerApellido }}
+                  {{ rowData.motivo_visita }}
                 </td>
                 <td>
-                  {{ rowData.encargadoVisita.persona.primerNombre }}
-                  {{ rowData.encargadoVisita.persona.primerApellido }}
+                  {{ rowData.encargado_visita.persona.primer_nombre }}
+                  {{ rowData.encargado_visita.persona.primer_apellido }}
                 </td>
                 <td>
-                  {{ rowData.fechaVisita }}
+                  {{ rowData.fecha_visita }}
                 </td>
                 <td>
-                  {{ rowData.horarioVisita.horaEntrada }}
-                  <!-- {{ rowData.hora_visita.formato_hora }} -->
+                  {{ rowData.hora_visita }}
                 </td>
               </tr>
             </ng-template>
@@ -668,56 +731,40 @@
                             {{ rowData.empresa.nombre }}
                           </div>
                           <div class="p-col-12">
-                            <b>Dirección:</b>
-                            {{ rowData.empresa.direccion.callePrincipal }}
-                            Y
-                            {{ rowData.empresa.direccion.calleSecundaria }}
-                          </div>
-                          <div class="p-col-12">
                             <b>Representante:</b>
                             {{
-                              rowData.empresa.representante.primerNombre
+                              rowData.empresa.representante.nombre
                             }}
                             {{
-                              rowData.empresa.representante.primerApellido
+                              rowData.empresa.representante.celular
+                            }}
+                            {{
+                              rowData.empresa.representante.correo
                             }}
                           </div>
                           <div class="p-col-12">
-                            <b>Correo:</b>
-                            {{ rowData.empresa.representante.correo }}
-                          </div>
-                          <div class="p-col-12">
-                            <b>Contacto:</b>
-                            {{ rowData.empresa.representante.contacto }}
+                            <b>Acompañantes:</b>
+                            <div *ngFor="let person of rowData.acompanantes">
+                              <p>Nombres: {{ person.nombre }}</p>
+                              <p>
+                              Contacto: {{ person.contacto }}
+                              </p>
+                            </div>
                           </div>
                         </div>
                       </div>
 
                       <div class="col-md-6">
                         <div class="p-grid">
-                          <div class="p-col-12 ">
-                            <!-- <button (click)="openPdf()">Generar PDF</button> -->
-
-                            <button (click)="openPdf()" 
-                            class="btn btn-secondary justify-content-center mb-1"
-                              >
-                              <!-- class="btn btn-secondary d-flex align-items-center justify-content-center mb-1" -->
-                              <i class="material-icons">
-                                picture_as_pdf
-                              </i> <span>&nbsp;</span>
-                            </button>
-
-                          </div>
-                          <br>
                           <div class="p-col-12">
                             <b>Motivo de Visita:</b>
                             {{ rowData.motivo_visita }}
                           </div>
                           <div class="p-col-12">
                             <b>Encargado de Visita:</b>
-                            {{ rowData.encargadoVisita.persona.primerNombre }}
+                            {{ rowData.encargado_visita.persona.primer_nombre }}
                             {{
-                              rowData.encargadoVisita.persona.primerApellido
+                              rowData.encargado_visita.persona.primer_apellido
                             }}
                           </div>
                           <div class="p-col-12">
@@ -726,7 +773,7 @@
                           </div>
                           <div class="p-col-12">
                             <b>Hora de Visita:</b>
-                            {{ rowData.horarioVisita.horaEntrada }}
+                            {{ rowData.hora_visita }}
                             <!-- {{ rowData.hora_visita.formato_hora }} -->
                           </div>
                         </div>
@@ -752,72 +799,35 @@
             [modal]="true"
             [style]="{ width: '700px' }"
           >
-            <div class="row justify-content-center" *ngIf="visita_editar">
+            <div class="row justify-content-center" *ngIf="visita_seleccionada">
               <div class="col-md-4">
                 <div class="row">
                   <div class="col-md-12">
                     <label for="_id" class="fuente">NOMBRE DE EMPRESA</label>
-                    <input
-                      type="text"
+                    <p-autoComplete
+                      [suggestions]="empresa_filtrada"
+                      (completeMethod)="filtrarEmpresa($event)"
+                      [size]="15"
+                      [minLength]="1"
                       placeholder="Empresa"
-                      pInputText
-                      size="20"
-                      [(ngModel)]="visita_editar.empresa.nombre"
-                    />
-                  </div>
-                </div>
-                <div class="row justify-content-center edicion">
-                  <div class="col-md-12">
-                    <label class="fuente">REPRESENTANTE</label>
-                    <input
-                      type="text"
-                      placeholder="Nombre"
-                      pInputText
-                      size="20"
-                      [(ngModel)]="
-                        visita_editar.empresa.representante.primerNombre
-                      "
-                    />
-                    <input
-                      type="text"
-                      placeholder="Apellido"
-                      pInputText
-                      size="20"
-                      [(ngModel)]="
-                        visita_editar.empresa.representante.primerApellido
-                      "
-                    />
+                      field="nombre"
+                      [dropdown]="true"
+                      [(ngModel)]="visita_seleccionada.empresa"
+                      
+                    >
+                    <ng-template let-brand pTemplate="item">
+                      <div class="ui-helper-clearfix">
+                        <div style="font-size: 15px; margin: 0.5em">
+                          {{ brand.nombre }}
+                        </div>
+                      </div>
+                    </ng-template>
+  
+                    </p-autoComplete>
+                    
                   </div>
                 </div>
                 <div class="row edicion">
-                  <div class="col-md-12">
-                    <label class="fuente">CORREO</label>
-                    <input
-                      type="email"
-                      placeholder="Correo"
-                      pInputText
-                      size="20"
-                      [(ngModel)]="
-                        visita_editar.empresa.representante.correo
-                      "
-                    />
-                  </div>
-                </div>
-                <div class="row edicion">
-                  <div class="col-md-12">
-                    <label class="fuente">CONTACTO</label>
-                    <p-inputMask
-                      mask="0999999999"
-                      placeholder="Celular"
-                      [(ngModel)]="
-                        visita_editar.empresa.representante.contacto
-                      "
-                    ></p-inputMask>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="row">
                   <div class="col-md-12">
                     <label for="email" class="fuente">GUÍA</label>
                     <p-autoComplete
@@ -827,7 +837,7 @@
                       [minLength]="1"
                       placeholder="Guía"
                       [dropdown]="true"
-                      [(ngModel)]="visita_editar.encargadoVisita"
+                      [(ngModel)]="visita_seleccionada.encargado_visita"
                       field="persona.identificacion"
                     >
                       <ng-template let-brand pTemplate="item">
@@ -848,23 +858,28 @@
                               margin: 8px 3px 0 0;
                             "
                           >
-                            {{ brand.persona.primerNombre }}
-                            {{ brand.persona.primerApellido }}
+                            {{ brand.persona.primer_nombre }}
+                            {{ brand.persona.primer_apellido }}
                           </div>
                         </div>
                       </ng-template>
                     </p-autoComplete>
                   </div>
                 </div>
+             
+              </div>
+              <div class="col-md-4">
+                
                 <div class="row edicion">
                   <div class="col-md-12">
                     <label for="tutor" class="fuente">FECHA DE VISITA</label>
                     <p-calendar
+                      #myCalendar
                       [locale]="es"
-                      dateFormat="dd/mm/yy"
+                      dateFormat="yy-mm-dd"
                       placeholder="Fecha de Visita"
-                      [(ngModel)]="visita_editar.fechaVisita"
-                      (onSelect)="mostrarFecha($event)"
+                      [(ngModel)]="visita_seleccionada.fecha_visita"
+                      (onSelect)="getFormato(myCalendar)"
                       [showWeek]="true"
                     ></p-calendar>
                   </div>
@@ -873,10 +888,11 @@
                 <div class="row edicion">
                   <div class="col-md-12">
                     <label class="fuente">HORA DE VISITA</label>
-                    <p-calendar
-                      [(ngModel)]="hora_visita"
+                    <ngb-timepicker [(ngModel)]="tiempo"></ngb-timepicker>
+                    <!-- <p-calendar
+                      [(ngModel)]="visita_seleccionada.hora_visita"
                       [timeOnly]="true"
-                    ></p-calendar>
+                    ></p-calendar> -->
                   </div>
                 </div>
               </div>
@@ -890,7 +906,7 @@
                       cols="23"
                       placeholder="Motivo de Visita"
                       pInputTextarea
-                      [(ngModel)]="visita_editar.motivoVisita"
+                      [(ngModel)]="visita_seleccionada.motivo_visita"
                     ></textarea>
                   </div>
                 </div>
@@ -902,7 +918,7 @@
                       cols="23"
                       placeholder="Motivo de Visita"
                       pInputTextarea
-                      [(ngModel)]="visita_editar.observaciones"
+                      [(ngModel)]="visita_seleccionada.observaciones"
                     ></textarea>
                   </div>
                 </div>
@@ -922,7 +938,7 @@
                 <button
                   type="button"
                   class="btn btn-outline-success btn-round btn-sm"
-                  (click)="save()"
+                  (click)="editarVisita()"
                 >
                   <i class="fas fa-save fa-lg fa-fw"></i> Guardar
                 </button>

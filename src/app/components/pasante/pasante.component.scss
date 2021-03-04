@@ -1,0 +1,33 @@
+:host ::ng-deep .multiselect-custom {
+  .p-multiselect {
+    width: 3em;
+  }
+
+  .p-multiselect-label {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+  }
+
+  //   .country-item-value {
+  //     padding: 0.25rem 0.5rem;
+  //     border-radius: 3px;
+  //     display: inline-flex;
+  //     margin-right: 0.5rem;
+  //     background-color: var(--primary-color);
+  //     color: var(--primary-color-text);
+
+  //     img.flag {
+  //       width: 17px;
+  //     }
+  //   }
+
+  //   .country-placeholder {
+  //     padding: 0.25rem;
+  //   }
+}
+
+:host ::ng-deep .ui-multiselect {
+  .p-multiselect {
+    width: 100px;
+  }
+}

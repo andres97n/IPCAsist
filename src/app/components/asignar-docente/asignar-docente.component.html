@@ -117,9 +117,255 @@
   <!-- FORMULARIO -->
   <div class="section section-dark text-center">
     <div class="container">
-      <h2 class="title">Asigne a un Docente!!</h2>
+
+      <div class="row">
+        <div class="col-md-10 mr-auto ml-auto">
+          <h2 class="title">INFORMACIÓN DE AULAS</h2>
+
+          <br />
+          <p-table
+            #dt
+            id="tabla_aulas"
+            [columns]="cols"
+            [value]="aulas"
+            dataKey="id"
+            [resizableColumns]="true"
+            [scrollable]="true"
+            scrollHeight="500px"
+            styleClass="ui-table-summary"
+            selectionMode="single"
+            [(selection)]="aula"
+            [globalFilterFields]="['nombre','docente.persona.primer_apellido',
+                                   'capacidad','periodo.nombre', 'jornada']"
+            [paginator]="true" 
+            [rows]="5" 
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
+          >
+          <ng-template pTemplate="caption">
+            <div class="row">
+              <div class= "col-md-6" style="text-align: left">
+                
+                <ng-template #contenido let-modal>
+                  <div class="modal-header">
+                      <h4 class="modal-title">Generar PDF por Períodos Lectivos</h4>
+                      <button class="close" aria-label="close" type="button" (click)="modalService.dismissAll()">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row justify-content-center">
+                      <div class="col-md-12" style="text-align: center">
+                          <p>Seleccione un Período Lectivo para generar el documento</p>
+                    </div>
+                      <div class= "col-md-12" style="text-align: center">   
+                        <p-dropdown [options]="periodos_lectivos" 
+                                    [(ngModel)]="periodo_lectivo" 
+                                    filter="true" 
+                                    optionLabel="nombre"
+                                    placeholder="Período Lectivo"
+                                    (onChange)="filtrarContenido($event)"
+                                    pTooltip="Seleccione para Generar PDF">
+                          <ng-template let-item pTemplate="selectedItem">
+                              <span style="vertical-align:middle;">{{item.label}}</span>
+                          </ng-template>
+                          <ng-template let-periodo pTemplate="item">
+                              <div class="ui-helper-clearfix" style="height: 50px;">
+                                  <div style="font-size:14px; text-align:middle">{{periodo.label}}</div>
+                              </div>
+                          </ng-template>
+                        </p-dropdown>
+  
+                      </div>
+                      <br/>
+                    <p-dialog header="Detalle de Documento" [(visible)]="mostrarAdmin" [style]="{width: '20vw'}">
+                      <div class="row justify-content-center">
+                        <div class="col-md-12">
+                          <span class="ui-float-label" style="margin-top: 2em;">
+                            <input id="float-input" type="text" size="30" pInputText [(ngModel)]="administracion.elaborado_por"> 
+                            <label for="float-input">Elaborado Por</label>
+                        </span>
+                        </div>
+                        <div class="col-md-12">
+                          <span class="ui-float-label espacio">
+                            <input id="float-input" type="text" size="30" pInputText [(ngModel)]="administracion.revisado_por"> 
+                            <label for="float-input">Revisado Por</label>
+                        </span>
+                        </div>
+                        <div class="col-md-12">
+                          <span class="ui-float-label espacio">
+                            <input id="float-input" type="text" size="30" pInputText [(ngModel)]="administracion.aprobado_por"> 
+                            <label for="float-input">Aprobado Por</label>
+                        </span>
+                        </div>
+                        <div class="col-md-12 espacio" style="text-align: center">
+                          <button 
+                            type="button" 
+                            class="btn btn-outline-default btn-round btn-sm" 
+                            (click)="abrirPDF()"
+                            
+                            >
+                            <i class="fas fa-file-pdf fa-lg fa-fw"></i> GUARDAR
+                          </button>
+                        </div>
+                      </div>
+                  </p-dialog>
+                  </div>
+                  <br/>
+                  <div class="modal-footer">
+                    </div>
+                      <!-- <button type="button" class="btn btn-success" (click)="modalService.close()">Ok!</button> -->
+                  </div>
+              </ng-template>
+                <button type="button" class="btn btn-outline-info" (click)="modalService.open(contenido)">GENERAR PDF</button>
+
+              </div>
+              <div class= "col-md-6" style="text-align: right">   
+                <div class="p-d-flex">
+                  <span class="ui-inputgroup-addon"><i class="fas fa-search fa-lg"></i></span>
+                            
+                            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Buscar en contenido" />
+                        
+                </div>
+              </div>
+            </div>
+        </ng-template>
+            <ng-template pTemplate="colgroup" let-columns>
+              <colgroup>
+                <col />
+                <col *ngFor="let col of columns" />
+              </colgroup>
+            </ng-template>
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th style="width: 3em"></th>
+                <th *ngFor="let col of columns" pResizableColumn>
+                  {{ col.header }}
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template
+              pTemplate="body"
+              let-rowData
+              let-expanded="expanded"
+              let-columns="columns"
+            >
+              <tr >
+                <td style="width: 3em">
+                  <a href="#" [pRowToggler]="rowData">
+                    <i
+                      [ngClass]="
+                        expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'
+                      "
+                    ></i>
+                  </a>
+                </td>
+                <td>
+                  {{ rowData.nombre }}
+                </td>
+                <td>
+                  <div *ngFor="let docente of rowData.docentes">
+                    <p> {{ docente.persona.primer_nombre}} {{ docente.persona.primer_apellido }}</p>
+                    <!--  -->
+                  </div>
+                </td>
+                <td>
+                  {{ rowData.capacidad }} 
+                </td>
+                <td>
+                  {{ rowData.periodo.nombre }}
+                </td>
+                <td>
+                  {{ rowData.jornada }}
+                </td>
+
+                <!-- <td
+                  *ngFor="let col of columns; let i = index"
+                  class="ui-resizable-column"
+                >
+                  {{ rowData[col.field] }}
+                </td> -->
+              </tr>
+            </ng-template>
+            <ng-template
+              pTemplate="rowexpansion"
+              let-rowData
+              let-columns="columns"
+            >
+              <tr>
+                <td [attr.colspan]="columns.length + 1">
+                  <div
+                    class="p-grid ui-fluid"
+                    style="font-size: 16px; padding: 20px"
+                    [@rowExpansionTrigger]="'active'"
+                  >
+                    <div class="row justify-content-center">
+                      <div class="col-md-6">
+                        <div class="p-grid">
+                          <div class="p-col-12">
+                            <b>Nombre:</b>
+                            <p>
+                              {{ rowData.nombre }}
+                            </p>
+                          </div>
+                          <div class="p-col-12">
+                            <b>Docentes:</b>
+                            <div *ngFor="let docente of rowData.docentes">
+                              <p>Nombres: {{ docente.persona.primer_nombre }} {{ docente.persona.primer_apellido }}</p>
+                              <p>
+                              Correo: {{ docente.persona.correo }}
+                              </p>
+                              <p>
+                              Celular: {{ docente.persona.celular }}
+
+                              </p>
+                            </div>
+                          </div>
+                          
+                          <!-- <div class="p-col-12">
+                            <b>Título:</b> {{ rowData.docente.titulo }}
+                          </div> -->
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="p-grid">
+                          <div class="p-col-12">
+                            <b>Capacidad:</b>
+                            <p>
+                              {{ rowData.capacidad }}
+                            </p>
+                          </div>
+                          <div class="p-col-12">
+                            <b>Período Lectivo:</b>
+                            <p>
+                              Nombre: {{ rowData.periodo.nombre }}
+                            </p>
+                            <p>
+                              Fecha de Inicio: {{ rowData.periodo.fecha_inicio }}
+                            </p>
+                            <p>
+                              Fecha Fin: {{ rowData.periodo.fecha_fin }}
+                            </p>
+                          </div>
+                          <div class="p-col-12">
+                            <b>Jornada:</b>
+                            {{ rowData.jornada }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+      
+      <!-- <h2 class="title">Asigne a un Docente!!</h2>
       <form [formGroup]="forma" (ngSubmit)="asignarDocente()">
-        <!-- Card Período Lectivo -->
+
 
         <div class="row justify-content-center">
           <div class="col-md-6">
@@ -151,40 +397,6 @@
                     </div>
                 </ng-template>
               </p-dropdown>
-                <!-- <p-autoComplete
-                  [suggestions]="docentes_filtrados"
-                  (completeMethod)="filtrarDocente($event)"
-                  [size]="30"
-                  [minLength]="1"
-                  placeholder="Docente"
-                  [dropdown]="true"
-                  formControlName="identificacion"
-                  field="persona.identificacion"
-                >
-                  <ng-template let-brand pTemplate="item">
-                    <div class="ui-helper-clearfix">
-                      <div
-                        style="
-                          font-size: 10px;
-                          display: inline-block;
-                          margin: 10px 10px 0 0;
-                        "
-                      >
-                        {{ brand.persona.identificacion }}
-                      </div>
-                      <div
-                        style="
-                          font-size: 12px;
-                          float: right;
-                          margin: 10px 10px 0 0;
-                        "
-                      >
-                        {{ brand.persona.primer_nombre }}
-                        {{ brand.persona.primer_apellido }}
-                      </div>
-                    </div>
-                  </ng-template>
-                </p-autoComplete> -->
               </div>
               <br />
               <div class="row justify-content-center">
@@ -202,7 +414,6 @@
         </div>
         <br>
 
-        <!-- Card Identificación -->
         <div class="row justify-content-center">
           <div class="col-md-6">
             <p-card
@@ -271,7 +482,6 @@
         </div>
         <br />
 
-        <!-- Card Horarios -->
         <div class="row justify-content-center">
           <div class="col-md-6">
             <p-card
@@ -290,13 +500,9 @@
                 style="margin-top: 1em"
                 formGroupName="horario"
               >
-                <!-- Horario de Entrada-->
+                
                 <div class="col-md-4">
                   <label>Horario de Entrada</label>
-                  <!-- <ngb-timepicker
-                    [meridian]="meridian"
-                    formControlName="horario_entrada"
-                  ></ngb-timepicker> -->
                   <p-calendar
                       formControlName="horario_entrada"
                       [timeOnly]="true"
@@ -308,13 +514,8 @@
                   ></p-message>
                   
                 </div>
-                <!-- Horario de Salida -->
                 <div class="col-md-4">
                   <label>Horario de Salida</label>
-                  <!-- <ngb-timepicker
-                    [meridian]="meridian"
-                    formControlName="horario_salida"
-                  ></ngb-timepicker> -->
                   <p-calendar
                     formControlName="horario_salida"
                     [timeOnly]="true"
@@ -334,7 +535,6 @@
         </div>
         <br />
 
-        <!-- Card Aula -->
         <div class="row justify-content-center">
           <div class="col-md-6">
             <p-card
@@ -373,9 +573,6 @@
                   </p-autoComplete>
                 </div>
                 <br />
-                <!-- <small class="text-danger" *ngIf="noAula">
-                  Se requiere el nombre del Aula
-                </small> -->
                 <div class="row justify-content-center">
                   <p-message
                     severity="error"
@@ -390,8 +587,6 @@
             </p-card>
           </div>
         </div>
-        <!-- <br />
-        <br /> -->
 
         <button
           type="submit"
@@ -401,405 +596,12 @@
         >
           <i class="fas fa-save fa-lg fa-fw"></i> Asignar Docente
         </button>
-      </form>
+      </form> -->
     </div>
   </div>
 
   <div class="section landing-section">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-10 mr-auto ml-auto">
-          <h2 class="text-center">INFORMACIÓN DE AULAS</h2>
-
-          <br />
-
-          <!-- (onRowSelect)="onRowSelect($event)"   Atributo para editar -->
-          <p-table
-            [columns]="cols"
-            [value]="aulas"
-            dataKey="_id"
-            [resizableColumns]="true"
-            [scrollable]="true"
-            scrollHeight="500px"
-            styleClass="ui-table-summary"
-            selectionMode="single"
-            [(selection)]="aula"
-          >
-          <ng-template pTemplate="caption">
-            <div class="row">
-              <div class= "col-md-6" style="text-align: left">
-                <button 
-                  type="button" 
-                  class="btn btn-outline-default btn-round btn-sm" 
-                  [disabled]="!periodo_lectivo" 
-                  (click)="generarPlanes()">
-                  <i class="fas fa-file-pdf fa-lg fa-fw"></i> GENERAR PDF
-                </button>
-              </div>
-              <div class= "col-md-6" style="text-align: right">   
-                <p-dropdown [options]="periodos_lectivos" 
-                            [(ngModel)]="periodo_lectivo" 
-                            filter="true" 
-                            optionLabel="nombre"
-                            placeholder="Período Lectivo"
-                            (onChange)="filtrarContenido($event)">
-                  <ng-template let-item pTemplate="selectedItem">
-                      <span style="vertical-align:middle;">{{item.label}}</span>
-                  </ng-template>
-                  <ng-template let-periodo pTemplate="item">
-                      <div class="ui-helper-clearfix" style="height: 25px;">
-                          <div style="font-size:14px; text-align:middle">{{periodo.label}}</div>
-                      </div>
-                  </ng-template>
-                </p-dropdown>
-              </div>
-            </div>
-        </ng-template>
-            <ng-template pTemplate="colgroup" let-columns>
-              <colgroup>
-                <col />
-                <col *ngFor="let col of columns" />
-              </colgroup>
-            </ng-template>
-            <ng-template pTemplate="header" let-columns>
-              <tr>
-                <th style="width: 3em"></th>
-                <th *ngFor="let col of columns" pResizableColumn>
-                  {{ col.header }}
-                </th>
-              </tr>
-            </ng-template>
-            <ng-template
-              pTemplate="body"
-              let-rowData
-              let-expanded="expanded"
-              let-columns="columns"
-            >
-              <tr [pSelectableRow]="rowData">
-                <td style="width: 3em">
-                  <a href="#" [pRowToggler]="rowData">
-                    <i
-                      [ngClass]="
-                        expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'
-                      "
-                    ></i>
-                  </a>
-                </td>
-                <td>
-                  {{ rowData.nombre }}
-                </td>
-                <td>
-                  <div *ngFor="let docente of rowData.docentes">
-                    <p> {{ docente.persona.primerNombre }} {{ docente.persona.primerApellido }}</p>
-                  </div>
-                </td>
-                <td>
-                  <div *ngFor="let pasante of rowData.pasantes">
-                    {{ pasante.persona.primerNombre }} {{ pasante.persona.primerApellido }}
-                  </div>
-                </td>
-                <td>
-                  {{ rowData.periodoLectivo.nombre }}
-                </td>
-                <td>
-                  <div *ngFor="let especialidad of rowData.especialidades">
-                    {{ especialidad.nombre }}
-                  </div>
-                </td>
-
-                <!-- <td
-                  *ngFor="let col of columns; let i = index"
-                  class="ui-resizable-column"
-                >
-                  {{ rowData[col.field] }}
-                </td> -->
-              </tr>
-            </ng-template>
-            <ng-template
-              pTemplate="rowexpansion"
-              let-rowData
-              let-columns="columns"
-            >
-              <tr>
-                <td [attr.colspan]="columns.length + 1">
-                  <div
-                    class="p-grid ui-fluid"
-                    style="font-size: 16px; padding: 20px"
-                    [@rowExpansionTrigger]="'active'"
-                  >
-                    <div class="row justify-content-center">
-                      <div class="col-md-6">
-                        <div class="p-grid">
-                          <div class="p-col-12">
-                            <b>Nombre:</b>
-                            <p>
-                              {{ rowData.nombre }}
-                            </p>
-                          </div>
-                          <div class="p-col-12">
-                            <b>Docentes:</b>
-                            <div *ngFor="let docente of rowData.docentes">
-                              <p> {{ docente.persona.primerNombre }} {{ docente.persona.primerApellido }}</p>
-                              <p>
-                                {{ docente.persona.correo }}
-                              </p>
-                              <p>
-                                {{ docente.persona.celular }}
-
-                              </p>
-                            </div>
-                          </div>
-                          
-                          <!-- <div class="p-col-12">
-                            <b>Título:</b> {{ rowData.docente.titulo }}
-                          </div> -->
-                        </div>
-                      </div>
-
-                      <div class="col-md-6">
-                        <div class="p-grid">
-                          <div class="p-col-12">
-                            <b>Pasantes:</b>
-                            <div *ngFor="let pasante of rowData.pasantes">
-                              <p> {{ pasante.persona.primerNombre }} {{ pasante.persona.primerApellido }}</p>
-                              <p>
-                                {{ pasante.persona.correo }}
-                              </p>
-                              <p>
-                                {{ pasante.persona.contacto }}
-
-                              </p>
-                            </div>
-                          </div>
-                          <div class="p-col-12">
-                            <b>Especialidades:</b>
-                            <div *ngFor="let especialidad of rowData.especialidades">
-                              <p>
-                                {{ especialidad.nombre }}
-                              </p>
-                              <p>
-                                {{ especialidad.descripcion }}
-                              </p>
-                            </div>
-                          </div>
-                          <div class="p-col-12">
-                            <b>Período Lectivo:</b>
-                            <p>
-                              {{ rowData.periodoLectivo.nombre }}
-                            </p>
-                            <p>
-                              {{ rowData.periodoLectivo.descripcion }}
-                            </p>
-                            <p>
-                              {{ rowData.periodoLectivo.estado }}
-                            </p>
-                          </div>
-                          <!-- <div class="p-col-12">
-                            <b>Horario de Salida:</b>
-                            {{ rowData.horario_salida.hora }}
-                            {{ rowData.horario_salida.periodo }}
-                          </div>
-                          <div class="p-col-12">
-                            <b>Nombre de Aula:</b>
-                            {{ rowData.aula.nombre }}
-                          </div> -->
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            </ng-template>
-          </p-table>
-
-          <p-dialog
-            header="Detalles de Persona"
-            [(visible)]="displayDialog"
-            [focusOnShow]="false"
-            showEffect="fade"
-            [modal]="true"
-            [style]="{ width: '320px' }"
-          >
-            <form [formGroup]="forma_editar" (ngSubmit)="editarDocente()">
-              <div class="p-grid ui-fluid" *ngIf="asignacion_editar">
-                <div class="p-col-4">
-                  <label for="_id" class="fuente"
-                    >IDENTIFICACIÓN DE DOCENTE</label
-                  >
-                </div>
-                <div class="p-col-8">
-                  <p-autoComplete
-                    [suggestions]="docentes_editados"
-                    (completeMethod)="filtrarDocenteEditar($event)"
-                    [size]="30"
-                    [minLength]="1"
-                    placeholder="Docente"
-                    [dropdown]="true"
-                    formControlName="identificacion"
-                    field="persona.identificacion"
-                  >
-                    <ng-template let-brand pTemplate="item">
-                      <div class="ui-helper-clearfix">
-                        <div
-                          style="
-                            font-size: 10px;
-                            display: inline-block;
-                            margin: 10px 10px 0 0;
-                          "
-                        >
-                          {{ brand.persona.identificacion }}
-                        </div>
-                        <div
-                          style="
-                            font-size: 12px;
-                            float: right;
-                            margin: 10px 10px 0 0;
-                          "
-                        >
-                          {{ brand.persona.primer_nombre }}
-                          {{ brand.persona.primer_apellido }}
-                        </div>
-                      </div>
-                    </ng-template>
-                  </p-autoComplete>
-                </div>
-                <div class="p-col-4 edicion">
-                  <label class="fuente">HORA DE ENTRADA</label>
-                </div>
-                <div class="p-col-8">
-                  <p-calendar
-                    formControlName="horario_entrada"
-                    [timeOnly]="true"
-                  ></p-calendar>
-                </div>
-                <div class="p-col-4 edicion">
-                  <label class="fuente">HORA DE SALIDA</label>
-                </div>
-                <div class="p-col-8">
-                  <p-calendar
-                    formControlName="horario_salida"
-                    [timeOnly]="true"
-                  ></p-calendar>
-                </div>
-                <div class="p-col-4 edicion">
-                  <label class="fuente">AULA</label>
-                </div>
-                <div class="p-col-8" style="margin-bottom: 0.5em">
-                  <p-autoComplete
-                    [suggestions]="aulas_editadas"
-                    (completeMethod)="filtrarAulaEditar($event)"
-                    [size]="30"
-                    [minLength]="1"
-                    placeholder="Aula"
-                    [dropdown]="true"
-                    formControlName="aula"
-                    field="nombre"
-                  >
-                    <ng-template let-brand pTemplate="item">
-                      <div class="ui-helper-clearfix">
-                        <div style="font-size: 15px; margin: 0.5em">
-                          {{ brand.nombre }}
-                        </div>
-                      </div>
-                    </ng-template>
-                  </p-autoComplete>
-                </div>
-              </div>
-              <br>
-              <p-footer>
-                <div
-                  class="ui-dialog-buttonpane ui-helper-clearfix row justify-content-center"
-                >
-                  <button
-                    type="button"
-                    class="btn btn-outline-danger btn-round btn-sm"
-                    (click)="delete()"
-                  >
-                    <i class="fas fa-trash-alt fa-lg fa-fw"></i> Borrar
-                  </button>
-                  <button
-                    type="submit"
-                    class="btn btn-outline-success btn-round btn-sm"
-                  >
-                    <i class="fas fa-save fa-lg fa-fw"></i> Guardar
-                  </button>
-                </div>
-                <div
-                  class="ui-dialog-buttonpane ui-helper-clearfix row justify-content-center"
-                  style="margin-top: 0.5em;"
-                > 
-                <button
-                  type="button"
-                  class="btn btn-outline-info btn-round btn-sm justify-content-center "
-                  (click)="openPdf()"
-                >
-                <i class="fas fa-file-pdf fa-lg fa-fw"></i> Generar PDF
-                </button>
-              </div>
-              </p-footer>
-            </form>
-          </p-dialog>
-
-          <!-- <form class="contact-form">
-            <div class="row">
-              <div class="col-md-6">
-                <label>Name</label>
-                <div
-                  class="input-group"
-                  [ngClass]="{ 'input-group-focus': focus === true }"
-                >
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"
-                      ><i class="nc-icon nc-single-02"></i
-                    ></span>
-                  </div>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Name"
-                    (focus)="focus = true"
-                    (blur)="focus = false"
-                  />
-                </div>
-              </div>
-              <div class="col-md-6">
-                <label>Email</label>
-                <div
-                  class="input-group"
-                  [ngClass]="{ 'input-group-focus': focus1 === true }"
-                >
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <i class="nc-icon nc-email-85"></i
-                    ></span>
-                  </div>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Email"
-                    (focus)="focus1 = true"
-                    (blur)="focus1 = false"
-                  />
-                </div>
-              </div>
-            </div>
-            <label>Message</label>
-            <textarea
-              class="form-control"
-              rows="4"
-              placeholder="Tell us your thoughts and feelings..."
-            ></textarea>
-            <div class="row">
-              <div class="col-md-4 mr-auto ml-auto">
-                <button class="btn btn-danger btn-lg btn-fill">
-                  Send Message
-                </button>
-              </div>
-            </div>
-          </form> -->
-        </div>
-      </div>
-    </div>
+    
   </div>
 
   <!-- <div class="section landing-section"> -->
@@ -832,69 +634,3 @@
     </div>
   </div>
 </div>
-
-<!-- <div class="card card-profile card-plain">
-            <div class="card-avatar">
-              <a href="#avatar"
-                ><img src="./assets/img/faces/joe-gardner-2.jpg" alt="..."
-              /></a>
-            </div>
-            <div class="card-block">
-              <a href="#paper-kit">
-                <div class="author">
-                  <h4 class="card-title">Sophie West</h4>
-                  <h6 class="card-category">Designer</h6>
-                </div>
-              </a>
-              <p class="card-description text-center">
-                A group becomes a team when each member is sure enough of
-                himself and his contribution to praise the skill of the others.
-                No one can whistle a symphony. It takes an orchestra to play it.
-              </p>
-            </div>
-            <div class="card-footer text-center">
-              <a href="#pablo" class="btn btn-link btn-just-icon btn-neutral"
-                ><i class="fa fa-twitter"></i
-              ></a>
-              <a href="#pablo" class="btn btn-link btn-just-icon btn-neutral"
-                ><i class="fa fa-google-plus"></i
-              ></a>
-              <a href="#pablo" class="btn btn-link btn-just-icon btn-neutral"
-                ><i class="fa fa-linkedin"></i
-              ></a>
-            </div>
-          </div> -->
-
-                  <!-- <div class="col-md-4">
-          <div class="card card-profile card-plain">
-            <div class="card-avatar">
-              <a href="#avatar"
-                ><img src="./assets/img/faces/erik-lucatero-2.jpg" alt="..."
-              /></a>
-            </div>
-            <div class="card-block">
-              <a href="#paper-kit">
-                <div class="author">
-                  <h4 class="card-title">Robert Orben</h4>
-                  <h6 class="card-category">Developer</h6>
-                </div>
-              </a>
-              <p class="card-description text-center">
-                The strength of the team is each individual member. The strength
-                of each member is the team. If you can laugh together, you can
-                work together, silence isn’t golden, it’s deadly.
-              </p>
-            </div>
-            <div class="card-footer text-center">
-              <a href="#pablo" class="btn btn-link btn-just-icon btn-neutral"
-                ><i class="fa fa-twitter"></i
-              ></a>
-              <a href="#pablo" class="btn btn-link btn-just-icon btn-neutral"
-                ><i class="fa fa-google-plus"></i
-              ></a>
-              <a href="#pablo" class="btn btn-link btn-just-icon btn-neutral"
-                ><i class="fa fa-linkedin"></i
-              ></a>
-            </div>
-          </div>
-        </div> -->

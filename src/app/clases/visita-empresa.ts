@@ -1,19 +1,15 @@
 import { Empresa } from "./empresa";
-import { Docente } from "./docente";
-import { Persona } from "./persona";
+import { Time } from "@angular/common";
 
 export class Visita_Empresa {
-  _id?: string;
+
+  id?: number;
   empresa?: Empresa;
-  motivoVisita?: string;
-  encargadoVisita?: Docente[];
-  fechaVisita?: Date;
-  horarioVisita?: {
-    horaEntrada?: string;
-    horaSalida?: string;
-  };
+  motivo_visita?: string;
+  acompanantes?: [{}];
+  encargado_visita?;
+  fecha_visita?: string;
+  hora_visita?: string;
   observaciones?: string;
-  historico?: {
-    fechaRegistro?: Date  
-  };
+
 }

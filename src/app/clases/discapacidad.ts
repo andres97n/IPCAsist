@@ -1,6 +1,5 @@
 export class Discapacidad {
-  _id: string;
+  id: string;
   nombre: string;
-  observaciones: string;
-  fecha_creacion: Date;
+  descripcion: string;
 }

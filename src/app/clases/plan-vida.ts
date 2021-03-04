@@ -1,31 +1,31 @@
-import { Docente } from "./docente";
-import { Estudiante } from "./estudiante";
-import { Materia } from "./materia";
+
+import { Alumno } from "./alumno";
 import { Aula } from "./aula";
-import { Detalle } from "./detalle";
 import { Periodo_Lectivo } from "./periodo_lectivo";
+import { Personal } from "./personal";
 
 export class Plan_Vida {
-  _id?: string;
-  periodoLectivo?: Periodo_Lectivo;
-  docente?: Docente;
-  alumno?: Estudiante;
-  asignaturas?: Materia[];
+
+  id?: number;
+  periodo_lectivo?: Periodo_Lectivo;
+  docente?: Personal;
+  alumno?: Alumno;
+  asignaturas?:[{}];
   aula?: Aula;
   descripcion?: string;
-  objetivoGeneral?: string;
-  metasEspecificas?: string[];
+  objetivo_general?: string;
+  metas_especificas?: string[];
   vision?: string;
-  ambitos?: Materia[];
-  dominio?: Materia[];
-  necesidades?: Detalle[];
-  potencialidades?: Detalle[];
-  gustos?: Detalle[];
-  disgustos?: Detalle[];
-  deseos?: Detalle[];
-  suenos?: Detalle[];
+  ambitos?: [{}];
+  dominio?:  [{}];
+  necesidades?:  [{}];
+  potencialidades?: [{}];
+  gustos?:  [{}];
+  disgustos?:  [{}];
+  deseos?:  [{}];
+  suenos?:  [{}];
   logros?: string[];
   observaciones?: string;
-  estado?: string;
-  historico?: []
+  estado?: number;
+
 }

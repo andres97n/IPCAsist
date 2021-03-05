@@ -34,7 +34,7 @@
           <a
             [routerLink]="['/ayuda-componentes']"
             class="btn btn-outline-default btn-round"
-            target="_blank"
+           
             ><i class="fas fa-question fa-lg fa-fw"></i>Ayuda de Componentes</a
           >
         </div>
@@ -264,7 +264,7 @@
 
                   <div class="row justify-content-center componente">
                     <p-listbox
-                      [options]="materias"
+                      [options]="asignaturas_combo"
                       [multiple]="true"
                       [checkbox]="true"
                       [filter]="true"
@@ -532,7 +532,7 @@
 
                   <div class="row justify-content-center componente">
                     <p-listbox
-                      [options]="materias"
+                      [options]="dominios_combo"
                       [multiple]="true"
                       [checkbox]="true"
                       [filter]="true"
@@ -941,7 +941,7 @@
 
                   <div class=" row justify-content-center componente">
                     <p-listbox
-                      [options]="materias"
+                      [options]="ambitos_combo"
                       [multiple]="true"
                       [checkbox]="true"
                       [filter]="true"
@@ -1728,7 +1728,7 @@
                           <button 
                             type="button" 
                             class="btn btn-outline-danger btn-round btn-sm" 
-                            (click)="eliminarPlan()">
+                            (click)="eliminarPlan(rowData)">
                             <i class="fas fa-trash-alt fa-lg fa-fw"></i> BORRAR PLAN DE VIDA
                           </button>
                           <button 

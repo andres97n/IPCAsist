@@ -102,6 +102,10 @@ export class PlanVidaComponent implements OnInit {
   nuevo_plan: boolean;
   plan_editar: Plan_Vida;
 
+  asignaturas_combo: Materia[];
+  ambitos_combo: Materia[];
+  dominios_combo: Materia[];
+
   ambito: string;
   asignatura: string;
   dominio: string;
@@ -217,6 +221,19 @@ export class PlanVidaComponent implements OnInit {
     this._planSrv.getLista("materias").subscribe( (materias:Materia[]) => {
       this.materias = materias;
       console.log(this.materias, "Materias");
+      this.asignaturas_combo = [];
+      this.ambitos_combo = [];
+      this.dominios_combo = [];
+
+      this.materias.forEach( (materia:Materia) => {
+        if(materia.tipo_materia == 1){
+          this.dominios_combo.push(materia);
+        } else if(materia.tipo_materia == 2){
+          this.ambitos_combo.push(materia);
+        } else{
+          this.asignaturas_combo.push(materia);
+        }
+      })
       
     } )
 
@@ -581,38 +598,11 @@ export class PlanVidaComponent implements OnInit {
     
   }
 
-  eliminarPlan(){
+  eliminarPlan(plan_vida:Plan_Vida){
     
-
-    let plan = {
-      id: this.plan_seleccionado.id,
-      periodo_lectivo: this.plan_seleccionado.periodo_lectivo.id,
-      docente: this.plan_seleccionado.docente.id,
-      alumno: this.plan_seleccionado.alumno.id,
-      asignaturas: this.plan_seleccionado.asignaturas,
-      aula: this.plan_seleccionado.aula.id,
-      descripcion: this.plan_seleccionado.descripcion,
-      objetivo_general: this.plan_seleccionado.objetivo_general,
-      metas_especificas: this.plan_seleccionado.metas_especificas,
-      vision: this.plan_seleccionado.vision,
-      ambitos: this.plan_seleccionado.ambitos,
-      dominio: this.plan_seleccionado.dominio,
-      necesidades: this.plan_seleccionado.necesidades,
-      potencialidades: this.plan_seleccionado.potencialidades,
-      gustos: this.plan_seleccionado.gustos,
-      disgustos: this.plan_seleccionado.disgustos,
-      deseos: this.plan_seleccionado.deseos,
-      suenos: this.plan_seleccionado.suenos,
-      logros: this.plan_seleccionado.logros,
-      observaciones: this.plan_seleccionado.observaciones,
-      estado: 1,
-    }
-
-    console.log(plan, "Plan Eliminar");
-
-    this._planSrv.editarPlanVida(plan).subscribe( data => {
-      console.log(data, "PLAN ELIMINADO");
-      
+    this._planSrv.eliminarPlan(plan_vida.id).subscribe( (data) => {
+      console.log(data, "ELIMINADO CORRECTAMENTE");
+      // this.displayDialog = false;
     })
 
   }
@@ -1025,8 +1015,6 @@ export class PlanVidaComponent implements OnInit {
 
     } )
     valor.push(aux)
-    // valor.push(this.plan_pdf.aula.nombre)
-    // valor.push(this.plan_pdf.descripcion)
     valores.push(valor);
 
     const head_plani_1 = cols
@@ -1157,40 +1145,4 @@ export class PlanVidaComponent implements OnInit {
     this.plan_pdf = event;
   }
 
-
-  // filtrarAulaEditada(event) {
-  //   let query = event.query;
-  //   let aulas: Aula[] = this.aulas;
-
-  //   this.aulas_editadas = [];
-  //   for (let i = 0; i < aulas.length; i++) {
-  //     let aula = aulas[i];
-
-  //     if (aula.nombre.toLowerCase().indexOf(query.toLowerCase()) == 0) {
-  //       this.aulas_editadas.push(aula);
-  //     }
-  //   }
-  // }
-
-  // filtrarEstudianteEditar(e: any) {
-  //   let query = e.query;
-  //   let estudiantes: Estudiante[] = this.estudiantes;
-
-  //   this.estudiantes_editados = [];
-  //   for (let i = 0; i < estudiantes.length; i++) {
-  //     let estudiante = estudiantes[i];
-
-  //     if (
-  //       estudiante.persona.primer_apellido
-  //         .toLowerCase()
-  //         .indexOf(query.toLowerCase()) == 0
-  //     ) {
-  //       this.estudiantes_editados.push(estudiante);
-  //     } else {
-  //       if (estudiante.persona.identificacion.indexOf(query) == 0) {
-  //         this.estudiantes_editados.push(estudiante);
-  //       }
-  //     }
-  //   }
-  // }
 }

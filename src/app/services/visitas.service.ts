@@ -23,6 +23,17 @@ export class VisitasService {
     return this.http.put(`http://localhost:8000/api/visita/${visita.id}`, body,{'headers':headers})
   }
 
+  eliminarVisita(visita:any){
+    return this.http.get(`http://localhost:8000/api/visita_eliminar/${visita}`);
+  }
+
+  setEmpresa(empresa:any): Observable<any>{
+    const headers = { 'content-type': 'application/json'}  
+    const body=JSON.stringify(empresa);
+    console.log(body)
+    return this.http.post(`http://localhost:8000/api/empresas`, body,{'headers':headers})
+  }
+
   getLista(e: string) {
     return this.http.get(`http://localhost:8000/api/${e}`);
   }

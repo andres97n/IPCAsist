@@ -13,7 +13,6 @@ import { FooterComponent } from "./shared/footer/footer.component";
 // import { GoogleMapsModule } from "@angular/google-maps";
 
 import { ComponentsModule } from "./components/components.module";
-import { ExamplesModule } from "./examples/examples.module";
 import { InputNumberModule } from "primeng/inputnumber";
 import { InputTextModule } from "primeng/inputtext";
 import { InputMaskModule } from "primeng/inputmask";
@@ -37,7 +36,6 @@ import { AuthGuard } from "./guards/auth.guard";
     AppRoutingModule,
     HttpClientModule,
     ComponentsModule,
-    ExamplesModule,
     ReactiveFormsModule,
     InputNumberModule,
     InputTextModule,

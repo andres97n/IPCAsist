@@ -24,6 +24,11 @@ export class PlanVidaService {
     console.log(body)
     return this.http.put(`http://localhost:8000/api/plan_vida/${plan_vida.id}`, body,{'headers':headers})
   }
+
+  eliminarPlan(plan:any){
+    return this.http.get(`http://localhost:8000/api/plan_vida_eliminar/${plan}`);
+  }
+
   
   // getPlanesVida(){
   //   return this.http.get("/assets/json/Plan_Vida.json");

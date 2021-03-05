@@ -4,10 +4,6 @@ import { BrowserModule } from "@angular/platform-browser";
 import { Routes, RouterModule } from "@angular/router";
 
 import { ComponentsComponent } from "./components/components.component";
-import { ProfileComponent } from "./examples/profile/profile.component";
-import { SignupComponent } from "./examples/signup/signup.component";
-import { LandingComponent } from "./examples/landing/landing.component";
-import { NucleoiconsComponent } from "./components/nucleoicons/nucleoicons.component";
 import { DesarrolladoresComponent } from "./components/desarrolladores/desarrolladores.component";
 import { VisitaEmpresaComponent } from "./components/visita-empresa/visita-empresa.component";
 import { PasanteComponent } from "./components/pasante/pasante.component";
@@ -15,6 +11,7 @@ import { PlanVidaComponent } from "./components/plan-vida/plan-vida.component";
 import { AsignarDocenteComponent } from "./components/asignar-docente/asignar-docente.component";
 import { AyudaComponentesComponent } from "./components/ayuda-componentes/ayuda-componentes.component";
 import { AuthGuard } from "./guards/auth.guard";
+import { SignupComponent } from "./components/signup/signup.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/sesion", pathMatch: "full" },

@@ -10,7 +10,6 @@ import {
   transition,
   trigger,
 } from "@angular/animations";
-import { DocenteService } from "app/services/docente.service";
 import { Docente } from "app/clases/docente";
 import { Aula } from "app/clases/aula";
 import { Table } from "primeng/table";
@@ -68,6 +67,13 @@ export class PasanteComponent implements OnInit {
 
   num_horas: number;
 
+  mostrar_pdf: boolean;
+  pasante_admin: {
+        elaborado_por?:string,
+        revisado_por?: string,
+        aprobado_por?: string
+      } = {};
+
   horario = Date;
   es: any;
 
@@ -105,6 +111,7 @@ export class PasanteComponent implements OnInit {
     this.crearFormulario();
 
     this.pasante = new Pasante();
+    this.mostrar_pdf = false
 
     this.universidades = this._ejemplosSrv.getUniversidades();
   }
@@ -275,9 +282,9 @@ export class PasanteComponent implements OnInit {
     return this.forma.get("num_horas").value;
   }
 
-  generoSeleccionado(event) {
-    console.log(event.value);
-  }
+  // generoSeleccionado(event) {
+  //   console.log(event.value);
+  // }
 
   sangreSeleccionada(event) {
     console.log(event.value);
@@ -586,4 +593,88 @@ export class PasanteComponent implements OnInit {
 
     // this.docentesFiltrados = this.filtrarDocentes(query, this.docentes);
   }
+
+  generarPasante(){
+
+    let fecha = `${new Date().getDate()}/${new Date().getMonth()}/${new Date().getFullYear()}`
+    // let visitas_filtradas=[];
+    // let cols: string[] = [];
+    // let valor = [];
+    // let valores = [];
+
+    let admin_colums = ['', "Elaborado Por", "Revisado Por", "Aprobado Por"];
+    let admin_fields = [["DETALLE", this.pasante_admin.elaborado_por, this.pasante_admin.revisado_por, this.pasante_admin.aprobado_por],
+                        ["FIRMA", '', '', ''],
+                        ["FECHA", fecha, fecha, fecha] ]
+
+    // const head = [cols]
+    // const data = valores
+    const head_2 = [admin_colums]
+    const data_2 = admin_fields
+    const doc = new jsPDF("p","mm","a4");
+    const pdfWidht=210;  // width of A4 in mm
+    const pdfHeight=297;  // height of A4 in mm
+
+    let logo_ipca= new Image();
+    logo_ipca.src = 'assets/img/logo-editado.png';
+
+    doc.addImage(logo_ipca, 'PNG', pdfWidht/2.5, pdfHeight/17, 45, 25, 'logo_IPCA', 'NONE', 0);
+    doc.setFontSize(18);
+    doc.text(`Institución de Parálisis Cerebral del Azuay`, pdfWidht/2,pdfHeight/5, {align:"center"});
+
+    doc.setFontSize(16);
+    doc.text(`Detalle de Pasante`, pdfWidht/2,pdfHeight/4, {align:"center"});
+    // doc.addPage('a4', "landscape")
+    doc.setFontSize(14);
+    doc.text(`Identificación: ${this.pasante_editar.persona.identificacion}`, 20, 90, {align:"left"});
+    doc.text(`Nombre: ${this.pasante_editar.persona.nombres} ${this.pasante_seleccionado.persona.apellidos}`, 20, 105, {align:"left"});
+    doc.text(`Edad: ${this.pasante_editar.persona.edad}`, 20, 120, {align:"left"});
+    doc.text(`Correo: ${this.pasante_editar.persona.correo}`, 20, 135, {align:"left"});
+    doc.text(`Contacto: ${this.pasante_editar.persona.contacto}`, 20, 150, {align:"left"});
+    doc.text(`Nombre de la Institución: ${this.pasante_editar.institucion.name} `, 20, 165, {align:"left"});
+    doc.text(`Nombre de Tutor: ${this.pasante_editar.tutor.persona.primer_nombre} ${this.pasante_editar.tutor.persona.segundo_nombre} ${this.pasante_editar.tutor.persona.primer_apellido} ${this.pasante_editar.tutor.persona.segundo_apellido}`, 20, 180, {align:"left"});
+    let i = 195
+    this.pasante_editar.aula.forEach( (aula:any) => {
+      doc.text(`Nombre: ${aula.nombre}`, 20, i, {align:"left"});
+      i = i + 15;
+    } )
+    doc.text(`Especialidad: ${this.pasante_editar.especialidad}`, 20, i, {align:"left"});
+    doc.text(`Número de horas diarias previstas: ${this.pasante_editar.numHoras}`, 20, i+15, {align:"left"});
+    
+    doc.addPage('a4');
+    
+    autoTable(doc, {
+      head: head_2,
+      body: data_2,
+      theme: "grid",
+      didDrawCell: (data) => {
+        console.log(data.column.index)
+      },
+    })
+
+    doc.setFontSize(8);
+    doc.text('Documento generado por IPCAsist', pdfWidht/2, pdfHeight/1.03, {align:"center"});
+
+
+    doc.save(`Pasante_${this.pasante_editar.persona.nombres}_${this.pasante_editar.persona.apellidos}.pdf`);
+    this.mostrar_pdf = false;
+    this.displayDialog = false;
+
+  }
+
+  mostrarPasante(){
+    this.mostrar_pdf = true;
+    
+    // this.generarPasante();
+  }
+
+  eliminarPasante(pasante:Pasante){
+
+    this._pasanteSrv.eliminarPasante(pasante.id).subscribe( (data) => {
+      console.log(data, "ELIMINADO CORRECTAMENTE");
+      this.displayDialog = false;
+    })
+
+  }
+
 }

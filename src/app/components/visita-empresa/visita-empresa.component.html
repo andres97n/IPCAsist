@@ -40,7 +40,6 @@
           <a
             [routerLink]="['/ayuda-componentes']"
             class="btn btn-outline-default btn-round"
-            target="_blank"
             ><i class="fas fa-question fa-lg fa-fw"></i>Ayuda de Componentes</a
           >
         </div>
@@ -53,6 +52,137 @@
   <div class="section section-dark text-center">
     <div class="container">
       <h2 class="title">Registre una Visita</h2>
+
+      <p-dialog header="INGRESAR NUEVA EMPRESA" [(visible)]="mostrar_nueva_empresa" [style]="{width: '25vw'}" >
+        <div class="container" style="margin-top: 1em;">
+          <form [formGroup]="forma_empresa" (ngSubmit)="guardarEmpresa()">
+            <div class="row justify-content-center">
+
+              <!-- Nombre -->
+              <div class="col-md-12">
+                <div class="ui-inputgroup">
+                  <span class="ui-inputgroup-addon">
+                    <i
+                      class="fas fa-pen-square fa-lg"
+                      style="line-height: 1"
+                    ></i
+                  ></span>
+                  <input
+                    type="text"
+                    size="30"
+                    pInputText
+                    formControlName="nombre"
+                    placeholder="Nombre de Empresa*"
+                  />
+                </div>
+                <!-- <div class="row justify-content-center">
+                  <p-message
+                    severity="error"
+                    text=" Se requiere el Nombre de la Empresa"
+                    *ngIf="invalidosEmpresa('empresa')"
+                    style="margin-top: 1em"
+                  ></p-message>
+                </div> -->
+              </div>
+
+              <!-- Representante -->
+              <div class="col-md-12 edicion">
+                <div class="ui-inputgroup">
+                  <span class="ui-inputgroup-addon">
+                    <i
+                      class="fas fa-pen-square fa-lg"
+                      style="line-height: 1"
+                    ></i
+                  ></span>
+                  <input
+                    type="text"
+                    size="30"
+                    pInputText
+                    formControlName="representante"
+                    placeholder="Nombre de Representante*"
+                  />
+                </div>
+                <!-- <div class="row justify-content-center">
+                  <p-message
+                    severity="error"
+                    text=" Se requiere el Nombre del Representante"
+                    *ngIf="invalidosEmpresa('representante')"
+                    style="margin-top: 1em"
+                  ></p-message>
+                </div> -->
+              </div>
+
+              <!-- Contacto -->
+              <div class="col-md-12 edicion">
+                <div class="ui-inputgroup">
+                  <span class="ui-inputgroup-addon">
+                    <i
+                      class="fas fa-pen-square fa-lg"
+                      style="line-height: 1"
+                    ></i
+                  ></span>
+                  <input
+                    type="text"
+                    size="30"
+                    pInputText
+                    formControlName="contacto"
+                    placeholder="Contacto Telefónico"
+                  />
+                </div>
+              </div>
+
+              <!-- Correo -->
+              <div class="col-md-12 edicion">
+                <div class="ui-inputgroup">
+                  <span class="ui-inputgroup-addon">
+                    <i
+                      class="fas fa-pen-square fa-lg"
+                      style="line-height: 1"
+                    ></i
+                  ></span>
+                  <input
+                    type="text"
+                    size="30"
+                    pInputText
+                    formControlName="correo"
+                    placeholder="Correo de Representante"
+                  />
+                </div>
+              </div>
+
+              <!-- Direccion -->
+              <div class="col-md-12 edicion">
+                <div class="ui-inputgroup">
+                  <span class="ui-inputgroup-addon">
+                    <i
+                      class="fas fa-pen-square fa-lg"
+                      style="line-height: 1"
+                    ></i
+                  ></span>
+                  <input
+                    type="text"
+                    size="30"
+                    pInputText
+                    formControlName="direccion"
+                    placeholder="Dirección de la Empresa"
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <button
+                type="submit"
+                class="btn btn-outline-success btn-round btn-sm"
+                [disabled]="!forma_empresa.valid"
+                style="margin-top: 2em"
+                >
+                  <i class="fas fa-save fa-lg fa-fw"></i> Registrar Empresa
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </p-dialog>
 
       <form [formGroup]="forma" (ngSubmit)="guardarVisita()">
         <div class="row justify-content-center" style="margin-top: 2em">
@@ -792,7 +922,7 @@
           </p-table>
 
           <p-dialog
-            header="DETALLES DE PASANTE"
+            header="DETALLES DE VISITA"
             [(visible)]="displayDialog"
             [focusOnShow]="false"
             showEffect="fade"
@@ -931,7 +1061,7 @@
                 <button
                   type="button"
                   class="btn btn-outline-danger btn-round btn-sm"
-                  (click)="delete()"
+                  (click)="borrarVisita(visita_seleccionada)"
                 >
                   <i class="fas fa-trash-alt fa-lg fa-fw"></i> Borrar
                 </button>
@@ -945,13 +1075,45 @@
                 <button
                   type="button"
                   class="btn btn-outline-info btn-round btn-sm justify-content-center "
-                  (click)="openPdf()"
+                  (click)="mostrarVentas()"
                 >
                 <i class="fas fa-file-pdf fa-lg fa-fw"></i> Generar PDF
                 </button>
               </div>
             </p-footer>
           </p-dialog>
+          <p-dialog header="Detalle de Documento" [(visible)]="mostrar_pdf" [style]="{width: '20vw'}">
+            <div class="row justify-content-center">
+              <div class="col-md-12">
+                <span class="ui-float-label" style="margin-top: 2em;">
+                  <input id="float-input" type="text" size="30" pInputText [(ngModel)]="visita_admin.elaborado_por"> 
+                  <label for="float-input">Elaborado Por</label>
+              </span>
+              </div>
+              <div class="col-md-12">
+                <span class="ui-float-label text">
+                  <input id="float-input" type="text" size="30" pInputText [(ngModel)]="visita_admin.revisado_por"> 
+                  <label for="float-input">Revisado Por</label>
+              </span>
+              </div>
+              <div class="col-md-12">
+                <span class="ui-float-label text">
+                  <input id="float-input" type="text" size="30" pInputText [(ngModel)]="visita_admin.aprobado_por"> 
+                  <label for="float-input">Aprobado Por</label>
+              </span>
+              </div>
+              <div class="col-md-12" style="text-align: center; margin-top: 2em;">
+                <button 
+                  type="button" 
+                  class="btn btn-outline-default btn-round btn-sm" 
+                  (click)="generarVisita()"
+                  
+                  >
+                  <i class="fas fa-file-pdf fa-lg fa-fw"></i> GUARDAR
+                </button>
+              </div>
+            </div>
+        </p-dialog>
         </div>
       </div>
     </div>

@@ -54,11 +54,6 @@ npm install @angular/google-maps --save
 
 -------------------------------------------------
 
-Libreria de PdfMake
-npm install --save pdfmake
-
--------------------------------------------------
-
 Generar Pdf's - JSPDF
 
 npm install jspdf --save

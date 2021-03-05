@@ -7,8 +7,8 @@ export class Empresa {
   nombre?: string;
   representante?: {};
   direccion?: {
-    callePrincipal: string;
-    calleSecundaria: string;
+    callePrincipal?: string;
+    calleSecundaria?: string;
   };
 
 }

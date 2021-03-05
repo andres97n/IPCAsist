@@ -26,13 +26,9 @@ import { MessageModule } from "primeng/message";
 import { ListboxModule } from "primeng/listbox";
 import { ChipsModule } from "primeng/chips";
 import {MultiSelectModule} from 'primeng/multiselect';
+import {TooltipModule} from 'primeng/tooltip';
 
-import { BasicelementsComponent } from "./basicelements/basicelements.component";
-import { NavigationComponent } from "./navigation/navigation.component";
-import { TypographyComponent } from "./typography/typography.component";
-import { NucleoiconsComponent } from "./nucleoicons/nucleoicons.component";
 import { ComponentsComponent } from "./components.component";
-import { NotificationComponent } from "./notification/notification.component";
 import { NgbdModalComponent } from "./modal/modal.component";
 import { NgbdModalContent } from "./modal/modal.component";
 import { DesarrolladoresComponent } from "./desarrolladores/desarrolladores.component";
@@ -41,8 +37,7 @@ import { PasanteComponent } from "./pasante/pasante.component";
 import { VisitaEmpresaComponent } from "./visita-empresa/visita-empresa.component";
 import { AsignarDocenteComponent } from "./asignar-docente/asignar-docente.component";
 import { AyudaComponentesComponent } from './ayuda-componentes/ayuda-componentes.component';
-import {TooltipModule} from 'primeng/tooltip';
-import { SignupComponent } from "app/examples/signup/signup.component";
+import { SignupComponent } from "./signup/signup.component";
 
 
 // import {ConfirmDialogModule} from 'primeng/confirmdialog';
@@ -85,11 +80,6 @@ import { SignupComponent } from "app/examples/signup/signup.component";
   ],
   declarations: [
     ComponentsComponent,
-    BasicelementsComponent,
-    NavigationComponent,
-    TypographyComponent,
-    NucleoiconsComponent,
-    NotificationComponent,
     NgbdModalComponent,
     NgbdModalContent,
     DesarrolladoresComponent,

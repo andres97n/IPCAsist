@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { Form, FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { EjemplosService } from "app/services/ejemplos.service";
 import { Visita_Empresa } from "app/clases/visita-empresa";
 import { VisitasService } from "app/services/visitas.service";
 import { jsPDF } from "jspdf";
@@ -13,7 +12,6 @@ import {
   trigger,
 } from "@angular/animations";
 import { Docente } from "app/clases/docente";
-import { DocenteService } from "app/services/docente.service";
 import { Empresa } from "app/clases/empresa";
 import { Persona } from "app/clases/persona";
 import { Personal } from "app/clases/personal";
@@ -49,11 +47,19 @@ export class VisitaEmpresaComponent implements OnInit {
   es: any;
   celular: number;
 
+  mostrar_pdf: boolean;
+
   forma: FormGroup;
   forma_empresa: FormGroup;
   mostrarAdmin: boolean;
 
   administracion: {
+      elaborado_por?:string,
+      revisado_por?: string,
+      aprobado_por?: string
+    } = {};
+
+    visita_admin: {
       elaborado_por?:string,
       revisado_por?: string,
       aprobado_por?: string
@@ -92,8 +98,10 @@ export class VisitaEmpresaComponent implements OnInit {
 
     this.visita = new Visita_Empresa();
     this.crearFormulario();
+    this.crearFormularioEmpresa();
 
     this.mostrarAdmin = false;
+    this.mostrar_pdf = false;
   }
 
   ngOnInit(): void {
@@ -205,10 +213,10 @@ export class VisitaEmpresaComponent implements OnInit {
   crearFormularioEmpresa(){
     this.forma_empresa = this.fb.group({
       nombre : ["", Validators.required],
-      acompantes: this.fb.array([]),
+      representante: ["", Validators.required],
       contacto: [""],
-      correo: [""],
-      direccion : ["", Validators.required]
+      correo: ["",Validators.email],
+      direccion : [""]
     });
     console.log("Se creo el formulario");
     
@@ -217,6 +225,10 @@ export class VisitaEmpresaComponent implements OnInit {
   invalidos(form: string) {
     return this.forma.get(form).invalid && this.forma.get(form).touched;
   }
+
+  // invalidosEmpresa(form: string) {
+  //   return this.forma_empresa.get(form).invalid && this.forma_empresa.get(form).touched;
+  // }
 
   agregarAcompanante(){
     this.acompanantes.push(
@@ -392,7 +404,7 @@ export class VisitaEmpresaComponent implements OnInit {
     let anio = e.value.getFullYear();
     let fecha = `${anio}-${mes}-${dia}`
     console.log(fecha, "fecha");
-    if(!this.nueva_visita){
+    if(this.nueva_visita){
       this.visita_seleccionada.fecha_visita = fecha;
     } else{
 
@@ -428,11 +440,27 @@ export class VisitaEmpresaComponent implements OnInit {
 
   empresaSeleccionada(){
     this.mostrar_nueva_empresa = true;
-    this.crearFormularioEmpresa();
+    // this.crearFormularioEmpresa();
   }
 
   guardarEmpresa(){
-    console.log(this.forma_empresa);
+    // console.log(this.forma_empresa);
+
+    let enterprise = {
+      nombre: this.forma_empresa.value.nombre,
+      representante: this.forma_empresa.value.representante,
+      direccion: {
+        callePrincipal: this.forma_empresa.value.direccion,
+        calleSecundaria: "S/N"
+      }
+    }
+
+    console.log(enterprise, "EMPRESA FINAL");
+    this._visitasSrv.setEmpresa(enterprise).subscribe( (data) => {
+      console.log(data, "EMPRESA GUARDADA");
+      this.mostrar_nueva_empresa = false;
+      
+    } )
     
   }
 
@@ -533,6 +561,85 @@ export class VisitaEmpresaComponent implements OnInit {
     doc.save(`Visitas_${this.empresa_pdf.nombre}.pdf`);
     this.empresa_pdf = {};
 
+  }
+
+  borrarVisita(visita:Visita_Empresa){
+
+    this._visitasSrv.eliminarVisita(visita.id).subscribe( (data) => {
+      console.log(data, "ELIMINADO CORRECTAMENTE");
+      this.displayDialog = false;
+    })
+
+  }
+
+  generarVisita(){
+
+    let fecha = `${new Date().getDate()}/${new Date().getMonth()}/${new Date().getFullYear()}`
+    // let visitas_filtradas=[];
+    // let cols: string[] = [];
+    // let valor = [];
+    // let valores = [];
+
+    let admin_colums = ['', "Elaborado Por", "Revisado Por", "Aprobado Por"];
+    let admin_fields = [["DETALLE", this.visita_admin.elaborado_por, this.visita_admin.revisado_por, this.visita_admin.aprobado_por],
+                        ["FIRMA", '', '', ''],
+                        ["FECHA", fecha, fecha, fecha] ]
+
+    // const head = [cols]
+    // const data = valores
+    const head_2 = [admin_colums]
+    const data_2 = admin_fields
+    const doc = new jsPDF("p","mm","a4");
+    const pdfWidht=210;  // width of A4 in mm
+    const pdfHeight=297;  // height of A4 in mm
+
+    let logo_ipca= new Image();
+    logo_ipca.src = 'assets/img/logo-editado.png';
+
+    doc.addImage(logo_ipca, 'PNG', pdfWidht/2.5, pdfHeight/17, 45, 25, 'logo_IPCA', 'NONE', 0);
+    doc.setFontSize(18);
+    doc.text(`Institución de Parálisis Cerebral del Azuay`, pdfWidht/2,pdfHeight/5, {align:"center"});
+
+    doc.setFontSize(16);
+    doc.text(`Detalle de Visita`, pdfWidht/2,pdfHeight/4, {align:"center"});
+    // doc.addPage('a4', "landscape")
+    doc.setFontSize(14);
+    doc.text(`Nombre de la Empresa: ${this.visita_seleccionada.empresa.nombre}`, 20, 90, {align:"left"});
+    doc.text(`Motivo de la Visita: ${this.visita_seleccionada.motivo_visita}`, 20, 110, {align:"left"});
+    doc.text(`Acompañantes de la Empresa: `, 20, 130, {align:"left"});
+    let i = 140
+    this.visita_seleccionada.acompanantes.forEach( (acompante:any) => {
+      doc.text(`Nombre: ${acompante.nombre} \nContacto: ${acompante.contacto || 'S/N'}`, 20, i, {align:"left"});
+      i = i + 20;
+    } )
+    doc.text(`Persona encargada de la Visita: ${this.visita_seleccionada.encargado_visita.persona.primer_nombre} ${this.visita_seleccionada.encargado_visita.persona.primer_apellido}`, 20, i, {align:"left"});
+    doc.text(`Fecha de Visita: ${this.visita_seleccionada.fecha_visita}`, 20, i+20, {align:"left"});
+    doc.text(`Hora de Visita: ${this.visita_seleccionada.hora_visita}`, 20, i+40, {align:"left"});
+    doc.text(`Observaciones: ${this.visita_seleccionada.observaciones}`, 20, i+60, {align:"left"});
+    
+    doc.addPage('a4');
+    
+    autoTable(doc, {
+      head: head_2,
+      body: data_2,
+      theme: "grid",
+      didDrawCell: (data) => {
+        console.log(data.column.index)
+      },
+    })
+
+    doc.setFontSize(8);
+    doc.text('Documento generado por IPCAsist', pdfWidht/2, pdfHeight/1.03, {align:"center"});
+
+
+    doc.save(`Visita_${this.visita_seleccionada.fecha_visita}_${this.visita_seleccionada.hora_visita}.pdf`);
+    this.mostrar_pdf = false;
+    this.displayDialog = false;
+
+  }
+
+  mostrarVentas(){
+    this.mostrar_pdf = true;
   }
   
 }

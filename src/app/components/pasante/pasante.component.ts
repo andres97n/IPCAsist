@@ -482,19 +482,6 @@ export class PasanteComponent implements OnInit {
 
     let pasantes_pdf:Pasante[] = this.pasantes
     console.log(pasantes_pdf, "PDF");
-    
-    pasantes_pdf.forEach( (pasante:Pasante) => {
-      // console.log(pasante.aula.length);
-      // 
-      // if(pasante.aula.length != 0){
-        this.pasante.aula.forEach( (aula:Aula) => {
-          if(aula.id == this.aulas_pdf.id){
-            pasantes_filtrados.push(pasante);
-          }
-        } )
-      // }
-    } )
-
     let fecha = `${new Date().getDate()}/${new Date().getMonth()}/${new Date().getFullYear()}`
     let pasantes_filtrados=[];
     let cols: string[] = [];
@@ -505,6 +492,19 @@ export class PasanteComponent implements OnInit {
     let admin_fields = [["DETALLE", this.administracion.elaborado_por, this.administracion.revisado_por, this.administracion.aprobado_por],
                         ["FIRMA", '', '', ''],
                         ["FECHA", fecha, fecha, fecha] ]
+    
+    pasantes_pdf.forEach( (pasante:Pasante) => {
+      // console.log(pasante.aula.length);
+      // 
+      // if(pasante.aula.length != 0){
+        pasante.aula.forEach( (aula:Aula) => {
+          if(aula.id == this.aulas_pdf.id){
+            pasantes_filtrados.push(pasante);
+          }
+        } )
+      // }
+    } )
+
 
 
     this.cols.forEach( col => {
@@ -535,7 +535,8 @@ export class PasanteComponent implements OnInit {
     let logo_ipca= new Image();
     logo_ipca.src = 'assets/img/logo-editado.png';
 
-    doc.addImage(logo_ipca, 'PNG', pdfWidht/3, pdfHeight/5, 75, 65, 'logo_IPCA', 'NONE', 0);
+    doc.addImage(logo_ipca, 'PNG', pdfWidht/3.2, pdfHeight/5, 85, 65, 'logo_IPCA', 'NONE', 0);
+
     doc.setFontSize(20);
     doc.text(`Pasantes por ${this.aulas_pdf.nombre}`, pdfWidht/2,pdfHeight/2, {align:"center"});
 
@@ -565,7 +566,7 @@ export class PasanteComponent implements OnInit {
     doc.setFontSize(8);
     doc.text('Documento generado por IPCAsist', pdfWidht/2, pdfHeight/1.03, {align:"center"});
 
-    doc.save(`Pasantes_${this.aulas_pdf}.pdf`);
+    doc.save(`Pasantes_${this.aulas_pdf.nombre}.pdf`);
     this.aulas_pdf = {};
 
   }

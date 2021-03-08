@@ -17,6 +17,7 @@ import { PlanVidaService } from "app/services/plan-vida.service";
 import { jsPDF } from "jspdf";
 import autoTable from 'jspdf-autotable'
 import { Table } from "primeng/table";
+// import { Message } from "primeng";
 import { Persona } from "app/clases/persona";
 import { Personal } from "app/clases/personal";
 // import {ConfirmationService} from 'primeng/api';
@@ -59,6 +60,8 @@ export class PlanVidaComponent implements OnInit {
 
   mostrarAdmin: boolean;
   mostrar_pdf: boolean;
+
+  // msgs: Message[] = [];
 
   administracion: {
       elaborado_por?:string,
@@ -577,15 +580,16 @@ export class PlanVidaComponent implements OnInit {
     if(!this.editar){
 
     this._planSrv.setPlanVida(plan).subscribe( (data) => {
-      console.log(data, "Guardado Exitoso");
+      // console.log(data, "Guardado Exitoso");
+      // this.showSuccess("guardó")
 
       
     })} else{
 
       plan.id = this.plan_seleccionado.id;
       this._planSrv.editarPlanVida(plan).subscribe( (data) => {
-        console.log(data, "EDITADO CORRECTAMENE");
-        
+        // console.log(data, "EDITADO CORRECTAMENE");
+        // this.showSuccess("editó")
       })
 
     }
@@ -826,6 +830,11 @@ export class PlanVidaComponent implements OnInit {
     this.generarPlanesporPeriodo();
   }
 
+  showSuccess(p:string) {
+    // this.msgs = [];
+    // this.msgs.push({severity:'success', summary:`Se ${p} correctamente`});
+  }
+
   generarPlanesporPeriodo(){
 
     let fecha = `${new Date().getDate()}/${new Date().getMonth()}/${new Date().getFullYear()}`
@@ -898,7 +907,7 @@ export class PlanVidaComponent implements OnInit {
         console.log(data.column.index)
       },
     })
-    doc.addPage('a4',"l");
+    doc.addPage('a4',"p");
 
     autoTable(doc, {
       head: head_2,

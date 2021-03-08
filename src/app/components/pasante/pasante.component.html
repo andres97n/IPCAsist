@@ -10,12 +10,12 @@
       <h1 class="titulo">IPCAsist</h1>
       <h3 class="titulo">Registro de Pasantes</h3>
       <br />
-      <a
+      <!-- <a
         href="https://www.youtube.com/channel/UCdaO3AoDM186eC32Hs7Hx6Q/videos"
         class="btn btn-outline-neutral btn-round"
         target="_blank"
         ><i class="fa fa-play fa-lg fa-fw"></i> Vídeo Informativo</a
-      >
+      > -->
     </div>
   </div>
 </div>
@@ -142,7 +142,6 @@
                       <p-dropdown
                         [options]="genero"
                         optionLabel="name"
-                        (ngModelChange)="generoSeleccionado($event)"
                         placeholder="Seleccione un género"
                         formControlName="genero"
                       ></p-dropdown>
@@ -449,7 +448,7 @@
                         </div>
                       </ng-template>
                       <p-footer>
-                        Ha seleccionado: {{ institucion || "Ninguno" }}
+                        <!-- Ha seleccionado: {{ institucion || "Ninguno" }} -->
                       </p-footer>
                     </p-listbox>
 

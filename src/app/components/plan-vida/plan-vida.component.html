@@ -551,7 +551,7 @@
                           <button
                               type="button"
                               class="btn btn-neutral btn-just-icon agregar_materias"
-                              (click)="dominioSeleccionado($event)"
+                              (click)="dominioSeleccionado()"
                           >
                             <i class="fas fa-plus fa-sm"></i>
                           </button>
@@ -1399,22 +1399,6 @@
           <h2 class="text-center">Listado de Planes de Vida</h2>
           <br />
 
-          <!-- <p-chips [(ngModel)]="values1"></p-chips>
-
-          <p-listbox
-            [options]="cities"
-            [(ngModel)]="selectedCities"
-            [multiple]="true"
-            [checkbox]="true"
-            [filter]="true"
-            optionLabel="name"
-            [listStyle]="{
-              'max-height': '150px'
-            }"
-          >
-            <p-header> Cities </p-header>
-          </p-listbox> -->
-
           <p-table
             #dt
             [columns]="cols"
@@ -1471,17 +1455,7 @@
 
                       </div>
                       <br/>
-                      <!-- <div class="col-md-6" style="text-align: center">
-                          <button 
-                            type="button" 
-                            class="btn btn-outline-default btn-round btn-sm" 
-                            [disabled]="!periodo_lectivo" 
-                            (click)="generarPlanes()"
-                            
-                            >
-                            <i class="fas fa-file-pdf fa-lg fa-fw"></i> GENERAR PDF
-                          </button>
-                    </div> -->
+
                     <p-dialog header="Detalle de Documento" [(visible)]="mostrarAdmin" [style]="{width: '20vw'}">
                       <div class="row justify-content-center">
                         <div class="col-md-12">
@@ -1522,22 +1496,7 @@
                   </div>
               </ng-template>
                 <button type="button" class="btn btn-outline-info" (click)="modalService.open(contenido)">GENERAR PDF</button>
-                <!-- <p-dropdown [options]="periodos_lectivos" 
-                            [(ngModel)]="periodo_lectivo" 
-                            filter="true" 
-                            optionLabel="nombre"
-                            placeholder="Período Lectivo"
-                            (onChange)="filtrarContenido($event)"
-                            pTooltip="Seleccione para Filtrar o Generar PDF">
-                  <ng-template let-item pTemplate="selectedItem">
-                      <span style="vertical-align:middle;">{{item.label}}</span>
-                  </ng-template>
-                  <ng-template let-periodo pTemplate="item">
-                      <div class="ui-helper-clearfix" style="height: 25px;">
-                          <div style="font-size:14px; text-align:middle">{{periodo.label}}</div>
-                      </div>
-                  </ng-template>
-                </p-dropdown> -->
+               
               </div>
               <div class= "col-md-6" style="text-align: right">   
                 <div class="p-d-flex">
@@ -1685,14 +1644,7 @@
                               rowData.gustos[0].descripcion
                             }}
                           </div>
-                          <!-- <div class="p-col-12">
-                            <b>Deseos:</b>
-                            {{ rowData.deseos[0].titulo }}
-                            ->
-                            {{
-                              rowData.deseos[0].descripcion
-                            }}
-                          </div> -->
+                          
                           <div class="p-col-12">
                             <b>Disgustos:</b>
                             {{ rowData.disgustos[0].nombre }}
@@ -1719,12 +1671,7 @@
                       </div>
                       <div class="col-md-12">
                         <div class="p-col-12" style="margin-top: 1em">
-                          <!-- <p-confirmDialog [style]="{width: '50vw'}" [visible]="false" #confirmDialog>
-                            <p-footer>
-                              <button type="button" pButton icon="fa-close" label="No deseo hacerlo" (click)="confirmDialog.reject()"></button>
-                              <button type="button" pButton icon="fa-check" label="Sí, eliminar Plan" (click)="confirmDialog.accept && confirmDialog.hide()"></button>
-                            </p-footer>
-                          </p-confirmDialog> -->
+                          
                           <button 
                             type="button" 
                             class="btn btn-outline-danger btn-round btn-sm" 

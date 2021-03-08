@@ -126,7 +126,7 @@
           > -->
           <!-- <a class="nav-link" *ngIf="!_authService.loggedIn()" routerLink="/login" routerLinkActive="active">Login</a> -->
           <a
-            *ngIf="!_authService.loggedIn()" [routerLink]="['/sesion']" 
+            *ngIf="!loged()" [routerLink]="['/sesion']" 
     
             class="btn btn-outline-info btn-round"
             >Ingresar</a
@@ -140,7 +140,7 @@
             >Have an issue</a
           > -->
           <a
-            style="cursor:pointer" *ngIf="_authService.loggedIn()" (click)="_authService.logoutUser()"
+            style="cursor:pointer" *ngIf="loged()" (click)="salir()"
             class="btn btn-success btn-round"
             >Salir</a
           >

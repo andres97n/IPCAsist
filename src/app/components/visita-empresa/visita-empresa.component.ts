@@ -106,14 +106,8 @@ export class VisitaEmpresaComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // this._visitasSrv.getVisitas().subscribe((visitas: Visita_Empresa[]) => {
-    //   console.log(visitas);
-    //   this.visitas = visitas;
-    // });
-
     this._visitasSrv.getLista("personal").subscribe((personal: Personal[]) => {
       this.docentes = personal;
-      console.log(this.docentes, "Docentes");
       this.docentes.forEach( (docente)=> {
         this._visitasSrv.getDetalle(docente.persona, "persona").subscribe( (persona: Persona) => {
           docente.persona = persona;
@@ -123,7 +117,6 @@ export class VisitaEmpresaComponent implements OnInit {
 
     this._visitasSrv.getLista("empresas").subscribe((empresa: Empresa[])=> {
       this.empresas = empresa;
-      console.log(this.empresas,"Empresas");
       
     } )
 
@@ -134,7 +127,6 @@ export class VisitaEmpresaComponent implements OnInit {
           visita.empresa = enterprise;
         })
       } )
-      console.log(this.visitas, "VISITAS");
       
     } )
 
@@ -218,7 +210,6 @@ export class VisitaEmpresaComponent implements OnInit {
       correo: ["",Validators.email],
       direccion : [""]
     });
-    console.log("Se creo el formulario");
     
   }
 
@@ -248,7 +239,6 @@ export class VisitaEmpresaComponent implements OnInit {
   }
 
   guardarVisita() {
-    console.log(this.forma);
     this.visita = this.forma.value;
     let hora = `${this.forma.value.horario_visita.hour}:${this.forma.value.horario_visita.minute}`;
   
@@ -262,8 +252,6 @@ export class VisitaEmpresaComponent implements OnInit {
       hora_visita: hora,
       observaciones: this.visita.observaciones
     }
-
-    console.log(visita, "VISITA FINAL");
     
     this._visitasSrv.setVisita(visita).subscribe( (data) => {
       console.log(data, "Se guardo correctamente");
@@ -278,7 +266,6 @@ export class VisitaEmpresaComponent implements OnInit {
 
     if(!this.nueva_visita){
       let hora = `${this.tiempo.hour}:${this.tiempo.minute}`;
-    // console.log(hora);
   
       let visita = {
         id: this.visita_seleccionada.id,
@@ -290,8 +277,6 @@ export class VisitaEmpresaComponent implements OnInit {
         hora_visita: hora,
         observaciones: this.visita_seleccionada.observaciones
       }
-
-      console.log(visita, "EDITAR");
 
       this._visitasSrv.editarVisita(visita).subscribe( (data) => {
         console.log(data, "Se editó correctamente");
@@ -316,14 +301,10 @@ export class VisitaEmpresaComponent implements OnInit {
     // this.visita_editar = this.clonePasante(event.data);
     this.displayDialog = true;
     let t = this.visita_seleccionada.hora_visita.split(":");
-    console.log(t, "TIEMPO");
     let hora = Number(t[0]);
     let min = Number(t[1]);
     
     this.tiempo = {hour: hora, minute: min}
-    console.log(this.visita_seleccionada,"VISITA SELECCIONADA");
-
-    // this.editarUniversidad(this.pasante_editar.institucion);
   }
 
 
@@ -358,9 +339,6 @@ export class VisitaEmpresaComponent implements OnInit {
     this.docentes_filtrados = [];
 
     docentes.forEach( (docente:Docente) => {
-      // console.log(docente);
-      
-      
       if (
         docente.persona.primer_apellido
           .toLowerCase()
@@ -381,9 +359,6 @@ export class VisitaEmpresaComponent implements OnInit {
   filtrarEmpresa(event) {
     let query = event.query;
     let empresas: Empresa[] = this.empresas;
-
-    console.log(empresas);
-    
     this.empresa_filtrada = [];
     empresas.forEach( (empresa) => {
 
@@ -398,12 +373,10 @@ export class VisitaEmpresaComponent implements OnInit {
   
 
   getFormato(e){
-    // console.log(e.value, "fecha");
     let dia = e.value.getDate();
     let mes = e.value.getMonth() + 1;;
     let anio = e.value.getFullYear();
     let fecha = `${anio}-${mes}-${dia}`
-    console.log(fecha, "fecha");
     if(this.nueva_visita){
       this.visita_seleccionada.fecha_visita = fecha;
     } else{
@@ -444,8 +417,6 @@ export class VisitaEmpresaComponent implements OnInit {
   }
 
   guardarEmpresa(){
-    // console.log(this.forma_empresa);
-
     let enterprise = {
       nombre: this.forma_empresa.value.nombre,
       representante: this.forma_empresa.value.representante,
@@ -454,8 +425,6 @@ export class VisitaEmpresaComponent implements OnInit {
         calleSecundaria: "S/N"
       }
     }
-
-    console.log(enterprise, "EMPRESA FINAL");
     this._visitasSrv.setEmpresa(enterprise).subscribe( (data) => {
       console.log(data, "EMPRESA GUARDADA");
       this.mostrar_nueva_empresa = false;
@@ -465,7 +434,6 @@ export class VisitaEmpresaComponent implements OnInit {
   }
 
   filtrarContenido(e) {
-    console.log(e.value);
     this.mostrarAdmin = true;
   }
 
@@ -498,12 +466,7 @@ export class VisitaEmpresaComponent implements OnInit {
     } )
     cols.push("ACOMPAÑANTES")
 
-    console.log(visitas_filtradas);
-    
-
     visitas_filtradas.forEach( (visita:Visita_Empresa) => {
-      console.log(visitas_filtradas);
-      
       let aux = [];
       valor.push(visita.empresa.nombre);
       valor.push(visita.motivo_visita);
@@ -575,10 +538,6 @@ export class VisitaEmpresaComponent implements OnInit {
   generarVisita(){
 
     let fecha = `${new Date().getDate()}/${new Date().getMonth()}/${new Date().getFullYear()}`
-    // let visitas_filtradas=[];
-    // let cols: string[] = [];
-    // let valor = [];
-    // let valores = [];
 
     let admin_colums = ['', "Elaborado Por", "Revisado Por", "Aprobado Por"];
     let admin_fields = [["DETALLE", this.visita_admin.elaborado_por, this.visita_admin.revisado_por, this.visita_admin.aprobado_por],

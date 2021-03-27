@@ -193,12 +193,10 @@ export class PlanVidaComponent implements OnInit {
 
     this._planSrv.getLista("periodos_activos").subscribe( (periodos_lectivos: Periodo_Lectivo[]) =>{
       this.periodos_lectivos = periodos_lectivos;
-      console.log(this.periodos_lectivos, "Periodos Lectivos");
     } )
 
     this._planSrv.getLista("personal").subscribe((personal: Personal[]) => {
       this.docentes = personal;
-      console.log(this.docentes, "Docentes");
       this.docentes.forEach( (docente)=> {
         this._planSrv.getDetallePersona(docente.persona).subscribe( (persona: Persona) => {
           docente.persona = persona;
@@ -208,7 +206,6 @@ export class PlanVidaComponent implements OnInit {
 
     this._planSrv.getLista("aulas").subscribe((aulas: Aula[]) => {
       this.aulas = aulas;
-      console.log(this.aulas, "Aulas");
     });
 
     this._planSrv.getLista("alumnos").subscribe((alumnos: Alumno[]) => {
@@ -218,12 +215,10 @@ export class PlanVidaComponent implements OnInit {
           alumno.persona = persona;
         } )
       })
-      console.log(this.alumnos, "Alumnos");
     });
 
     this._planSrv.getLista("materias").subscribe( (materias:Materia[]) => {
       this.materias = materias;
-      console.log(this.materias, "Materias");
       this.asignaturas_combo = [];
       this.ambitos_combo = [];
       this.dominios_combo = [];
@@ -242,18 +237,10 @@ export class PlanVidaComponent implements OnInit {
 
     this._planSrv.getLista("periodos_lectivos").subscribe( (periodos_lectivos:Periodo_Lectivo[]) => {
       this.periodos_lectivos = periodos_lectivos;
-      // let periodo:Periodo_Lectivo = new Periodo_Lectivo();
-      // periodo.nombre = "Todos"
-      // this.periodos_lectivos.push(periodo);
-      console.log(this.periodos_lectivos, "Periodos Lectivos");
     })
     
     this._planSrv.getLista("periodos_activos").subscribe( (periodos_lectivos:Periodo_Lectivo[]) => {
       this.periodos_activos = periodos_lectivos;
-      // let periodo:Periodo_Lectivo = new Periodo_Lectivo();
-      // periodo.nombre = "Todos"
-      // this.periodos_activos.push(periodo);
-      console.log(this.periodos_activos, "Periodos Lectivos");
     })
     
     this._planSrv.getLista("planes_vida").subscribe((planes_vida: Plan_Vida[]) =>{
@@ -286,15 +273,8 @@ export class PlanVidaComponent implements OnInit {
         })
         
       })
-
-      console.log(this.planes_vida, "Planes de Vida");
       
-    } )
-    // this._planSrv.getLista("planes_vida").subscribe( (planes_vida: Plan_Vida[]) =>{
-    //   this.planes_vida = planes_vida;
-    //   console.log(this.planes_vida, "Planes de Vida");
-      
-    // } )
+    } );
 
     this.cols = [
       { field: "docente.persona.primer_apellido", header: "DOCENTE" },
@@ -315,11 +295,6 @@ export class PlanVidaComponent implements OnInit {
       
       this.periodos_drop.push( drop );
     })
-   
-
-    console.log(this.periodos_drop, "Periodos Drop");
-
-    
 
   }
 
@@ -452,10 +427,8 @@ export class PlanVidaComponent implements OnInit {
     if(this.forma.get("ambito").value){
       this.materias.push({
         nombre: this.forma.get("ambito").value,
-        // asignacion: "NO"
       })
     }
-    console.log(this.materias);
     this.mostrar_nuevo_ambito = false;
   }
 
@@ -464,16 +437,11 @@ export class PlanVidaComponent implements OnInit {
   }
 
   nuevaMateria(tipo:number, nombre:string){
-
-    console.log(this.forma.get(nombre).value);
-    
-
     if(this.forma.get(nombre).value){
 
       let materia: Materia = new Materia();
       materia.nombre = this.forma.get(nombre).value
       materia.tipo_materia = tipo;
-      console.log(materia);
       
 
       this._planSrv.setMateria(materia).subscribe( (data) => {
@@ -547,7 +515,6 @@ export class PlanVidaComponent implements OnInit {
 
 // Guardar datos de Plan de Vida
   guardarPlan() {
-    console.log(this.forma);
     this.plan_vida = this.forma.value;
     
     
@@ -575,38 +542,28 @@ export class PlanVidaComponent implements OnInit {
       estado: 1
     }
 
-    console.log(plan, "JSON");
-
     if(!this.editar){
 
     this._planSrv.setPlanVida(plan).subscribe( (data) => {
-      // console.log(data, "Guardado Exitoso");
-      // this.showSuccess("guardó")
 
       
     })} else{
 
       plan.id = this.plan_seleccionado.id;
       this._planSrv.editarPlanVida(plan).subscribe( (data) => {
-        // console.log(data, "EDITADO CORRECTAMENE");
-        // this.showSuccess("editó")
       })
 
     }
     
     this.forma.reset();
     this.limpiarArrays();
-    // this._planSrv.setPlanVida(this.plan_vida).subscribe((data) =>{
-    //   console.log(data);
-    // })
-    
+ 
   }
 
   eliminarPlan(plan_vida:Plan_Vida){
     
     this._planSrv.eliminarPlan(plan_vida.id).subscribe( (data) => {
       console.log(data, "ELIMINADO CORRECTAMENTE");
-      // this.displayDialog = false;
     })
 
   }
@@ -624,63 +581,32 @@ export class PlanVidaComponent implements OnInit {
     this.nuevo_plan = false;
     this.plan_editar = this.clonePlan(event.data);
     this.editar = true;
-    console.log(this.plan_seleccionado, "PLAN SELECCIONADO");
-
-    // let plan_select = event.data;
-
-    // this.necesidades.setValue(this.plan_vida.necesidades);
-
     this.limpiarArrays();
-
-    // plan_select.necesidades.forEach( necesidad => {
-    //   this.agregarNecesidad() 
-    // });
 
     this.plan_seleccionado.necesidades.forEach( necesidad =>{
       this.agregarNecesidad() 
-    } )
+    } );
 
-    // plan_select.potencialidades.forEach( potencialidad => {
-    //   this.agregarPotencialidad();
-    // } );
 
     this.plan_seleccionado.potencialidades.forEach(potencialidad => {
       this.agregarPotencialidad();
-    } )
-
-    // plan_select.disgustos.forEach( disgusto =>{
-    //   this.agregarDisgusto();
-    // } );
+    } );
 
     this.plan_seleccionado.disgustos.forEach( disgusto => {
       this.agregarDisgusto();
-    } )
-
-    // plan_select.suenos.forEach( sueno=> {
-    //   this.agregarSueno();
-    // } );
+    } ); 
 
     this.plan_seleccionado.suenos.forEach( sueno => {
       this.agregarSueno();
-    } )
-
-    // plan_select.gustos.forEach( gusto=> {
-    //   this.agregarGusto();
-    // } );
+    } );
 
     this.plan_seleccionado.gustos.forEach( seguro => {
       this.agregarGusto();
-    } )
-
-    // plan_select.deseos.forEach( deseo=> {
-    //   this.agregarDeseo();
-    // } );
+    } );
 
     this.plan_seleccionado.deseos.forEach( deseo => {
       this.agregarDeseo();
-    } )
-    
-    // console.log(plan_select.alumno);
+    } );
 
     this.forma.setValue({
       periodo_lectivo: this.plan_seleccionado.periodo_lectivo,
@@ -764,9 +690,6 @@ export class PlanVidaComponent implements OnInit {
     this.alumnos_filtrados = [];
 
     alumnos.forEach( (alumno) => {
-
-      console.log(query);
-      
       if (
         alumno.persona.primer_apellido
           .toLowerCase()
@@ -821,7 +744,6 @@ export class PlanVidaComponent implements OnInit {
   }
 
   filtrarContenido(e) {
-    console.log(e.value);
     this.mostrarAdmin = true;
   }
 
@@ -860,12 +782,7 @@ export class PlanVidaComponent implements OnInit {
     cols.push("VISIÓN")
     cols.push("DESCRIPCIÓN")
 
-    // console.log(planes_filtrados);
-
     planes_filtrados.forEach( (plan:Plan_Vida) => {
-      console.log(planes_filtrados);
-      
-      // let aux = [];
       valor.push(`${plan.docente.persona.primer_nombre} ${plan.docente.persona.primer_apellido}`);
       valor.push(`${plan.alumno.persona.primer_nombre} ${plan.alumno.persona.primer_apellido}`);
       valor.push(plan.aula.nombre);
@@ -873,10 +790,6 @@ export class PlanVidaComponent implements OnInit {
       valor.push(plan.objetivo_general);
       valor.push(plan.vision);
       valor.push(plan.descripcion);
-      // visita.acompanantes.forEach( (persona:any) => {
-      //   aux.push(`${persona.nombre} ${persona.contacto}`)
-      // } )
-      // valor.push(aux);
       valores.push(valor);
     })
 
@@ -986,7 +899,6 @@ export class PlanVidaComponent implements OnInit {
       head: head_info,
       body: data_info,
       theme: "striped",
-      // startY: pdfHeight/2,
       didDrawCell: (data) => {
         console.log(data.column.index)
       },
@@ -1142,14 +1054,11 @@ export class PlanVidaComponent implements OnInit {
 
     doc.save(`Planes_Vida_${this.plan_pdf.alumno.persona.primer_nombre}_${this.plan_pdf.alumno.persona.primer_apellido}_${this.plan_pdf.periodo_lectivo.nombre}.pdf`);
     this.plan_pdf = {};
-    
-    // doc.text(`Plan de Vida - ${this.plan_pdf.alumno.persona.primer_nombre} ${this.plan_pdf.alumno.persona.primer_apellido} - ${this.plan_pdf.periodo_lectivo.nombre}`, pdfWidht/2,pdfHeight/6, {align:"center"});
-    
+
 
   }
 
   copiarPlan(event){
-    console.log(event, "Event");
     this.mostrar_pdf = true;
     this.plan_pdf = event;
   }

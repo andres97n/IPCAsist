@@ -130,50 +130,32 @@ export class PasanteComponent implements OnInit {
         if(pasante.aula.length != 0){
           pasante.aula.forEach( (aula: Aula) => {
             this._pasanteSrv.getDetalle(aula, "aula").subscribe( (aula:Aula) => {
-              // if(pasante.aula.length == 1){
-
-              //   pasante.aula = []
-              // }
+       
               pasante.aula.push(aula);
-              // this._aulaSrv.getDetalle(teacher.id, "persona").subscribe( (person:Persona) =>{
-              //   teacher.persona = person;
-              // } )
             })
           } )
         }
-        // this.institucion.nombre = pasante.institucion
-        // this.instituciones.push(this.institucion);
-        // this.pasante.aula.reverse();
+     
       } )
 
       this.pasantes.forEach( (pasante:Pasante) => {
       
         let num_aula = pasante.aula.length;
-        // let num_alumno = aula.alumnos.length;
+
         
         for (let index = 0; index < num_aula; index++) {
-          // console.log(aula.a);
+
           
          this.removeItemFromArr(pasante.aula,index);
           
         }
 
-        // for (let index = 0; index < num_alumno; index++) {
-        //   // console.log(aula.a);
-          
-        //  this.removeItemFromArr(aula.docentes,index);
-          
-        // }
       } )
 
-      console.log(this.pasantes, "PASANTES");
-      // this.institucion = {}
-      // this.instituciones
     });
 
     this._pasanteSrv.getLista("aulas").subscribe( (aulas: Aula[] ) => {
       this.lista_aulas = aulas;
-      console.log(this.lista_aulas, "Aulas");
     });
 
     this._pasanteSrv.getLista("personal").subscribe((docentes: Personal[]) => {
@@ -183,7 +165,6 @@ export class PasanteComponent implements OnInit {
           docente.persona = persona;
         } )
       })
-      console.log(this.docentes, "DOCENTES");
     });
 
     this.cols = [
@@ -282,10 +263,6 @@ export class PasanteComponent implements OnInit {
     return this.forma.get("num_horas").value;
   }
 
-  // generoSeleccionado(event) {
-  //   console.log(event.value);
-  // }
-
   sangreSeleccionada(event) {
     console.log(event.value);
   }
@@ -296,7 +273,6 @@ export class PasanteComponent implements OnInit {
       this.mostrarModal = true;
     }
 
-    console.log(event.option.name);
   }
 
   nuevaInstitucion(e) {
@@ -306,7 +282,6 @@ export class PasanteComponent implements OnInit {
 
   cerrarModal() {
     this.mostrarModal = false;
-    console.log(this.universidad);
   }
 
   mostrarFecha(event) {
@@ -314,7 +289,6 @@ export class PasanteComponent implements OnInit {
   }
 
   guardarPasante() {
-    // console.log(this.forma.value);
     let tutor: Personal =  this.forma.value.tutor;
     let aulas = [];
     this.forma.value.aulas.forEach(aula => {
@@ -337,8 +311,6 @@ export class PasanteComponent implements OnInit {
       especialidad: this.forma.value.especialidad,
       numHoras: this.forma.value.num_horas
       }
-
-      console.log(datos, "PASANTE");
       
       this._pasanteSrv.setPasante(datos).subscribe( data => {
         console.log(data, "Se guardó con éxito");
@@ -349,8 +321,6 @@ export class PasanteComponent implements OnInit {
   }
 
   editarPasante(){
-
-    // console.log(this.pasante_seleccionado);
     let aulas = []
 
     this.pasante_editar.aula.forEach( data => {
@@ -377,9 +347,6 @@ export class PasanteComponent implements OnInit {
       especialidad: this.pasante_editar.especialidad,
       numHoras: this.pasante_editar.numHoras
       }
-      
-
-      console.log(datos, "DATOS FINALES");
 
       this._pasanteSrv.editarPasante(datos).subscribe( data => {
 
@@ -395,28 +362,6 @@ export class PasanteComponent implements OnInit {
     this.nuevo_pasante = false;
     this.pasante_editar = this.clonePasante(event.data);
     this.displayDialog = true;
-    // console.log(this.pasante_seleccionado);
-    
-    // switch (this.pasante_editar.persona) {
-    //   case "F":
-    //     this.selectedGen = {
-    //       name: "Femenino",
-    //       value: "F",
-    //     };
-    //     break;
-    //   case "M":
-    //     this.selectedGen = {
-    //       name: "Masculino",
-    //       value: "M",
-    //     };
-    //     break;
-    //   case "O":
-    //     this.selectedGen = {
-    //       name: "Otro",
-    //       value: "O",
-    //     };
-    //     break;
-    // }
     this.editarUniversidad(this.pasante_editar.institucion);
     this.editarGenero(this.pasante_editar.persona.genero)
     // this.pasante_seleccionado.institucion = this.auto_universidad;
@@ -440,8 +385,6 @@ export class PasanteComponent implements OnInit {
 
   editarGenero(u: string) {
     this.genero.forEach((g) => {
-      // console.log(u);
-      
       if (g.value === u) {
         this.pasante_editar.persona.genero = g;
       }
@@ -469,7 +412,6 @@ export class PasanteComponent implements OnInit {
   }
 
   filtrarContenido(e) {
-    console.log(e.value);
     this.mostrarAdmin = true;
   }
 
@@ -481,7 +423,6 @@ export class PasanteComponent implements OnInit {
   generarPasantesPorAula(){
 
     let pasantes_pdf:Pasante[] = this.pasantes
-    console.log(pasantes_pdf, "PDF");
     let fecha = `${new Date().getDate()}/${new Date().getMonth()}/${new Date().getFullYear()}`
     let pasantes_filtrados=[];
     let cols: string[] = [];
@@ -494,9 +435,6 @@ export class PasanteComponent implements OnInit {
                         ["FECHA", fecha, fecha, fecha] ]
     
     pasantes_pdf.forEach( (pasante:Pasante) => {
-      // console.log(pasante.aula.length);
-      // 
-      // if(pasante.aula.length != 0){
         pasante.aula.forEach( (aula:Aula) => {
           if(aula.id == this.aulas_pdf.id){
             pasantes_filtrados.push(pasante);
@@ -540,10 +478,7 @@ export class PasanteComponent implements OnInit {
     doc.setFontSize(20);
     doc.text(`Pasantes por ${this.aulas_pdf.nombre}`, pdfWidht/2,pdfHeight/2, {align:"center"});
 
-    doc.addPage('a4')
-    // doc.setFontSize(20);
-    // doc.text(`Listado de Períodos Lectivo en ${this.periodo_lectivo.nombre}`, pdfWidht/2,pdfHeight/15, {align:"center"});
-    // doc.table(pdfWidht/15,pdfHeight/4, aulas_filtradas, cols)
+    doc.addPage('a4');
     autoTable(doc, {
       head: head,
       body: data,

@@ -361,44 +361,6 @@
             </div>
           </div>
         </div>
-
-        <!-- Card Sangre -->
-        <!-- <div class="row justify-content-center">
-          <div class="col-md-5">
-            <p-card
-              header="Tipo de Sangre"
-              subheader="Ingrese el tipo de sangre del Pasante."
-              styleClass="ui-card-shadow"
-            >
-              <p-header>
-                <div style="background-color: #cfcfcf;">
-                  <i class="fas fa-syringe fa-3x fa-fw icono"></i>
-                </div>
-              </p-header>
-              <div class="form-group">
-                <br />
-                <p-dropdown
-                  [options]="tipo_sangre"
-                  optionLabel="name"
-                  (ngModelChange)="sangreSeleccionada($event)"
-                  placeholder="Seleccione un Tipo de Sangre "
-                  size="30"
-                  filter="true"
-                  formControlName="tipo_sangre"
-                ></p-dropdown>
-                <div class="row justify-content-center">
-                  <p-message
-                    severity="error"
-                    text=" Debe seleccionar un Tipo de Sangre"
-                    *ngIf="invalidos('tipo_sangre')"
-                    style="margin-top: 1em;"
-                  ></p-message>
-                </div>
-              </div>
-            </p-card>
-          </div>
-        </div> -->
-        <!-- <br /> -->
         <br />
 
         <!-- Información Adicional -->
@@ -451,39 +413,6 @@
                         <!-- Ha seleccionado: {{ institucion || "Ninguno" }} -->
                       </p-footer>
                     </p-listbox>
-
-                    <!-- <p-dialog
-                      header="Nombre de Institución"
-                      [(visible)]="mostrarModal"
-                      [focusOnShow]="false"
-                      showEffect="fade"
-                      [modal]="true"
-                      [style]="{ width: '300px' }"
-                    >
-                      <div class="p-grid ui-fluid">
-                        <div class="p-col-8">
-                          <input
-                            pInputText
-                            formControlName="institucion"
-                            placeholder="Ingrese Nombre"
-                            (change)="nuevaInstitucion($event)"
-                          />
-                        </div>
-                      </div>
-                      <p-footer>
-                        <div
-                          class="ui-dialog-buttonpane ui-helper-clearfix row justify-content-center"
-                        >
-                          <button
-                            type="button"
-                            class="btn btn-outline-success btn-round btn-sm"
-                            (click)="cerrarModal()"
-                          >
-                            <i class="fas fa-save fa-lg fa-fw"></i> Guardar
-                          </button>
-                        </div>
-                      </p-footer>
-                    </p-dialog> -->
 
                     <div
                       class="row justify-content-center"
@@ -570,48 +499,39 @@
                         ></i
                       ></span>
                       <p-autoComplete
-                      [suggestions]="docentes_filtrados"
-                      (completeMethod)="filtrarDocente($event)"
-                      [size]="30"
-                      [minLength]="1"
-                      placeholder="Docente"
-                      [dropdown]="true"
-                      formControlName="tutor"
-                      field="persona.identificacion"
-                    >
-                      <ng-template let-teacher pTemplate="item">
-                        <div class="ui-helper-clearfix">
-                          <div
-                            style="
-                              font-size: 10px;
-                              display: inline-block;
-                              margin: 10px 10px 0 0;
-                            "
-                          >
-                            {{ teacher.persona.identificacion }}
-                          </div>
-                          <div
-                            style="
-                              font-size: 12px;
-                              float: right;
-                              margin: 10px 10px 0 0;
-                            "
-                          >
-                            {{ teacher.persona.primer_nombre }}
-                            {{ teacher.persona.primer_apellido }}
-                          </div>
-                        </div>
-                      </ng-template>
-                    </p-autoComplete>
-                      <!-- <p-autoComplete
-                        [suggestions]="filteredCountriesSingle"
-                        (completeMethod)="filterCountrySingle($event)"
-                        field="name"
-                        [size]="35"
-                        placeholder="Nombre o Identificación"
+                        [suggestions]="docentes_filtrados"
+                        (completeMethod)="filtrarDocente($event)"
+                        [size]="30"
                         [minLength]="1"
+                        placeholder="Docente"
+                        [dropdown]="true"
                         formControlName="tutor"
-                      ></p-autoComplete> -->
+                        field="persona.identificacion"
+                      >
+                        <ng-template let-teacher pTemplate="item">
+                          <div class="ui-helper-clearfix">
+                            <div
+                              style="
+                                font-size: 10px;
+                                display: inline-block;
+                                margin: 10px 10px 0 0;
+                              "
+                            >
+                              {{ teacher.persona.identificacion }}
+                            </div>
+                            <div
+                              style="
+                                font-size: 12px;
+                                float: right;
+                                margin: 10px 10px 0 0;
+                              "
+                            >
+                              {{ teacher.persona.primer_nombre }}
+                              {{ teacher.persona.primer_apellido }}
+                            </div>
+                          </div>
+                        </ng-template>
+                      </p-autoComplete>
                     </div>
                     <div class="row justify-content-center">
                       <p-message
@@ -649,21 +569,14 @@
                           style="line-height: 1"
                         ></i
                       ></span>
-                      <p-multiSelect 
-                      [options]="lista_aulas" 
-                      formControlName="aulas" 
-                      defaultLabel="Seleccione un Aula" 
-                      optionLabel="nombre"
-                      class="multiselect-custom">
+                      <p-multiSelect
+                        [options]="lista_aulas"
+                        formControlName="aulas"
+                        defaultLabel="Seleccione un Aula"
+                        optionLabel="nombre"
+                        class="multiselect-custom"
+                      >
                       </p-multiSelect>
-                      <!-- <p-calendar
-                        [locale]="es"
-                        dateFormat="dd/mm/yy"
-                        placeholder="Fecha de Visita"
-                        formControlName="fecha_inicio"
-                        (onSelect)="mostrarFecha($event)"
-                        [showWeek]="true"
-                      ></p-calendar> -->
                     </div>
                     <div class="row justify-content-center">
                       <div class="col-md-12">
@@ -679,52 +592,6 @@
                 </p-card>
               </div>
             </div>
-            <!-- <br /> -->
-
-            <!-- Card Aula -->
-            <!-- <div class="row">
-              <div class="col-md-12">
-                <p-card
-                  header="Asignación a un Aula"
-                  subheader="Ingrese el nombre del Aula al que pertenece el Pasante."
-                  styleClass="ui-card-shadow"
-                >
-                  <p-header>
-                    <div class="head">
-                      <i class="fas fa-child fa-3x fa-fw icono"></i>
-                    </div>
-                  </p-header>
-                  <div class="row justify-content-center componente">
-                    <div class="ui-inputgroup">
-                      <span class="ui-inputgroup-addon">
-                        <i
-                          class="fas fa-door-open fa-lg"
-                          style="line-height: 1"
-                        ></i
-                      ></span>
-                      <p-autoComplete
-                        [suggestions]="filteredCountriesSingle"
-                        (completeMethod)="filterCountrySingle($event)"
-                        field="name"
-                        [size]="35"
-                        placeholder="Aula"
-                        [minLength]="1"
-                        formControlName="asignacion_aula"
-                      ></p-autoComplete>
-                    </div>
-                    <div class="row justify-content-center">
-                      <p-message
-                        severity="error"
-                        text=" Debe seleccionar un Aula"
-                        *ngIf="invalidos('asignacion_aula')"
-                        style="margin-top: 1em"
-                      ></p-message>
-                    </div>
-                  </div>
-                </p-card>
-              </div>
-            </div>
-            <br /> -->
 
             <!-- Card Horas -->
             <div class="row espacio_info">
@@ -795,32 +662,39 @@
             selectionMode="single"
             [(selection)]="pasante_seleccionado"
             (onRowSelect)="onRowSelect($event)"
-            [globalFilterFields]="['persona.identificacion','persona.apellidos',
-                                   'institucion', 'tutor.persona.primer_apellido']"
-            [paginator]="true" 
-            [rows]="5" 
+            [globalFilterFields]="[
+              'persona.identificacion',
+              'persona.apellidos',
+              'institucion',
+              'tutor.persona.primer_apellido'
+            ]"
+            [paginator]="true"
+            [rows]="5"
             [showCurrentPageReport]="true"
             currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
           >
-
-          <ng-template pTemplate="caption">
-            <div class="row ">
-              <div class= "col-md-6" style="text-align: left"> 
-                
-                <ng-template #contenido let-modal>
-                  <div class="modal-header">
+            <ng-template pTemplate="caption">
+              <div class="row">
+                <div class="col-md-6" style="text-align: left">
+                  <ng-template #contenido let-modal>
+                    <div class="modal-header">
                       <h4 class="modal-title">Generar PDF por Aula</h4>
-                      <button class="close" aria-label="close" type="button" (click)="modalService.dismissAll()">
-                          <span aria-hidden="true">&times;</span>
+                      <button
+                        class="close"
+                        aria-label="close"
+                        type="button"
+                        (click)="modalService.dismissAll()"
+                      >
+                        <span aria-hidden="true">&times;</span>
                       </button>
-                  </div>
-                  <div class="modal-body">
-                    <div class="row ">
-                      <div class="col-md-12" style="text-align: center">
-                        <p>Seleccione un Aula para generar el documento</p>
-                      </div>
-                      <div class= "col-md-12" style="text-align: center"> 
-                        <!-- <p-multiSelect 
+                    </div>
+                    <div class="modal-body">
+                      <div class="row">
+                        <div class="col-md-12" style="text-align: center">
+                          <p>Seleccione un Aula para generar el documento</p>
+                        </div>
+                        <div class="col-md-12" style="text-align: center">
+                          <!-- <p-multiSelect 
                       [options]="lista_aulas" 
                       [(ngModel)]="aulas_pdf"
                       defaultLabel="Seleccione un Aula" 
@@ -828,27 +702,37 @@
                       (onChange)="filtrarContenido($event)"
                       class="multiselect-custom">
                       </p-multiSelect>   -->
-                      
-                        <p-dropdown [options]="lista_aulas" 
-                                    [(ngModel)]="aulas_pdf" 
-                                    filter="true" 
-                                    optionLabel="nombre"
-                                    placeholder="Aulas"
-                                    (onChange)="filtrarContenido($event)"
-                                    pTooltip="Seleccione Generar PDF">
-                          <ng-template let-item pTemplate="selectedItem">
-                              <span style="vertical-align:middle;">{{item.label}}</span>
-                          </ng-template>
-                          <ng-template let-periodo pTemplate="item">
-                              <div class="ui-helper-clearfix" style="height: 45px;">
-                                  <div style="font-size:14px; text-align:middle">{{periodo.label}}</div>
-                              </div>
-                          </ng-template>
-                        </p-dropdown>
 
-                      </div>
-                      <br/>
-                      <!-- <div class="col-md-6" style="text-align: center">
+                          <p-dropdown
+                            [options]="lista_aulas"
+                            [(ngModel)]="aulas_pdf"
+                            filter="true"
+                            optionLabel="nombre"
+                            placeholder="Aulas"
+                            (onChange)="filtrarContenido($event)"
+                            pTooltip="Seleccione Generar PDF"
+                          >
+                            <ng-template let-item pTemplate="selectedItem">
+                              <span style="vertical-align: middle">{{
+                                item.label
+                              }}</span>
+                            </ng-template>
+                            <ng-template let-periodo pTemplate="item">
+                              <div
+                                class="ui-helper-clearfix"
+                                style="height: 45px"
+                              >
+                                <div
+                                  style="font-size: 14px; text-align: middle"
+                                >
+                                  {{ periodo.label }}
+                                </div>
+                              </div>
+                            </ng-template>
+                          </p-dropdown>
+                        </div>
+                        <br />
+                        <!-- <div class="col-md-6" style="text-align: center">
                           <button 
                             type="button" 
                             class="btn btn-outline-default btn-round btn-sm" 
@@ -859,57 +743,96 @@
                             <i class="fas fa-file-pdf fa-lg fa-fw"></i> GENERAR PDF
                           </button>
                     </div> -->
-                    <p-dialog header="Detalle de Documento" [(visible)]="mostrarAdmin" [style]="{width: '20vw'}">
-                      <div class="row justify-content-center">
-                        <div class="col-md-12">
-                          <span class="ui-float-label" style="margin-top: 2em;">
-                            <input id="float-input" type="text" size="30" pInputText [(ngModel)]="administracion.elaborado_por"> 
-                            <label for="float-input">Elaborado Por</label>
-                        </span>
-                        </div>
-                        <div class="col-md-12">
-                          <span class="ui-float-label espacio">
-                            <input id="float-input" type="text" size="30" pInputText [(ngModel)]="administracion.revisado_por"> 
-                            <label for="float-input">Revisado Por</label>
-                        </span>
-                        </div>
-                        <div class="col-md-12">
-                          <span class="ui-float-label espacio">
-                            <input id="float-input" type="text" size="30" pInputText [(ngModel)]="administracion.aprobado_por"> 
-                            <label for="float-input">Aprobado Por</label>
-                        </span>
-                        </div>
-                        <div class="col-md-12 espacio" style="text-align: center">
-                          <button 
-                            type="button" 
-                            class="btn btn-outline-default btn-round btn-sm" 
-                            (click)="abrirPDF()"
-                            
+                        <p-dialog
+                          header="Detalle de Documento"
+                          [(visible)]="mostrarAdmin"
+                          [style]="{ width: '20vw' }"
+                        >
+                          <div class="row justify-content-center">
+                            <div class="col-md-12">
+                              <span
+                                class="ui-float-label"
+                                style="margin-top: 2em"
+                              >
+                                <input
+                                  id="float-input"
+                                  type="text"
+                                  size="30"
+                                  pInputText
+                                  [(ngModel)]="administracion.elaborado_por"
+                                />
+                                <label for="float-input">Elaborado Por</label>
+                              </span>
+                            </div>
+                            <div class="col-md-12">
+                              <span class="ui-float-label espacio">
+                                <input
+                                  id="float-input"
+                                  type="text"
+                                  size="30"
+                                  pInputText
+                                  [(ngModel)]="administracion.revisado_por"
+                                />
+                                <label for="float-input">Revisado Por</label>
+                              </span>
+                            </div>
+                            <div class="col-md-12">
+                              <span class="ui-float-label espacio">
+                                <input
+                                  id="float-input"
+                                  type="text"
+                                  size="30"
+                                  pInputText
+                                  [(ngModel)]="administracion.aprobado_por"
+                                />
+                                <label for="float-input">Aprobado Por</label>
+                              </span>
+                            </div>
+                            <div
+                              class="col-md-12 espacio"
+                              style="text-align: center"
                             >
-                            <i class="fas fa-file-pdf fa-lg fa-fw"></i> GUARDAR
-                          </button>
-                        </div>
+                              <button
+                                type="button"
+                                class="btn btn-outline-default btn-round btn-sm"
+                                (click)="abrirPDF()"
+                              >
+                                <i class="fas fa-file-pdf fa-lg fa-fw"></i>
+                                GUARDAR
+                              </button>
+                            </div>
+                          </div>
+                        </p-dialog>
                       </div>
-                  </p-dialog>
-                  </div>
-                  <br/>
-                  <div class="modal-footer">
-                    </div>
+                      <br />
+                      <div class="modal-footer"></div>
                       <!-- <button type="button" class="btn btn-success" (click)="modalService.close()">Ok!</button> -->
+                    </div>
+                  </ng-template>
+                  <button
+                    type="button"
+                    class="btn btn-outline-info"
+                    (click)="modalService.open(contenido)"
+                  >
+                    GENERAR PDF
+                  </button>
+                </div>
+                <div class="col-md-6" style="text-align: right">
+                  <div class="p-d-flex">
+                    <span class="ui-inputgroup-addon"
+                      ><i class="fas fa-search fa-lg"></i
+                    ></span>
+
+                    <input
+                      pInputText
+                      type="text"
+                      (input)="dt.filterGlobal($event.target.value, 'contains')"
+                      placeholder="Buscar en contenido"
+                    />
                   </div>
-              </ng-template>
-                <button type="button" class="btn btn-outline-info" (click)="modalService.open(contenido)">GENERAR PDF</button>
-              </div>
-              <div class= "col-md-6" style="text-align: right">   
-                <div class="p-d-flex">
-                  <span class="ui-inputgroup-addon"><i class="fas fa-search fa-lg"></i></span>
-                            
-                            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Buscar en contenido" />
-                        
                 </div>
               </div>
-            </div>
-        </ng-template>
+            </ng-template>
 
             <ng-template pTemplate="colgroup" let-columns>
               <colgroup>
@@ -950,7 +873,7 @@
                 </td>
                 <td>
                   <div *ngFor="let aula of rowData.aula">
-                   <p>{{ aula.nombre }}</p> 
+                    <p>{{ aula.nombre || "Sin datos" }}</p>
                   </div>
                 </td>
                 <td>
@@ -1125,14 +1048,15 @@
                 <div class="row edicion">
                   <div class="col-md-12">
                     <label class="fuente">AULAS</label>
-                    <br>
-                    <p-multiSelect 
-                      [options]="lista_aulas" 
+                    <br />
+                    <p-multiSelect
+                      [options]="lista_aulas"
                       [(ngModel)]="pasante_editar.aula"
-                      defaultLabel="Seleccione un Aula" 
+                      defaultLabel="Seleccione un Aula"
                       optionLabel="nombre"
-                      class="multiselect-custom">
-                      </p-multiSelect>
+                      class="multiselect-custom"
+                    >
+                    </p-multiSelect>
                   </div>
                 </div>
               </div>
@@ -1249,46 +1173,70 @@
                 </button>
                 <button
                   type="button"
-                  class="btn btn-outline-info btn-round btn-sm justify-content-center "
+                  class="btn btn-outline-info btn-round btn-sm justify-content-center"
                   (click)="mostrarPasante()"
                 >
-                <i class="fas fa-file-pdf fa-lg fa-fw"></i> Generar PDF
+                  <i class="fas fa-file-pdf fa-lg fa-fw"></i> Generar PDF
                 </button>
               </div>
             </p-footer>
           </p-dialog>
-          <p-dialog header="Detalle de Documento" [(visible)]="mostrar_pdf" [style]="{width: '20vw'}">
+          <p-dialog
+            header="Detalle de Documento"
+            [(visible)]="mostrar_pdf"
+            [style]="{ width: '20vw' }"
+          >
             <div class="row justify-content-center">
               <div class="col-md-12">
-                <span class="ui-float-label" style="margin-top: 2em;">
-                  <input id="float-input" type="text" size="30" pInputText [(ngModel)]="pasante_admin.elaborado_por"> 
+                <span class="ui-float-label" style="margin-top: 2em">
+                  <input
+                    id="float-input"
+                    type="text"
+                    size="30"
+                    pInputText
+                    [(ngModel)]="pasante_admin.elaborado_por"
+                  />
                   <label for="float-input">Elaborado Por</label>
-              </span>
+                </span>
               </div>
               <div class="col-md-12">
                 <span class="ui-float-label espacio">
-                  <input id="float-input" type="text" size="30" pInputText [(ngModel)]="pasante_admin.revisado_por"> 
+                  <input
+                    id="float-input"
+                    type="text"
+                    size="30"
+                    pInputText
+                    [(ngModel)]="pasante_admin.revisado_por"
+                  />
                   <label for="float-input">Revisado Por</label>
-              </span>
+                </span>
               </div>
               <div class="col-md-12">
                 <span class="ui-float-label espacio">
-                  <input id="float-input" type="text" size="30" pInputText [(ngModel)]="pasante_admin.aprobado_por"> 
+                  <input
+                    id="float-input"
+                    type="text"
+                    size="30"
+                    pInputText
+                    [(ngModel)]="pasante_admin.aprobado_por"
+                  />
                   <label for="float-input">Aprobado Por</label>
-              </span>
+                </span>
               </div>
-              <div class="col-md-12" style="text-align: center; margin-top: 2em;">
-                <button 
-                  type="button" 
-                  class="btn btn-outline-default btn-round btn-sm" 
+              <div
+                class="col-md-12"
+                style="text-align: center; margin-top: 2em"
+              >
+                <button
+                  type="button"
+                  class="btn btn-outline-default btn-round btn-sm"
                   (click)="generarPasante()"
-                  
-                  >
+                >
                   <i class="fas fa-file-pdf fa-lg fa-fw"></i> GUARDAR
                 </button>
               </div>
             </div>
-        </p-dialog>
+          </p-dialog>
         </div>
       </div>
     </div>

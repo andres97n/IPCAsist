@@ -9,24 +9,22 @@ import { Observable } from "rxjs";
 export class PlanVidaService {
   constructor(private http: HttpClient) {}
 
-  baseURL : "http://localhost:8000/api/"
-
   setPlanVida(plan_vida:any): Observable<any>{
     const headers = { 'content-type': 'application/json'}  
     const body=JSON.stringify(plan_vida);
     console.log(body)
-    return this.http.post(`http://localhost:8000/api/planes_vida`, body,{'headers':headers})
+    return this.http.post(`https://ipcasist.herokuapp.com/api/planes_vida`, body,{'headers':headers})
   }
 
   editarPlanVida(plan_vida:any): Observable<any>{
     const headers = { 'content-type': 'application/json'}  
     const body=JSON.stringify(plan_vida);
     console.log(body)
-    return this.http.put(`http://localhost:8000/api/plan_vida/${plan_vida.id}`, body,{'headers':headers})
+    return this.http.put(`https://ipcasist.herokuapp.com/api/plan_vida/${plan_vida.id}`, body,{'headers':headers})
   }
 
   eliminarPlan(plan:any){
-    return this.http.get(`http://localhost:8000/api/plan_vida_eliminar/${plan}`);
+    return this.http.get(`https://ipcasist.herokuapp.com/api/plan_vida_eliminar/${plan}`);
   }
 
   
@@ -35,18 +33,18 @@ export class PlanVidaService {
   // }
 
   getLista(e: string) {
-    return this.http.get(`http://localhost:8000/api/${e}`);
+    return this.http.get(`https://ipcasist.herokuapp.com/api/${e}`);
   }
 
   getDetallePersona(id: any){
-    return this.http.get(`http://localhost:8000/api/persona/${id}`);
+    return this.http.get(`https://ipcasist.herokuapp.com/api/persona/${id}`);
   }
 
   setMateria(materia:Materia): Observable<any>{
     const headers = { 'content-type': 'application/json'}  
     const body=JSON.stringify(materia);
     console.log(body)
-    return this.http.post(`http://localhost:8000/api/materias`, body,{'headers':headers})
+    return this.http.post(`https://ipcasist.herokuapp.com/api/materias`, body,{'headers':headers})
   }
 
   getPeriodoLectivo(){

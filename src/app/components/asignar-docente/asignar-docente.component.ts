@@ -159,7 +159,7 @@ export class AsignarDocenteComponent implements OnInit {
           aula.periodo = periodo;
         } )
 
-      } )
+      } );
 
       this.aulas.forEach( (aula:Aula) => {
       
@@ -167,39 +167,31 @@ export class AsignarDocenteComponent implements OnInit {
         let num_alumno = aula.alumnos.length;
         
         for (let index = 0; index < num_docente; index++) {
-          // console.log(aula.a);
-          
          this.removeItemFromArr(aula.docentes,index);
           
         }
 
         for (let index = 0; index < num_alumno; index++) {
-          // console.log(aula.a);
           
-         this.removeItemFromArr(aula.docentes,index);
+         this.removeItemFromArr(aula.alumnos,index);
           
         }
       } )
-
-      console.log(this.aulas, "AULAS CON OBJETOS");
     });
 
     this._aulaSrv.getLista("periodos_lectivos").subscribe( (periodos_lectivos: Periodo_Lectivo[]) =>{
       
       this.periodos_lectivos = periodos_lectivos;
-      
-      console.log(this.periodos_lectivos, "PERIODOS LECTIVOS");
+  
     } )
 
     this._docenteSrv
       .getAsignaciones()
       .subscribe((asignaciones: AsignarDocente[]) => {
         this.asignaciones = asignaciones;
-        console.log(this.asignaciones);
       });
 
     this._docenteSrv.getDocentes().subscribe((docentes: Docente[]) => {
-      console.log(docentes);
       this.docentes = docentes;
     });
 
@@ -287,35 +279,17 @@ export class AsignarDocenteComponent implements OnInit {
 
   // Método no Válido - Edición
   onRowSelect(event) {
-    console.log(this.asignacion_seleccionada);
 
     this.nueva_asignacion = false;
     this.asignacion_editar = this.cloneAsignacion(event.data);
     this.crearFormularioEditar(this.asignacion_editar);
-    // this.dia = new Date();
-    // console.log(this.dia);
-
-    // this.dia = new Date(
-    //   Number(this.dia.getFullYear.toString),
-    //   Number(this.dia.getMonth.toString),
-    //   Number(this.dia.getDay.toString),
-    //   12,
-    //   30,
-    //   0,
-    //   this.dia.getTimezoneOffset() * 60 * 1000
-    // );
-    // console.log(this.dia);
-
-    this.displayDialog = true;
-    console.log(this.asignacion);
     
+    this.displayDialog = true;
   }
 
-  //PENDIENTE
+  
   filtrarContenido(event: any){
-    console.log(event.value);
     this.mostrarAdmin = true;
-    // this.table.filterGlobal(event.value, 'contains')
   }
   
   abrirPDF(){
@@ -343,21 +317,6 @@ export class AsignarDocenteComponent implements OnInit {
     });
   }
 
-  // asignacion_periodo(){
-
-  // }
-
- 
-
-  asignarDocente() {
-    console.log(this.forma);
-
-    // this.forma.reset();
-  }
-
-  editarDocente() {
-    console.log(this.forma_editar);
-  }
 
   filtrarDocente(event) {
     let query = event.query;
@@ -498,10 +457,7 @@ export class AsignarDocenteComponent implements OnInit {
     doc.setFontSize(20);
     doc.text(`Aulas por Período Lectivo ${this.periodo_lectivo.nombre}`, pdfWidht/2,pdfHeight/2, {align:"center"});
 
-    doc.addPage('a4')
-    // doc.setFontSize(20);
-    // doc.text(`Listado de Períodos Lectivo en ${this.periodo_lectivo.nombre}`, pdfWidht/2,pdfHeight/15, {align:"center"});
-    // doc.table(pdfWidht/15,pdfHeight/4, aulas_filtradas, cols)
+    doc.addPage('a4');
     autoTable(doc, {
       head: head,
       body: data,

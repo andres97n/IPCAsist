@@ -12,27 +12,27 @@ export class PasantesService {
     const headers = { 'content-type': 'application/json'}  
     const body=JSON.stringify(pasante);
     console.log(body)
-    return this.http.post(`http://localhost:8000/api/pasantes`, body,{'headers':headers})
+    return this.http.post(`https://ipcasist.herokuapp.com/api/pasantes`, body,{'headers':headers})
   }
 
   editarPasante(pasante:any): Observable<any>{
     const headers = { 'content-type': 'application/json'}  
     const body=JSON.stringify(pasante);
     console.log(body)
-    return this.http.put(`http://localhost:8000/api/pasante/${pasante.id}`, body,{'headers':headers})
+    return this.http.put(`https://ipcasist.herokuapp.com/api/pasante/${pasante.id}`, body,{'headers':headers})
   }
 
   eliminarPasante(pasante:any){
-    return this.http.get(`http://localhost:8000/api/pasante_eliminar/${pasante}`);
+    return this.http.get(`https://ipcasist.herokuapp.com/api/pasante_eliminar/${pasante}`);
   }
 
 
   getLista(e: string) {
-    return this.http.get(`http://localhost:8000/api/${e}`);
+    return this.http.get(`https://ipcasist.herokuapp.com/api/${e}`);
   }
 
   getDetalle(id: any, e:string){
-    return this.http.get(`http://localhost:8000/api/${e}/${id}`);
+    return this.http.get(`https://ipcasist.herokuapp.com/api/${e}/${id}`);
   }
 
   getPasantes() {

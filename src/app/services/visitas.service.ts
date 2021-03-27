@@ -13,33 +13,33 @@ export class VisitasService {
     const headers = { 'content-type': 'application/json'}  
     const body=JSON.stringify(visita);
     console.log(body)
-    return this.http.post(`http://localhost:8000/api/visitas`, body,{'headers':headers})
+    return this.http.post(`https://ipcasist.herokuapp.com/api/visitas`, body,{'headers':headers})
   }
 
   editarVisita(visita:any): Observable<any>{
     const headers = { 'content-type': 'application/json'}  
     const body=JSON.stringify(visita);
     console.log(body)
-    return this.http.put(`http://localhost:8000/api/visita/${visita.id}`, body,{'headers':headers})
+    return this.http.put(`https://ipcasist.herokuapp.com/api/visita/${visita.id}`, body,{'headers':headers})
   }
 
   eliminarVisita(visita:any){
-    return this.http.get(`http://localhost:8000/api/visita_eliminar/${visita}`);
+    return this.http.get(`https://ipcasist.herokuapp.com/api/visita_eliminar/${visita}`);
   }
 
   setEmpresa(empresa:any): Observable<any>{
     const headers = { 'content-type': 'application/json'}  
     const body=JSON.stringify(empresa);
     console.log(body)
-    return this.http.post(`http://localhost:8000/api/empresas`, body,{'headers':headers})
+    return this.http.post(`https://ipcasist.herokuapp.com/api/empresas`, body,{'headers':headers})
   }
 
   getLista(e: string) {
-    return this.http.get(`http://localhost:8000/api/${e}`);
+    return this.http.get(`https://ipcasist.herokuapp.com/api/${e}`);
   }
 
   getDetalle(id: any, e:string){
-    return this.http.get(`http://localhost:8000/api/${e}/${id}`);
+    return this.http.get(`https://ipcasist.herokuapp.com/api/${e}/${id}`);
   }
 
   

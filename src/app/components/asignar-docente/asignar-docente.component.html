@@ -28,96 +28,26 @@
         <div class="col-md-8 mr-auto ml-auto">
           <h2 class="title">Breve Descripción</h2>
           <h5 class="description">
-            En está página se ofrece la visualización de los datos de todos los 
+            En está página se ofrece la visualización de los datos de todos los
             docentes asignados a un aula.
             <br />
             <span
-              >A continuación se presenta una tabla, en la cual se permite visualiazar
-              detalladamente toda la información de las aulas, así como del personal
-              que está invloucrado en las mismas.
+              >A continuación se presenta una tabla, en la cual se permite
+              visualiazar detalladamente toda la información de las aulas, así
+              como del personal que está invloucrado en las mismas.
               <!-- <br />
               Aquí una breve explicación. -->
             </span>
           </h5>
-          <!-- <br />
-          <a
-            [routerLink]="['/ayuda-componentes']"
-            class="btn btn-outline-default btn-round"
-            target="_blank"
-            ><i class="fas fa-question fa-lg fa-fw"></i>Ayuda de Componentes</a
-          > -->
         </div>
       </div>
       <br /><br />
-      <!-- <div class="row">
-        <div class="col-md-3">
-          <div class="info">
-            <div class="icon icon-danger">
-              <i class="nc-icon nc-album-2"></i>
-            </div>
-            <div class="description">
-              <h4 class="info-title">Beautiful Gallery</h4>
-              <p class="description">
-                Spend your time generating new ideas. You don't have to think of
-                implementing.
-              </p>
-              <a href="#pkp" class="btn btn-link btn-danger">See more</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="info">
-            <div class="icon icon-danger">
-              <i class="nc-icon nc-bulb-63"></i>
-            </div>
-            <div class="description">
-              <h4 class="info-title">New Ideas</h4>
-              <p>
-                Larger, yet dramatically thinner. More powerful, but remarkably
-                power efficient.
-              </p>
-              <a href="#pkp" class="btn btn-link btn-danger">See more</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="info">
-            <div class="icon icon-danger">
-              <i class="nc-icon nc-chart-bar-32"></i>
-            </div>
-            <div class="description">
-              <h4 class="info-title">Statistics</h4>
-              <p>
-                Choose from a veriety of many colors resembling sugar paper
-                pastels.
-              </p>
-              <a href="#pkp" class="btn btn-link btn-danger">See more</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="info">
-            <div class="icon icon-danger">
-              <i class="nc-icon nc-sun-fog-29"></i>
-            </div>
-            <div class="description">
-              <h4 class="info-title">Delightful design</h4>
-              <p>
-                Find unique and handmade delightful designs related items
-                directly from our sellers.
-              </p>
-              <a href="#pkp" class="btn btn-link btn-danger">See more</a>
-            </div>
-          </div>
-        </div>
-      </div> -->
     </div>
   </div>
 
   <!-- FORMULARIO -->
   <div class="section section-dark text-center">
     <div class="container">
-
       <div class="row">
         <div class="col-md-10 mr-auto ml-auto">
           <h2 class="title">INFORMACIÓN DE AULAS</h2>
@@ -135,101 +65,163 @@
             styleClass="ui-table-summary"
             selectionMode="single"
             [(selection)]="aula"
-            [globalFilterFields]="['nombre','docente.persona.primer_apellido',
-                                   'capacidad','periodo.nombre', 'jornada']"
-            [paginator]="true" 
-            [rows]="5" 
+            [globalFilterFields]="[
+              'nombre',
+              'docente.persona.primer_apellido',
+              'capacidad',
+              'periodo.nombre',
+              'jornada'
+            ]"
+            [paginator]="true"
+            [rows]="5"
             [showCurrentPageReport]="true"
             currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
           >
-          <ng-template pTemplate="caption">
-            <div class="row">
-              <div class= "col-md-6" style="text-align: left">
-                
-                <ng-template #contenido let-modal>
-                  <div class="modal-header">
-                      <h4 class="modal-title">Generar PDF por Períodos Lectivos</h4>
-                      <button class="close" aria-label="close" type="button" (click)="modalService.dismissAll()">
-                          <span aria-hidden="true">&times;</span>
+            <ng-template pTemplate="caption">
+              <div class="row">
+                <div class="col-md-6" style="text-align: left">
+                  <ng-template #contenido let-modal>
+                    <div class="modal-header">
+                      <h4 class="modal-title">
+                        Generar PDF por Períodos Lectivos
+                      </h4>
+                      <button
+                        class="close"
+                        aria-label="close"
+                        type="button"
+                        (click)="modalService.dismissAll()"
+                      >
+                        <span aria-hidden="true">&times;</span>
                       </button>
-                  </div>
-                  <div class="modal-body">
-                    <div class="row justify-content-center">
-                      <div class="col-md-12" style="text-align: center">
-                          <p>Seleccione un Período Lectivo para generar el documento</p>
                     </div>
-                      <div class= "col-md-12" style="text-align: center">   
-                        <p-dropdown [options]="periodos_lectivos" 
-                                    [(ngModel)]="periodo_lectivo" 
-                                    filter="true" 
-                                    optionLabel="nombre"
-                                    placeholder="Período Lectivo"
-                                    (onChange)="filtrarContenido($event)"
-                                    pTooltip="Seleccione para Generar PDF">
-                          <ng-template let-item pTemplate="selectedItem">
-                              <span style="vertical-align:middle;">{{item.label}}</span>
-                          </ng-template>
-                          <ng-template let-periodo pTemplate="item">
-                              <div class="ui-helper-clearfix" style="height: 50px;">
-                                  <div style="font-size:14px; text-align:middle">{{periodo.label}}</div>
-                              </div>
-                          </ng-template>
-                        </p-dropdown>
-  
-                      </div>
-                      <br/>
-                    <p-dialog header="Detalle de Documento" [(visible)]="mostrarAdmin" [style]="{width: '20vw'}">
+                    <div class="modal-body">
                       <div class="row justify-content-center">
-                        <div class="col-md-12">
-                          <span class="ui-float-label" style="margin-top: 2em;">
-                            <input id="float-input" type="text" size="30" pInputText [(ngModel)]="administracion.elaborado_por"> 
-                            <label for="float-input">Elaborado Por</label>
-                        </span>
+                        <div class="col-md-12" style="text-align: center">
+                          <p>
+                            Seleccione un Período Lectivo para generar el
+                            documento
+                          </p>
                         </div>
-                        <div class="col-md-12">
-                          <span class="ui-float-label espacio">
-                            <input id="float-input" type="text" size="30" pInputText [(ngModel)]="administracion.revisado_por"> 
-                            <label for="float-input">Revisado Por</label>
-                        </span>
+                        <div class="col-md-12" style="text-align: center">
+                          <p-dropdown
+                            [options]="periodos_lectivos"
+                            [(ngModel)]="periodo_lectivo"
+                            filter="true"
+                            optionLabel="nombre"
+                            placeholder="Período Lectivo"
+                            (onChange)="filtrarContenido($event)"
+                            pTooltip="Seleccione para Generar PDF"
+                          >
+                            <ng-template let-item pTemplate="selectedItem">
+                              <span style="vertical-align: middle">{{
+                                item.label
+                              }}</span>
+                            </ng-template>
+                            <ng-template let-periodo pTemplate="item">
+                              <div
+                                class="ui-helper-clearfix"
+                                style="height: 50px"
+                              >
+                                <div
+                                  style="font-size: 14px; text-align: middle"
+                                >
+                                  {{ periodo.label }}
+                                </div>
+                              </div>
+                            </ng-template>
+                          </p-dropdown>
                         </div>
-                        <div class="col-md-12">
-                          <span class="ui-float-label espacio">
-                            <input id="float-input" type="text" size="30" pInputText [(ngModel)]="administracion.aprobado_por"> 
-                            <label for="float-input">Aprobado Por</label>
-                        </span>
-                        </div>
-                        <div class="col-md-12 espacio" style="text-align: center">
-                          <button 
-                            type="button" 
-                            class="btn btn-outline-default btn-round btn-sm" 
-                            (click)="abrirPDF()"
-                            
+                        <br />
+                        <p-dialog
+                          header="Detalle de Documento"
+                          [(visible)]="mostrarAdmin"
+                          [style]="{ width: '20vw' }"
+                        >
+                          <div class="row justify-content-center">
+                            <div class="col-md-12">
+                              <span
+                                class="ui-float-label"
+                                style="margin-top: 2em"
+                              >
+                                <input
+                                  id="float-input"
+                                  type="text"
+                                  size="30"
+                                  pInputText
+                                  [(ngModel)]="administracion.elaborado_por"
+                                />
+                                <label for="float-input">Elaborado Por</label>
+                              </span>
+                            </div>
+                            <div class="col-md-12">
+                              <span class="ui-float-label espacio">
+                                <input
+                                  id="float-input"
+                                  type="text"
+                                  size="30"
+                                  pInputText
+                                  [(ngModel)]="administracion.revisado_por"
+                                />
+                                <label for="float-input">Revisado Por</label>
+                              </span>
+                            </div>
+                            <div class="col-md-12">
+                              <span class="ui-float-label espacio">
+                                <input
+                                  id="float-input"
+                                  type="text"
+                                  size="30"
+                                  pInputText
+                                  [(ngModel)]="administracion.aprobado_por"
+                                />
+                                <label for="float-input">Aprobado Por</label>
+                              </span>
+                            </div>
+                            <div
+                              class="col-md-12 espacio"
+                              style="text-align: center"
                             >
-                            <i class="fas fa-file-pdf fa-lg fa-fw"></i> GUARDAR
-                          </button>
-                        </div>
+                              <button
+                                type="button"
+                                class="btn btn-outline-default btn-round btn-sm"
+                                (click)="abrirPDF()"
+                              >
+                                <i class="fas fa-file-pdf fa-lg fa-fw"></i>
+                                GUARDAR
+                              </button>
+                            </div>
+                          </div>
+                        </p-dialog>
                       </div>
-                  </p-dialog>
-                  </div>
-                  <br/>
-                  <div class="modal-footer">
-                    </div>
+                      <br />
+                      <div class="modal-footer"></div>
                       <!-- <button type="button" class="btn btn-success" (click)="modalService.close()">Ok!</button> -->
-                  </div>
-              </ng-template>
-                <button type="button" class="btn btn-outline-info" (click)="modalService.open(contenido)">GENERAR PDF</button>
+                    </div>
+                  </ng-template>
+                  <button
+                    type="button"
+                    class="btn btn-outline-info"
+                    (click)="modalService.open(contenido)"
+                  >
+                    GENERAR PDF
+                  </button>
+                </div>
+                <div class="col-md-6" style="text-align: right">
+                  <div class="p-d-flex">
+                    <span class="ui-inputgroup-addon"
+                      ><i class="fas fa-search fa-lg"></i
+                    ></span>
 
-              </div>
-              <div class= "col-md-6" style="text-align: right">   
-                <div class="p-d-flex">
-                  <span class="ui-inputgroup-addon"><i class="fas fa-search fa-lg"></i></span>
-                            
-                            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Buscar en contenido" />
-                        
+                    <input
+                      pInputText
+                      type="text"
+                      (input)="dt.filterGlobal($event.target.value, 'contains')"
+                      placeholder="Buscar en contenido"
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-        </ng-template>
+            </ng-template>
             <ng-template pTemplate="colgroup" let-columns>
               <colgroup>
                 <col />
@@ -250,7 +242,7 @@
               let-expanded="expanded"
               let-columns="columns"
             >
-              <tr >
+              <tr>
                 <td style="width: 3em">
                   <a href="#" [pRowToggler]="rowData">
                     <i
@@ -265,12 +257,15 @@
                 </td>
                 <td>
                   <div *ngFor="let docente of rowData.docentes">
-                    <p> {{ docente.persona.primer_nombre}} {{ docente.persona.primer_apellido }}</p>
+                    <p>
+                      {{ docente.persona.primer_nombre }}
+                      {{ docente.persona.primer_apellido }}
+                    </p>
                     <!--  -->
                   </div>
                 </td>
                 <td>
-                  {{ rowData.capacidad }} 
+                  {{ rowData.capacidad }}
                 </td>
                 <td>
                   {{ rowData.periodo.nombre }}
@@ -311,20 +306,14 @@
                           <div class="p-col-12">
                             <b>Docentes:</b>
                             <div *ngFor="let docente of rowData.docentes">
-                              <p>Nombres: {{ docente.persona.primer_nombre }} {{ docente.persona.primer_apellido }}</p>
                               <p>
-                              Correo: {{ docente.persona.correo }}
+                                Nombres: {{ docente.persona.primer_nombre }}
+                                {{ docente.persona.primer_apellido }}
                               </p>
-                              <p>
-                              Celular: {{ docente.persona.celular }}
-
-                              </p>
+                              <p>Correo: {{ docente.persona.correo }}</p>
+                              <p>Celular: {{ docente.persona.celular }}</p>
                             </div>
                           </div>
-                          
-                          <!-- <div class="p-col-12">
-                            <b>Título:</b> {{ rowData.docente.titulo }}
-                          </div> -->
                         </div>
                       </div>
 
@@ -338,15 +327,12 @@
                           </div>
                           <div class="p-col-12">
                             <b>Período Lectivo:</b>
+                            <p>Nombre: {{ rowData.periodo.nombre }}</p>
                             <p>
-                              Nombre: {{ rowData.periodo.nombre }}
+                              Fecha de Inicio:
+                              {{ rowData.periodo.fecha_inicio }}
                             </p>
-                            <p>
-                              Fecha de Inicio: {{ rowData.periodo.fecha_inicio }}
-                            </p>
-                            <p>
-                              Fecha Fin: {{ rowData.periodo.fecha_fin }}
-                            </p>
+                            <p>Fecha Fin: {{ rowData.periodo.fecha_fin }}</p>
                           </div>
                           <div class="p-col-12">
                             <b>Jornada:</b>
@@ -362,247 +348,10 @@
           </p-table>
         </div>
       </div>
-      
-      <!-- <h2 class="title">Asigne a un Docente!!</h2>
-      <form [formGroup]="forma" (ngSubmit)="asignarDocente()">
-
-
-        <div class="row justify-content-center">
-          <div class="col-md-6">
-            <p-card
-              header="Período Lectivo"
-              subheader="Seleccione el Período Lectivo al que corresponde la siguiente asignación."
-              styleClass="ui-card-shadow"
-            >
-              <p-header>
-                <div style="background-color: #cfcfcf">
-                  <i class="fas fa-calendar-alt fa-4x fa-fw icono"></i>
-                </div>
-              </p-header>
-              <br />
-              <div class="ui-inputgroup row justify-content-center">
-                <span class="ui-inputgroup-addon">
-                <i class="far fa-calendar-check fa-lg" style="line-height: 1"></i></span>
-                <p-dropdown [options]="periodos_lectivos" 
-                          filter="true" 
-                          optionLabel="nombre"
-                          placeholder="Período Lectivo"
-                          formControlName="periodo_lectivo">
-                <ng-template let-item pTemplate="selectedItem">
-                    <span style="vertical-align:middle;">{{item.label}}</span>
-                </ng-template>
-                <ng-template let-periodo pTemplate="item">
-                    <div class="ui-helper-clearfix" style="height: 25px;">
-                        <div style="font-size:14px; text-align:middle">{{periodo.label}}</div>
-                    </div>
-                </ng-template>
-              </p-dropdown>
-              </div>
-              <br />
-              <div class="row justify-content-center">
-                <p-message
-                  severity="error"
-                  text=" Se requiere el Período"
-                  *ngIf="invalidos('periodo_lectivo')"
-                ></p-message>
-              </div>
-              <p-footer>
-                <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-              </p-footer>
-            </p-card>
-          </div>
-        </div>
-        <br>
-
-        <div class="row justify-content-center">
-          <div class="col-md-6">
-            <p-card
-              header="Identificación del Docente"
-              subheader="Ingrese la identificación o el nombre del Docente a asignar."
-              styleClass="ui-card-shadow"
-            >
-              <p-header>
-                <div style="background-color: #cfcfcf">
-                  <i class="fas fa-chalkboard-teacher fa-4x fa-fw icono"></i>
-                </div>
-              </p-header>
-              <br />
-              <div class="ui-inputgroup row justify-content-center">
-                <span class="ui-inputgroup-addon">
-                  <i class="fas fa-user-tie fa-lg" style="line-height: 1"></i
-                ></span>
-                <p-autoComplete
-                  [suggestions]="docentes_filtrados"
-                  (completeMethod)="filtrarDocente($event)"
-                  [size]="30"
-                  [minLength]="1"
-                  placeholder="Docente"
-                  [dropdown]="true"
-                  formControlName="identificacion"
-                  field="persona.identificacion"
-                >
-                  <ng-template let-brand pTemplate="item">
-                    <div class="ui-helper-clearfix">
-                      <div
-                        style="
-                          font-size: 10px;
-                          display: inline-block;
-                          margin: 10px 10px 0 0;
-                        "
-                      >
-                        {{ brand.persona.identificacion }}
-                      </div>
-                      <div
-                        style="
-                          font-size: 12px;
-                          float: right;
-                          margin: 10px 10px 0 0;
-                        "
-                      >
-                        {{ brand.persona.primerNombre }}
-                        {{ brand.persona.primerApellido }}
-                      </div>
-                    </div>
-                  </ng-template>
-                </p-autoComplete>
-              </div>
-              <br />
-              <div class="row justify-content-center">
-                <p-message
-                  severity="error"
-                  text=" Se requiere la Identificación"
-                  *ngIf="invalidos('identificacion')"
-                ></p-message>
-              </div>
-              <p-footer>
-                <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-              </p-footer>
-            </p-card>
-          </div>
-        </div>
-        <br />
-
-        <div class="row justify-content-center">
-          <div class="col-md-6">
-            <p-card
-              header="Horario de Docente"
-              subheader="Ingrese el horario de trabajo del Docente."
-              styleClass="ui-card-shadow"
-            >
-              <p-header>
-                <div style="background-color: #cfcfcf">
-                  <i class="far fa-clock fa-4x fa-fw icono"></i>
-                </div>
-              </p-header>
-
-              <div
-                class="row justify-content-center"
-                style="margin-top: 1em"
-                formGroupName="horario"
-              >
-                
-                <div class="col-md-4">
-                  <label>Horario de Entrada</label>
-                  <p-calendar
-                      formControlName="horario_entrada"
-                      [timeOnly]="true"
-                    ></p-calendar>
-                  <p-message
-                    severity="error"
-                    text=" Se requiere el Horario de Entrada del Docente"
-                    *ngIf="noEntrada"
-                  ></p-message>
-                  
-                </div>
-                <div class="col-md-4">
-                  <label>Horario de Salida</label>
-                  <p-calendar
-                    formControlName="horario_salida"
-                    [timeOnly]="true"
-                  ></p-calendar>
-                  <p-message
-                    severity="error"
-                    text=" Se requiere el Horario de Entrada del Docente"
-                    *ngIf="noSalida"
-                  ></p-message>
-                </div>
-              </div>
-              <p-footer>
-                <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-              </p-footer>
-            </p-card>
-          </div>
-        </div>
-        <br />
-
-        <div class="row justify-content-center">
-          <div class="col-md-6">
-            <p-card
-              header="Identificación del Aula"
-              subheader="Ingrese la identificación del Aula en la cual se desea ingresar al Docente."
-              styleClass="ui-card-shadow"
-            >
-              <p-header>
-                <div style="background-color: #cfcfcf">
-                  <i class="fas fa-school fa-4x fa-fw icono"></i>
-                </div>
-              </p-header>
-              <div>
-                <br />
-                <div class="ui-inputgroup row justify-content-center">
-                  <span class="ui-inputgroup-addon">
-                    <i class="fas fa-door-open fa-lg" style="line-height: 1"></i
-                  ></span>
-                  <p-autoComplete
-                    [suggestions]="aulas_filtradas"
-                    (completeMethod)="filtrarAula($event)"
-                    [size]="30"
-                    [minLength]="1"
-                    placeholder="Aula"
-                    [dropdown]="true"
-                    formControlName="aula"
-                    field="nombre"
-                  >
-                    <ng-template let-brand pTemplate="item">
-                      <div class="ui-helper-clearfix">
-                        <div style="font-size: 15px; margin: 0.5em">
-                          {{ brand.nombre }}
-                        </div>
-                      </div>
-                    </ng-template>
-                  </p-autoComplete>
-                </div>
-                <br />
-                <div class="row justify-content-center">
-                  <p-message
-                    severity="error"
-                    text="  Se requiere el nombre del Aula"
-                    *ngIf="invalidos('aula')"
-                  ></p-message>
-                </div>
-              </div>
-              <p-footer>
-                <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-              </p-footer>
-            </p-card>
-          </div>
-        </div>
-
-        <button
-          type="submit"
-          class="btn btn-neutral btn-round btn-lg"
-          [disabled]="!forma.valid"
-          style="margin-top: 3em"
-        >
-          <i class="fas fa-save fa-lg fa-fw"></i> Asignar Docente
-        </button>
-      </form> -->
     </div>
   </div>
 
-  <div class="section landing-section">
-    
-  </div>
+  <div class="section landing-section"></div>
 
   <!-- <div class="section landing-section"> -->
   <div class="container" style="margin-bottom: 10%">
